@@ -2,6 +2,14 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Slick2D"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/Slick2D">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Program Files/Slick2D"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files/Slick2D/jinput.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Slick2D/lwjgl.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Slick2D/lwjgl_util.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Slick2D/slick.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

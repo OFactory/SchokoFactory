@@ -55,6 +55,7 @@ public class Main extends StateBasedGame{
 			
 			loadResources();
 			
+			
 		} catch (SlickException e) {
 			System.err.println("ERROR <001>: Fenster konnte nicht erstellt werden!");
 			e.printStackTrace();
