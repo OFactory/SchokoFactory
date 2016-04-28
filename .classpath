@@ -8,7 +8,11 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Program Files/Slick2D/jinput.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Slick2D/lwjgl.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Slick2D/lwjgl.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Program Files/Slick2D/native"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="C:/Program Files/Slick2D/lwjgl_util.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/Slick2D/slick.jar"/>
 	<classpathentry kind="output" path="bin"/>
