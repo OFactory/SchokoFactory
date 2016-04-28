@@ -68,7 +68,6 @@ public class MainState extends BasicGameState{
 	
 	
 	
-	
 	//-------------------------------------------------------------------------
 	
 	// Spielmethoden
