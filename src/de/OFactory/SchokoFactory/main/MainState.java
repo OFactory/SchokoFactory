@@ -29,10 +29,8 @@ import de.OFactory.SchokoFactory.inventory.Stockpile;
 public class MainState extends BasicGameState{
 
 	public static Stockpile pile;
-	public static Wiese w;
 	
-	
-	public static float curScale = 0.7F;
+	public static float curScale = 0.6F;
 	
 	public static ArrayList<Pattern> field;
 	public static Image[] patternimg = ResourceManager.loadPics(ResourceManager.loadImage("res/img/assets/texture/patterns/patterns.png").getScaledCopy(curScale), 50);
@@ -134,6 +132,7 @@ public class MainState extends BasicGameState{
 		b1.update(gc);
 		b2.update(gc);
 		
+
 		
 		if(clicked != null){ // Clicked Pattern
 			
