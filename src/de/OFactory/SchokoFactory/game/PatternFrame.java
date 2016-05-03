@@ -12,7 +12,7 @@ public class PatternFrame {
 	public static final int TANK_100 = 5;
 	
 	
-	public static final int RÜHRER_S = 5;
+	public static final int RÜHRER_S = 6;
 	public static final int RÜHRER_E = 9;
 	
 	

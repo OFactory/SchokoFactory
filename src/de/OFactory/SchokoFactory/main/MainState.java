@@ -18,6 +18,7 @@ import de.OFactory.SchokoFactory.game.GameUtils;
 import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternState;
 import de.OFactory.SchokoFactory.game.patterns.Chemiefabrik;
+import de.OFactory.SchokoFactory.game.patterns.Rührer;
 import de.OFactory.SchokoFactory.game.patterns.Tank;
 import de.OFactory.SchokoFactory.game.patterns.Wiese;
 import de.OFactory.SchokoFactory.inventory.BuyButton;
@@ -50,6 +51,8 @@ public class MainState extends BasicGameState{
 	public static BuyButton b1;
 	public static BuyButton b2;
 	
+	public static MainStateListener msl;
+	
 	//-------------------------------------------------------------------------
 	
 	//Spielvariablen
@@ -76,6 +79,9 @@ public class MainState extends BasicGameState{
 		field = createField(20, 20);
 		b1 = new BuyButton(0, 1, 2, gc.getWidth()/80*65, gc.getHeight()/15, "-30");
 		b2 = new BuyButton(3, 4, 5, gc.getWidth()/80*73, gc.getHeight()/15, "-30");
+		
+		msl = new MainStateListener();
+		gc.getInput().addMouseListener(MainState.msl); //MouseListener
 		
 		molten_chokolate = 3000;
 		free_molten_chokolate = molten_chokolate;
@@ -130,22 +136,20 @@ public class MainState extends BasicGameState{
 		
 		if(clicked != null){ // Clicked Pattern
 			
-			if(MainState.curpatternstate == PatternState.TANK){
-				if(clicked instanceof Wiese) {
-					MainState.field.set(clicked.getId(), new Tank(clicked.getX(), clicked.getY(), clicked.getId()));
-				}
-			} else if(MainState.curpatternstate == PatternState.CHEMIEFABRIK){
-				if(clicked instanceof Wiese) {
-					MainState.field.set(clicked.getId(), new Chemiefabrik(clicked.getX(), clicked.getY(), clicked.getId()));
-				}
-			} else if(MainState.curpatternstate == PatternState.WIESE){
-				if(!(clicked instanceof Wiese)) {
-					MainState.field.set(clicked.getId(), new Wiese(clicked.getX(), clicked.getY(), clicked.getId()));
-				}
+			if(clicked instanceof Wiese){
+				if(curpatternstate == PatternState.TANK)
+					field.set(clicked.getId(), new Tank(clicked.getX(), clicked.getY(), clicked.getId()));
+				if(curpatternstate == PatternState.CHEMIEFABRIK)
+					field.set(clicked.getId(), new Chemiefabrik(clicked.getX(), clicked.getY(), clicked.getId()));
+				if(curpatternstate == PatternState.RÜHRER)
+					field.set(clicked.getId(), new Rührer(clicked.getX(), clicked.getY(), clicked.getId()));
+				
+				//TODO add other PatternStates
+			} else {
+				if(curpatternstate == PatternState.WIESE)
+					field.set(clicked.getId(), new Wiese(clicked.getX(), clicked.getY(), clicked.getId()));
 			}
 				
-			
-			//System.out.println("P"+ clicked.getId() + " (" + clicked.getPatternState() + ") ");
 		}
 		
 		
@@ -165,6 +169,8 @@ public class MainState extends BasicGameState{
 			MainState.curpatternstate = PatternState.WIESE;
 		if(in.isKeyDown(Input.KEY_C))
 			MainState.curpatternstate = PatternState.CHEMIEFABRIK;
+		if(in.isKeyDown(Input.KEY_R))
+			MainState.curpatternstate = PatternState.RÜHRER;
 		
 		
 		if(in.isKeyDown(Input.KEY_UP))
