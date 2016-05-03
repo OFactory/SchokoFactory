@@ -1,8 +1,6 @@
 package de.OFactory.SchokoFactory.game.patterns;
 
 
-import org.newdawn.slick.Image;
-
 import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternFrame;
 import de.OFactory.SchokoFactory.game.PatternState;
