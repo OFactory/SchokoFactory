@@ -29,9 +29,10 @@ public class Main extends StateBasedGame{
 	// Spielmethoden
 	
 	@Override
-	public void initStatesList(GameContainer gc) throws SlickException {
+	public void initStatesList(GameContainer gc) throws SlickException {	
 		this.addState(new MainState());
 		this.addState(new MainMenuState());
+		
 		
 		
 	}
