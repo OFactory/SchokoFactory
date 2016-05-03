@@ -28,7 +28,6 @@ public class MainMenuState  extends BasicGameState {
 
 	// Spielmethoden
 	
-	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		
 		play = new Button(0, 350, 350, 600, 100, "Spielen", 20);
@@ -37,7 +36,6 @@ public class MainMenuState  extends BasicGameState {
 		
 	}
 	
-	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		
 		headersize += 0.02;
@@ -50,7 +48,6 @@ public class MainMenuState  extends BasicGameState {
 		
 	}
 
-	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		
 		g.setColor(new Color(180, 180, 180));

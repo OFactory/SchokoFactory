@@ -4,14 +4,10 @@ package de.OFactory.SchokoFactory.game;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Polygon;
-import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
-import de.OFactory.SchokoFactory.game.patterns.Tank;
-import de.OFactory.SchokoFactory.game.patterns.Wiese;
 import de.OFactory.SchokoFactory.main.MainState;
 
 public abstract class Pattern extends GameObject{

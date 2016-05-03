@@ -32,7 +32,6 @@ public class Stockpile implements Drawable, Updateable{
 
 	}
 
-	@Override
 	public void update(GameContainer gc) {	
 		this.shape.setWidth(Display.getWidth());
 		this.shape.setHeight(getHeight());
@@ -47,7 +46,6 @@ public class Stockpile implements Drawable, Updateable{
 		
 	}
 
-	@Override
 	public void draw(Graphics g) {
 		
 		//Stockpile Hintergrund mit #Verlauf

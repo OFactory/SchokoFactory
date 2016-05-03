@@ -1,6 +1,5 @@
 package de.OFactory.SchokoFactory.main;
 
-import java.awt.Font;
 import java.util.ArrayList;
 
 import org.newdawn.slick.Color;
@@ -9,8 +8,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.UnicodeFont;
-import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.state.BasicGameState;
@@ -72,7 +69,6 @@ public class MainState extends BasicGameState{
 	
 	// Spielmethoden
 	
-	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		pile = new Stockpile(0.05);
 		
@@ -121,7 +117,6 @@ public class MainState extends BasicGameState{
 		
 	}
 
-	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		
 		Input in = gc.getInput();
@@ -135,17 +130,17 @@ public class MainState extends BasicGameState{
 		
 		if(clicked != null){ // Clicked Pattern
 			
-			if(this.curpatternstate == PatternState.TANK){
+			if(MainState.curpatternstate == PatternState.TANK){
 				if(clicked instanceof Wiese) {
-					this.field.set(clicked.getId(), new Tank(clicked.getX(), clicked.getY(), clicked.getId()));
+					MainState.field.set(clicked.getId(), new Tank(clicked.getX(), clicked.getY(), clicked.getId()));
 				}
-			} else if(this.curpatternstate == PatternState.CHEMIEFABRIK){
+			} else if(MainState.curpatternstate == PatternState.CHEMIEFABRIK){
 				if(clicked instanceof Wiese) {
-					this.field.set(clicked.getId(), new Chemiefabrik(clicked.getX(), clicked.getY(), clicked.getId()));
+					MainState.field.set(clicked.getId(), new Chemiefabrik(clicked.getX(), clicked.getY(), clicked.getId()));
 				}
-			} else if(this.curpatternstate == PatternState.WIESE){
+			} else if(MainState.curpatternstate == PatternState.WIESE){
 				if(!(clicked instanceof Wiese)) {
-					this.field.set(clicked.getId(), new Wiese(clicked.getX(), clicked.getY(), clicked.getId()));
+					MainState.field.set(clicked.getId(), new Wiese(clicked.getX(), clicked.getY(), clicked.getId()));
 				}
 			}
 				
@@ -202,7 +197,6 @@ public class MainState extends BasicGameState{
 	}
 
 
-	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		
 		

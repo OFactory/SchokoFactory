@@ -1,6 +1,5 @@
 package de.OFactory.SchokoFactory.inventory;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -34,7 +33,6 @@ public class BuyButton implements Updateable, Drawable{
 		this.y = y;
 	}
 	
-	@Override
 	public void draw(Graphics g) {
 		if(this.active)
 			this.activeimg.draw(x, y);
@@ -46,7 +44,6 @@ public class BuyButton implements Updateable, Drawable{
 		
 	}
 
-	@Override
 	public void update(GameContainer gc) {
 		Input in = gc.getInput();
 		

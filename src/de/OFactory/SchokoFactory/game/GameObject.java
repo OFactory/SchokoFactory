@@ -1,12 +1,8 @@
 package de.OFactory.SchokoFactory.game;
 
-import java.awt.Point;
-import java.awt.geom.Rectangle2D;
-import java.awt.geom.Rectangle2D.Double;
-import java.awt.image.BufferedImage;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Shape;
 
@@ -60,7 +56,9 @@ public abstract class GameObject implements Updateable, Drawable{
 		
 	}
 
-	
+	public void draw(Graphics g){
+		
+	}
 	
 	/////////////////////////////////// Setter und Getter ///////////////////
 	
