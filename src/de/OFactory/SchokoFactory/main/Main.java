@@ -8,8 +8,16 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.StateBasedGame;
 
-
+/** 
+ * Hauptklasse des Spiels
+ * beinhaltet main() 
+ * 
+ * @extends StateBasedGame | Ein Spiel, dass auf verschiedenen Statuus besteht
+ * @author Maximilian
+ *
+ */
 public class Main extends StateBasedGame{
+	
 	
 	//Variablen
 	

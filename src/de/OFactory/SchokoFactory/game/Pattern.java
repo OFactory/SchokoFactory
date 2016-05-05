@@ -118,6 +118,10 @@ public abstract class Pattern extends GameObject{
 		
 	}
 	
+	public String toString(){
+		return "Pattern(" + this.getId() + ", " + this.getPatternState() + ")";
+	}
+	
 	////////////////////////////////////////// Setter & Getter ///////////
 
 	public PatternState getPatternState() {

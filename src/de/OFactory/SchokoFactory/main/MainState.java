@@ -1,7 +1,5 @@
 package de.OFactory.SchokoFactory.main;
 
-import java.util.ArrayList;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -15,6 +13,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import de.OFactory.SchokoFactory.game.GameSettings;
 import de.OFactory.SchokoFactory.game.GameUtils;
+import de.OFactory.SchokoFactory.game.Map;
 import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternState;
 import de.OFactory.SchokoFactory.game.patterns.Chemiefabrik;
@@ -24,34 +23,47 @@ import de.OFactory.SchokoFactory.game.patterns.Wiese;
 import de.OFactory.SchokoFactory.inventory.BuyButton;
 import de.OFactory.SchokoFactory.inventory.Stockpile;
 
+/** 
+ * Der Hauptstate des Spieles (=MainState)
+ * In diesem findet das eigentliche Spiel statt
+ * 
+ * @extends BasicGameState: Standard SpielStatus
+ * @author Maximilian
+ */
 public class MainState extends BasicGameState{
 
-	public static Stockpile pile;
+	//Zeug fürs GUI
 	
-	public static float curScale = 0.6F;
-	
-	public static ArrayList<Pattern> field;
-	public static Image[] patternimg = ResourceManager.loadPics(ResourceManager.loadImage("res/img/assets/texture/patterns/patterns.png").getScaledCopy(curScale), 50);
+	public static MainStateListener msl; //Listener
 	
 	
-	public static Image[] buybuttonimg = ResourceManager.loadPics(ResourceManager.loadImage("res/img/gui/buy_inventory/buy_buttons.png").getScaledCopy(0.5F), 6);
+	//Zeug für Pattern
 	
-	public static Pattern hoveredpattern;
-	public static Pattern clicked;
-	public static int allv_y;
-	public static int allv_x;
+	public static Map field;
+	
+	public static float curpatternscale = 0.6F;
+	public static Image   patternimg_raw = ResourceManager.loadImage("res/img/assets/texture/patterns/patterns.png").getScaledCopy(curpatternscale);
+	public static Image[] patternimg = ResourceManager.loadPics(patternimg_raw, 50); //Bild splitten -> Einzelne Bilder (Image[])
+	public static Pattern hoveredpattern; //Gehoverter Pattern
+	public static Pattern clicked;        //Geklickter Pattern
+	
+	public static int allv_y; //Geschwindigkeit y
+	public static int allv_x; //Geschwindidkeit  x
 	
 	public static final  int TEXTURE_WIDTH = 200;
 	public static final  int TEXTURE_HEIGHT = 64;
 	public static String curpatterninfo;
-	
 	public static PatternState curpatternstate;
 	
-	
+	//Zeug fürs Inventar
+
+	public static Stockpile pile;
+	public static float curbuttonscale = 0.5F;
+	public static Image   buybuttonimg_raw = ResourceManager.loadImage("res/img/gui/buy_inventory/buy_buttons.png").getScaledCopy(curbuttonscale);
+	public static Image[] buybuttonimg = ResourceManager.loadPics(buybuttonimg_raw, 6);
 	public static BuyButton b1;
 	public static BuyButton b2;
 	
-	public static MainStateListener msl;
 	
 	//-------------------------------------------------------------------------
 	
@@ -72,32 +84,57 @@ public class MainState extends BasicGameState{
 	
 	// Spielmethoden
 	
+	/** Die Initialisationsmethode des States MainState
+	 *              
+	 *  @param GameContainer gc | MainState's GameContainer Instanz
+	 *  @param StateBasedGame sbg | Die Instanz des Spiels
+	 *  @throws SlickException: Falls Etwas beim Initialisieren schief läuft
+	 */
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		pile = new Stockpile(0.05);
-		
-		
-		field = createField(20, 20);
-		b1 = new BuyButton(0, 1, 2, gc.getWidth()/80*65, gc.getHeight()/15, "-30");
-		b2 = new BuyButton(3, 4, 5, gc.getWidth()/80*73, gc.getHeight()/15, "-30");
+		pile = new Stockpile(0.05); // Stockpile generieren
+		field = createField(20, 20); // Feld generieren
+		field.setName("Test");
+		System.out.println(field.getSaveString());
 		
 		msl = new MainStateListener();
 		gc.getInput().addMouseListener(MainState.msl); //MouseListener
 		
+		// TESTAREA Inc. ------------------------------------------------------------
+		
+		b1 = new BuyButton(0, 1, 2, gc.getWidth()/80*65, gc.getHeight()/15, "-30");
+		b2 = new BuyButton(3, 4, 5, gc.getWidth()/80*73, gc.getHeight()/15, "-30");
 		molten_chokolate = 3000;
 		free_molten_chokolate = molten_chokolate;
+		
+		// TESTAREA End. ------------------------------------------------------------
 	}
 	
-	private static ArrayList<Pattern> createField(int pattern_width, int pattern_height) {
+	
+	/** Erstellt ein Feld (=Liste) von Patterns aus einer Angebebenen Breite und Höhe
+	 *  mit folgenedem Schema:
+	 *  	
+	 *  	h = 3 | w = 3	
+	 *  		  0
+	 *  		1	2
+	 *  	  3   4	  5
+	 *			6   7
+	 *            8
+	 *              
+	 *  @param int pattern_width | Breite des Feldes
+	 *  @param int pattern_height | Höhe des Feldes
+	 *  @return ArrayList<Pattern> ps | Das Feld bestehend aus Pattern
+	 */
+	private static Map createField(int pattern_width, int pattern_height) {
 		
 		int i = 0;
 		
-		ArrayList<Pattern> ps = new ArrayList<Pattern>();
+		Map ps = new Map();
+		ps.setHeight(pattern_height);
+		ps.setWidth(pattern_width);
 		
 		int grid_width = 0; // Anzahl Spalten in nter Reihe
 		
 		for(int y = 0; y < pattern_width*2-1; y++){ // für jede Reihe
-			
-			
 			if(y >= pattern_width){ // nte Reihe erreicht(max width)
 				grid_width--;
 			} else {
@@ -105,62 +142,74 @@ public class MainState extends BasicGameState{
 			}
 			
 			for(int x = 0; x < grid_width; x++){ // für jede Spalte
-				
-											//Normal Placement					//Verschiebung durch Anzahl Patterns in Reihe				//Normal Placemewnt
+								    //Normal Placement					//Verschiebung durch Anzahl Patterns in Reihe				//Normal Placemewnt
 				Wiese w = new Wiese(
-						(int) (  x*TEXTURE_WIDTH*curScale +  ( (pattern_width-grid_width)*TEXTURE_WIDTH*curScale )/2  - pattern_width*TEXTURE_WIDTH*curScale/3),
-						(int) (  y*TEXTURE_HEIGHT*curScale - pattern_height*TEXTURE_HEIGHT*curScale/1.5), 
-						i );
+						(int) (  x*TEXTURE_WIDTH*curpatternscale +  ( (pattern_width-grid_width)*TEXTURE_WIDTH*curpatternscale )/2  - pattern_width*TEXTURE_WIDTH*curpatternscale/3),
+						(int) (  y*TEXTURE_HEIGHT*curpatternscale - pattern_height*TEXTURE_HEIGHT*curpatternscale/1.5), 
+						i ); // i = ID
 				ps.add(w);
 				i++;
-				
-				
 			}
-		
 		}
-		
+	
 		return ps;
 		
 	}
-
+	
+	/** Die Update Methode,
+	 *  hier wird alles berechnet #Mathe15Punkte
+	 *  
+	 *  @param GameContainer gc | MainState's GameContainer Instanz
+	 *  @param StateBasedGame sbg | Die Instanz des Spiels
+	 *  @param int delta | Zeit, die bis zum letzten Aufruf vergangen ist #Komplex #wurzelausminuseins
+	 *  @throws SlickException: Falls Etwas beim Berechnen schief läuft
+	 */
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		
-		Input in = gc.getInput();
-		
+		Input in = gc.getInput(); //Inputinstanz holen
 		patternMovement(gc, in); // Bewegung der Pattern
-		
-		b1.update(gc);
-		b2.update(gc);
-		
 
-		
 		if(clicked != null){ // Clicked Pattern
 			
-			if(clicked instanceof Wiese){
-				if(curpatternstate == PatternState.TANK)
+			if(clicked instanceof Wiese){ //Feld "leer" ( = Wiese)
+				if(curpatternstate == PatternState.TANK) //TANK
 					field.set(clicked.getId(), new Tank(clicked.getX(), clicked.getY(), clicked.getId()));
-				if(curpatternstate == PatternState.CHEMIEFABRIK)
+				if(curpatternstate == PatternState.CHEMIEFABRIK) //CHEMIEFABRIK
 					field.set(clicked.getId(), new Chemiefabrik(clicked.getX(), clicked.getY(), clicked.getId()));
-				if(curpatternstate == PatternState.RÜHRER)
+				if(curpatternstate == PatternState.RÜHRER) //RÜHRER
 					field.set(clicked.getId(), new Rührer(clicked.getX(), clicked.getY(), clicked.getId()));
 				
-				//TODO add other PatternStates
-			} else {
-				if(curpatternstate == PatternState.WIESE)
+				//TODO Andere PatternStates hinzufügen
+			} else { //Feld hat ein Gebäude
+				if(curpatternstate == PatternState.WIESE) //Gebäude entfernen (-> Wiese) 
 					field.set(clicked.getId(), new Wiese(clicked.getX(), clicked.getY(), clicked.getId()));
 			}
 				
 		}
 		
 		
-		GameUtils.refreshSize();
+		GameUtils.refreshSize(); // Testen, ob Größe sihc verändert hat -> Ausprinten
 		
-		for(Pattern p : field)
+		for(Pattern p : field) //jedes Pattern zeichnen
 			p.update(gc);
 		
-		pile.update(gc);
+		pile.update(gc); //Stockpiles updaten
+		
+		// TESTAREA Inc. --------------------------------------
+		
+		b1.update(gc);
+		b2.update(gc);
+		
+		// TESTAREA End. --------------------------------------
 	}
 	
+	/** Ändert den aktuellen Pattern-Zustand curpatternstate
+	 *  Ändert die aktuelle Geschwindigkeit in x und y Richtung zur vektorisierten Konstante GameSettings.PATTERN_MOVEMENT_SPEED
+	 *  Erstellt Bereiche im Fenster up,left,right,down mit denen der Spieler über das Feld scrollen kann
+	 *  
+	 *  @param GameContainer gc | MainState's GameContainer Instanz
+	 *  @param Input in |  MainState's Input Instanz
+	 */
 	private void patternMovement(GameContainer gc, Input in) {
 		
 		if(in.isKeyDown(Input.KEY_T))
@@ -201,43 +250,55 @@ public class MainState extends BasicGameState{
 		if(down.contains(in.getMouseX(), in.getMouseY()))
 			MainState.allv_y = - GameSettings.PATTERN_MOVEMENT_SPEED;
 	}
-
-
+	
+	
+	/** Die Render Methode,
+	 *  hier wird alles gezeichnet
+	 *  
+	 *  @param GameContainer gc | MainState's GameContainer Instanz
+	 *  @param StateBasedGame sbg | Die Instanz des Spiels
+	 *  @param Graphics g | MainState's Grafikinstanz, hiermit zeichnet man (Bsp.: g.fillRect(x, y, w, h))
+	 *  @throws SlickException: Falls Etwas beim Zeichnen schief läuft #KeineFarbeMehr #lowbudget
+	 */
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+
 		
-		
-		
-		
-		g.setColor(new Color(44, 201, 51));
-		g.fillRect(0, 0, Main.width, Main.height);
+		g.setColor(new Color(44, 201, 51)); //TODO Farben auslagern
+		g.fillRect(0, 0, Main.width, Main.height); //Hintergrund
 	
 		
-		for(Pattern p : field)
-			p.draw(g);
+		for(Pattern p : field) //Alle Patterns in field Zeichnen
+			p.draw(g); 
 	
 		
+		//Kaufmenü zeichnen (Rechts)
 		g.setColor(new Color(220, 220, 220));
-		g.fillRect(gc.getWidth()/5*4, 0, gc.getWidth()/5, gc.getHeight());
-		
-		g.setColor(Color.black);
+		g.fillRect(gc.getWidth()/5*4, 0, gc.getWidth()/5, gc.getHeight());  
+		g.setColor(Color.black); 
 		g.drawRect(gc.getWidth()/5*4, 0, gc.getWidth()/5, gc.getHeight());
 		
+		//Stockpiles Zeichnen (Oben)
 		pile.draw(g);
 		
-		
+		//Developer Info
 		g.setColor(new Color(200, 200, 200, 0.5F));
-		g.fillRect(0, gc.getHeight()/20, gc.getWidth()/4, gc.getHeight()/6);
-		
+		g.fillRect(0, gc.getHeight()/20, gc.getWidth()/4, gc.getHeight()/6);	
 		g.setColor(Color.black);
 		g.drawRect(0, gc.getHeight()/20, gc.getWidth()/4, gc.getHeight()/6);
 		
-		g.setColor(new Color(0, 20, 200));;
+		g.setColor(new Color(0, 20, 200));
 		g.drawString("State: MainState", 10, 50);
 		g.drawString("CurPattern: " + curpatterninfo, 10, 80);
 		g.drawString("CurState: " + curpatternstate, 10, 100);
 		
+		// TESTAREA Inc. --------------------------
+		
+		//Buttons #just4funs
 		b1.draw(g);
 		b2.draw(g);
+		
+		
+		// TESTARE End. ---------------------------
 	}
 	
 	//-------------------------------------------------------------------------
