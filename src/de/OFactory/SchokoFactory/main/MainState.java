@@ -1,5 +1,7 @@
 package de.OFactory.SchokoFactory.main;
 
+import java.util.Arrays;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -22,6 +24,9 @@ import de.OFactory.SchokoFactory.game.patterns.Tank;
 import de.OFactory.SchokoFactory.game.patterns.Wiese;
 import de.OFactory.SchokoFactory.inventory.BuyButton;
 import de.OFactory.SchokoFactory.inventory.Stockpile;
+import de.OFactory.SchokoFactory.inventory.info.InfoPanel;
+import de.OFactory.SchokoFactory.inventory.info.InfoState;
+import de.OFactory.SchokoFactory.inventory.info.Tab;
 
 /** 
  * Der Hauptstate des Spieles (=MainState)
@@ -63,6 +68,7 @@ public class MainState extends BasicGameState{
 	public static Image[] buybuttonimg = ResourceManager.loadPics(buybuttonimg_raw, 6);
 	public static BuyButton b1;
 	public static BuyButton b2;
+	public static InfoPanel ip;
 	
 	
 	//-------------------------------------------------------------------------
@@ -103,6 +109,7 @@ public class MainState extends BasicGameState{
 		
 		b1 = new BuyButton(0, 1, 2, gc.getWidth()/80*65, gc.getHeight()/15, "-30");
 		b2 = new BuyButton(3, 4, 5, gc.getWidth()/80*73, gc.getHeight()/15, "-30");
+		ip = new InfoPanel(gc.getWidth()/5*4, 0, gc.getWidth()/5, gc.getHeight(), InfoState.BUILD, Arrays.asList(new Tab(patternimg[0], "Gebäudeinformation")));
 		molten_chokolate = 3000;
 		free_molten_chokolate = molten_chokolate;
 		
@@ -122,7 +129,7 @@ public class MainState extends BasicGameState{
 	 *              
 	 *  @param int pattern_width | Breite des Feldes
 	 *  @param int pattern_height | Höhe des Feldes
-	 *  @return ArrayList<Pattern> ps | Das Feld bestehend aus Pattern
+	 *  @return Map ps | Das Feld bestehend aus Pattern
 	 */
 	private static Map createField(int pattern_width, int pattern_height) {
 		
@@ -199,6 +206,7 @@ public class MainState extends BasicGameState{
 		
 		b1.update(gc);
 		b2.update(gc);
+		ip.update(gc);
 		
 		// TESTAREA End. --------------------------------------
 	}
@@ -272,10 +280,10 @@ public class MainState extends BasicGameState{
 	
 		
 		//Kaufmenü zeichnen (Rechts)
-		g.setColor(new Color(220, 220, 220));
-		g.fillRect(gc.getWidth()/5*4, 0, gc.getWidth()/5, gc.getHeight());  
-		g.setColor(Color.black); 
-		g.drawRect(gc.getWidth()/5*4, 0, gc.getWidth()/5, gc.getHeight());
+//		g.setColor(new Color(220, 220, 220));
+//		g.fillRect(gc.getWidth()/5*4, 0, gc.getWidth()/5, gc.getHeight());  
+//		g.setColor(Color.black); 
+//		g.drawRect(gc.getWidth()/5*4, 0, gc.getWidth()/5, gc.getHeight());
 		
 		//Stockpiles Zeichnen (Oben)
 		pile.draw(g);
@@ -292,6 +300,8 @@ public class MainState extends BasicGameState{
 		g.drawString("CurState: " + curpatternstate, 10, 100);
 		
 		// TESTAREA Inc. --------------------------
+		
+		ip.draw(g);
 		
 		//Buttons #just4funs
 		b1.draw(g);
