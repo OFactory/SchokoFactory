@@ -100,7 +100,7 @@ public class MainState extends BasicGameState{
 		pile = new Stockpile(0.05); // Stockpile generieren
 		field = createField(20, 20); // Feld generieren
 		field.setName("Test");
-		System.out.println(field.getSaveString());
+		//System.out.println(field.getSaveString());
 		
 		msl = new MainStateListener();
 		gc.getInput().addMouseListener(MainState.msl); //MouseListener
@@ -203,6 +203,10 @@ public class MainState extends BasicGameState{
 		pile.update(gc); //Stockpiles updaten
 		
 		// TESTAREA Inc. --------------------------------------
+		
+		if(in.isKeyPressed(Input.KEY_S)){ // Speichertest
+			field.saveMap();
+		}
 		
 		b1.update(gc);
 		b2.update(gc);

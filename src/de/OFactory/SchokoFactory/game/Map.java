@@ -11,7 +11,7 @@ import sun.util.calendar.LocalGregorianCalendar.Date;
 
 public class Map extends ArrayList<Pattern>{
 
-	public final static String SAVE_PATH_DIR = "/saves";
+	public final static String SAVE_PATH_DIR = "src/saves";
 	
 	private static final long serialVersionUID = 1L;
 	private String name = "unnamed";
@@ -54,6 +54,9 @@ public class Map extends ArrayList<Pattern>{
 	 * @return Map m | Die ausgelesene Karte(Speicherstand)
 	 */
 	public void saveMap(String path){
+		
+		System.out.println("Saving Map \"" + name + "\" to \"" + path + "\"...");
+		
 		File f = new File(path);
 		
 		try {
@@ -61,6 +64,7 @@ public class Map extends ArrayList<Pattern>{
 			FileWriter fw = new FileWriter(f);
 			fw.write(this.getSaveString());
 			fw.close();
+			System.out.println("Succesfully saved Map \"" + name + "\"!");
 			
 		} catch (IOException e) {
 			System.err.println("ERROR <003>: Datei \"" + path + "\" konnte nicht gefunden werden!");
