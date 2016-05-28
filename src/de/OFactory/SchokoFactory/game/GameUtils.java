@@ -37,4 +37,22 @@ public class GameUtils {
 	    return randomNum;
 	}
 	
+	/** Testet, ob eine String eine Zahl ist!
+	 *  
+	 * @param:  String str | Der zu überprüfende String
+	 * @return: true, wenn str zahl ist, false, wenn nicht
+	 */	
+	public static boolean isNumeric(String str)  
+	{  
+	  try  
+	  {  
+	    Double.parseDouble(str);  
+	  }  
+	  catch(NumberFormatException nfe)  
+	  {  
+	    return false;  
+	  }  
+	  return true;  
+	}
+	
 }

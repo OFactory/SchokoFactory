@@ -98,7 +98,7 @@ public class MainState extends BasicGameState{
 	 */
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		pile = new Stockpile(0.05); // Stockpile generieren
-		field = createField(20, 20); // Feld generieren
+		field = Map.generateMap(20, 20); // Feld generieren
 		field.setName("Test");
 		//System.out.println(field.getSaveString());
 		
@@ -117,51 +117,6 @@ public class MainState extends BasicGameState{
 	}
 	
 	
-	/** Erstellt ein Feld (=Liste) von Patterns aus einer Angebebenen Breite und Höhe
-	 *  mit folgenedem Schema:
-	 *  	
-	 *  	h = 3 | w = 3	
-	 *  		  0
-	 *  		1	2
-	 *  	  3   4	  5
-	 *			6   7
-	 *            8
-	 *              
-	 *  @param int pattern_width | Breite des Feldes
-	 *  @param int pattern_height | Höhe des Feldes
-	 *  @return Map ps | Das Feld bestehend aus Pattern
-	 */
-	private static Map createField(int pattern_width, int pattern_height) {
-		
-		int i = 0;
-		
-		Map ps = new Map();
-		ps.setHeight(pattern_height);
-		ps.setWidth(pattern_width);
-		
-		int grid_width = 0; // Anzahl Spalten in nter Reihe
-		
-		for(int y = 0; y < pattern_width*2-1; y++){ // für jede Reihe
-			if(y >= pattern_width){ // nte Reihe erreicht(max width)
-				grid_width--;
-			} else {
-				grid_width = y;
-			}
-			
-			for(int x = 0; x < grid_width; x++){ // für jede Spalte
-								    //Normal Placement					//Verschiebung durch Anzahl Patterns in Reihe				//Normal Placemewnt
-				Wiese w = new Wiese(
-						(int) (  x*TEXTURE_WIDTH*curpatternscale +  ( (pattern_width-grid_width)*TEXTURE_WIDTH*curpatternscale )/2  - pattern_width*TEXTURE_WIDTH*curpatternscale/3),
-						(int) (  y*TEXTURE_HEIGHT*curpatternscale - pattern_height*TEXTURE_HEIGHT*curpatternscale/1.5), 
-						i ); // i = ID
-				ps.add(w);
-				i++;
-			}
-		}
-	
-		return ps;
-		
-	}
 	
 	/** Die Update Methode,
 	 *  hier wird alles berechnet #Mathe15Punkte
