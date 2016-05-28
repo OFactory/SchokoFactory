@@ -2,13 +2,17 @@ package de.OFactory.SchokoFactory.main;
 
 public enum GameImage
 {
-	Patterns("res/img/assets/texture/patterns/patterns.png"),
-	header("res/img/gui/header.png");
+	PATTERN("res/img/assets/texture/patterns/patterns.png"),
+	HEADER("res/img/gui/header.png");
 	
-	GameImage(String path) {
-		System.out.println("new image initialized at" + path);
-		this.path = path;
+	private String file;
+	
+	GameImage(String file) {
+		System.out.println("new image initialized at" + file);
+		this.file = file;
 	}
-	
+	public String getPath(){
+		return this.file;
+	}
 }
 
