@@ -276,7 +276,7 @@ public class MainState extends BasicGameState{
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 
 		
-		g.setColor(new Color(44, 201, 51)); //TODO Farben auslagern
+		g.setColor(new Color(69, 166, 76)); //TODO Farben auslagern
 		g.fillRect(0, 0, Main.width, Main.height); //Hintergrund
 	
 		
