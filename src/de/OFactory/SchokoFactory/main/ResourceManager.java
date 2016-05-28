@@ -54,7 +54,7 @@ public class ResourceManager {
 		
 	}
 	
-public static Image[] loadPics(Image source, int pics){
+	public static Image[] loadPics(Image source, int pics){
 		
 		Image[] anim = new Image[pics];
 		

@@ -35,6 +35,7 @@ import de.OFactory.SchokoFactory.inventory.info.Tab;
  * @extends BasicGameState: Standard SpielStatus
  * @author Maximilian
  */
+
 public class MainState extends BasicGameState{
 
 	//Zeug fürs GUI
