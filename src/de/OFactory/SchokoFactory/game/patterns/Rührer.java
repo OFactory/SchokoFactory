@@ -12,7 +12,7 @@ public class Rührer extends Pattern{
 	public Rührer(int x, int y, int id) {
 		super(x, y, PatternState.RÜHRER, id);
 		this.setFrameLoop(PatternFrame.RÜHRER_S, PatternFrame.RÜHRER_E);
-		this.setDelay(5);
+		this.setDelay(4);
 	}
 
 	@Override
