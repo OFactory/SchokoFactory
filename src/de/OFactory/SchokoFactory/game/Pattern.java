@@ -8,6 +8,14 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Shape;
 
+import de.OFactory.SchokoFactory.game.patterns.Chemiefabrik;
+import de.OFactory.SchokoFactory.game.patterns.Kakaoplantage;
+import de.OFactory.SchokoFactory.game.patterns.Molkerei;
+import de.OFactory.SchokoFactory.game.patterns.Rührer;
+import de.OFactory.SchokoFactory.game.patterns.Tank;
+import de.OFactory.SchokoFactory.game.patterns.Weizenfeld;
+import de.OFactory.SchokoFactory.game.patterns.Wiese;
+import de.OFactory.SchokoFactory.game.patterns.Zuckerplantage;
 import de.OFactory.SchokoFactory.main.MainState;
 
 public abstract class Pattern extends GameObject{
@@ -25,6 +33,50 @@ public abstract class Pattern extends GameObject{
 		super(x, y, MainState.patternimg);
 		this.ps = ps;
 		this.setId(id);
+		
+	}
+	
+	/** Liefert ein Pattern eines Patternstates 
+	 * unter Parametersierung aller Attribute des Patterns (x, y, id)
+	 * Liefer null wenn keine PatternKlasse vorhanden
+	 * 
+	 * Patternklasse = extends Pattern;
+	 * 
+	 * @param x : x-Koordinate
+	 * @param y : y-Koordinate
+	 * @param ps : PatternState, dessen Klasse ermittelt werden soll
+	 * @param id : id des Patterns in der Map(Map-spezifische Koordinate)
+	 * @return Pattern p der Klasse des PatternStates ps
+	 * @return null : Wenn es keine adäquate Klasse für den PatternState ps gibt
+	 */
+	public static Pattern getInstance(int x, int y, PatternState ps, int id){
+		
+		Pattern p = null;
+		
+		if(ps == PatternState.WIESE)
+			p = new Wiese(x, y, id);
+		else if(ps == PatternState.CHEMIEFABRIK)
+			p = new Chemiefabrik(x, y, id);
+		else if(ps == PatternState.RÜHRER)
+			p = new Rührer(x, y, id);
+		else if(ps == PatternState.LAGERHALLE)
+			p = new Rührer(x, y, id);
+		else if(ps == PatternState.GIEßER)
+			p = new Rührer(x, y, id);
+		else if(ps == PatternState.KAKAOPLANTAGE)
+			p = new Kakaoplantage(x, y, id);
+		else if(ps == PatternState.MOLKEREI)
+			p = new Molkerei(x, y, id);
+		else if(ps == PatternState.WEIZENFELD)
+			p = new Weizenfeld(x, y, id);
+		else if(ps == PatternState.TANK)
+			p = new Tank(x, y, id);
+		else if(ps == PatternState.ZUCKERPLANTAGE)
+			p = new Zuckerplantage(x, y, id);
+		else
+			System.err.print("ERR <005>: Kann dem PatternState \"" + ps + "\" keine Klasse zuweisen! return null;");
+		
+		return p;
 		
 	}
 
