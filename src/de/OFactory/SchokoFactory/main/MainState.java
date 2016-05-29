@@ -111,7 +111,7 @@ public class MainState extends BasicGameState{
 		b1 = new BuyButton(0, 1, 2, gc.getWidth()/80*65, gc.getHeight()/15, "-30");
 		b2 = new BuyButton(3, 4, 5, gc.getWidth()/80*73, gc.getHeight()/15, "-30");
 		ip = new InfoPanel(gc.getWidth()/5*4, 0, gc.getWidth()/5, gc.getHeight(), InfoState.BUILD, Arrays.asList(new Tab(patternimg[0], "Gebäudeinformation")));
-		molten_chokolate = 3000;
+		molten_chokolate = 3600;
 		free_molten_chokolate = molten_chokolate;
 		
 		// TESTAREA End. ------------------------------------------------------------
