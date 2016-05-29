@@ -9,7 +9,10 @@ import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Shape;
 
 import de.OFactory.SchokoFactory.game.patterns.Chemiefabrik;
+import de.OFactory.SchokoFactory.game.patterns.Farm;
+import de.OFactory.SchokoFactory.game.patterns.Gießer;
 import de.OFactory.SchokoFactory.game.patterns.Kakaoplantage;
+import de.OFactory.SchokoFactory.game.patterns.Lagerhalle;
 import de.OFactory.SchokoFactory.game.patterns.Molkerei;
 import de.OFactory.SchokoFactory.game.patterns.Rührer;
 import de.OFactory.SchokoFactory.game.patterns.Tank;
@@ -60,9 +63,9 @@ public abstract class Pattern extends GameObject{
 		else if(ps == PatternState.RÜHRER)
 			p = new Rührer(x, y, id);
 		else if(ps == PatternState.LAGERHALLE)
-			p = new Rührer(x, y, id);
+			p = new Lagerhalle(x, y, id);
 		else if(ps == PatternState.GIEßER)
-			p = new Rührer(x, y, id);
+			p = new Gießer(x, y, id);
 		else if(ps == PatternState.KAKAOPLANTAGE)
 			p = new Kakaoplantage(x, y, id);
 		else if(ps == PatternState.MOLKEREI)
@@ -73,6 +76,8 @@ public abstract class Pattern extends GameObject{
 			p = new Tank(x, y, id);
 		else if(ps == PatternState.ZUCKERPLANTAGE)
 			p = new Zuckerplantage(x, y, id);
+		else if(ps == PatternState.FARM)
+			p = new Farm(x, y, id);
 		else
 			System.err.print("ERR <005>: Kann dem PatternState \"" + ps + "\" keine Klasse zuweisen! return null;");
 		

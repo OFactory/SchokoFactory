@@ -24,8 +24,8 @@ public class PatternFrame {
 	public static final int LAGERHALLE_ENDE = 17;
 	public static final int LAGERHALLE_NORMAL = 18;
 	
-	public static final int MOLKEREI_MODERN = 22;
+	public static final int MOLKEREI_MODERN = 21;
 	
-	public static final int FARM = 23;
+	public static final int FARM = 22;
 	
 }
