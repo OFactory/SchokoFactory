@@ -174,7 +174,7 @@ public class MainState extends BasicGameState{
 	 */
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		
-		Input in = gc.getInput(); //Inputinstanz holen
+		/*Input in = gc.getInput(); //Inputinstanz holen
 		patternMovement(gc, in); // Bewegung der Pattern
 
 		if(clicked != null){ // Clicked Pattern
@@ -193,21 +193,27 @@ public class MainState extends BasicGameState{
 					field.set(clicked.getId(), new Wiese(clicked.getX(), clicked.getY(), clicked.getId()));
 			}
 				
-		}
+		}*/
 		
 		
-		GameUtils.refreshSize(); // Testen, ob Größe sihc verändert hat -> Ausprinten
+		/*GameUtils.refreshSize(); // Testen, ob Größe sihc verändert hat -> Ausprinten
 		
 		for(Pattern p : field) //jedes Pattern zeichnen
-			p.update(gc);
+			p.update(gc);*/
+		
+		final MainLoop mainloop = new MainLoop(gc, sbg, delta);
+		
+		mainloop.loopPass();
+		
+		/*if(in.isKeyPressed(Input.KEY_S)){ // Speichertest
+			field.saveMap();
+		}*/
 		
 		pile.update(gc); //Stockpiles updaten
 		
 		// TESTAREA Inc. --------------------------------------
 		
-		if(in.isKeyPressed(Input.KEY_S)){ // Speichertest
-			field.saveMap();
-		}
+		
 		
 		b1.update(gc);
 		b2.update(gc);
