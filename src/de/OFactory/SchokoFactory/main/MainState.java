@@ -324,5 +324,15 @@ public class MainState extends BasicGameState{
 	public int getID() {
 		return 1;
 	}
+	
+	@Override
+	public void mouseWheelMoved(int change) {
+		msl.mouseWheelMoved(change);
+	}	
+	
+	@Override
+	public void mousePressed(int button, int x, int y) {
+		msl.mousePressed(button, x, y);
+	}
 
 }
