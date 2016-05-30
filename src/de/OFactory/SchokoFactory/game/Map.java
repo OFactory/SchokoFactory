@@ -83,6 +83,30 @@ public class Map extends ArrayList<Pattern>{
 		
 	}
 	
+	public void restructureMap(float curpatternscale){
+		int grid_width = 0; // Anzahl Spalten in nter Reihe
+		int i = 0;
+		
+		
+		for(int y = 0; y < this.getWidth()*2-1; y++){ // für jede Reihe
+			if(y >= this.getHeight()){ // nte Reihe erreicht(max width)
+				grid_width--;
+			} else {
+				grid_width = y;
+			}
+			
+			for(int x = 0; x < grid_width; x++){ // für jede Spalte
+								    									
+				this.get(i).setX( (int) (  x*MainState.TEXTURE_WIDTH * curpatternscale +//Normal Placement
+								( (this.getWidth()-grid_width)*MainState.TEXTURE_WIDTH * curpatternscale ) / 2 - //Verschiebung durch Anzahl Patterns in Reihe
+								this.getWidth()*MainState.TEXTURE_WIDTH*curpatternscale / 3));
+				this.get(i).setY((int) (  y*MainState.TEXTURE_HEIGHT * curpatternscale - //Normal Placement
+								this.getHeight()*MainState.TEXTURE_HEIGHT * curpatternscale / 1.5));
+				i++;
+			}
+		}
+	}
+	
 	/** Strukturiert ein Feld mit Übergabe eines Arrays aus PatternStates
 	 *  mit folgendem Format: (siehe auch generateMap(int, int))
 	 *  	

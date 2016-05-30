@@ -39,6 +39,7 @@ public abstract class Pattern extends GameObject{
 		
 	}
 	
+
 	/** Liefert ein Pattern eines Patternstates 
 	 * unter Parametersierung aller Attribute des Patterns (x, y, id)
 	 * Liefer null wenn keine PatternKlasse vorhanden
@@ -88,6 +89,15 @@ public abstract class Pattern extends GameObject{
 		return p;
 		
 	}
+	
+	/**
+	 *  Updated die Texturen auf die Aktuelle Skalierung (MainState.curscale);
+	 */
+	public void updateTexture(){
+		this.setImage(MainState.patternimg);
+		System.out.println("UPDATED TEXTURE");
+	}
+	
 
 	@Override
 	public void update(GameContainer gc) {
