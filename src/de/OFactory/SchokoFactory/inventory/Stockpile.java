@@ -12,6 +12,7 @@ import org.newdawn.slick.geom.Rectangle;
 
 import de.OFactory.SchokoFactory.main.Drawable;
 import de.OFactory.SchokoFactory.main.Main;
+import de.OFactory.SchokoFactory.main.MainState;
 import de.OFactory.SchokoFactory.main.Updateable;
 
 public class Stockpile implements Drawable, Updateable{
@@ -40,7 +41,7 @@ public class Stockpile implements Drawable, Updateable{
 		this.piles.clear();
 		this.piles.add(Main.company_name);
 		this.piles.add(Main.money + " EUR");
-		this.piles.add("some random info");
+		this.piles.add(MainState.molten_chokolate+" Liter");
 		this.piles.add("5t0p l00k1ng @me");
 		this.piles.add("1337");
 		
