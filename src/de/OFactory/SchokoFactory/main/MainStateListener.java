@@ -3,6 +3,8 @@ package de.OFactory.SchokoFactory.main;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.MouseListener;
 
+import de.OFactory.SchokoFactory.game.Pattern;
+
 public class MainStateListener implements MouseListener{
 
 	//TODO Mausvariablen
@@ -30,7 +32,15 @@ public class MainStateListener implements MouseListener{
 
 	public void mouseWheelMoved(int change) {
 		System.out.println(change);
-
+		MainState.curpatternscale += change/300F;
+		MainState.field.restructureMap(MainState.curpatternscale);
+		
+		System.out.println(MainState.curpatternscale);
+		
+		MainState.patternimg = ResourceManager.loadPics(ResourceManager.loadImage("res/img/assets/texture/patterns/patterns.png").getScaledCopy(MainState.curpatternscale), 50); //Bild splitten -> Einzelne Bilder (Image[])
+		for(Pattern p : MainState.field){
+			p.updateTexture();
+		}
 		
 	}
 

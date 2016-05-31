@@ -57,34 +57,46 @@ public abstract class Pattern extends GameObject{
 		Pattern p = null;
 		
 		switch(ps){
-		case WIESE:
-			p = new Wiese(x, y, id);
-		case CHEMIEFABRIK:
-			p = new Chemiefabrik(x, y, id);
-		case RÜHRER:
-			p = new Rührer(x, y, id);
-		case LAGERHALLE:
-			p = new Lagerhalle(x, y, id);
-		case GIEßER:
-			p = new Gießer(x, y, id);			
-		case KAKAOPLANTAGE:
-			p = new Kakaoplantage(x, y, id);
-		case MOLKEREI:
-			p = new Molkerei(x, y, id);
-		case WEIZENFELD:
-			p = new Weizenfeld(x, y, id);
-		case TANK:
-			p = new Tank(x, y, id);
-		case ZUCKERPLANTAGE: 				//enum contant FARM needs a corresponding case label in this enum switch on PatternState (?)
-			p = new Zuckerplantage(x, y, id);
-		case FARM:
-			p = new Farm(x, y, id);
-		default :
-			System.err.print("ERR <005>: Kann dem PatternState \"" + ps + "\" keine Klasse zuweisen! return null;");
-			}
+		
+			case WIESE: p = new Wiese(x, y, id);
+				break;
+			case CHEMIEFABRIK: p = new Chemiefabrik(x, y, id);
+				break;
+			case RÜHRER: p = new Rührer(x, y, id);
+				break;
+			case LAGERHALLE: p = new Lagerhalle(x, y, id);
+				break;
+			case GIEßER: p = new Gießer(x, y, id);
+				break;
+			case KAKAOPLANTAGE: p = new Kakaoplantage(x, y, id);
+				break;
+			case MOLKEREI: p = new Molkerei(x, y, id);
+				break;
+			case WEIZENFELD: p = new Weizenfeld(x, y, id);
+				break;
+			case TANK: p = new Tank(x, y, id);
+				break;
+			case ZUCKERPLANTAGE: p = new Zuckerplantage(x, y, id);
+				break;
+			case FARM: p = new Farm(x, y, id);
+				break;
+			default: System.err.print("ERR <005>: Kann dem PatternState \"" + ps + "\" keine Klasse zuweisen! return null;");
+				break;
+			
+		}
+
 		return p;
 		
 	}
+	
+	/**
+	 *  Updated die Texturen auf die Aktuelle Skalierung (MainState.curscale);
+	 */
+	public void updateTexture(){
+		this.setImage(MainState.patternimg);
+		System.out.println("UPDATED TEXTURE");
+	}
+	
 
 	@Override
 	public void update(GameContainer gc) {

@@ -18,9 +18,6 @@ import de.OFactory.SchokoFactory.game.GameUtils;
 import de.OFactory.SchokoFactory.game.Map;
 import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternState;
-import de.OFactory.SchokoFactory.game.patterns.Chemiefabrik;
-import de.OFactory.SchokoFactory.game.patterns.Rührer;
-import de.OFactory.SchokoFactory.game.patterns.Tank;
 import de.OFactory.SchokoFactory.game.patterns.Wiese;
 import de.OFactory.SchokoFactory.inventory.BuyButton;
 import de.OFactory.SchokoFactory.inventory.Stockpile;
@@ -131,7 +128,8 @@ public class MainState extends BasicGameState{
 		
 		Input in = gc.getInput(); //Inputinstanz holen
 		patternMovement(gc, in); // Bewegung der Pattern
-
+		
+		
 		if(clicked != null){ // Clicked Pattern
 			
 			if(clicked instanceof Wiese){ //Feld "leer" ( = Wiese)
@@ -192,6 +190,8 @@ public class MainState extends BasicGameState{
 			MainState.curpatternstate = PatternState.FARM;
 		if(in.isKeyDown(Input.KEY_G))
 			MainState.curpatternstate = PatternState.GIEßER;
+		if(in.isKeyDown(Input.KEY_2))
+			MainState.molten_chokolate += 100;
 		
 		
 		if(in.isKeyDown(Input.KEY_UP))
