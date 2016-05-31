@@ -9,7 +9,7 @@ public class Gieﬂer extends Pattern{
 	public Gieﬂer(int x, int y, int id) {
 		super(x, y, PatternState.GIEﬂER, id);
 		
-		this.setDelay(4);
+		this.setDelay(6);
 		this.setFrameLoop(PatternFrame.GIEﬂER_S, PatternFrame.GIEﬂER_E);
 	}
 

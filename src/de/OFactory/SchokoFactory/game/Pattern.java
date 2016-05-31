@@ -9,7 +9,10 @@ import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Shape;
 
 import de.OFactory.SchokoFactory.game.patterns.Chemiefabrik;
+import de.OFactory.SchokoFactory.game.patterns.Farm;
+import de.OFactory.SchokoFactory.game.patterns.Gießer;
 import de.OFactory.SchokoFactory.game.patterns.Kakaoplantage;
+import de.OFactory.SchokoFactory.game.patterns.Lagerhalle;
 import de.OFactory.SchokoFactory.game.patterns.Molkerei;
 import de.OFactory.SchokoFactory.game.patterns.Rührer;
 import de.OFactory.SchokoFactory.game.patterns.Tank;
@@ -61,9 +64,9 @@ public abstract class Pattern extends GameObject{
 		case RÜHRER:
 			p = new Rührer(x, y, id);
 		case LAGERHALLE:
-			//p = new Lagerhalle(x, y, id);
+			p = new Lagerhalle(x, y, id);
 		case GIEßER:
-			//p = new Gießer(x, y, id);			geht irgendwie nicht
+			p = new Gießer(x, y, id);			
 		case KAKAOPLANTAGE:
 			p = new Kakaoplantage(x, y, id);
 		case MOLKEREI:
@@ -74,11 +77,11 @@ public abstract class Pattern extends GameObject{
 			p = new Tank(x, y, id);
 		case ZUCKERPLANTAGE: 				//enum contant FARM needs a corresponding case label in this enum switch on PatternState (?)
 			p = new Zuckerplantage(x, y, id);
+		case FARM:
+			p = new Farm(x, y, id);
 		default :
 			System.err.print("ERR <005>: Kann dem PatternState \"" + ps + "\" keine Klasse zuweisen! return null;");
 			}
-			
-		
 		return p;
 		
 	}

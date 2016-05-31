@@ -59,7 +59,7 @@ public class MainState extends BasicGameState{
 	public static final  int TEXTURE_WIDTH = 200;
 	public static final  int TEXTURE_HEIGHT = 64;
 	public static String curpatterninfo;
-	public static PatternState curpatternstate;
+	public static PatternState curpatternstate = PatternState.WIESE;
 	
 	//Zeug fürs Inventar
 
@@ -135,14 +135,8 @@ public class MainState extends BasicGameState{
 		if(clicked != null){ // Clicked Pattern
 			
 			if(clicked instanceof Wiese){ //Feld "leer" ( = Wiese)
-				if(curpatternstate == PatternState.TANK) //TANK
-					field.set(clicked.getId(), new Tank(clicked.getX(), clicked.getY(), clicked.getId()));
-				if(curpatternstate == PatternState.CHEMIEFABRIK) //CHEMIEFABRIK
-					field.set(clicked.getId(), new Chemiefabrik(clicked.getX(), clicked.getY(), clicked.getId()));
-				if(curpatternstate == PatternState.RÜHRER) //RÜHRER
-					field.set(clicked.getId(), new Rührer(clicked.getX(), clicked.getY(), clicked.getId()));
-				
-				//TODO Andere PatternStates hinzufügen
+				if(curpatternstate != PatternState.WIESE)
+					field.set(clicked.getId(), Pattern.getInstance(clicked.getX(), clicked.getY(), curpatternstate, clicked.getId()));
 			} else { //Feld hat ein Gebäude
 				if(curpatternstate == PatternState.WIESE) //Gebäude entfernen (-> Wiese) 
 					field.set(clicked.getId(), new Wiese(clicked.getX(), clicked.getY(), clicked.getId()));
@@ -190,6 +184,14 @@ public class MainState extends BasicGameState{
 			MainState.curpatternstate = PatternState.CHEMIEFABRIK;
 		if(in.isKeyDown(Input.KEY_R))
 			MainState.curpatternstate = PatternState.RÜHRER;
+		if(in.isKeyDown(Input.KEY_L))
+			MainState.curpatternstate = PatternState.LAGERHALLE;
+		if(in.isKeyDown(Input.KEY_M))
+			MainState.curpatternstate = PatternState.MOLKEREI;
+		if(in.isKeyDown(Input.KEY_F))
+			MainState.curpatternstate = PatternState.FARM;
+		if(in.isKeyDown(Input.KEY_G))
+			MainState.curpatternstate = PatternState.GIEßER;
 		
 		
 		if(in.isKeyDown(Input.KEY_UP))
