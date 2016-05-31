@@ -1,9 +1,11 @@
 package de.OFactory.SchokoFactory.game;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 
 import de.OFactory.SchokoFactory.game.patterns.Chemiefabrik;
@@ -15,7 +17,7 @@ import sun.util.calendar.LocalGregorianCalendar.Date;
 
 public class Map extends ArrayList<Pattern>{
 
-	public final static String SAVE_PATH_DIR = "src/saves";
+	public final static String SAVE_PATH_DIR = "saves";
 	
 	private static final long serialVersionUID = 1L;
 	private String name = "unnamed";
@@ -125,8 +127,8 @@ public class Map extends ArrayList<Pattern>{
 		int i = 0;
 		
 		
-		int pattern_width =  (int) Math.sqrt(ps.size());
-		int pattern_height = (int) Math.sqrt(ps.size());
+		int pattern_width =  (int) Math.sqrt(ps.size()) + 1;
+		int pattern_height = (int) Math.sqrt(ps.size()) + 1;
 		
 		Map m = new Map();
 		m.setWidth(pattern_width);
@@ -153,14 +155,7 @@ public class Map extends ArrayList<Pattern>{
 				Pattern p = null;
 				PatternState state = ps.get(i);
 				
-				if(state == PatternState.WIESE)
-					p = new Wiese(px, py, i);
-				else if(state == PatternState.TANK)
-					p = new Tank(px, py, i);
-				else if(state == PatternState.CHEMIEFABRIK)
-					p = new Chemiefabrik(px, py, i);
-				else if(state == PatternState.RÜHRER)
-					p = new Rührer(px, py, i);
+				p = Pattern.getInstance(px, py, state, i);
 				//TODO Alle anderen PatternStates adden! Allgemeinde Methode
 				
 				
@@ -263,14 +258,15 @@ public class Map extends ArrayList<Pattern>{
 	 */
 	public static Map readSavedMap(String path){
 		File f = new File(path);
-		
+		System.out.println("Reading " + path + " ...");
 		String mapstring = null;
 		
 		try {
 			
-			FileReader fr = new FileReader(f);
-			mapstring = fr.toString();
-			fr.close();
+			BufferedReader br = new BufferedReader(new FileReader(f));
+			mapstring = br.readLine();
+			
+			br.close();
 			
 		} catch (IOException e) {
 			System.err.println("ERROR <003>: Datei \"" + path + "\" konnte nicht gefunden werden!");

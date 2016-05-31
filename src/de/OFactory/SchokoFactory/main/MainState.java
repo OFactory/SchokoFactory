@@ -19,7 +19,6 @@ import de.OFactory.SchokoFactory.game.Map;
 import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternState;
 import de.OFactory.SchokoFactory.game.patterns.Wiese;
-import de.OFactory.SchokoFactory.inventory.BuyButton;
 import de.OFactory.SchokoFactory.inventory.Stockpile;
 import de.OFactory.SchokoFactory.inventory.info.InfoPanel;
 import de.OFactory.SchokoFactory.inventory.info.InfoState;
@@ -45,7 +44,7 @@ public class MainState extends BasicGameState{
 	public static Map field;
 	
 	public static float curpatternscale = 0.6F;
-	public static Image   patternimg_raw = ResourceManager.loadImage("res/img/assets/texture/patterns/patterns.png").getScaledCopy(curpatternscale);
+	public static Image   patternimg_raw = ResourceManager.loadImage("assets/textures/patterns/patterns.png").getScaledCopy(curpatternscale);
 	public static Image[] patternimg = ResourceManager.loadPics(patternimg_raw, 50); //Bild splitten -> Einzelne Bilder (Image[])
 	public static Pattern hoveredpattern; //Gehoverter Pattern
 	public static Pattern clicked;        //Geklickter Pattern
@@ -62,10 +61,10 @@ public class MainState extends BasicGameState{
 
 	public static Stockpile pile;
 	public static float curbuttonscale = 0.5F;
-	public static Image   buybuttonimg_raw = ResourceManager.loadImage("res/img/gui/buy_inventory/buy_buttons.png").getScaledCopy(curbuttonscale);
+	public static Image   buybuttonimg_raw = ResourceManager.loadImage("assets/textures/gui/buy_buttons.png").getScaledCopy(curbuttonscale);
 	public static Image[] buybuttonimg = ResourceManager.loadPics(buybuttonimg_raw, 6);
-	public static BuyButton b1;
-	public static BuyButton b2;
+	//public static BuyButton b1;
+	//public static BuyButton b2;
 	public static InfoPanel ip;
 	
 	
@@ -96,8 +95,10 @@ public class MainState extends BasicGameState{
 	 */
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		pile = new Stockpile(0.05); // Stockpile generieren
-		field = Map.generateMap(20, 20); // Feld generieren
-		field.setName("Test");
+		//field = Map.generateMap(GameSettings.STANDARD_MAP_SIZE_WIDTH, GameSettings.STANDARD_MAP_SIZE_HEIGHT); // Feld generieren
+		//field.setName("Test");
+		field = Map.readSavedMap("saves/Test.sf");
+		System.out.println(field);
 		//System.out.println(field.getSaveString());
 		
 		msl = new MainStateListener();
@@ -105,8 +106,8 @@ public class MainState extends BasicGameState{
 		
 		// TESTAREA Inc. ------------------------------------------------------------
 		
-		b1 = new BuyButton(0, 1, 2, gc.getWidth()/80*65, gc.getHeight()/15, "-30");
-		b2 = new BuyButton(3, 4, 5, gc.getWidth()/80*73, gc.getHeight()/15, "-30");
+		//b1 = new BuyButton(0, 1, 2, gc.getWidth()/80*65, gc.getHeight()/15, "-30");
+		//b2 = new BuyButton(3, 4, 5, gc.getWidth()/80*73, gc.getHeight()/15, "-30");
 		ip = new InfoPanel(gc.getWidth()/5*4, 0, gc.getWidth()/5, gc.getHeight(), InfoState.BUILD, Arrays.asList(new Tab(patternimg[0], "Gebäudeinformation")));
 		molten_chokolate = 3600;
 		free_molten_chokolate = molten_chokolate;
@@ -146,7 +147,8 @@ public class MainState extends BasicGameState{
 		GameUtils.refreshSize(); // Testen, ob Größe sihc verändert hat -> Ausprinten
 		
 		for(Pattern p : field) //jedes Pattern zeichnen
-			p.update(gc);
+			if(p != null)
+				p.update(gc);
 		
 		if(in.isKeyPressed(Input.KEY_S)){ // Speichertest
 			field.saveMap();
@@ -158,8 +160,8 @@ public class MainState extends BasicGameState{
 		
 		
 		
-		b1.update(gc);
-		b2.update(gc);
+		//b1.update(gc);
+		//b2.update(gc);
 		ip.update(gc);
 		
 		// TESTAREA End. --------------------------------------
@@ -240,7 +242,8 @@ public class MainState extends BasicGameState{
 	
 		
 		for(Pattern p : field) //Alle Patterns in field Zeichnen
-			p.draw(g); 
+			if(p != null)
+				p.draw(g); 
 	
 		
 		//Kaufmenü zeichnen (Rechts)
@@ -268,8 +271,8 @@ public class MainState extends BasicGameState{
 		ip.draw(g);
 		
 		//Buttons #just4funs
-		b1.draw(g);
-		b2.draw(g);
+		//b1.draw(g);
+		//b2.draw(g);
 		
 		
 		// TESTARE End. ---------------------------

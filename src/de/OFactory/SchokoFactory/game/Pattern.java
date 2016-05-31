@@ -57,7 +57,7 @@ public abstract class Pattern extends GameObject{
 		
 		Pattern p = null;
 		
-		switch(ps){
+		switch(ps){ //SWITCH-CASE FOR THE WIN
 		
 			case WIESE: p = new Wiese(x, y, id);
 				break;
@@ -95,7 +95,6 @@ public abstract class Pattern extends GameObject{
 	 */
 	public void updateTexture(){
 		this.setImage(MainState.patternimg);
-		System.out.println("UPDATED TEXTURE");
 	}
 	
 

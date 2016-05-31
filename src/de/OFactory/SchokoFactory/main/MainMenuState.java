@@ -32,7 +32,7 @@ public class MainMenuState  extends BasicGameState {
 		
 		play = new Button(0, 350, 350, 600, 100, "Spielen", 20);
 		test = new Button(1, 350, 500, 600, 100, "Test", Color.blue, Color.green, Color.red, 20);
-		header = new Image("res/img/header.png");
+		header = new Image("assets/textures/gui/header.png");
 		
 	}
 	

@@ -3,6 +3,7 @@ package de.OFactory.SchokoFactory.main;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.MouseListener;
 
+import de.OFactory.SchokoFactory.game.GameSettings;
 import de.OFactory.SchokoFactory.game.Pattern;
 
 public class MainStateListener implements MouseListener{
@@ -31,15 +32,19 @@ public class MainStateListener implements MouseListener{
 	}
 
 	public void mouseWheelMoved(int change) {
-		System.out.println(change);
-		MainState.curpatternscale += change/300F;
-		MainState.field.restructureMap(MainState.curpatternscale);
+		//System.out.println(change);
 		
-		System.out.println(MainState.curpatternscale);
-		
-		MainState.patternimg = ResourceManager.loadPics(ResourceManager.loadImage("res/img/assets/texture/patterns/patterns.png").getScaledCopy(MainState.curpatternscale), 50); //Bild splitten -> Einzelne Bilder (Image[])
-		for(Pattern p : MainState.field){
-			p.updateTexture();
+		//Zoomfunktion //Zooom im richtigem Berreich?
+		if(MainState.curpatternscale + change/GameSettings.ZOOM_STEP >= GameSettings.ZOOM_MIN &&
+				MainState.curpatternscale + change/GameSettings.ZOOM_STEP <= GameSettings.ZOOM_MAX){
+			
+			MainState.curpatternscale += change/GameSettings.ZOOM_STEP;
+			MainState.field.restructureMap(MainState.curpatternscale); //Map neu anordnen
+			
+			MainState.patternimg = ResourceManager.loadPics(ResourceManager.loadImage("assets/textures/patterns/patterns.png").getScaledCopy(MainState.curpatternscale), 50); //Bild splitten -> Einzelne Bilder (Image[])
+			for(Pattern p : MainState.field){
+				p.updateTexture();
+			}
 		}
 		
 	}
