@@ -39,7 +39,6 @@ public abstract class Pattern extends GameObject{
 		
 	}
 	
-
 	/** Liefert ein Pattern eines Patternstates 
 	 * unter Parametersierung aller Attribute des Patterns (x, y, id)
 	 * Liefer null wenn keine PatternKlasse vorhanden
@@ -85,7 +84,7 @@ public abstract class Pattern extends GameObject{
 				break;
 			
 		}
-		
+
 		return p;
 		
 	}
