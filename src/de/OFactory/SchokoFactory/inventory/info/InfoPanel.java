@@ -20,8 +20,6 @@ public class InfoPanel implements Drawable, Updateable{
 	private int width;
 	private int height;
 	
-	private InfoState curinfostate;
-	
 	//PatternState : BUILDING_INFO
 	private Pattern curpattern; //nur wichtig bei: InfoState = Building-Information
 	
@@ -29,30 +27,47 @@ public class InfoPanel implements Drawable, Updateable{
 	private int page;
 	
 	private List<Tab> tabs;
+	public Tab activetab;
 
 	//standard Konstruktor of live
-	public InfoPanel(int x, int y, int width, int height, InfoState is, List<Tab> tabs){
+	public InfoPanel(int x, int y, int width, int height){
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		this.curinfostate = is;
-		this.tabs = tabs;
 	}
 	
 	
+	//update Tab position
 	public void update(GameContainer gc) {
-		// TODO Auto-generated method stub
+		
+		int tabsize = this.getWidth()/tabs.size();
+		int i = 0;
+		
+		for( Tab t : tabs ){
+			t.update(gc);
+			t.setX(this.getX() + i * tabsize);
+			t.setY(this.getY() + this.getHeight() - tabsize);
+			t.setSize(tabsize);
+			i++;
+		}
 		
 	}
 
 	public void draw(Graphics g) {
+		
+		
+		
 		
 		//Hintergrund
 		g.setColor(InfoPanel.BG_COLOR);
 		g.fillRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
 		g.setColor(Color.black);
 		g.drawRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+	
+		//Tabs
+		for(Tab t : tabs)
+			t.draw(g);
 		
 		
 		
@@ -92,13 +107,6 @@ public class InfoPanel implements Drawable, Updateable{
 		this.height = height;
 	}
 
-	public InfoState getCurInfoState() {
-		return curinfostate;
-	}
-
-	public void setCurInfoState(InfoState curinfostate) {
-		this.curinfostate = curinfostate;
-	}
 
 	public List<Tab> getTabs() {
 		return tabs;
@@ -109,11 +117,11 @@ public class InfoPanel implements Drawable, Updateable{
 	}
 	
 	public void addTab(Tab t){
-		this.getTabs().add(t);
+		this.tabs.add(t);
 	}
 	
 	public void removeTab(Tab t){
-		this.getTabs().remove(t);
+		this.tabs.remove(t);
 	}
 
 

@@ -21,8 +21,9 @@ import de.OFactory.SchokoFactory.game.PatternState;
 import de.OFactory.SchokoFactory.game.patterns.Wiese;
 import de.OFactory.SchokoFactory.inventory.Stockpile;
 import de.OFactory.SchokoFactory.inventory.info.InfoPanel;
-import de.OFactory.SchokoFactory.inventory.info.InfoState;
-import de.OFactory.SchokoFactory.inventory.info.Tab;
+import de.OFactory.SchokoFactory.inventory.info.tabs.BuildTab;
+import de.OFactory.SchokoFactory.inventory.info.tabs.BuildingInfoTab;
+import de.OFactory.SchokoFactory.inventory.info.tabs.MarketInfoTab;
 
 /** 
  * Der Hauptstate des Spieles (=MainState)
@@ -43,7 +44,7 @@ public class MainState extends BasicGameState{
 	
 	public static Map field;
 	
-	public static float curpatternscale = 0.6F;
+	public static float curpatternscale = 0.7F;
 	public static Image   patternimg_raw = ResourceManager.loadImage("assets/textures/patterns/patterns.png").getScaledCopy(curpatternscale);
 	public static Image[] patternimg = ResourceManager.loadPics(patternimg_raw, 50); //Bild splitten -> Einzelne Bilder (Image[])
 	public static Pattern hoveredpattern; //Gehoverter Pattern
@@ -101,6 +102,14 @@ public class MainState extends BasicGameState{
 		System.out.println(field);
 		//System.out.println(field.getSaveString());
 		
+		// InfoPanel + TABS
+		ip = new InfoPanel(gc.getWidth()/5*4, 0, gc.getWidth()/5, gc.getHeight());
+		ip.setTabs(Arrays.asList(new BuildTab(ip, buybuttonimg[0]),
+				new BuildTab(ip, patternimg[10]),
+				new MarketInfoTab(ip, patternimg[1]),
+				new BuildingInfoTab(ip, patternimg[1])));
+		
+		
 		msl = new MainStateListener();
 		gc.getInput().addMouseListener(MainState.msl); //MouseListener
 		
@@ -108,7 +117,7 @@ public class MainState extends BasicGameState{
 		
 		//b1 = new BuyButton(0, 1, 2, gc.getWidth()/80*65, gc.getHeight()/15, "-30");
 		//b2 = new BuyButton(3, 4, 5, gc.getWidth()/80*73, gc.getHeight()/15, "-30");
-		ip = new InfoPanel(gc.getWidth()/5*4, 0, gc.getWidth()/5, gc.getHeight(), InfoState.BUILD, Arrays.asList(new Tab(patternimg[0], "Gebäudeinformation")));
+		
 		molten_chokolate = 3600;
 		free_molten_chokolate = molten_chokolate;
 		

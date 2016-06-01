@@ -4,11 +4,13 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 
+import de.OFactory.SchokoFactory.game.GameFonts;
 import de.OFactory.SchokoFactory.main.Drawable;
 import de.OFactory.SchokoFactory.main.Updateable;
 
-public class Tab implements Drawable, Updateable{
+public abstract class Tab implements Drawable, Updateable{
 	
 	public static Color BG_COLOR_DISABLED = new Color(100, 100, 100);
 	public static Color BG_COLOR_ACTIVE   = new Color(150, 150, 200);
@@ -16,43 +18,60 @@ public class Tab implements Drawable, Updateable{
 	
 	private int x;
 	private int y;
-	private int width;
-	
-	private boolean active;
+	private int size;
 	private boolean disabled;
 	private Image  display;
 	private String name;
 	
-	public Tab(Image img, String name){
+	private InfoPanel ip;
+	
+	public Tab(InfoPanel ip, Image img, String name){
+		this.ip = ip;
 		this.display = img;
 		this.setName(name);
 	}
 	
 	public void update(GameContainer gc) {
-		// TODO Auto-generated method stub
+		Input in = gc.getInput();
+		
+		if((in.getMouseX() > x && in.getMouseX() < x + size) 
+				&& (in.getMouseY() > y && in.getMouseY() < y + size)){
+			
+			if(in.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)){
+				ip.activetab = this;
+			}
+			
+			
+		} 
 		
 	}
 
 	public void draw(Graphics g) {
-		if(this.active)
+		if(this.isActive()){ // Aktiv			
+			this.drawContent(g);
 			g.setColor(Tab.BG_COLOR_ACTIVE);
-		else if(this.disabled)
+		} else if(this.isDisabled()) // Deaktiviert
 			g.setColor(Tab.BG_COLOR_DISABLED);
-		else
+		else //Normal
 			g.setColor(Tab.BG_COLOR_NORMAL);
 		
-		g.fillRect(this.getX(), this.getY(), this.getWidth(), this.getWidth());
+		g.fillRect(x, y, size, size);
 		g.setColor(Color.black);
-		g.drawRect(this.getX(), this.getY(), this.getWidth(), this.getWidth());
+		g.drawRect(x, y, size, size);
 		
+		//g.drawImage(display.getScaledCopy(size/display.getWidth()), -30);
+		//display.draw(x, y-500);
+		GameFonts.MAIN.drawString(x + 20, y + 10, "" + name.charAt(0), Color.black);
 	}
+	
+	public abstract void drawContent(Graphics g);
 	
 	
 	public boolean isActive() {
-		return active;
+		return ip.activetab == this;
 	}
 	public void setActive(boolean active) {
-		this.active = active;
+		ip.activetab = this;
 	}
 	public Image getDisplay() {
 		return display;
@@ -77,12 +96,20 @@ public class Tab implements Drawable, Updateable{
 		this.y = y;
 	}
 
-	public int getWidth() {
-		return width;
+	public void setInfoPanel(InfoPanel ip){
+		this.ip = ip;
+	}
+	
+	public InfoPanel getInfoPanel(){
+		return ip;
+	}
+	
+	public int getSize() {
+		return size;
 	}
 
-	public void setWidth(int width) {
-		this.width = width;
+	public void setSize(int size) {
+		this.size = size;
 	}
 
 	public String getName() {
