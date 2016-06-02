@@ -1,6 +1,7 @@
 package de.OFactory.SchokoFactory.inventory.info.tabs;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
@@ -18,6 +19,12 @@ public class BuildingInfoTab extends Tab{
 	@Override
 	public void drawContent(Graphics g) {
 		GameFonts.SUB.drawString(getInfoPanel().getX() + 10, getInfoPanel().getY()+20, "Gebäudeinformation", Color.black);
+	}
+
+	@Override
+	public void updateContent(GameContainer gc) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

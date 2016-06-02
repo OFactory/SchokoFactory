@@ -42,7 +42,9 @@ public abstract class Tab implements Drawable, Updateable{
 			}
 			
 			
-		} 
+		}
+		
+		updateContent(gc);
 		
 	}
 
@@ -65,6 +67,7 @@ public abstract class Tab implements Drawable, Updateable{
 	}
 	
 	public abstract void drawContent(Graphics g);
+	public abstract void updateContent(GameContainer gc);
 	
 	
 	public boolean isActive() {
