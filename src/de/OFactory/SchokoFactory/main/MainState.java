@@ -80,7 +80,7 @@ public class MainState extends BasicGameState{
 	public static int molten_chokolate;
 	public static int free_molten_chokolate;
 	
-	public Market m;
+	public static Market m;
 	
 	
 	
@@ -100,6 +100,15 @@ public class MainState extends BasicGameState{
 	 *  @throws SlickException: Falls Etwas beim Initialisieren schief läuft
 	 */
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
+		
+		// - Market
+		this.m = new Market();
+		this.m.setPlayer(Arrays.asList(
+				new Player(m,"P1",100000),
+				new Player(m,"P2",100000),
+				new Player(m,"P3",100000)
+				));
+		
 		pile = new Stockpile(0.05); // Stockpile generieren
 		//field = Map.generateMap(GameSettings.STANDARD_MAP_SIZE_WIDTH, GameSettings.STANDARD_MAP_SIZE_HEIGHT); // Feld generieren
 		//field.setName("Test");
@@ -135,13 +144,7 @@ public class MainState extends BasicGameState{
 		
 		// TESTAREA End. ------------------------------------------------------------
 		
-		// - Market
-		m = new Market();
-		m.setPlayer(Arrays.asList(
-				new Player(m,"P1",100000),
-				new Player(m,"P2",100000),
-				new Player(m,"P3",100000)
-				));
+
 	}
 	
 	
@@ -189,7 +192,7 @@ public class MainState extends BasicGameState{
 		
 		// TESTAREA Inc. --------------------------------------
 		
-		
+		m.day();
 		
 		//b1.update(gc);
 		//b2.update(gc);

@@ -16,11 +16,11 @@ public class Market {
 	}
 	
 	/** processed every day **/
-	private void day() {
+	public void day() {
 		
 		
-		this.time ++;
-		
+		this.time++;
+		System.out.println(getTimeString());
 	}
 	public void addPlayer(Player p){
 		this.players.add(p);
@@ -38,8 +38,13 @@ public class Market {
 		return this.players;
 	}
 	
-/*	public String getTimeString() {
-		while () {
-		return ""+time
-	}*/
+	public String getTimeString() {
+		int year = time/360;
+		int month = (time - year*360)/30;
+		int day = time- year*360 - month*30 ;
+		
+		return (year)+":"+(month+1)+":"+(day+1);	// ++ Denn es gibt keinen 0. Monat/Tag
+	}
+	
 }
+
