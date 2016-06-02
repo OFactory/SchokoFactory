@@ -25,6 +25,9 @@ import de.OFactory.SchokoFactory.inventory.info.tabs.BuildTab;
 import de.OFactory.SchokoFactory.inventory.info.tabs.BuildingInfoTab;
 import de.OFactory.SchokoFactory.inventory.info.tabs.MarketInfoTab;
 
+import de.OFactory.SchokoFactory.simulation.Market;
+import de.OFactory.SchokoFactory.simulation.Player;
+
 /** 
  * Der Hauptstate des Spieles (=MainState)
  * In diesem findet das eigentliche Spiel statt
@@ -77,6 +80,8 @@ public class MainState extends BasicGameState{
 	public static int molten_chokolate;
 	public static int free_molten_chokolate;
 	
+	public Market m;
+	
 	
 	
 	
@@ -109,10 +114,12 @@ public class MainState extends BasicGameState{
 		int height = gc.getHeight()/20*19;
 		
 		ip = new InfoPanel(x, y, width, height);
-		ip.setTabs(Arrays.asList(new BuildTab(ip, buybuttonimg[0]),
+		ip.setTabs(Arrays.asList(
+				new BuildTab(ip, buybuttonimg[0]),
 				new BuildTab(ip, patternimg[10]),
 				new MarketInfoTab(ip, patternimg[1]),
-				new BuildingInfoTab(ip, patternimg[1])));
+				new BuildingInfoTab(ip, patternimg[1])
+				));
 		ip.getTabs().get(0).setActive(true);
 		
 		msl = new MainStateListener();
@@ -127,6 +134,14 @@ public class MainState extends BasicGameState{
 		free_molten_chokolate = molten_chokolate;
 		
 		// TESTAREA End. ------------------------------------------------------------
+		
+		// - Market
+		m = new Market();
+		m.setPlayer(Arrays.asList(
+				new Player(m,"P1",100000),
+				new Player(m,"P2",100000),
+				new Player(m,"P3",100000)
+				));
 	}
 	
 	
@@ -156,6 +171,7 @@ public class MainState extends BasicGameState{
 			}
 				
 		}
+		
 		
 		
 		GameUtils.refreshSize(); // Testen, ob Größe sihc verändert hat -> Ausprinten
