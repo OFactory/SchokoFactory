@@ -15,6 +15,6 @@ import org.newdawn.slick.TrueTypeFont;
  */
 public class GameFonts {
 	
-	public static TrueTypeFont MAIN = new TrueTypeFont(new Font("Verdana", Font.BOLD, 32), true);
-	public static TrueTypeFont SUB = new TrueTypeFont(new Font("Verdana", Font.BOLD, 20), true); 
+	public static TrueTypeFont MAIN = new TrueTypeFont(new Font("Arial", Font.BOLD, 32), true);
+	public static TrueTypeFont SUB = new TrueTypeFont(new Font("Arial", Font.BOLD, 20), true); 
 }

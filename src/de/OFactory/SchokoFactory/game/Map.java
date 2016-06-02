@@ -5,12 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 
-import de.OFactory.SchokoFactory.game.patterns.Chemiefabrik;
-import de.OFactory.SchokoFactory.game.patterns.Rührer;
-import de.OFactory.SchokoFactory.game.patterns.Tank;
 import de.OFactory.SchokoFactory.game.patterns.Wiese;
 import de.OFactory.SchokoFactory.main.MainState;
 import sun.util.calendar.LocalGregorianCalendar.Date;
@@ -85,6 +81,11 @@ public class Map extends ArrayList<Pattern>{
 		
 	}
 	
+	/**
+	 * Zoomt eine Map an die obere Linke Seite heran.
+	 * 
+	 * @param curpatternscale Skalierung
+	 */
 	public void restructureMap(float curpatternscale){
 		int grid_width = 0; // Anzahl Spalten in nter Reihe
 		int i = 0;
@@ -104,6 +105,45 @@ public class Map extends ArrayList<Pattern>{
 								this.getWidth()*MainState.TEXTURE_WIDTH*curpatternscale / 3));
 				this.get(i).setY((int) (  y*MainState.TEXTURE_HEIGHT * curpatternscale - //Normal Placement
 								this.getHeight()*MainState.TEXTURE_HEIGHT * curpatternscale / 1.5));
+				i++;
+			}
+		}
+	}
+	
+	/**
+	 * Zoomt eine Map an die eine bestimmte Stelle (zx,zy) heran bzw. heraus.
+	 * Hierbei kommt es darauf an, ob currpatternscale größer oder kleiner als die vorgergegangene Skalierung ist.
+	 * 
+	 * @param curpatternscale Skalierung
+	 * @param zx X-Position des Zoom-Punktes
+	 * @param zy Y-Position des Zoom-Punktes
+	 */
+	public void zoomMap(float curpatternscale, int zx, int zy){
+		int grid_width = 0; // Anzahl Spalten in nter Reihe
+		int i = 0;
+		int twidth  = (int) (MainState.TEXTURE_WIDTH * curpatternscale);
+		int theight = (int) (MainState.TEXTURE_HEIGHT * curpatternscale);
+		
+		
+		for(int y = 0; y < this.getWidth()*2-1; y++){ // für jede Reihe
+			if(y >= this.getHeight()){ // nte Reihe erreicht(max width)
+				grid_width--;
+			} else {
+				grid_width = y;
+			}
+			
+			for(int x = 0; x < grid_width; x++){ // für jede Spalte
+				
+				Pattern p = this.get(i);
+				
+				p.setX( (int) (  x* twidth+//Normal Placement
+								( (this.getWidth()-grid_width)*twidth ) / 2 - //Verschiebung durch Anzahl Patterns in Reihe
+								this.getWidth()*twidth / 3));
+				p.setY( (int) (  y*theight - //Normal Placement
+								 this.getHeight()*theight / 1.5));
+				
+				
+				
 				i++;
 			}
 		}
