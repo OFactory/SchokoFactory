@@ -41,7 +41,7 @@ public class MainState extends BasicGameState{
 	//Zeug fürs GUI
 	
 	public static MainStateListener msl; //Listener
-	
+	public static GameContainer gc;
 	
 	//Zeug für Pattern
 	
@@ -159,6 +159,7 @@ public class MainState extends BasicGameState{
 		Input in = gc.getInput(); //Inputinstanz holen
 		patternMovement(gc, in); // Bewegung der Pattern
 		
+		MainState.gc = gc;
 		
 		if(clicked != null){ // Clicked Pattern
 			
