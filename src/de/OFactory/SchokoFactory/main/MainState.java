@@ -103,12 +103,17 @@ public class MainState extends BasicGameState{
 		//System.out.println(field.getSaveString());
 		
 		// InfoPanel + TABS
-		ip = new InfoPanel(gc.getWidth()/5*4, 0, gc.getWidth()/5, gc.getHeight());
+		int x = gc.getWidth()/5*4;
+		int y =gc.getHeight()/20;
+		int width = gc.getWidth()/20*4;
+		int height = gc.getHeight()/20*19;
+		
+		ip = new InfoPanel(x, y, width, height);
 		ip.setTabs(Arrays.asList(new BuildTab(ip, buybuttonimg[0]),
 				new BuildTab(ip, patternimg[10]),
 				new MarketInfoTab(ip, patternimg[1]),
 				new BuildingInfoTab(ip, patternimg[1])));
-		
+		ip.getTabs().get(0).setActive(true);
 		
 		msl = new MainStateListener();
 		gc.getInput().addMouseListener(MainState.msl); //MouseListener

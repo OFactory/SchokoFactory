@@ -13,7 +13,7 @@ import de.OFactory.SchokoFactory.main.Updateable;
 public abstract class Tab implements Drawable, Updateable{
 	
 	public static Color BG_COLOR_DISABLED = new Color(100, 100, 100);
-	public static Color BG_COLOR_ACTIVE   = new Color(150, 150, 200);
+	public static Color BG_COLOR_ACTIVE   = new Color(50, 100, 200);
 	public static Color BG_COLOR_NORMAL   = new Color(180, 180, 180);
 	
 	private int x;

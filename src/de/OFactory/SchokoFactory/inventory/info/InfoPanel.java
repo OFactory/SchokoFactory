@@ -35,6 +35,9 @@ public class InfoPanel implements Drawable, Updateable{
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		
+		
+		
 	}
 	
 	
@@ -47,10 +50,11 @@ public class InfoPanel implements Drawable, Updateable{
 		for( Tab t : tabs ){
 			t.update(gc);
 			t.setX(this.getX() + i * tabsize);
-			t.setY(this.getY() + this.getHeight() - tabsize);
+			t.setY(gc.getHeight() - tabsize);
 			t.setSize(tabsize);
 			i++;
 		}
+		
 		
 	}
 

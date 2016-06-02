@@ -17,7 +17,7 @@ public class BuildingInfoTab extends Tab{
 
 	@Override
 	public void drawContent(Graphics g) {
-		GameFonts.SUB.drawString(getInfoPanel().getX() + 10, 20, "Gebäudeinformation", Color.black);
+		GameFonts.SUB.drawString(getInfoPanel().getX() + 10, getInfoPanel().getY()+20, "Gebäudeinformation", Color.black);
 	}
 
 }
