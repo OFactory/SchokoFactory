@@ -14,12 +14,12 @@ public class Market {
 	private double eco = 1;
 	private double boni;
 	private int summeMoegAbs;
-	private int summeAbs;
+	int summeAbs;
 	@SuppressWarnings("unused")
-	private double summeUms;
+	double summeUms;
 	@SuppressWarnings("unused") //PLS USE
 	private double zuwachs;
-	private int summeAbsAlt;
+	private int summeAbsAlt = 1;
 	
 	public Market() {
 		
@@ -40,7 +40,7 @@ public class Market {
 	/** Calculate economic development of market and players **/
 	private void calculation() {
 
-		bedarf *= Math.pow(this.eco , 2) * boni * (Math.pow(getWerbefaktoren(),0.9) + 10)/11;
+		bedarf = (int)(summeAbs * Math.pow(this.eco , 2) * boni * (Math.pow(getWerbefaktoren(),0.9) + 10)/11);
 		
 		summeMoegAbs = getMoegAbs();
 		summeAbs = (summeMoegAbs+bedarf)/2;
@@ -54,7 +54,7 @@ public class Market {
 			summeUms += p.getAbsatz() * p.getPreis();
 		}
 
-		if(summeAbsAlt != 0)
+		if(summeAbsAlt != 0)		// Division by zero abhalten
 			zuwachs = summeAbs/summeAbsAlt;
 		summeAbsAlt = summeAbs;
 		
@@ -64,8 +64,7 @@ public class Market {
 	
 	
 	
-	
-	
+
 	/**
 	 * Produkt der Werbefaktoren aller Spieler
 	 * 

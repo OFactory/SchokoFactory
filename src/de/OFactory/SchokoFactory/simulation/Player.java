@@ -49,6 +49,20 @@ public class Player {
     
     public void finalCalculation() {
     	
+    	umsatz = absatz * preis;
+    	money += umsatz;
+        produktmenge -= absatz;
+        marktanteil = absatz/this.market.summeAbs;
+
+        if (money < 0 && liquide) {
+            zinsen = -money / Math.pow(umsatz,2) * this.market.summeUms * 0.0167 * 5;
+            if (zinsen < 0.03) 
+                zinsen = 0.03;
+            money += zinsen*money;
+            if (zinsen > 0.20) 
+                liquide = false;
+        } else
+            zinsen = 0;
     	
     }
     
@@ -147,7 +161,6 @@ public class Player {
 	public void setQualitaet(double qualitaet) {
 		this.qualitaet = qualitaet;
 	}
-
 	public void setMoegAbs(int moegAbs) {
 		this.moegAbs = moegAbs;
 	}
