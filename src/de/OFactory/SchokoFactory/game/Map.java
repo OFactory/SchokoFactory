@@ -82,7 +82,7 @@ public class Map extends ArrayList<Pattern>{
 	}
 	
 	/**
-	 * Zoomt eine Map an die obere Linke Seite heran.
+	 * Restrukturiert
 	 * 
 	 * @param curpatternscale Skalierung
 	 */
@@ -112,7 +112,10 @@ public class Map extends ArrayList<Pattern>{
 	
 	/**
 	 * Zoomt eine Map an die eine bestimmte Stelle (zx,zy) heran bzw. heraus.
-	 * Hierbei kommt es darauf an, ob currpatternscale größer oder kleiner als die vorgergegangene Skalierung ist.
+	 * Hierbei kommt es darauf an, ob currpatternscale größer oder kleiner als die vorgergegangene Skalierung ist,
+	 * und ob die Map herangezoomt bzw. herausgezoomt werden soll.
+	 * Hierbei bewegen sich alle Pattern gleichmäßig um die Zoomstelle herum,
+	 * ähnlich wie die Pixel bei der Zoom-Funktion von Bildern.
 	 * 
 	 * @param curpatternscale Skalierung
 	 * @param zx X-Position des Zoom-Punktes
@@ -136,11 +139,13 @@ public class Map extends ArrayList<Pattern>{
 				
 				Pattern p = this.get(i);
 				
-				p.setX( (int) (  x* twidth+//Normal Placement
+				p.setX( (int) ( zx - MainState.gc.getWidth()/2 + 
+								x* twidth+//Normal Placement
 								( (this.getWidth()-grid_width)*twidth ) / 2 - //Verschiebung durch Anzahl Patterns in Reihe
 								this.getWidth()*twidth / 3));
-				p.setY( (int) (  y*theight - //Normal Placement
-								 this.getHeight()*theight / 1.5));
+				p.setY( (int) ( zy - MainState.gc.getHeight()/2 + 
+								y*theight - //Normal Placement
+								this.getHeight()*theight / 1.5));
 				
 				
 				
@@ -148,6 +153,7 @@ public class Map extends ArrayList<Pattern>{
 			}
 		}
 	}
+	
 	
 	/** Strukturiert ein Feld mit Übergabe eines Arrays aus PatternStates
 	 *  mit folgendem Format: (siehe auch generateMap(int, int))
@@ -169,6 +175,7 @@ public class Map extends ArrayList<Pattern>{
 		
 		int pattern_width =  (int) Math.sqrt(ps.size()) + 1;
 		int pattern_height = (int) Math.sqrt(ps.size()) + 1;
+		
 		
 		Map m = new Map();
 		m.setWidth(pattern_width);
@@ -199,13 +206,14 @@ public class Map extends ArrayList<Pattern>{
 				//TODO Alle anderen PatternStates adden! Allgemeinde Methode
 				
 				
-				
 				m.add(p);
 				i++;
 			}
 		}
-	
+		
 		return m;
+		
+		
 		
 	}
 	
@@ -257,7 +265,7 @@ public class Map extends ArrayList<Pattern>{
 	
 	
 	public String toString(){
-		return "Map(name=" + name + "; " + super.toString() + ")"; //Bsp. Map[name=test; ArrayList[Pattern....]]
+		return "Map(name=" + name + "; size= " + this.getWidth() + "*" + this.getHeight() + " ;" + super.toString() + ")"; //Bsp. Map[name=test; ArrayList[Pattern....]]
 	}
 	
 	// STATIC

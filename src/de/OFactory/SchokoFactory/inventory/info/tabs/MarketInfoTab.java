@@ -8,6 +8,7 @@ import org.newdawn.slick.Image;
 import de.OFactory.SchokoFactory.game.GameFonts;
 import de.OFactory.SchokoFactory.inventory.info.InfoPanel;
 import de.OFactory.SchokoFactory.inventory.info.Tab;
+import de.OFactory.SchokoFactory.main.MainState;
 
 public class MarketInfoTab extends Tab{
 
@@ -19,6 +20,7 @@ public class MarketInfoTab extends Tab{
 	@Override
 	public void drawContent(Graphics g) {
 		GameFonts.SUB.drawString(getInfoPanel().getX() + 10, getInfoPanel().getY()+20, "Marktinformation", Color.black);
+		GameFonts.SUB.drawString(getInfoPanel().getX() + 10, getInfoPanel().getY()+40, "Datum: " + MainState.m.getDateString(), Color.black);
 		
 	}
 
