@@ -15,7 +15,6 @@ public class Market {
 	private double boni;
 	private int summeMoegAbs;
 	int summeAbs;
-	@SuppressWarnings("unused")
 	double summeUms;
 	@SuppressWarnings("unused") //PLS USE
 	private double zuwachs;
@@ -54,13 +53,21 @@ public class Market {
 			summeUms += p.getAbsatz() * p.getPreis();
 		}
 
-		if(summeAbsAlt != 0)		// Division by zero abhalten
+		if(summeAbsAlt != 0)		// Division by zero auffangen
 			zuwachs = summeAbs/summeAbsAlt;
 		summeAbsAlt = summeAbs;
 		
+		for (Player p : players) 
+			p.finalCalculation();
 	}
 	
-	
+	@SuppressWarnings("unused")
+	/**Calculates the shift of requirements between the players/clients.**/
+	private void calculateShift() {
+		
+		
+		
+	}
 	
 	
 	

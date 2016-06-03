@@ -61,6 +61,7 @@ public class Player {
             money += zinsen*money;
             if (zinsen > 0.20) 
                 liquide = false;
+            	System.out.println();
         } else
             zinsen = 0;
     	
@@ -77,7 +78,6 @@ public class Player {
         werbefaktor = 1 + 0;//Änderung
         money -= 0;//Änderung
         preis = 0;//Änderung
-        
  
     }
     
