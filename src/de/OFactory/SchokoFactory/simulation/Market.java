@@ -7,7 +7,7 @@ import java.lang.Math;
 
 public class Market {
 	
-	private int time;
+	private long time = 725759; // 1. Januar 2016
 	private List<Player> players;
 	
 	private int bedarf;
@@ -15,13 +15,15 @@ public class Market {
 	private double boni;
 	private int summeMoegAbs;
 	private int summeAbs;
+	@SuppressWarnings("unused")
 	private double summeUms;
+	@SuppressWarnings("unused") //PLS USE
 	private double zuwachs;
 	private int summeAbsAlt;
 	
 	public Market() {
 		
-		System.out.println("Hello, I'm the market! How are you?");
+		System.out.println("<Markt> Hello, I'm the market! How are you?");
 		
 	}
 	
@@ -31,15 +33,14 @@ public class Market {
 		calculation();
 		
 		this.time++;
-		System.out.println(getTimeString());
+		System.out.println("<Markt> [ " + getDateString() + " ]" );
 		
 	}
 	
 	/** Calculate economic development of market and players **/
 	private void calculation() {
-		
-		double werbefaktoren = getWerbefaktoren();
-		bedarf *= Math.pow(this.eco , 2) * boni * (Math.pow(werbefaktoren,0.9) + 10)/11;
+
+		bedarf *= Math.pow(this.eco , 2) * boni * (Math.pow(getWerbefaktoren(),0.9) + 10)/11;
 		
 		summeMoegAbs = getMoegAbs();
 		summeAbs = (summeMoegAbs+bedarf)/2;
@@ -53,7 +54,8 @@ public class Market {
 			summeUms += p.getAbsatz() * p.getPreis();
 		}
 
-		zuwachs = summeAbs/summeAbsAlt;
+		if(summeAbsAlt != 0)
+			zuwachs = summeAbs/summeAbsAlt;
 		summeAbsAlt = summeAbs;
 		
 	}
@@ -64,7 +66,11 @@ public class Market {
 	
 	
 	
-	/** Produkt der Werbefaktoren**/
+	/**
+	 * Produkt der Werbefaktoren aller Spieler
+	 * 
+	 * @return int Produkt der Werbefaktoren
+	 */
 	private double getWerbefaktoren() {
 		double werbefaktoren = 1;
 		for (Player p:players) {
@@ -73,30 +79,50 @@ public class Market {
 		return werbefaktoren;
 	}
 	
-	/** Summe der moeglichen Absaetze**/
+	/** 
+	 * Summer der Möglichen Absätze aller Spieler
+	 * 
+	 * @return int Summer der Möglichen Absätze
+	 */
 	private int getMoegAbs() {
 		int summe = 0;
 		for (Player p:players) {
 			summe += p.getMoegAbs();
 		}
+		
 		return summe;
 	}
-	/** Summe der Absaetze**/
+	
+	/** 
+	 * Summe der Absaetze aller Spieler
+	 * 
+	 * @return int Summe
+	 */
+	@SuppressWarnings("unused")
 	private int getAbs() {
 		int summe = 0;
 		for (Player p:players) {
 			summe += p.getAbsatz();
 		}
+		
 		return summe;
 	}
-	/** Summe der Umsaetze**/
+	
+	/** 
+	 * Summe der Umsätze aller Spieler
+	 * 
+	 * @return int Summe Umsätze
+	 */
+	@SuppressWarnings("unused")
 	private int getUms() {
 		int summe = 0;
 		for (Player p:players) {
 			summe += p.getUmsatz();
 		}
+		
 		return summe;
 	}
+	
 	public void addPlayer(Player p){
 		this.players.add(p);
 	}
@@ -113,19 +139,28 @@ public class Market {
 		return this.players;
 	}
 	
-	public String getTimeString() {
-		int year = time/360;
-		int month = (time - year*360)/30;
-		int day = time- year*360 - month*30 ;
+	/**
+	 * Gibt den Datumsstring der aktullen Zeit time im Format dd.mm.yyyy zurück.
+	 * Hierbei werden führende Nullen verwendet. z.B. 01.05.2016
+	 * 
+	 * @return String, das Datum in Stringform
+	 */
+	public String getDateString() {
+		long year = time/360;
+		long month = (time - year*360)/30;
+		long day = time- year*360 - month*30 ;
 		
-		return (year)+":"+(month+1)+":"+(day+1);	// ++ Denn es gibt keinen 0. Monat/Tag
+		//return (year)+":"+(month+1)+":"+(day+1);	// ++ Denn es gibt keinen 0. Monat/Tag
+		return String.format("%02d", day+1) + "." + String.format("%02d", month+1) + "." + String.format("%04d", year);
+		// Führende Nullen: dd.mm.yyyy
+		// z.B. 01.05.0020
 	}
 
-	public int getTime() {
+	public long getTime() {
 		return time;
 	}
 
-	public void setTime(int time) {
+	public void setTime(long time) {
 		this.time = time;
 	}
 

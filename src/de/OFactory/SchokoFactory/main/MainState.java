@@ -72,6 +72,11 @@ public class MainState extends BasicGameState{
 	public static InfoPanel ip;
 	
 	
+	//Zeug für Zeit -> Simulationsberechnungen
+	public static long last;
+	public static long delta_t;
+	
+	
 	//-------------------------------------------------------------------------
 	
 	//Spielvariablen
@@ -102,8 +107,8 @@ public class MainState extends BasicGameState{
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		
 		// - Market
-		this.m = new Market();
-		this.m.setPlayer(Arrays.asList(
+		MainState.m = new Market();
+		MainState.m.setPlayer(Arrays.asList(
 				new Player(m,"P1",100000),
 				new Player(m,"P2",100000),
 				new Player(m,"P3",100000)
@@ -190,9 +195,21 @@ public class MainState extends BasicGameState{
 		
 		pile.update(gc); //Stockpiles updaten
 		
+		//Tag berechnen
+		delta_t = System.currentTimeMillis() - last;
+		
+		if(delta_t >= GameSettings.DAY_MILIS){ //Ein Tag(Siehe GameSettings.DAY_MILIS) geht verüber
+			last = 0;
+			m.day();
+		}
+		
+		if(last == 0)
+			last = System.currentTimeMillis(); //last neu ausrechnen
+		
+		
 		// TESTAREA Inc. --------------------------------------
 		
-		m.day();
+		//m.day();
 		
 		//b1.update(gc);
 		//b2.update(gc);

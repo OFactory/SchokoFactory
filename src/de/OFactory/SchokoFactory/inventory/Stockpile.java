@@ -15,9 +15,6 @@ import de.OFactory.SchokoFactory.main.Main;
 import de.OFactory.SchokoFactory.main.MainState;
 import de.OFactory.SchokoFactory.main.Updateable;
 
-import de.OFactory.SchokoFactory.simulation.Market;
-import de.OFactory.SchokoFactory.simulation.Player;
-
 public class Stockpile implements Drawable, Updateable{
 	
 	protected ArrayList<String> piles = new ArrayList<String>();
@@ -46,7 +43,7 @@ public class Stockpile implements Drawable, Updateable{
 		this.piles.add(Main.money + " EUR");
 		this.piles.add(MainState.molten_chokolate+" Liter");
 		this.piles.add("5t0p l00k1ng @me");
-		this.piles.add(MainState.m.getTimeString());
+		this.piles.add(MainState.m.getDateString());
 		
 	}
 

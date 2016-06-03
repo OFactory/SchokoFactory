@@ -53,7 +53,8 @@ public class Player {
     }
     
 	/**Get inputs from GUI(in Game.py).**/
-    private void get() {
+    @SuppressWarnings("unused") //PLS USE
+	private void get() {
     	
         altqualitaet = qualitaet;
         altwerbefaktor = werbefaktor;
