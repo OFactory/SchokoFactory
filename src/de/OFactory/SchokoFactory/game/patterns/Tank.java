@@ -1,6 +1,7 @@
 package de.OFactory.SchokoFactory.game.patterns;
 
 
+import de.OFactory.SchokoFactory.game.Map;
 import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternFrame;
 import de.OFactory.SchokoFactory.game.PatternState;
@@ -11,8 +12,8 @@ public class Tank extends Pattern{
 	private int capacity = 1000; // 1000l Startkapatzität
 	private int stored_amount = 0; // stored anzahl
 
-	public Tank(int x, int y, int id) {
-		super(x, y, PatternState.TANK, id);
+	public Tank(Map map, int x, int y, int id) {
+		super(map, x, y, PatternState.TANK, id);
 		this.setPatternFrame(PatternFrame.TANK_0);
 		
 	}

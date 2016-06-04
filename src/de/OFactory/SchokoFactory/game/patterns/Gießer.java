@@ -1,13 +1,14 @@
 package de.OFactory.SchokoFactory.game.patterns;
 
+import de.OFactory.SchokoFactory.game.Map;
 import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternFrame;
 import de.OFactory.SchokoFactory.game.PatternState;
 
 public class Gieﬂer extends Pattern{
 	
-	public Gieﬂer(int x, int y, int id) {
-		super(x, y, PatternState.GIEﬂER, id);
+	public Gieﬂer(Map map, int x, int y, int id) {
+		super(map, x, y, PatternState.GIEﬂER, id);
 		
 		this.setDelay(6);
 		this.setFrameLoop(PatternFrame.GIEﬂER_S, PatternFrame.GIEﬂER_E);

@@ -76,6 +76,10 @@ public class MainState extends BasicGameState{
 	public static long last;
 	public static long delta_t;
 	
+	// Zeug für Markt
+	public static Player p; //Spieler
+	
+	
 	
 	//-------------------------------------------------------------------------
 	
@@ -106,10 +110,13 @@ public class MainState extends BasicGameState{
 	 */
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		
+		
+		
 		// - Market
 		MainState.m = new Market();
+		p = new Player(m, "P", 100000);
 		MainState.m.setPlayer(Arrays.asList(
-				new Player(m,"P1",100000),
+				p,
 				new Player(m,"P2",100000),
 				new Player(m,"P3",100000)
 				));
@@ -173,10 +180,10 @@ public class MainState extends BasicGameState{
 			
 			if(clicked instanceof Wiese){ //Feld "leer" ( = Wiese)
 				if(curpatternstate != PatternState.WIESE)
-					field.set(clicked.getId(), Pattern.getInstance(clicked.getX(), clicked.getY(), curpatternstate, clicked.getId()));
+					field.set(clicked.getId(), Pattern.getInstance(MainState.field, clicked.getX(), clicked.getY(), curpatternstate, clicked.getId()));
 			} else { //Feld hat ein Gebäude
 				if(curpatternstate == PatternState.WIESE) //Gebäude entfernen (-> Wiese) 
-					field.set(clicked.getId(), new Wiese(clicked.getX(), clicked.getY(), clicked.getId()));
+					field.set(clicked.getId(), new Wiese(MainState.field, clicked.getX(), clicked.getY(), clicked.getId()));
 			}
 				
 		}

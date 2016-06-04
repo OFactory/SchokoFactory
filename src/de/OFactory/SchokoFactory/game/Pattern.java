@@ -31,9 +31,11 @@ public abstract class Pattern extends GameObject{
 	
 	public boolean hovered = false;
 	
+	private Map m;
 
-	public Pattern(int x, int y, PatternState ps, int id) {
+	public Pattern(Map map, int x, int y, PatternState ps, int id) {
 		super(x, y, MainState.patternimg);
+		this.m = map;
 		this.ps = ps;
 		this.setId(id);
 		
@@ -52,33 +54,33 @@ public abstract class Pattern extends GameObject{
 	 * @return Pattern p der Klasse des PatternStates ps
 	 * @return null : Wenn es keine adäquate Klasse für den PatternState ps gibt
 	 */
-	public static Pattern getInstance(int x, int y, PatternState ps, int id){
+	public static Pattern getInstance(Map map,int x, int y, PatternState ps, int id){
 		
 		Pattern p = null;
 		
 		switch(ps){ //SWITCH-CASE FOR THE WIN
 		
-			case WIESE: p = new Wiese(x, y, id);
+			case WIESE: p = new Wiese(map, x, y, id);
 				break;
-			case CHEMIEFABRIK: p = new Chemiefabrik(x, y, id);
+			case CHEMIEFABRIK: p = new Chemiefabrik(map, x, y, id);
 				break;
-			case RÜHRER: p = new Rührer(x, y, id);
+			case RÜHRER: p = new Rührer(map, x, y, id);
 				break;
-			case LAGERHALLE: p = new Lagerhalle(x, y, id);
+			case LAGERHALLE: p = new Lagerhalle(map, x, y, id);
 				break;
-			case GIEßER: p = new Gießer(x, y, id);
+			case GIEßER: p = new Gießer(map, x, y, id);
 				break;
-			case KAKAOPLANTAGE: p = new Kakaoplantage(x, y, id);
+			case KAKAOPLANTAGE: p = new Kakaoplantage(map, x, y, id);
 				break;
-			case MOLKEREI: p = new Molkerei(x, y, id);
+			case MOLKEREI: p = new Molkerei(map, x, y, id);
 				break;
-			case WEIZENFELD: p = new Weizenfeld(x, y, id);
+			case WEIZENFELD: p = new Weizenfeld(map, x, y, id);
 				break;
-			case TANK: p = new Tank(x, y, id);
+			case TANK: p = new Tank(map, x, y, id);
 				break;
-			case ZUCKERPLANTAGE: p = new Zuckerplantage(x, y, id);
+			case ZUCKERPLANTAGE: p = new Zuckerplantage(map, x, y, id);
 				break;
-			case FARM: p = new Farm(x, y, id);
+			case FARM: p = new Farm(map, x, y, id);
 				break;
 			default: System.err.print("ERR <005>: Kann dem PatternState \"" + ps + "\" keine Klasse zuweisen! return null;");
 				break;
@@ -223,6 +225,14 @@ public abstract class Pattern extends GameObject{
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public Map getMap() {
+		return m;
+	}
+
+	public void setMap(Map m) {
+		this.m = m;
 	}
 
 }

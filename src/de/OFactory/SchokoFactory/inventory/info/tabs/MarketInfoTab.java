@@ -12,6 +12,8 @@ import de.OFactory.SchokoFactory.main.MainState;
 
 public class MarketInfoTab extends Tab{
 
+	public static final Color INFO_FONT_COLOR = new Color(50, 100, 200);
+	
 	public MarketInfoTab(InfoPanel ip, Image img) {
 		super(ip, img, "Marktinfo");
 		// TODO Auto-generated constructor stub
@@ -19,8 +21,24 @@ public class MarketInfoTab extends Tab{
 
 	@Override
 	public void drawContent(Graphics g) {
-		GameFonts.SUB.drawString(getInfoPanel().getX() + 10, getInfoPanel().getY()+20, "Marktinformation", Color.black);
-		GameFonts.SUB.drawString(getInfoPanel().getX() + 10, getInfoPanel().getY()+40, "Datum: " + MainState.m.getDateString(), Color.black);
+		
+		int offx = getInfoPanel().getX();
+		int offy = getInfoPanel().getY();
+		
+		
+		GameFonts.MED.drawString( offx + 10, offy + 20,  "Marktinformation",                               Color.black);
+		GameFonts.SUB.drawString( offx + 10, offy + 50,  "Datum: "        + MainState.m.getDateString(),   INFO_FONT_COLOR);
+ 
+		GameFonts.MED.drawString( offx + 10, offy + 90,  "Markt",                                          Color.black);
+		GameFonts.SUB.drawString( offx + 10, offy + 120, "Bedarf: "       + MainState.m.getBedarf(),       INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 140, "Wachstum: "     + MainState.m.getBoni(),         INFO_FONT_COLOR);
+
+		GameFonts.MED.drawString( offx + 10, offy + 180, "Spieler",                                        Color.black);
+		GameFonts.SUB.drawString( offx + 10, offy + 210, "Absatz: "       + MainState.p.getAbsatz(),       INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 230, "Bekanntheit: "  + MainState.p.getBekanntheit(),  INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 250, "Marktanteil: "  + MainState.p.getMarktanteil(),  INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 270, "Produktmenge: " + MainState.p.getProduktmenge(), INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 290, "Qualität: "     + MainState.p.getQualitaet(),    INFO_FONT_COLOR);
 		
 	}
 

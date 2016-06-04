@@ -65,7 +65,7 @@ public class Map extends ArrayList<Pattern>{
 			
 			for(int x = 0; x < grid_width; x++){ // für jede Spalte
 								    									
-				Wiese w = new Wiese(
+				Wiese w = new Wiese( ps,
 						(int) (  x*MainState.TEXTURE_WIDTH * MainState.curpatternscale +//Normal Placement
 								( (pattern_width-grid_width)*MainState.TEXTURE_WIDTH * MainState.curpatternscale ) / 2 - //Verschiebung durch Anzahl Patterns in Reihe
 								pattern_width*MainState.TEXTURE_WIDTH*MainState.curpatternscale / 3),
@@ -202,7 +202,7 @@ public class Map extends ArrayList<Pattern>{
 				Pattern p = null;
 				PatternState state = ps.get(i);
 				
-				p = Pattern.getInstance(px, py, state, i);
+				p = Pattern.getInstance(m, px, py, state, i);
 				//TODO Alle anderen PatternStates adden! Allgemeinde Methode
 				
 				
