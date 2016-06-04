@@ -10,8 +10,8 @@ public class Wiese extends Pattern{
 	public int type = 0;
 	
 
-	public Wiese(Map map, int x, int y, int id) {
-		super(map, x, y, PatternState.WIESE, id);
+	public Wiese(Map map, int x, int y, int id, int xcoor, int ycoor) {
+		super(map, x, y, PatternState.WIESE, id, xcoor, ycoor);
 		
 		
 		this.type = GameUtils.randInt(0, 3);

@@ -6,8 +6,8 @@ import de.OFactory.SchokoFactory.game.PatternFrame;
 import de.OFactory.SchokoFactory.game.PatternState;
 
 public class Molkerei extends Pattern {
-	public Molkerei(Map map, int x, int y, int id) {
-		super(map, x, y, PatternState.MOLKEREI, id);
+	public Molkerei(Map map, int x, int y, int id, int xcoor, int ycoor) {
+		super(map, x, y, PatternState.MOLKEREI, id, xcoor, ycoor);
 		
 		this.setPatternFrame(PatternFrame.MOLKEREI_MODERN);
 	}

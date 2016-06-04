@@ -29,15 +29,20 @@ public abstract class Pattern extends GameObject{
 	
 	private int id;
 	
+	private int xcoor;
+	private int ycoor;
+	
 	public boolean hovered = false;
 	
 	private Map m;
 
-	public Pattern(Map map, int x, int y, PatternState ps, int id) {
+	public Pattern(Map map, int x, int y, PatternState ps, int id, int xcoor, int ycoor) {
 		super(x, y, MainState.patternimg);
 		this.m = map;
 		this.ps = ps;
 		this.setId(id);
+		this.xcoor = xcoor;
+		this.ycoor = ycoor;
 		
 	}
 	
@@ -54,33 +59,33 @@ public abstract class Pattern extends GameObject{
 	 * @return Pattern p der Klasse des PatternStates ps
 	 * @return null : Wenn es keine adäquate Klasse für den PatternState ps gibt
 	 */
-	public static Pattern getInstance(Map map,int x, int y, PatternState ps, int id){
+	public static Pattern getInstance(Map map,int x, int y, PatternState ps, int id, int xcoor, int ycoor){
 		
 		Pattern p = null;
 		
 		switch(ps){ //SWITCH-CASE FOR THE WIN
 		
-			case WIESE: p = new Wiese(map, x, y, id);
+			case WIESE: p = new Wiese(map, x, y, id, xcoor, ycoor);
 				break;
-			case CHEMIEFABRIK: p = new Chemiefabrik(map, x, y, id);
+			case CHEMIEFABRIK: p = new Chemiefabrik(map, x, y, id, xcoor, ycoor);
 				break;
-			case RÜHRER: p = new Rührer(map, x, y, id);
+			case RÜHRER: p = new Rührer(map, x, y, id, xcoor, ycoor);
 				break;
-			case LAGERHALLE: p = new Lagerhalle(map, x, y, id);
+			case LAGERHALLE: p = new Lagerhalle(map, x, y, id, xcoor, ycoor);
 				break;
-			case GIEßER: p = new Gießer(map, x, y, id);
+			case GIEßER: p = new Gießer(map, x, y, id, xcoor, ycoor);
 				break;
-			case KAKAOPLANTAGE: p = new Kakaoplantage(map, x, y, id);
+			case KAKAOPLANTAGE: p = new Kakaoplantage(map, x, y, id, xcoor, ycoor);
 				break;
-			case MOLKEREI: p = new Molkerei(map, x, y, id);
+			case MOLKEREI: p = new Molkerei(map, x, y, id, xcoor, ycoor);
 				break;
-			case WEIZENFELD: p = new Weizenfeld(map, x, y, id);
+			case WEIZENFELD: p = new Weizenfeld(map, x, y, id, xcoor, ycoor);
 				break;
-			case TANK: p = new Tank(map, x, y, id);
+			case TANK: p = new Tank(map, x, y, id, xcoor, ycoor);
 				break;
-			case ZUCKERPLANTAGE: p = new Zuckerplantage(map, x, y, id);
+			case ZUCKERPLANTAGE: p = new Zuckerplantage(map, x, y, id, xcoor, ycoor);
 				break;
-			case FARM: p = new Farm(map, x, y, id);
+			case FARM: p = new Farm(map, x, y, id, xcoor, ycoor);
 				break;
 			default: System.err.print("ERR <005>: Kann dem PatternState \"" + ps + "\" keine Klasse zuweisen! return null;");
 				break;
@@ -233,6 +238,34 @@ public abstract class Pattern extends GameObject{
 
 	public void setMap(Map m) {
 		this.m = m;
+	}
+
+	/**
+	 * @return die X-Koordinate des Patterns auf der Map m
+	 */
+	public int getXCoordinate() {
+		return xcoor;
+	}
+
+	/**
+	 * @param xcoor Die X-Koordinate des Patterns auf der Map m
+	 */
+	public void setXCoordinate(int xcoor) {
+		this.xcoor = xcoor;
+	}
+	
+	/**
+	 * @return die Y-Koordinate des Patterns auf der Map m
+	 */
+	public int getYCoordinate() {
+		return ycoor;
+	}
+
+	/**
+	 * @param xcoor Die Y-Koordinate des Patterns auf der Map m
+	 */
+	public void setYCoordinate(int ycoor) {
+		this.ycoor = ycoor;
 	}
 
 }

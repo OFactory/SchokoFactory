@@ -12,8 +12,8 @@ public class Tank extends Pattern{
 	private int capacity = 1000; // 1000l Startkapatzität
 	private int stored_amount = 0; // stored anzahl
 
-	public Tank(Map map, int x, int y, int id) {
-		super(map, x, y, PatternState.TANK, id);
+	public Tank(Map map, int x, int y, int id, int xcoor, int ycoor) {
+		super(map, x, y, PatternState.TANK, id, xcoor, ycoor);
 		this.setPatternFrame(PatternFrame.TANK_0);
 		
 	}

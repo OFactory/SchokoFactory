@@ -180,10 +180,10 @@ public class MainState extends BasicGameState{
 			
 			if(clicked instanceof Wiese){ //Feld "leer" ( = Wiese)
 				if(curpatternstate != PatternState.WIESE)
-					field.set(clicked.getId(), Pattern.getInstance(MainState.field, clicked.getX(), clicked.getY(), curpatternstate, clicked.getId()));
+					field.set(clicked.getId(), Pattern.getInstance(MainState.field, clicked.getX(), clicked.getY(), curpatternstate, clicked.getId(), clicked.getXCoordinate(), clicked.getYCoordinate()));
 			} else { //Feld hat ein Gebäude
 				if(curpatternstate == PatternState.WIESE) //Gebäude entfernen (-> Wiese) 
-					field.set(clicked.getId(), new Wiese(MainState.field, clicked.getX(), clicked.getY(), clicked.getId()));
+					field.set(clicked.getId(), new Wiese(MainState.field, clicked.getX(), clicked.getY(), clicked.getId(), clicked.getXCoordinate(), clicked.getYCoordinate()));
 			}
 				
 		}

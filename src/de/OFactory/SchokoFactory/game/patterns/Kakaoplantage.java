@@ -6,8 +6,8 @@ import de.OFactory.SchokoFactory.game.PatternState;
 
 public class Kakaoplantage extends Pattern{
 	
-	public Kakaoplantage(Map map,int x, int y, int id) {
-		super(map, x, y, PatternState.KAKAOPLANTAGE, id);
+	public Kakaoplantage(Map map,int x, int y, int id, int xcoor, int ycoor) {
+		super(map, x, y, PatternState.KAKAOPLANTAGE, id, xcoor, ycoor);
 		
 		//TODO KAKAOPLANTAGE Bild fehlt noch! 
 	}

@@ -5,8 +5,8 @@ import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternState;
 
 public class Zuckerplantage extends Pattern{
-	public Zuckerplantage(Map map, int x, int y, int id) {
-		super(map, x, y, PatternState.ZUCKERPLANTAGE, id);
+	public Zuckerplantage(Map map, int x, int y, int id, int xcoor, int ycoor) {
+		super(map, x, y, PatternState.ZUCKERPLANTAGE, id, xcoor, ycoor);
 		
 		//XXX BILD FEHLT NOCH
 	}

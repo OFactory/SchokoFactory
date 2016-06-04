@@ -56,6 +56,19 @@ public class Map extends ArrayList<Pattern>{
 		
 		int grid_width = 0; // Anzahl Spalten in nter Reihe
 		
+		int xcoor = 1;
+		int ycoor = 1;
+		
+		ArrayList<Integer> xcoors = new ArrayList<Integer>();
+		ArrayList<Integer> ycoors = new ArrayList<Integer>();
+		
+		int row = 1;
+		
+		//Koordinaten bestimmen
+		for(int n = 0;n < pattern_width * pattern_height; n++){
+			
+		}
+		
 		for(int y = 0; y < pattern_width*2-1; y++){ // für jede Reihe
 			if(y >= pattern_width){ // nte Reihe erreicht(max width)
 				grid_width--;
@@ -64,15 +77,29 @@ public class Map extends ArrayList<Pattern>{
 			}
 			
 			for(int x = 0; x < grid_width; x++){ // für jede Spalte
-								    									
+				
+
+				
 				Wiese w = new Wiese( ps,
 						(int) (  x*MainState.TEXTURE_WIDTH * MainState.curpatternscale +//Normal Placement
 								( (pattern_width-grid_width)*MainState.TEXTURE_WIDTH * MainState.curpatternscale ) / 2 - //Verschiebung durch Anzahl Patterns in Reihe
 								pattern_width*MainState.TEXTURE_WIDTH*MainState.curpatternscale / 3),
 						(int) (  y*MainState.TEXTURE_HEIGHT * MainState.curpatternscale - //Normal Placement
 								pattern_height*MainState.TEXTURE_HEIGHT * MainState.curpatternscale / 1.5), 
-						i ); // i = ID
+						i, xcoor, ycoor ); // i = ID
 				ps.add(w);
+				
+				//Nächste Koordinate bestimmen
+				if(xcoor == ycoor)
+					xcoor++;
+				
+				if(xcoor > ycoor){
+					xcoor--;
+					ycoor++;
+				}
+					
+				
+				
 				i++;
 			}
 		}
@@ -181,6 +208,8 @@ public class Map extends ArrayList<Pattern>{
 		m.setWidth(pattern_width);
 		m.setHeight(pattern_height);
 		
+		int xcoor = 1;
+		int ycoor = 1;
 		
 		int grid_width = 0; // Anzahl Spalten in nter Reihe
 		
@@ -202,7 +231,7 @@ public class Map extends ArrayList<Pattern>{
 				Pattern p = null;
 				PatternState state = ps.get(i);
 				
-				p = Pattern.getInstance(m, px, py, state, i);
+				p = Pattern.getInstance(m, px, py, state, i, xcoor, ycoor);
 				//TODO Alle anderen PatternStates adden! Allgemeinde Methode
 				
 				

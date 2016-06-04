@@ -6,8 +6,8 @@ import de.OFactory.SchokoFactory.game.PatternFrame;
 import de.OFactory.SchokoFactory.game.PatternState;
 
 public class Weizenfeld extends Pattern{
-	public Weizenfeld(Map map, int x, int y, int id) {
-		super(map, x, y, PatternState.WEIZENFELD, id);
+	public Weizenfeld(Map map, int x, int y, int id, int xcoor, int ycoor) {
+		super(map, x, y, PatternState.WEIZENFELD, id, xcoor, ycoor);
 		
 		this.setPatternFrame(PatternFrame.FARM);
 		//XXX BILD FEHLT NOCH

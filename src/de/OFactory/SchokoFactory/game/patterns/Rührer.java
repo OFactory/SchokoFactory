@@ -10,8 +10,8 @@ public class Rührer extends Pattern{
 	private boolean active = false;
 	
 	
-	public Rührer(Map map, int x, int y, int id) {
-		super(map, x, y, PatternState.RÜHRER, id);
+	public Rührer(Map map, int x, int y, int id, int xcoor, int ycoor) {
+		super(map, x, y, PatternState.RÜHRER, id, xcoor, ycoor);
 		this.setFrameLoop(PatternFrame.RÜHRER_S, PatternFrame.RÜHRER_E);
 		this.setDelay(4);
 	}

@@ -7,8 +7,8 @@ import de.OFactory.SchokoFactory.game.PatternState;
 
 public class Gieﬂer extends Pattern{
 	
-	public Gieﬂer(Map map, int x, int y, int id) {
-		super(map, x, y, PatternState.GIEﬂER, id);
+	public Gieﬂer(Map map, int x, int y, int id, int xcoor, int ycoor) {
+		super(map, x, y, PatternState.GIEﬂER, id, xcoor, ycoor);
 		
 		this.setDelay(6);
 		this.setFrameLoop(PatternFrame.GIEﬂER_S, PatternFrame.GIEﬂER_E);

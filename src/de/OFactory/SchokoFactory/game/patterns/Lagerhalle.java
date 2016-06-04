@@ -8,8 +8,8 @@ import de.OFactory.SchokoFactory.game.PatternFrame;
 import de.OFactory.SchokoFactory.game.PatternState;
 
 public class Lagerhalle extends Pattern{
-	public Lagerhalle(Map map, int x, int y, int id) {
-		super(map, x, y, PatternState.LAGERHALLE, id);
+	public Lagerhalle(Map map, int x, int y, int id, int xcoor, int ycoor) {
+		super(map, x, y, PatternState.LAGERHALLE, id, xcoor, ycoor);
 		
 		this.setPatternFrame(PatternFrame.LAGERHALLE_NORMAL);
 	}
