@@ -144,7 +144,7 @@ public abstract class Pattern extends GameObject{
 		
 		if(this.getClickBox().contains(in.getMouseX(), in.getMouseY())){
 			this.hovered = true;
-			MainState.curpatterninfo = "P" + this.getId() + " (" + this.getPatternState() + ") ";
+			MainState.curpatterninfo = this.getXcoor()+" "+this.getYcoor() + " (" + this.getPatternState() + ") ";
 		} else {
 			this.hovered = false;
 		}
@@ -265,6 +265,22 @@ public abstract class Pattern extends GameObject{
 	 * @param xcoor Die Y-Koordinate des Patterns auf der Map m
 	 */
 	public void setYCoordinate(int ycoor) {
+		this.ycoor = ycoor;
+	}
+
+	public int getXcoor() {
+		return xcoor;
+	}
+
+	public void setXcoor(int xcoor) {
+		this.xcoor = xcoor;
+	}
+
+	public int getYcoor() {
+		return ycoor;
+	}
+
+	public void setYcoor(int ycoor) {
 		this.ycoor = ycoor;
 	}
 

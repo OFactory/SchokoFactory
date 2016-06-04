@@ -50,6 +50,10 @@ public class Map extends ArrayList<Pattern>{
 		
 		int i = 0;
 		
+		pattern_width++;
+		pattern_height++;
+		
+		
 		Map ps = new Map();
 		ps.setHeight(pattern_height);
 		ps.setWidth(pattern_width);
@@ -62,18 +66,19 @@ public class Map extends ArrayList<Pattern>{
 		ArrayList<Integer> xcoors = new ArrayList<Integer>();
 		ArrayList<Integer> ycoors = new ArrayList<Integer>();
 		
-		int row = 1;
-		
-		//Koordinaten bestimmen
-		for(int n = 0;n < pattern_width * pattern_height; n++){
-			
-		}
+
 		
 		for(int y = 0; y < pattern_width*2-1; y++){ // für jede Reihe
 			if(y >= pattern_width){ // nte Reihe erreicht(max width)
 				grid_width--;
+				
+				xcoor = pattern_width-1;// muss bei bugfix(pattern_width ist immer 1 größer) geändert werden
+				ycoor = y - pattern_height+2; //später nur noch +1
 			} else {
 				grid_width = y;
+				
+				xcoor = y;
+				ycoor = 1;
 			}
 			
 			for(int x = 0; x < grid_width; x++){ // für jede Spalte
@@ -89,19 +94,21 @@ public class Map extends ArrayList<Pattern>{
 						i, xcoor, ycoor ); // i = ID
 				ps.add(w);
 				
-				//Nächste Koordinate bestimmen
-				if(xcoor == ycoor)
-					xcoor++;
-				
-				if(xcoor > ycoor){
+				if (y >= pattern_width) {
+					xcoor--;
+					ycoor++;
+				} else {
 					xcoor--;
 					ycoor++;
 				}
+				
 					
 				
 				
 				i++;
 			}
+			
+			
 		}
 	
 		return ps;
@@ -216,8 +223,12 @@ public class Map extends ArrayList<Pattern>{
 		for(int y = 0; y < pattern_width*2-1; y++){ // für jede Reihe
 			if(y >= pattern_width){ // nte Reihe erreicht(max width)
 				grid_width--;
+				xcoor = pattern_width-1;// muss bei bugfix(pattern_width ist immer 1 größer) geändert werden
+				ycoor = y - pattern_height+2; //später nur noch +1
 			} else {
 				grid_width = y;
+				xcoor = y;
+				ycoor = 1;
 			}
 			
 			for(int x = 0; x < grid_width; x++){ // für jede Spalte
@@ -237,6 +248,14 @@ public class Map extends ArrayList<Pattern>{
 				
 				m.add(p);
 				i++;
+				
+				if (y >= pattern_width) {
+					xcoor--;
+					ycoor++;
+				} else {
+					xcoor--;
+					ycoor++;
+				}
 			}
 		}
 		
