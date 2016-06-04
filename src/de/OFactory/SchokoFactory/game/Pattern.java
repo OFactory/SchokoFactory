@@ -1,6 +1,9 @@
 package de.OFactory.SchokoFactory.game;
 
 
+import java.awt.Point;
+import java.util.ArrayList;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -170,9 +173,124 @@ public abstract class Pattern extends GameObject{
 		//Spezifischer Update Kontext jeder Pattern art
 		
 		updateContext();
-		
+		System.out.println("Lots Of Love");
 	}
 
+	/**
+    * 
+    * Diese Methode gibt die direkt angrenzenden Nachbarn eines Feldes zurück.
+    * Die Felder werden nach Himmelsrichtungen
+    * 
+    *  no: Nordosten,
+    *  so: Suedosten,
+    *  sw: Suedwesten,
+    *  nw: Nordwesten
+    * 
+    * geordnet.   
+    * 					
+    * 				   no
+    * 				nw	P so
+    * 				   sw
+    * 
+    * Gibt null zurück, wenn es einen der Pattern nicht gibt!
+    * Bitte bei Verwendung null checken!
+    * 
+    * @return ArrayList<Pattern> direkt angrenzende Nachbarn
+    */
+	public ArrayList<Pattern> getPatternNeighbours(){
+	   
+		ArrayList<Pattern> ps = new ArrayList<Pattern>();
+		ArrayList<Point> dirs = new ArrayList<Point>();
+		dirs.add(new Point(-1,  0)); //NO
+		dirs.add(new Point( 0,  1)); //SO
+		dirs.add(new Point( 1,  0)); //SW
+		dirs.add(new Point( 0, -1)); //NW
+    
+	    for(Point dir : dirs){
+	    	
+	    	boolean success = false;
+	    	
+	    	for(Pattern pt : this.getMap()) {
+	    		
+	    		if(success == false){ //Suche noch nicht erfolgreich
+		    		if(pt.getXCoordinate() == this.getXCoordinate() + dir.getX() &&
+		    				pt.getYCoordinate() == this.getYCoordinate() + dir.getY()) {
+		    			ps.add(pt);
+		    			success = true;
+		    		}
+	    		}
+		    }
+	    	
+	    	if(success == false)
+	    		ps.add(null);
+	    }
+	    
+	    
+	    return ps;
+	}
+	
+	/**
+    * 
+    * Diese Methode gibt die indirekt angrenzenden Nachbarn eines Feldes zurück.
+    * Die Felder sind demnach über die Punkte des Feldes verknüpft und teilen sich nicht eine Kante.
+    * Die Felder werden nach Himmelsrichtungen
+    * 
+    *  n: Norden,
+    *  no: Nordosten,
+    *  o: Osten,
+    *  so:Südosten,
+    *  s: Süden,
+    *  sw:Südwesten,
+    *  w: Westen,
+    *  nw:Nordwesten
+    *  
+    * geordnet.   
+    * 
+    * 		 N  no  O
+    * 		nw	P  so
+    * 		 W  sw  S
+    * 
+    * Gibt null zurück, wenn es einen der Pattern nicht gibt!
+    * Bitte bei Verwendung null checken!
+    * 
+    * @return ArrayList<Pattern> anliegende Pattern
+    */
+	public ArrayList<Pattern> getPatternNears(){
+	   
+		ArrayList<Pattern> ps = new ArrayList<Pattern>();
+		ArrayList<Point> dirs = new ArrayList<Point>();
+		dirs.add(new Point(-1, -1)); //N
+		dirs.add(new Point(-1,  0)); //NO
+		dirs.add(new Point(-1,  1)); //O
+		dirs.add(new Point( 0,  1)); //SO
+		dirs.add(new Point( 1,  1)); //S
+		dirs.add(new Point( 1,  0)); //SW
+		dirs.add(new Point( 1, -1)); //W
+		dirs.add(new Point( 0, -1)); //NW
+    
+		 for(Point dir : dirs){
+		    	
+		    	boolean success = false;
+		    	
+		    	for(Pattern pt : this.getMap()) {
+		    		
+		    		if(success == false){ //Suche noch nicht erfolgreich
+			    		if(pt.getXCoordinate() == this.getXCoordinate() + dir.getX() &&
+			    				pt.getYCoordinate() == this.getYCoordinate() + dir.getY()) {
+			    			ps.add(pt);
+			    			success = true;
+			    		}
+		    		}
+			    }
+		    	
+		    	if(success == false)
+		    		ps.add(null);
+		    }
+	    
+	    
+	    return ps;
+	}
+	
 	public abstract void updateContext();
 
 	@Override

@@ -50,9 +50,6 @@ public class Map extends ArrayList<Pattern>{
 		
 		int i = 0;
 		
-		pattern_width++;
-		pattern_height++;
-		
 		
 		Map ps = new Map();
 		ps.setHeight(pattern_height);
@@ -63,17 +60,15 @@ public class Map extends ArrayList<Pattern>{
 		int xcoor = 1;
 		int ycoor = 1;
 		
-		ArrayList<Integer> xcoors = new ArrayList<Integer>();
-		ArrayList<Integer> ycoors = new ArrayList<Integer>();
 		
 
 		
-		for(int y = 0; y < pattern_width*2-1; y++){ // für jede Reihe
-			if(y >= pattern_width){ // nte Reihe erreicht(max width)
+		for(int y = 0; y < (pattern_width+1)*2-1; y++){ // für jede Reihe
+			if(y >= pattern_width+1){ // nte Reihe erreicht(max width)
 				grid_width--;
 				
-				xcoor = pattern_width-1;// muss bei bugfix(pattern_width ist immer 1 größer) geändert werden
-				ycoor = y - pattern_height+2; //später nur noch +1
+				xcoor = pattern_width;// muss bei bugfix(pattern_width ist immer 1 größer) geändert werden
+				ycoor = y - pattern_height+1; //später nur noch +1
 			} else {
 				grid_width = y;
 				
@@ -87,14 +82,14 @@ public class Map extends ArrayList<Pattern>{
 				
 				Wiese w = new Wiese( ps,
 						(int) (  x*MainState.TEXTURE_WIDTH * MainState.curpatternscale +//Normal Placement
-								( (pattern_width-grid_width)*MainState.TEXTURE_WIDTH * MainState.curpatternscale ) / 2 - //Verschiebung durch Anzahl Patterns in Reihe
-								pattern_width*MainState.TEXTURE_WIDTH*MainState.curpatternscale / 3),
+								( ((pattern_width+1)-grid_width)*MainState.TEXTURE_WIDTH * MainState.curpatternscale ) / 2 - //Verschiebung durch Anzahl Patterns in Reihe
+								(pattern_width+1)*MainState.TEXTURE_WIDTH*MainState.curpatternscale / 3),
 						(int) (  y*MainState.TEXTURE_HEIGHT * MainState.curpatternscale - //Normal Placement
-								pattern_height*MainState.TEXTURE_HEIGHT * MainState.curpatternscale / 1.5), 
+								(pattern_height+1)*MainState.TEXTURE_HEIGHT * MainState.curpatternscale / 1.5), 
 						i, xcoor, ycoor ); // i = ID
 				ps.add(w);
 				
-				if (y >= pattern_width) {
+				if (y >= pattern_width+1) {
 					xcoor--;
 					ycoor++;
 				} else {
@@ -207,13 +202,13 @@ public class Map extends ArrayList<Pattern>{
 		int i = 0;
 		
 		
-		int pattern_width =  (int) Math.sqrt(ps.size()) + 1;
-		int pattern_height = (int) Math.sqrt(ps.size()) + 1;
+		int pattern_width =  (int) Math.sqrt(ps.size())  + 1;
+		int pattern_height = (int) Math.sqrt(ps.size())  + 1;
 		
 		
 		Map m = new Map();
-		m.setWidth(pattern_width);
-		m.setHeight(pattern_height);
+		m.setWidth(pattern_width - 1);
+		m.setHeight(pattern_height - 1);
 		
 		int xcoor = 1;
 		int ycoor = 1;
@@ -223,8 +218,8 @@ public class Map extends ArrayList<Pattern>{
 		for(int y = 0; y < pattern_width*2-1; y++){ // für jede Reihe
 			if(y >= pattern_width){ // nte Reihe erreicht(max width)
 				grid_width--;
-				xcoor = pattern_width-1;// muss bei bugfix(pattern_width ist immer 1 größer) geändert werden
-				ycoor = y - pattern_height+2; //später nur noch +1
+				xcoor = pattern_width-1;
+				ycoor = y - pattern_height+2;
 			} else {
 				grid_width = y;
 				xcoor = y;
