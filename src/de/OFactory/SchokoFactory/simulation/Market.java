@@ -17,7 +17,7 @@ public class Market {
 	private int summeMoegAbs;
 	private int summeAbs;
 	private double summeUms;
-	@SuppressWarnings("unused") //PLS USE
+
 	private double zuwachs;
 	private int summeAbsAlt = 1;
 	
@@ -300,6 +300,22 @@ public class Market {
 
 	public void setSummeUms(double summeUms) {
 		this.summeUms = summeUms;
+	}
+
+	public int getStartingYear() {
+		return startingYear;
+	}
+
+	public void setStartingYear(int startingYear) {
+		this.startingYear = startingYear;
+	}
+
+	public double getZuwachs() {
+		return zuwachs;
+	}
+
+	public void setZuwachs(double zuwachs) {
+		this.zuwachs = zuwachs;
 	}
 	
 }
