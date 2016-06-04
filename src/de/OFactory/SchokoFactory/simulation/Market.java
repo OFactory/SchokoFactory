@@ -14,11 +14,16 @@ public class Market {
 	private double eco = 1;
 	private double boni;
 	private int summeMoegAbs;
-	int summeAbs;
-	double summeUms;
+	private int summeAbs;
+	private double summeUms;
 	@SuppressWarnings("unused") //PLS USE
 	private double zuwachs;
 	private int summeAbsAlt = 1;
+	
+	private List<Player> p_mit_diff;
+	private List<Player> p_ohne_diff;
+	
+	
 	
 	public Market() {
 		
@@ -47,10 +52,10 @@ public class Market {
 		//calculateShift(); wäre mal guut... (!)
 		
 		summeAbs = 0;
-		summeUms = 0;
+		setSummeUms(0);
 		for (Player p:players) {
 			summeAbs += p.getAbsatz();
-			summeUms += p.getAbsatz() * p.getPreis();
+			setSummeUms(getSummeUms() + p.getAbsatz() * p.getPreis());
 		}
 
 		if(summeAbsAlt != 0)		// Division by zero auffangen
@@ -65,8 +70,40 @@ public class Market {
 	/**Calculates the shift of requirements between the players/clients.**/
 	private void calculateShift() {
 		
+		for (Player p: players) {
+			p.calculateDiff();
+			if (p.getDiff_bedarf() >= 0)	// einsortieren
+				p_mit_diff.add(p);
+			else
+				p_ohne_diff.add(p);
+		}
 		
+		int diff_ges = getDiff_ges();
+		int rest_ges = getRest_ges();
+		int trans;
+		if (diff_ges < rest_ges)	// was ist kleiner | es kann nur so viel Bedarf umverteilt werden, wie andere Unternehmen im Lager übrig haben.
+			trans = diff_ges;
+		else
+			trans = rest_ges;
 		
+		if (trans != 0) {			// kommt es zu Verschiebungen?
+			
+			double f = getF();
+			trans *= f;
+			
+			int divisor = 0;
+			for (Player p: p_ohne_diff)
+				divisor += p.getMoegAbs();
+			for (Player p: p_ohne_diff) {
+				double q = p.getMoegAbs() / divisor;
+				p.setZuschuss((int)(trans * q));
+				if (p.getZuschuss() > p.getRest())
+					p.setZuschuss(p.getRest());
+				
+				p.setRest( p.getRest()-p.getZuschuss() );
+				p.setAbsatz(p.getAbsatz()+p.getZuschuss());
+			}
+		}
 	}
 	
 	
@@ -79,9 +116,9 @@ public class Market {
 	 */
 	private double getWerbefaktoren() {
 		double werbefaktoren = 1;
-		for (Player p:players) {
+		for (Player p:players) 
 			werbefaktoren *= p.getWerbefaktor();
-		}
+
 		return werbefaktoren;
 	}
 	
@@ -92,13 +129,48 @@ public class Market {
 	 */
 	private int getMoegAbs() {
 		int summe = 0;
-		for (Player p:players) {
+		for (Player p: players)
 			summe += p.getMoegAbs();
-		}
+
 		
 		return summe;
 	}
 	
+	private int getDiff_ges() {
+		int summe = 0;
+		for (Player p: players) // hier darf players benutzt werden, da alle Player ohne diff diff_bedarf = 0 haben.
+			summe += p.getDiff_bedarf();
+
+		return summe;		
+	}
+	
+	private int getRest_ges() {
+		int summe = 0;
+		for (Player p: players)  // hier darf players benutzt werden, da alle Player mit diff rest = 0 haben.
+			summe += p.getRest();
+
+		return summe;		
+	}
+	
+	private double getF() {
+		
+		int a = 0;
+		for (Player p: p_mit_diff)
+			a += p.getMoegAbs()*p.getDiff_bedarf();
+
+		int b = 0;
+		for (Player p: p_mit_diff)
+			b += p.getDiff_bedarf();
+
+		int c = 0;
+		for (Player p: p_ohne_diff)
+			c += p.getMoegAbs();
+
+		
+		double f = a / b / c;
+		
+		return f;
+	}
 	/** 
 	 * Summe der Absaetze aller Spieler
 	 * 
@@ -107,9 +179,9 @@ public class Market {
 	@SuppressWarnings("unused")
 	private int getAbs() {
 		int summe = 0;
-		for (Player p:players) {
+		for (Player p:players)
 			summe += p.getAbsatz();
-		}
+
 		
 		return summe;
 	}
@@ -204,6 +276,14 @@ public class Market {
 
 	public void setSummeAbs(int summeAbs) {
 		this.summeAbs = summeAbs;
+	}
+
+	public double getSummeUms() {
+		return summeUms;
+	}
+
+	public void setSummeUms(double summeUms) {
+		this.summeUms = summeUms;
 	}
 	
 }

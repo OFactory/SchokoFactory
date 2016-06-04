@@ -28,6 +28,9 @@ public class Player {
 	private double altwerbefaktor;
 	private int moegAbs;
 	
+	private int rest;
+	private int diff_bedarf;
+	
 	public Player(Market market, String name, double money) {
 		
 		this.market = market;
@@ -47,15 +50,31 @@ public class Player {
         return moegAbs;
     }
     
+    public void calculateDiff() {
+    	
+    	double moegMarktanteil = moegAbs/market.getSummeAbs();
+    	moegAbs = (int)(moegMarktanteil * market.getSummeAbs());
+    	
+    	if (moegAbs > produktmenge) {
+    		absatz = produktmenge;
+    		setRest(0);
+    		setDiff_bedarf(moegAbs - produktmenge);	
+    	} else {
+    		absatz = moegAbs;
+    		setRest(produktmenge - moegAbs);
+    		setDiff_bedarf(0);
+    	}
+    }
+    
     public void finalCalculation() {
     	
     	umsatz = absatz * preis;
     	money += umsatz;
         produktmenge -= absatz;
-        marktanteil = absatz/this.market.summeAbs;
+        marktanteil = absatz/this.market.getSummeAbs();
 
         if (money < 0 && liquide) {
-            zinsen = -money / Math.pow(umsatz,2) * this.market.summeUms * 0.0167 * 5;
+            zinsen = -money / Math.pow(umsatz,2) * this.market.getSummeUms() * 0.0167 * 5;
             if (zinsen < 0.03) 
                 zinsen = 0.03;
             money += zinsen*money;
@@ -190,6 +209,18 @@ public class Player {
 	}
 	public void setMoney(double money) {
 		this.money = money;
+	}
+	public int getRest() {
+		return rest;
+	}
+	public void setRest(int rest) {
+		this.rest = rest;
+	}
+	public int getDiff_bedarf() {
+		return diff_bedarf;
+	}
+	public void setDiff_bedarf(int diff_bedarf) {
+		this.diff_bedarf = diff_bedarf;
 	}
 
 }
