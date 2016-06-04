@@ -7,7 +7,8 @@ import java.lang.Math;
 
 public class Market {
 	
-	private long time = 725759; // 1. Januar 2016
+	private int startingYear = 2016;
+	private long time = 0; // 1. Januar 2016
 	private List<Player> players;
 	
 	private int bedarf;
@@ -224,14 +225,29 @@ public class Market {
 	 * @return String, das Datum in Stringform
 	 */
 	public String getDateString() {
-		long year = time/360;
-		long month = (time - year*360)/30;
-		long day = time- year*360 - month*30 ;
+		long year = getYear();
+		long month = getMonth();
+		long day = getDay();
 		
 		//return (year)+":"+(month+1)+":"+(day+1);	// ++ Denn es gibt keinen 0. Monat/Tag
-		return String.format("%02d", day+1) + "." + String.format("%02d", month+1) + "." + String.format("%04d", year);
+		return String.format("%02d", day+1) + "." + String.format("%02d", month+1) + "." + String.format("%04d", year+startingYear);
 		// Führende Nullen: dd.mm.yyyy
 		// z.B. 01.05.0020
+	}
+	
+	public long getYear() {
+		long year = time/360;
+		return year;
+	}
+	
+	public long getMonth() {
+		long month = (time - getYear()*360)/30;
+		return month;
+	}
+	
+	public long getDay() {
+		long day = time- getYear()*360 - getMonth()*30 ;
+		return day;
 	}
 
 	public long getTime() {
