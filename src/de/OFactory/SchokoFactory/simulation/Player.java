@@ -8,12 +8,12 @@ public class Player {
 	private boolean liquide = true;
 	private double zinsen = 1;
 	private double money;
-	private double absatz;
+	private int absatz = 1;
 	private double preis = 1;
 	private double umsatz;
 	
 	private double marktanteil;
-	private int produktmenge;
+	private int produktmenge = 10000000;
 	
 	private int fabriken;
 	
@@ -24,8 +24,8 @@ public class Player {
 	
 	private int zuschuss;
 	
-	private double altqualitaet;
-	private double altwerbefaktor;
+	private double altqualitaet = 1;
+	private double altwerbefaktor = 1;
 	private int moegAbs;
 	
 	private int rest;
@@ -40,19 +40,19 @@ public class Player {
 		
 	}
 	/**First part of the calculation. Gets inputs and works out possible sales(ger.: Absatz). Returns possible sales to Game.**/
-    public int getMoegAbs() {
+    public void calculateMoegAbs() {
         
         //get();
-
-
         bekanntheit *= Math.pow(werbefaktor,0.9) * qualitaet / altqualitaet;
         moegAbs = (int)(this.bekanntheit * this.market.getBedarf() * this.market.getBoni() / altwerbefaktor * werbefaktor / Math.pow(preis,1.2));
-        return moegAbs;
+
     }
     
     public void calculateDiff() {
-    	
-    	double moegMarktanteil = moegAbs/market.getSummeAbs();
+    	double moegMarktanteil = 0;
+    	if (market.getSummeAbs() != 0) 
+    		moegMarktanteil = moegAbs/market.getSummeAbs();
+
     	moegAbs = (int)(moegMarktanteil * market.getSummeAbs());
     	
     	if (moegAbs > produktmenge) {
@@ -65,16 +65,18 @@ public class Player {
     		setDiff_bedarf(0);
     	}
     }
-    
+
     public void finalCalculation() {
     	
     	umsatz = absatz * preis;
     	money += umsatz;
         produktmenge -= absatz;
-        marktanteil = absatz/this.market.getSummeAbs();
+        System.out.println(market.getSummeAbs());
+        if (market.getSummeAbs() != 0) 
+        	marktanteil = absatz/market.getSummeAbs();
 
         if (money < 0 && liquide) {
-            zinsen = -money / Math.pow(umsatz,2) * this.market.getSummeUms() * 0.0167 * 5;
+            zinsen = -money / Math.pow(umsatz,2) * market.getSummeUms() * 0.0167 * 5;
             if (zinsen < 0.03) 
                 zinsen = 0.03;
             money += zinsen*money;
@@ -85,7 +87,7 @@ public class Player {
             zinsen = 0;
     	
     }
-    
+
 	/**Get inputs from GUI(in Game.py).**/
     @SuppressWarnings("unused") //PLS USE
 	private void get() {
@@ -126,10 +128,10 @@ public class Player {
 	public void setZinsen(double zinsen) {
 		this.zinsen = zinsen;
 	}
-	public double getAbsatz() {
+	public int getAbsatz() {
 		return absatz;
 	}
-	public void setAbsatz(double absatz) {
+	public void setAbsatz(int absatz) {
 		this.absatz = absatz;
 	}
 	public double getUmsatz() {
@@ -221,6 +223,9 @@ public class Player {
 	}
 	public void setDiff_bedarf(int diff_bedarf) {
 		this.diff_bedarf = diff_bedarf;
+	}
+	public int getMoegAbs() {
+		return moegAbs;
 	}
 
 }

@@ -1,7 +1,7 @@
 package de.OFactory.SchokoFactory.simulation;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.lang.Math;
 
 
 
@@ -11,18 +11,18 @@ public class Market {
 	private long time = 0; // 1. Januar 2016
 	private List<Player> players;
 	
-	private int bedarf;
+	private int bedarf = 2000;
 	private double eco = 1;
-	private double boni;
-	private int summeMoegAbs;
+	private double boni = 1;
+	private int summeMoegAbs = 1000;
 	private int summeAbs;
 	private double summeUms;
 
 	private double zuwachs;
-	private int summeAbsAlt = 1;
+	private int summeAbsAlt = 1800;
 	
-	private List<Player> p_mit_diff;
-	private List<Player> p_ohne_diff;
+	private ArrayList<Player> p_mit_diff = new ArrayList<Player>();
+	private ArrayList<Player> p_ohne_diff = new ArrayList<Player>();
 	
 	
 	
@@ -45,12 +45,12 @@ public class Market {
 	/** Calculate economic development of market and players **/
 	private void calculation() {
 
-		bedarf = (int)(summeAbs * Math.pow(this.eco , 2) * boni * (Math.pow(getWerbefaktoren(),0.9) + 10)/11);
+		bedarf = (int)(summeAbsAlt * Math.pow(this.eco , 2) * boni * (Math.pow(getWerbefaktoren(),0.9) + 10)/11);
 		
 		summeMoegAbs = getMoegAbs();
 		summeAbs = (summeMoegAbs+bedarf)/2;
 		
-		//calculateShift(); wäre mal guut... (!)
+		calculateShift();
 		
 		summeAbs = 0;
 		setSummeUms(0);
@@ -67,7 +67,6 @@ public class Market {
 			p.finalCalculation();
 	}
 	
-	@SuppressWarnings("unused")
 	/**Calculates the shift of requirements between the players/clients.**/
 	private void calculateShift() {
 		
@@ -77,6 +76,7 @@ public class Market {
 				p_mit_diff.add(p);
 			else
 				p_ohne_diff.add(p);
+			
 		}
 		
 		int diff_ges = getDiff_ges();
@@ -102,7 +102,7 @@ public class Market {
 					p.setZuschuss(p.getRest());
 				
 				p.setRest( p.getRest()-p.getZuschuss() );
-				p.setAbsatz(p.getAbsatz()+p.getZuschuss());
+				p.setAbsatz( p.getAbsatz()+p.getZuschuss() );
 			}
 		}
 	}
@@ -130,8 +130,10 @@ public class Market {
 	 */
 	private int getMoegAbs() {
 		int summe = 0;
-		for (Player p: players)
-			summe += p.getMoegAbs();
+		for (Player p: players) {
+			p.calculateMoegAbs();
+			p.getMoegAbs();
+		}
 
 		
 		return summe;
@@ -172,6 +174,7 @@ public class Market {
 		
 		return f;
 	}
+	
 	/** 
 	 * Summe der Absaetze aller Spieler
 	 * 
