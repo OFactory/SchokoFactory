@@ -173,7 +173,7 @@ public abstract class Pattern extends GameObject{
 		//Spezifischer Update Kontext jeder Pattern art
 		
 		updateContext();
-		System.out.println("Lots Of Love");
+		//System.out.println("Lots Of Love"); LOL starring
 	}
 
 	/**

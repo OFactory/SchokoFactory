@@ -17,17 +17,11 @@ public class Lagerhalle extends Pattern{
 		
 		//System.out.println("LOL");
 		
-		//Testet ob Links oben auch eine Lagerhalle steht
-		Pattern nop = this.getPatternNeighbours().get(0);
 		Pattern swp = this.getPatternNeighbours().get(2);
-		if(nop == null || nop instanceof Lagerhalle){
-				if(!(swp instanceof Lagerhalle)) //Links unten KEINE Lagerhalle
-					this.setCurrentImagePosition(PatternFrame.LAGERHALLE_ENDE);
-				else
-					this.setCurrentImagePosition(PatternFrame.LAGERHALLE_NORMAL);
-		} else {
+		if(!(swp instanceof Lagerhalle)) //Links unten KEINE Lagerhalle
+			this.setCurrentImagePosition(PatternFrame.LAGERHALLE_ENDE);
+		else
 			this.setCurrentImagePosition(PatternFrame.LAGERHALLE_NORMAL);
-		}
 		
 		
 	}
