@@ -28,8 +28,6 @@ public class Market {
 	
 	public Market() {
 		
-		System.out.println("<Markt> Hello, I'm the market! How are you?");
-		
 	}
 	
 	/** processed every day **/
@@ -45,7 +43,8 @@ public class Market {
 	/** Calculate economic development of market and players **/
 	private void calculation() {
 
-		bedarf = (int)(summeAbsAlt * Math.pow(this.eco , 2) * boni * (Math.pow(getWerbefaktoren(),0.9) + 10)/11);
+		bedarf = (int)((59*bedarf + summeAbsAlt) / 60 * Math.pow(this.eco , 2) * boni * (Math.pow(getWerbefaktoren(),0.9) + 330)/331);
+		// Bedarf gleicht sich an den alten Absatz über 2 Monate (60 Tage), Gewöhnungseffekt
 		
 		summeMoegAbs = getMoegAbs();
 		summeAbs = (summeMoegAbs+bedarf)/2;
@@ -60,7 +59,11 @@ public class Market {
 		}
 
 		if(summeAbsAlt != 0)		// Division by zero auffangen
-			zuwachs = summeAbs/summeAbsAlt;
+			zuwachs = (double)summeAbs/(double)summeAbsAlt;
+			
+
+			
+
 		summeAbsAlt = summeAbs;
 		
 		for (Player p : players) 
@@ -113,7 +116,7 @@ public class Market {
 	/**
 	 * Produkt der Werbefaktoren aller Spieler
 	 * 
-	 * @return int Produkt der Werbefaktoren
+	 * @return double Produkt der Werbefaktoren
 	 */
 	private double getWerbefaktoren() {
 		double werbefaktoren = 1;
@@ -236,6 +239,18 @@ public class Market {
 		return String.format("%02d", day+1) + "." + String.format("%02d", month+1) + "." + String.format("%04d", year+startingYear);
 		// Führende Nullen: dd.mm.yyyy
 		// z.B. 01.05.0020
+	}
+	
+	public String getZuwachsString() {
+		String s = "";
+		double z = getZuwachs();
+		if (z == 0 || z==1)
+			return "±0%";
+		else if (z > 1)
+			s += "+";		// - Zeichen wird automatisch gesetzt
+		s += (z-1)*100 + "%";
+		
+		return s;
 	}
 	
 	public long getYear() {

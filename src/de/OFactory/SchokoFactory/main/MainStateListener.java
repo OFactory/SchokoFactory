@@ -56,7 +56,6 @@ public class MainStateListener implements MouseListener{
 
 	public void mousePressed(int button, int x, int y) {
 		// TODO Auto-generated method stub
-		System.out.println("Pressed:"+button+" "+x+" "+y);
 		
 	}
 
