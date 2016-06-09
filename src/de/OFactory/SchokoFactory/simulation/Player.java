@@ -13,7 +13,7 @@ public class Player {
 	private double umsatz;
 	
 	private double marktanteil;
-	private int produktmenge = 10000000;
+	private int produktmenge = 15000;
 	
 	private int fabriken;
 	
@@ -75,7 +75,7 @@ public class Player {
         	marktanteil = absatz/market.getSummeAbs();
 
         if (money < 0 && liquide) {
-            zinsen = -money / Math.pow(umsatz,2) * market.getSummeUms() * 0.0167 * 5;
+            zinsen = -money / Math.pow(umsatz,2) * market.getSummeUms() * 0.0167 / 5;
             if (zinsen < 0.03) 
                 zinsen = 0.03;
             money += zinsen*money;

@@ -31,14 +31,15 @@ public class MarketInfoTab extends Tab{
  
 		GameFonts.MED.drawString( offx + 10, offy + 90,  "Markt",                                          Color.black);
 		GameFonts.SUB.drawString( offx + 10, offy + 120, "Bedarf: "       + MainState.m.getBedarf(),       INFO_FONT_COLOR);
-		GameFonts.SUB.drawString( offx + 10, offy + 140, "Wachstum: "     + MainState.m.getZuwachsString(),INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 140, "Absatz: "       + MainState.m.getSummeAbs(),     INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 160, "Wachstum: "     + MainState.m.getZuwachsString(),INFO_FONT_COLOR);
 
-		GameFonts.MED.drawString( offx + 10, offy + 180, "Spieler",                                        Color.black);
-		GameFonts.SUB.drawString( offx + 10, offy + 210, "Absatz: "       + MainState.p.getAbsatz(),       INFO_FONT_COLOR);
-		GameFonts.SUB.drawString( offx + 10, offy + 230, "Bekanntheit: "  + MainState.p.getBekanntheit(),  INFO_FONT_COLOR);
-		GameFonts.SUB.drawString( offx + 10, offy + 250, "Marktanteil: "  + MainState.p.getMarktanteil(),  INFO_FONT_COLOR);
-		GameFonts.SUB.drawString( offx + 10, offy + 270, "Produktmenge: " + MainState.p.getProduktmenge(), INFO_FONT_COLOR);
-		GameFonts.SUB.drawString( offx + 10, offy + 290, "Qualität: "     + MainState.p.getQualitaet(),    INFO_FONT_COLOR);
+		GameFonts.MED.drawString( offx + 10, offy + 200, "Spieler",                                        Color.black);
+		GameFonts.SUB.drawString( offx + 10, offy + 230, "Absatz: "       + MainState.p.getAbsatz(),       INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 250, "Bekanntheit: "  + MainState.p.getBekanntheit(),  INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 270, "Marktanteil: "  + MainState.p.getMarktanteil(),  INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 290, "Produktmenge: " + MainState.p.getProduktmenge(), INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 310, "Qualität: "     + MainState.p.getQualitaet(),    INFO_FONT_COLOR);
 		
 	}
 

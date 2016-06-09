@@ -28,8 +28,6 @@ public class Market {
 	
 	public Market() {
 		
-
-		
 	}
 	
 	/** processed every day **/
@@ -45,7 +43,8 @@ public class Market {
 	/** Calculate economic development of market and players **/
 	private void calculation() {
 
-		bedarf = (int)(summeAbsAlt * Math.pow(this.eco , 2) * boni * (Math.pow(getWerbefaktoren(),0.9) + 10)/11);
+		bedarf = (int)((59*bedarf + summeAbsAlt) / 60 * Math.pow(this.eco , 2) * boni * (Math.pow(getWerbefaktoren(),0.9) + 330)/331);
+		// Bedarf gleicht sich an den alten Absatz über 2 Monate (60 Tage), Gewöhnungseffekt
 		
 		summeMoegAbs = getMoegAbs();
 		summeAbs = (summeMoegAbs+bedarf)/2;
@@ -59,10 +58,9 @@ public class Market {
 			setSummeUms(getSummeUms() + p.getAbsatz() * p.getPreis());
 		}
 
-		if(summeAbsAlt != 0) {		// Division by zero auffangen
-			zuwachs = summeAbs/summeAbsAlt;
-			System.out.println("Absatzverlauf: "+summeAbsAlt+"/"+summeAbs);
-			}
+		if(summeAbsAlt != 0)		// Division by zero auffangen
+			zuwachs = (double)summeAbs/(double)summeAbsAlt;
+			
 
 			
 
@@ -118,7 +116,7 @@ public class Market {
 	/**
 	 * Produkt der Werbefaktoren aller Spieler
 	 * 
-	 * @return int Produkt der Werbefaktoren
+	 * @return double Produkt der Werbefaktoren
 	 */
 	private double getWerbefaktoren() {
 		double werbefaktoren = 1;
