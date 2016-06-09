@@ -71,7 +71,6 @@ public class Player {
     	umsatz = absatz * preis;
     	money += umsatz;
         produktmenge -= absatz;
-        System.out.println(market.getSummeAbs());
         if (market.getSummeAbs() != 0) 
         	marktanteil = absatz/market.getSummeAbs();
 
@@ -82,13 +81,13 @@ public class Player {
             money += zinsen*money;
             if (zinsen > 0.20) 
                 liquide = false;
-            	System.out.println();
+
         } else
             zinsen = 0;
     	
     }
 
-	/**Get inputs from GUI(in Game.py).**/
+	/**Get inputs from GUI(in Market.java).**/
     @SuppressWarnings("unused") //PLS USE
 	private void get() {
     	

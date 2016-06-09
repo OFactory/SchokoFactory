@@ -28,7 +28,7 @@ public class Market {
 	
 	public Market() {
 		
-		System.out.println("<Markt> Hello, I'm the market! How are you?");
+
 		
 	}
 	
@@ -59,8 +59,13 @@ public class Market {
 			setSummeUms(getSummeUms() + p.getAbsatz() * p.getPreis());
 		}
 
-		if(summeAbsAlt != 0)		// Division by zero auffangen
+		if(summeAbsAlt != 0) {		// Division by zero auffangen
 			zuwachs = summeAbs/summeAbsAlt;
+			System.out.println("Absatzverlauf: "+summeAbsAlt+"/"+summeAbs);
+			}
+
+			
+
 		summeAbsAlt = summeAbs;
 		
 		for (Player p : players) 
@@ -236,6 +241,18 @@ public class Market {
 		return String.format("%02d", day+1) + "." + String.format("%02d", month+1) + "." + String.format("%04d", year+startingYear);
 		// Führende Nullen: dd.mm.yyyy
 		// z.B. 01.05.0020
+	}
+	
+	public String getZuwachsString() {
+		String s = "";
+		double z = getZuwachs();
+		if (z == 0 || z==1)
+			return "±0%";
+		else if (z > 1)
+			s += "+";		// - Zeichen wird automatisch gesetzt
+		s += (z-1)*100 + "%";
+		
+		return s;
 	}
 	
 	public long getYear() {

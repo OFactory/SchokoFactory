@@ -31,7 +31,7 @@ public class MarketInfoTab extends Tab{
  
 		GameFonts.MED.drawString( offx + 10, offy + 90,  "Markt",                                          Color.black);
 		GameFonts.SUB.drawString( offx + 10, offy + 120, "Bedarf: "       + MainState.m.getBedarf(),       INFO_FONT_COLOR);
-		GameFonts.SUB.drawString( offx + 10, offy + 140, "Wachstum: "     + MainState.m.getBoni(),         INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 140, "Wachstum: "     + MainState.m.getZuwachsString(),INFO_FONT_COLOR);
 
 		GameFonts.MED.drawString( offx + 10, offy + 180, "Spieler",                                        Color.black);
 		GameFonts.SUB.drawString( offx + 10, offy + 210, "Absatz: "       + MainState.p.getAbsatz(),       INFO_FONT_COLOR);
