@@ -156,9 +156,9 @@ public class Map extends ArrayList<Pattern>{
 		int twidth  = (int) (MainState.TEXTURE_WIDTH * curpatternscale);
 		int theight = (int) (MainState.TEXTURE_HEIGHT * curpatternscale);
 		
-		
-		for(int y = 0; y < this.getWidth()*2-1; y++){ // für jede Reihe
-			if(y >= this.getHeight()){ // nte Reihe erreicht(max width)
+
+		for(int y = 0; y < (this.getWidth()+1)*2-1; y++){ // für jede Reihe
+			if(y >= this.getHeight()+1){ // nte Reihe erreicht(max width)
 				grid_width--;
 			} else {
 				grid_width = y;
@@ -170,11 +170,11 @@ public class Map extends ArrayList<Pattern>{
 				
 				p.setX( (int) ( zx - MainState.gc.getWidth()/2 + 
 								x* twidth+//Normal Placement
-								( (this.getWidth()-grid_width)*twidth ) / 2 - //Verschiebung durch Anzahl Patterns in Reihe
-								this.getWidth()*twidth / 3));
-				p.setY( (int) ( zy - MainState.gc.getHeight()/2 + 
+								( (this.getWidth()+1-grid_width)*twidth ) / 2 - //Verschiebung durch Anzahl Patterns in Reihe
+								(this.getWidth()+1)*twidth / 3));
+				p.setY( (int) ( zy - (MainState.gc.getHeight()+1)/2 + 
 								y*theight - //Normal Placement
-								this.getHeight()*theight / 1.5));
+								(this.getHeight()+1)*theight / 1.5));
 				
 				
 				
@@ -204,12 +204,13 @@ public class Map extends ArrayList<Pattern>{
 		
 		int pattern_width =  (int) Math.sqrt(ps.size())  + 1;
 		int pattern_height = (int) Math.sqrt(ps.size())  + 1;
-		
+
+
 		
 		Map m = new Map();
 		m.setWidth(pattern_width - 1);
 		m.setHeight(pattern_height - 1);
-		
+
 		int xcoor = 1;
 		int ycoor = 1;
 		
