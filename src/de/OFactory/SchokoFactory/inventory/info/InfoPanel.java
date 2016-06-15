@@ -6,7 +6,6 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
-import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.main.Drawable;
 import de.OFactory.SchokoFactory.main.Updateable;
 
@@ -21,7 +20,7 @@ public class InfoPanel implements Drawable, Updateable{
 	private int height;
 	
 	//PatternState : BUILDING_INFO
-	private Pattern curpattern; //nur wichtig bei: InfoState = Building-Information
+	//private Pattern curpattern; //nur wichtig bei: InfoState = Building-Information
 	
 	//PatternSTATE : BUILD
 	private int page;
@@ -120,24 +119,16 @@ public class InfoPanel implements Drawable, Updateable{
 		this.tabs = tabs;
 	}
 	
+	public void switchTab(int n) {
+		this.activetab = tabs.get(n);
+	}
+	
 	public void addTab(Tab t){
 		this.tabs.add(t);
 	}
 	
 	public void removeTab(Tab t){
 		this.tabs.remove(t);
-	}
-
-
-
-
-
-	public Pattern getCurpattern() {
-		return curpattern;
-	}
-
-	public void setCurpattern(Pattern curpattern) {
-		this.curpattern = curpattern;
 	}
 
 

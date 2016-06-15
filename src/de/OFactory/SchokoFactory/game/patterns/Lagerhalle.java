@@ -6,6 +6,10 @@ import de.OFactory.SchokoFactory.game.PatternFrame;
 import de.OFactory.SchokoFactory.game.PatternState;
 
 public class Lagerhalle extends Pattern{
+	
+	public static final int LAGERKAPAZITÄT_NORMAL = 2000;
+	
+	
 	public Lagerhalle(Map map, int x, int y, int id, int xcoor, int ycoor) {
 		super(map, x, y, PatternState.LAGERHALLE, id, xcoor, ycoor);
 		

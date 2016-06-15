@@ -36,6 +36,7 @@ public abstract class Pattern extends GameObject{
 	private int ycoor;
 	
 	public boolean hovered = false;
+	public boolean selected = false;
 	
 	private Map m;
 
@@ -118,7 +119,7 @@ public abstract class Pattern extends GameObject{
 		
 		
 		this.setClickBox(p);
-
+		this.selected = MainState.selected_pattern == this;
 		
 		//Animation tick
 		
@@ -296,14 +297,16 @@ public abstract class Pattern extends GameObject{
 	@Override
 	public void draw(Graphics g) {
 		if(this.isRendered()) {
-			if(this.hovered){
-				this.getCurrentImage().draw(this.getX(), this.getY(), new Color(150, 150, 200));
-				
-				if(MainState.clicked == this) {
+			if(this.hovered){ //GEHOVERED
+				if(MainState.clicked == this) { //GEKLICKT
 					this.getCurrentImage().draw(this.getX(), this.getY(), new Color(200, 150, 150));
+				} else {
+					this.getCurrentImage().draw(this.getX(), this.getY(), new Color(150, 150, 200));
 				}
-				
-			} else {	
+
+			} else if(selected){ //AUSGEWÄHLT
+				this.getCurrentImage().draw(this.getX(), this.getY(), new Color(150, 255, 150));
+			} else { //NORMAL
 				this.getCurrentImage().draw(this.getX(), this.getY());
 			}
 			

@@ -23,6 +23,7 @@ import de.OFactory.SchokoFactory.inventory.Stockpile;
 import de.OFactory.SchokoFactory.inventory.info.InfoPanel;
 import de.OFactory.SchokoFactory.inventory.info.tabs.BuildTab;
 import de.OFactory.SchokoFactory.inventory.info.tabs.BuildingInfoTab;
+import de.OFactory.SchokoFactory.inventory.info.tabs.EnviromentTab;
 import de.OFactory.SchokoFactory.inventory.info.tabs.MarketInfoTab;
 
 import de.OFactory.SchokoFactory.simulation.Market;
@@ -59,7 +60,8 @@ public class MainState extends BasicGameState{
 	public static final  int TEXTURE_WIDTH = 200;
 	public static final  int TEXTURE_HEIGHT = 64;
 	public static String curpatterninfo;
-	public static PatternState curpatternstate = PatternState.WIESE;
+	public static PatternState curpatternstate = null;
+	public static Pattern selected_pattern = null; // ausgewähltes Pattern
 	
 	//Zeug fürs Inventar
 
@@ -140,12 +142,11 @@ public class MainState extends BasicGameState{
 		
 		ip = new InfoPanel(x, y, width, height);
 		ip.setTabs(Arrays.asList(
-				new BuildTab(ip, buybuttonimg[0]),
+				new BuildingInfoTab(ip, patternimg[3]),
 				new BuildTab(ip, patternimg[10]),
 				new MarketInfoTab(ip, patternimg[1]),
-				new BuildingInfoTab(ip, patternimg[1])
-				));
-		ip.getTabs().get(2).setActive(true);
+				new EnviromentTab(ip, patternimg[2])));
+		ip.switchTab(2);
 		
 		msl = new MainStateListener();
 		gc.getInput().addMouseListener(MainState.msl); //MouseListener
@@ -182,12 +183,22 @@ public class MainState extends BasicGameState{
 		
 		if(clicked != null){ // Clicked Pattern
 			
-			if(clicked instanceof Wiese){ //Feld "leer" ( = Wiese)
-				if(curpatternstate != PatternState.WIESE)
-					field.set(clicked.getId(), Pattern.getInstance(MainState.field, clicked.getX(), clicked.getY(), curpatternstate, clicked.getId(), clicked.getXCoordinate(), clicked.getYCoordinate()));
-			} else { //Feld hat ein Gebäude
-				if(curpatternstate == PatternState.WIESE) //Gebäude entfernen (-> Wiese) 
-					field.set(clicked.getId(), new Wiese(MainState.field, clicked.getX(), clicked.getY(), clicked.getId(), clicked.getXCoordinate(), clicked.getYCoordinate()));
+			if(curpatternstate == null){ // Kein Gebäude ausgewählt: nur auswahlmöglichkeit
+				if(clicked instanceof Wiese) {
+					selected_pattern = null; // keine Auswahl beim Klicken auf leeres Feld
+				} else {
+					selected_pattern = clicked; // Gebäude auswählen
+					ip.switchTab(0); // Tab wechseln
+				}
+			} else {
+			
+				if(clicked instanceof Wiese){ //Feld "leer" ( = Wiese)
+					if(curpatternstate != PatternState.WIESE)
+						field.set(clicked.getId(), Pattern.getInstance(MainState.field, clicked.getX(), clicked.getY(), curpatternstate, clicked.getId(), clicked.getXCoordinate(), clicked.getYCoordinate()));
+				} else { //Feld hat ein Gebäude
+					if(curpatternstate == PatternState.WIESE) //Gebäude entfernen (-> Wiese) 
+						field.set(clicked.getId(), new Wiese(MainState.field, clicked.getX(), clicked.getY(), clicked.getId(), clicked.getXCoordinate(), clicked.getYCoordinate()));
+				}
 			}
 				
 		}
@@ -254,6 +265,8 @@ public class MainState extends BasicGameState{
 			MainState.curpatternstate = PatternState.FARM;
 		if(in.isKeyDown(Input.KEY_G))
 			MainState.curpatternstate = PatternState.GIEßER;
+		if(in.isKeyDown(Input.KEY_N))
+			MainState.curpatternstate = null;
 		if(in.isKeyDown(Input.KEY_2))
 			MainState.molten_chokolate += 100;
 		
@@ -325,8 +338,9 @@ public class MainState extends BasicGameState{
 		
 		g.setColor(new Color(0, 20, 200));
 		g.drawString("State: MainState", 10, 50);
-		g.drawString("CurPattern: " + curpatterninfo, 10, 80);
-		g.drawString("CurState: " + curpatternstate, 10, 100);
+		g.drawString("CurPattern: " + curpatterninfo,   10,  80);
+		g.drawString("CurState: "   + curpatternstate,  10, 100);
+		g.drawString("Selected: "   + selected_pattern, 10, 120);
 		
 		// TESTAREA Inc. --------------------------
 		
