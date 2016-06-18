@@ -45,7 +45,7 @@ public class InfoPanel implements Drawable, Updateable{
 		
 		int tabsize = this.getWidth()/tabs.size();
 		int i = 0;
-		
+
 		for( Tab t : tabs ){
 			t.update(gc);
 			t.setX(this.getX() + i * tabsize);
