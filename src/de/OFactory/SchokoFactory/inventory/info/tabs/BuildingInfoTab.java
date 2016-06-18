@@ -24,6 +24,10 @@ public class BuildingInfoTab extends Tab{
 		if(MainState.selected_pattern != null){
 			GameFonts.MED.drawString(getInfoPanel().getX() + 10, getInfoPanel().getY()+50, MainState.selected_pattern.getPatternState().getName(), Color.black);
 			GameFonts.MED.drawString(getInfoPanel().getX() + 10, getInfoPanel().getY()+70, MainState.selected_pattern.getId() + "", Color.black);
+			
+			//TODO Pattern Information
+			
+			MainState.selected_pattern.getCurrentImage().getScaledCopy(1.5F).draw(getInfoPanel().getX() + 20, getInfoPanel().getY()-80);
 		} else {
 			GameFonts.SUB.drawString(getInfoPanel().getX() + 10, getInfoPanel().getY()+50, "Kein Gebäude ausgewählt!", Color.black);
 		}
