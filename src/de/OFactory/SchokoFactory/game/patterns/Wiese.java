@@ -4,6 +4,7 @@ import de.OFactory.SchokoFactory.game.GameUtils;
 import de.OFactory.SchokoFactory.game.Map;
 import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternState;
+import de.OFactory.SchokoFactory.main.MainState;
 
 public class Wiese extends Pattern{
 	
@@ -25,7 +26,12 @@ public class Wiese extends Pattern{
 
 	@Override
 	public void updateContext() {
-		
+		if(this.hovered) { //ROT DARSTELLUNG DES MainState.curpatternstate
+			if(MainState.curpatternstate != null && MainState.curpatternstate != PatternState.WIESE)
+				this.setPatternFrame(MainState.curpatternstate.getDisplayFrame());
+		} else {
+			this.setPatternFrame(36 + type);
+		}
 		
 		
 	}

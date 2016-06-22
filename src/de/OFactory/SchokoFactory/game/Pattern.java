@@ -299,9 +299,12 @@ public abstract class Pattern extends GameObject{
 		if(this.isRendered()) {
 			if(this.hovered){ //GEHOVERED
 				if(MainState.clicked == this) { //GEKLICKT
-					this.getCurrentImage().draw(this.getX(), this.getY(), new Color(200, 150, 150));
-				} else {
-					this.getCurrentImage().draw(this.getX(), this.getY(), new Color(150, 150, 200));
+					this.getCurrentImage().draw(this.getX(), this.getY(), new Color(100, 255, 255)); // GEKLICKT
+				} else { // GEHOVERED
+					if(this instanceof Wiese && MainState.curpatternstate != null && MainState.curpatternstate != PatternState.WIESE)
+						this.getCurrentImage().draw(this.getX(), this.getY(), new Color(255, 100, 100)); //GEHOVERED + WIESE
+					else
+						this.getCurrentImage().draw(this.getX(), this.getY(), new Color(200, 200, 150)); // nur GEHOVERED
 				}
 
 			} else if(selected){ //AUSGEWÄHLT

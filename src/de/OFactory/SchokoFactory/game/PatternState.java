@@ -3,24 +3,26 @@ package de.OFactory.SchokoFactory.game;
 import java.util.HashMap;
 
 public enum PatternState {
-	TANK(0L, "Tank"),
-	RÜHRER(1L, "Rührer"),
-	CHEMIEFABRIK(2L, "Chemiefabrik"),
-	GIEßER(3L, "Gießer"),
-	LAGERHALLE(4L, "Lagerhalle"),
-	MOLKEREI(5L, "Molkerei"),
-	FARM(6L, "Farm"),
-	WEIZENFELD(7L, "Weizenfeld"),
-	KAKAOPLANTAGE(8L, "Kakaoplantage"),
-	ZUCKERPLANTAGE(9L, "Zuckerplantage"),
-	WIESE(10L, "Wiese");
+	TANK        	(0L, "Tank",		  PatternFrame.TANK_0),
+	RÜHRER  		(1L, "Rührer", 		  PatternFrame.RÜHRER_S),
+	CHEMIEFABRIK	(2L, "Chemiefabrik",  PatternFrame.CHEMIE_S),
+	GIEßER			(3L, "Gießer", 		  PatternFrame.GIEßER_S),
+	LAGERHALLE		(4L, "Lagerhalle", 	  PatternFrame.LAGERHALLE_NORMAL),
+	MOLKEREI		(5L, "Molkerei",	  PatternFrame.MOLKEREI_MODERN),
+	FARM			(6L, "Farm", 		  PatternFrame.FARM),
+	WEIZENFELD		(7L, "Weizenfeld", 	  PatternFrame.TANK_0), //TODO BILDER
+	KAKAOPLANTAGE	(8L, "Kakaoplantage", PatternFrame.TANK_0), //TODO BILDER
+	ZUCKERPLANTAGE	(9L, "Zuckerplantage",PatternFrame.TANK_0), //TODO BILDER
+	WIESE			(10L, "Wiese",		  PatternFrame.WIESE_1);
 	
 	private String name;
 	private Long id;
+	private int displayframe;
 	
-	private PatternState(Long id, String name){
+	private PatternState(Long id, String name, int displayframe){
 		this.name = name;
 		this.id = id;
+		this.setDisplayFrame(displayframe);
 	}
 	
 	private static final HashMap<Long, PatternState> byId = new HashMap<Long, PatternState>();
@@ -43,6 +45,22 @@ public enum PatternState {
 	
 	public long getId(){
 		return this.id;
+	}
+
+
+	/**
+	 * @return int displayframe | Der Index des zu darstellenden Bildes des Patterns
+	 */
+	public int getDisplayFrame() {
+		return displayframe;
+	}
+
+
+	/**
+	 * @param int displayframe | Der Index des zu darstellenden Bildes des Patterns
+	 */
+	public void setDisplayFrame(int displayframe) {
+		this.displayframe = displayframe;
 	}
 	
 }

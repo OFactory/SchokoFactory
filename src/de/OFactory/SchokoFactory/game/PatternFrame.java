@@ -2,6 +2,12 @@ package de.OFactory.SchokoFactory.game;
 
 public class PatternFrame {
 
+	//WIESE
+	public static final int WIESE_1  = 36;
+	public static final int WIESE_2  = 37;
+	public static final int WIESE_3  = 38;
+	public static final int WIESE_4  = 39;
+	
 	
 	//Tank
 	public static final int TANK_0   = 0;

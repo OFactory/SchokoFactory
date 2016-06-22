@@ -198,6 +198,9 @@ public class MainState extends BasicGameState{
 				} else { //Feld hat ein Gebäude
 					if(curpatternstate == PatternState.WIESE) //Gebäude entfernen (-> Wiese) 
 						field.set(clicked.getId(), new Wiese(MainState.field, clicked.getX(), clicked.getY(), clicked.getId(), clicked.getXCoordinate(), clicked.getYCoordinate()));
+					else // Keine Wiese: Geböude Auswählen
+						selected_pattern = clicked;
+						
 				}
 			}
 				
