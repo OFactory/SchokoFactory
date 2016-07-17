@@ -12,6 +12,8 @@ import de.OFactory.SchokoFactory.main.MainState;
 
 public class BuildingInfoTab extends Tab{
 
+	public final float PATTERN_IMAGE_SCALE = 200F;
+
 	public BuildingInfoTab(InfoPanel ip, Image img) {
 		super(ip, img, "i Gebäudeinformation");
 		// TODO Auto-generated constructor stub
@@ -27,7 +29,8 @@ public class BuildingInfoTab extends Tab{
 			
 			//TODO Pattern Information
 			
-			MainState.selected_pattern.getCurrentImage().getScaledCopy(1.5F).draw(getInfoPanel().getX() + 20, getInfoPanel().getY()-80);
+			double scale = PATTERN_IMAGE_SCALE/MainState.selected_pattern.getCurrentImage().getWidth();
+			MainState.selected_pattern.getCurrentImage().getScaledCopy((float) scale).draw(getInfoPanel().getX() + 20, getInfoPanel().getY()-80);
 		} else {
 			GameFonts.SUB.drawString(getInfoPanel().getX() + 10, getInfoPanel().getY()+50, "Kein Gebäude ausgewählt!", Color.black);
 		}

@@ -39,6 +39,7 @@ public class MainStateListener implements MouseListener{
 				MainState.curpatternscale + change/GameSettings.ZOOM_STEP <= GameSettings.ZOOM_MAX){
 			
 			MainState.curpatternscale += change/GameSettings.ZOOM_STEP;
+			System.out.println(MainState.field);
 			MainState.field.zoomMap(MainState.curpatternscale, MainState.gc.getInput().getMouseX(), MainState.gc.getInput().getMouseX()); //Map neu anordnen
 			
 			MainState.patternimg = ResourceManager.loadPics(ResourceManager.loadImage("assets/textures/patterns/patterns.png").getScaledCopy(MainState.curpatternscale), 50); //Bild splitten -> Einzelne Bilder (Image[])
