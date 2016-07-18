@@ -49,7 +49,7 @@ public class MainState extends BasicGameState{
 	public static Map field;
 	
 	public static float curpatternscale = 0.7F;
-	public static Image   patternimg_raw = ResourceManager.loadImage("assets/textures/patterns/patterns.png").getScaledCopy(curpatternscale);
+	public static Image   patternimg_raw = ResourceManager.loadImage("assets/textures/patterns/patterns.png");
 	public static Image[] patternimg = ResourceManager.loadPics(patternimg_raw, 50); //Bild splitten -> Einzelne Bilder (Image[])
 	public static Pattern hoveredpattern; //Gehoverter Pattern
 	public static Pattern clicked;        //Geklickter Pattern

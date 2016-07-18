@@ -4,7 +4,6 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.MouseListener;
 
 import de.OFactory.SchokoFactory.game.GameSettings;
-import de.OFactory.SchokoFactory.game.Pattern;
 
 public class MainStateListener implements MouseListener{
 
@@ -42,10 +41,10 @@ public class MainStateListener implements MouseListener{
 			System.out.println(MainState.field);
 			MainState.field.zoomMap(MainState.curpatternscale, MainState.gc.getInput().getMouseX(), MainState.gc.getInput().getMouseX()); //Map neu anordnen
 			
-			MainState.patternimg = ResourceManager.loadPics(ResourceManager.loadImage("assets/textures/patterns/patterns.png").getScaledCopy(MainState.curpatternscale), 50); //Bild splitten -> Einzelne Bilder (Image[])
-			for(Pattern p : MainState.field){
-				p.updateTexture();
-			}
+			//MainState.patternimg = ResourceManager.loadPics(ResourceManager.loadImage("assets/textures/patterns/patterns.png").getScaledCopy(MainState.curpatternscale), 50); //Bild splitten -> Einzelne Bilder (Image[])
+			//for(Pattern p : MainState.field){
+			//	p.updateTexture();
+			//}
 		}
 		
 	}

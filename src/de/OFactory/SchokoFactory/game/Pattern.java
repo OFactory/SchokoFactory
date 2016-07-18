@@ -112,10 +112,12 @@ public abstract class Pattern extends GameObject{
 	public void update(GameContainer gc) {
 		
 		Polygon p = new Polygon();
-		p.addPoint(this.getX() + this.getCurrentImage().getWidth()*0.1F,   this.getY() + this.getCurrentImage().getHeight()*0.82F);
-		p.addPoint(this.getX() + this.getCurrentImage().getWidth()/2,      this.getY() + this.getCurrentImage().getHeight()*0.68F);
-		p.addPoint(this.getX() + this.getCurrentImage().getWidth()*0.9F,   this.getY() + this.getCurrentImage().getHeight()*0.82F);		
-		p.addPoint(this.getX() + this.getCurrentImage().getWidth()/2,      this.getY() + this.getCurrentImage().getHeight()*0.95F);
+		int off_x = this.getCurrentImage().getScaledCopy(MainState.curpatternscale).getWidth();
+		int off_y = this.getCurrentImage().getScaledCopy(MainState.curpatternscale).getHeight();
+		p.addPoint(getX() + off_x*0.1F,   getY() + off_y*0.82F);
+		p.addPoint(getX() + off_x/2,      getY() + off_y*0.68F);
+		p.addPoint(getX() + off_x*0.9F,   getY() + off_y*0.82F);		
+		p.addPoint(getX() + off_x/2,      getY() + off_y*0.95F);
 		
 		
 		this.setClickBox(p);
@@ -163,8 +165,8 @@ public abstract class Pattern extends GameObject{
 		}
 		
 		//Pattern aus Bildschirmrand?
-		if(this.getX() > gc.getWidth() || this.getX() + this.getCurrentImage().getWidth() < 0
-				|| this.getY() > gc.getHeight() || this.getY() + this.getCurrentImage().getHeight() < 0)
+		if(this.getX() > gc.getWidth() || this.getX() + this.getCurrentImage().getWidth()*MainState.curpatternscale < 0
+				|| this.getY() > gc.getHeight() || this.getY() + this.getCurrentImage().getHeight()*MainState.curpatternscale < 0)
 			this.rendered = false; // --> Nicht rendern
 		else
 			this.rendered = true;
@@ -297,24 +299,33 @@ public abstract class Pattern extends GameObject{
 	@Override
 	public void draw(Graphics g) {
 		if(this.isRendered()) {
+			
+			Color filter = Color.white;
+			
 			if(this.hovered){ //GEHOVERED
 				if(MainState.clicked == this) { //GEKLICKT
-					this.getCurrentImage().draw(this.getX(), this.getY(), new Color(100, 255, 255)); // GEKLICKT
+					filter = new Color(100, 255, 255); // GEKLICKT
 				} else { // GEHOVERED
 					if(this instanceof Wiese && MainState.curpatternstate != null && MainState.curpatternstate != PatternState.WIESE)
-						this.getCurrentImage().draw(this.getX(), this.getY(), new Color(255, 100, 100)); //GEHOVERED + WIESE
+						filter = new Color(255, 100, 100); //GEHOVERED + WIESE
 					else
-						this.getCurrentImage().draw(this.getX(), this.getY(), new Color(200, 200, 150)); // nur GEHOVERED
+						filter = new Color(200, 200, 150); // nur GEHOVERED
 				}
 
 			} else if(selected){ //AUSGEWÄHLT
-				this.getCurrentImage().draw(this.getX(), this.getY(), new Color(150, 255, 150));
-			} else { //NORMAL
-				this.getCurrentImage().draw(this.getX(), this.getY());
-			}
+				filter = new Color(150, 255, 150);
+			} //NORMAL => WEIß
+			
+			this.getCurrentImage().getScaledCopy(MainState.curpatternscale).draw(this.getX(), this.getY(), filter);
 			
 			
 		}
+		
+		g.setColor(Color.pink);
+		g.setLineWidth(2F);
+		
+		if(this.getClickBox() != null)
+			g.draw(this.getClickBox());
 		
 	}
 	
