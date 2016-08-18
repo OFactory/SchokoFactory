@@ -29,6 +29,12 @@ public class Lagerhalle extends Pattern{
 		
 		
 	}
+
+	@Override
+	public void updatePatternInfo() {
+		// XXX Mögliche Attribute: Kapazität
+		
+	}
 	
   
 }

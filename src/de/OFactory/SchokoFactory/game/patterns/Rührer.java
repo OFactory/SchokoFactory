@@ -30,4 +30,10 @@ public class Rührer extends Pattern{
 		this.active = active;
 	}
 
+	@Override
+	public void updatePatternInfo() {
+		// XXX Mögliche Attribute: Effizienz, Qualität(Verschmutzung des Rührers etc.)
+		
+	}
+
 }

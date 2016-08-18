@@ -35,6 +35,13 @@ public class Wiese extends Pattern{
 		
 		
 	}
+
+
+	@Override
+	public void updatePatternInfo() {
+		// XXX Mögliche Attribute: Fruchtbarkeit des Bodens
+		
+	}
 	
 	
 

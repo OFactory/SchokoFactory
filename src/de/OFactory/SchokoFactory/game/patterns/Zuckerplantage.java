@@ -15,4 +15,10 @@ public class Zuckerplantage extends Pattern{
 	public void updateContext() {
 		
 	}
+
+	@Override
+	public void updatePatternInfo() {
+		// XXX Mögliche Attribute: Effizienz, Fruchtbarkeit, Qualität(Verunreinigungen des Zuckers)
+		
+	}
 }

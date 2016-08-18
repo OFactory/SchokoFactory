@@ -17,4 +17,10 @@ public class Weizenfeld extends Pattern{
 	public void updateContext() {
 		
 	}
+
+	@Override
+	public void updatePatternInfo() {
+		// XXX Mögliche Attribute: Effizienz, Fruchtbarkeit, Qualität
+		
+	}
 }

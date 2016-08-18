@@ -20,4 +20,9 @@ public class Chemiefabrik extends Pattern{
 		
 	}
 
+	@Override
+	public void updatePatternInfo() {
+		// XXX Mögliche Attribute: Effizienz, Bedenklichkeit bzgl. "Chemie"
+	}
+
 }

@@ -3,6 +3,7 @@ package de.OFactory.SchokoFactory.game;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -31,6 +32,8 @@ public abstract class Pattern extends GameObject{
 	private Shape clickbox;
 	
 	private int id;
+	
+	private HashMap<String, Object> pattern_info = new HashMap<String, Object>();
 	
 	private int xcoor;
 	private int ycoor;
@@ -173,9 +176,10 @@ public abstract class Pattern extends GameObject{
 		
 		
 		
-		//Spezifischer Update Kontext jeder Pattern art
-		
+		//Spezifischer Update Kontext jeder Pattern-Art
 		updateContext();
+		//Spezifischer Update Kontext für die Info eines Pattern jeder Pattern-Art
+		updatePatternInfo();
 		//System.out.println("Lots Of Love"); LOL starring
 	}
 
@@ -260,6 +264,7 @@ public abstract class Pattern extends GameObject{
     */
 	public ArrayList<Pattern> getPatternNears(){
 	   
+		
 		ArrayList<Pattern> ps = new ArrayList<Pattern>();
 		ArrayList<Point> dirs = new ArrayList<Point>();
 		dirs.add(new Point(-1, -1)); //N
@@ -332,6 +337,17 @@ public abstract class Pattern extends GameObject{
 	public String toString(){
 		return "Pattern(" + this.getId() + ", " + this.getPatternState() + ")";
 	}
+	
+	/**
+	 * Updated Pattern-Info (HashMap) der Werte eines Objektes
+	 * @return void //TODO überall implementieren
+	 */
+	public abstract void updatePatternInfo();
+	
+	public void putPatternInfo(String s, Object o){
+		pattern_info.putIfAbsent(s, o);
+	}
+	
 	
 	////////////////////////////////////////// Setter & Getter ///////////
 
@@ -417,6 +433,20 @@ public abstract class Pattern extends GameObject{
 
 	public void setYcoor(int ycoor) {
 		this.ycoor = ycoor;
+	}
+
+	/**
+	 * @return the pattern_info
+	 */
+	public HashMap<String, Object> getPatternInfo() {
+		return pattern_info;
+	}
+
+	/**
+	 * @param pattern_info the pattern_info to set
+	 */
+	public void setPatternInfo(HashMap<String, Object> pattern_info) {
+		this.pattern_info = pattern_info;
 	}
 
 }

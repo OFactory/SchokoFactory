@@ -16,4 +16,10 @@ public class Molkerei extends Pattern {
 	public void updateContext() {
 		//TODO Molkerei alt adden! Bild fehlt :(
 	}
+
+	@Override
+	public void updatePatternInfo() {
+		// XXX Mögliche Attribute: Effizienz, Anzahl Kühe, Qualität
+		
+	}
 }

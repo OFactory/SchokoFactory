@@ -16,4 +16,10 @@ public class Farm extends Pattern{
 	public void updateContext() {
 		
 	}
+
+	@Override
+	public void updatePatternInfo() {
+		// XXX Mögliche Attribute: Effizienz, Fruchtbarkeit des Bodens
+		
+	}
 }
