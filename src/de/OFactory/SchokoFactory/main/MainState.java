@@ -131,7 +131,7 @@ public class MainState extends BasicGameState{
 		field = Map.readSavedMap("saves/Test.sf");
 		//System.out.println(System.currentTimeMillis()-time_1);
 		
-		System.out.println(field);
+		//System.out.println(field);
 		//System.out.println(field.getSaveString());
 		
 		// InfoPanel + TABS

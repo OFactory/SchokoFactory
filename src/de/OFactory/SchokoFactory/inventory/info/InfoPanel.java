@@ -25,6 +25,8 @@ public class InfoPanel implements Drawable, Updateable{
 	//PatternSTATE : BUILD
 	private int page;
 	
+	private int scroll;
+	
 	private List<Tab> tabs;
 	public Tab activetab;
 
@@ -139,6 +141,30 @@ public class InfoPanel implements Drawable, Updateable{
 
 	public void setPage(int page) {
 		this.page = page;
+	}
+
+
+	/**
+	 * @return the scroll
+	 */
+	public int getScroll() {
+		return scroll;
+	}
+
+
+	/**
+	 * @param int scroll the scroll to set
+	 * Kann nicht kleine rals 0 sein!
+	 * Sonst: Keine Veränderung des Wertes
+	 */
+	public void setScroll(int scroll) {
+		
+		if(!(scroll < 0))
+			this.scroll = scroll;
+	}
+	
+	public void addScroll(int change){
+		this.setScroll(this.getScroll() + change);
 	}
 
 
