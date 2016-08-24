@@ -7,6 +7,7 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.RoundedRectangle;
 import org.newdawn.slick.geom.Shape;
 
+import de.OFactory.SchokoFactory.game.GameFonts;
 import de.OFactory.SchokoFactory.main.Drawable;
 
 public class Button implements Drawable{
@@ -24,6 +25,8 @@ public class Button implements Drawable{
 	protected Color normal_color;
 	protected Color clicked_color;
 	
+	protected int cornerradius;
+	
 	protected String content;
 	
 	boolean hovered = false;
@@ -39,6 +42,8 @@ public class Button implements Drawable{
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		
+		this.cornerradius = cornerradius;
 		
 		this.content = content;
 		
@@ -65,6 +70,8 @@ public class Button implements Drawable{
 		
 		this.content = content;
 		
+		this.cornerradius = cornerradius;
+		
 		if(cornerradius != 0){
 			this.shape = new RoundedRectangle(x, y, width, height, cornerradius);
 		} else {
@@ -79,9 +86,9 @@ public class Button implements Drawable{
 	
 	//-------------------------------------------------------------------------
 	
-	@SuppressWarnings("static-access")
 	public void update(Input in){
-
+		
+		
 		if(this.shape.contains(in.getMouseX(), in.getMouseY())) {
 			this.hovered = true;
 		} else {
@@ -89,7 +96,7 @@ public class Button implements Drawable{
 		}
 		
 		if(this.hovered){
-			if(in.isMouseButtonDown(in.MOUSE_LEFT_BUTTON)){
+			if(in.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)){
 				this.clicked = true;
 			}
 		}
@@ -97,6 +104,14 @@ public class Button implements Drawable{
 		
 		
 		
+	}
+	
+	public void updateShape(){
+		if(cornerradius != 0){
+			this.shape = new RoundedRectangle(this.getX(), this.getY(), this.getWidth(), this.getHeight(), cornerradius);
+		} else {
+			this.shape = new Rectangle(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+		}
 	}
 	
 	public void draw(Graphics g){
@@ -118,7 +133,7 @@ public class Button implements Drawable{
 		g.draw(this.shape);
 		
 		if(this.content != "") {
-			g.drawString(content, this.x + this.width/2, this.y + this.height/2);
+			GameFonts.SUB.drawString( this.x + 20, this.y + (int) (this.height*0.3), content, new Color(256 - g.getColor().getRed(), 256 - g.getColor().getGreen(), 256 - g.getColor().getBlue()));
 		}
 		
 	}
@@ -132,6 +147,7 @@ public class Button implements Drawable{
 	
 	public void setX(int x) {
 		this.x = x;
+		updateShape();
 	}
 	
 	public int getX() {
@@ -140,6 +156,7 @@ public class Button implements Drawable{
 	
 	public void setY(int y) {
 		this.y = y;
+		updateShape();
 	}
 	
 	public int getY() {
@@ -148,6 +165,7 @@ public class Button implements Drawable{
 	
 	public void setWidth(int width){
 		this.width = width;
+		updateShape();
 	}
 	
 	public int getWidth() {
@@ -156,6 +174,7 @@ public class Button implements Drawable{
 	
 	public void setHeight(int height){
 		this.height = height;
+		updateShape();
 	}
 	
 	public int getHeight() {
