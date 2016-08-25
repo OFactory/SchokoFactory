@@ -121,6 +121,10 @@ public class InfoPanel implements Drawable, Updateable{
 		this.tabs = tabs;
 	}
 	
+	public Tab getCurrentTab(){
+		return this.activetab;
+	}
+	
 	public void switchTab(int n) {
 		this.activetab = tabs.get(n);
 	}

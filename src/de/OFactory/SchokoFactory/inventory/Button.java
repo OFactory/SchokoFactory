@@ -29,8 +29,8 @@ public class Button implements Drawable{
 	
 	protected String content;
 	
-	boolean hovered = false;
-	boolean clicked = false;
+	protected boolean hovered = false;
+	protected boolean clicked = false;
 	
 	
 	

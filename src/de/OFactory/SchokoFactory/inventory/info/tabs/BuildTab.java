@@ -16,6 +16,7 @@ public class BuildTab extends Tab{
 
 	//ArrayList<Tuple<PatternState, Integer>> buildings = new ArrayList<Tuple<PatternState,Integer>>();
 	ArrayList<BuildingButton> buildings = new ArrayList<BuildingButton>();
+	BuildingButton curbuilding;
 	
 	public BuildTab(InfoPanel ip, Image img) {
 		super(ip, img, "Gebäude");
@@ -63,5 +64,14 @@ public class BuildTab extends Tab{
 	public void addBuilding(PatternState state, int price){
 		buildings.add(new BuildingButton(0, getInfoPanel(), state, price));
 	}
+	
+	public void setCurrentBuilding(BuildingButton bb){
+		this.curbuilding = bb;
+	}
+	
+	public BuildingButton getCurrentBuilding(){
+		return curbuilding;
+	}
+	
 
 }
