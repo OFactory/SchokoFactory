@@ -63,7 +63,9 @@ public abstract class Tab implements Drawable, Updateable{
 		
 		//g.drawImage(display.getScaledCopy(size/display.getWidth()), -30);
 		//display.draw(x, y-500);
-		GameFonts.MAIN.drawString(x + 20, y + 10, "" + name.charAt(0), Color.black);
+		int charwidth = GameFonts.MAIN.getWidth("" + name.charAt(0));
+		int charheight = GameFonts.MAIN.getHeight("" + name.charAt(0));
+		GameFonts.MAIN.drawString(x + (size-charwidth)/2, y + (size-charheight)/2 + 2, "" + name.charAt(0), Color.black);
 	}
 	
 	public abstract void drawContent(Graphics g);

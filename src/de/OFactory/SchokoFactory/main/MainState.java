@@ -183,7 +183,7 @@ public class MainState extends BasicGameState{
 		
 		if(clicked != null){ // Clicked Pattern
 			
-			if(curpatternstate == null){ // Kein Gebäude ausgewählt: nur auswahlmöglichkeit
+			if(curpatternstate == null){ // Kein Gebäude ausgewählt: nur Auswahlmöglichkeit
 				if(clicked instanceof Wiese) {
 					selected_pattern = null; // keine Auswahl beim Klicken auf leeres Feld
 				} else {
@@ -198,7 +198,7 @@ public class MainState extends BasicGameState{
 				} else { //Feld hat ein Gebäude
 					if(curpatternstate == PatternState.WIESE) //Gebäude entfernen (-> Wiese) 
 						field.set(clicked.getId(), new Wiese(MainState.field, clicked.getX(), clicked.getY(), clicked.getId(), clicked.getXCoordinate(), clicked.getYCoordinate()));
-					else // Keine Wiese: Geböude Auswählen
+					else // Keine Wiese: Gebäude Auswählen
 						selected_pattern = clicked;
 						
 				}
@@ -208,7 +208,7 @@ public class MainState extends BasicGameState{
 		
 		
 		
-		GameUtils.refreshSize(); // Testen, ob Größe sihc verändert hat -> Ausprinten
+		GameUtils.refreshSize(); // Testen, ob Größe sich verändert hat -> Ausprinten
 		
 		for(Pattern p : field) //jedes Pattern zeichnen
 			if(p != null)
