@@ -146,7 +146,7 @@ public class MainState extends BasicGameState{
 				new BuildTab(ip, patternimg[10]),
 				new MarketInfoTab(ip, patternimg[1]),
 				new EnviromentTab(ip, patternimg[2])));
-		ip.switchTab(2);
+		ip.switchTab(1);
 		
 		msl = new MainStateListener();
 		gc.getInput().addMouseListener(MainState.msl); //MouseListener
