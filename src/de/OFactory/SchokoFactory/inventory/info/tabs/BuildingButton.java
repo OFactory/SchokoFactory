@@ -10,7 +10,7 @@ import de.OFactory.SchokoFactory.inventory.info.InfoPanel;
 public class BuildingButton extends Button{
 	
 	private InfoPanel ip;
-	
+	private PatternState ps;
 	
 
 	public BuildingButton(int ID, InfoPanel ip, PatternState ps, Integer price) {
@@ -18,7 +18,7 @@ public class BuildingButton extends Button{
 		// TODO Auto-generated constructor stub
 		
 		this.ip = ip;
-		
+		this.ps = ps;
 		this.clicked_color = new Color(100, 100, 100);
 		this.hovered_color = new Color(150, 150, 255);
 		this.normal_color  = new Color(	65,105,225);
@@ -39,6 +39,7 @@ public class BuildingButton extends Button{
 		if(this.hovered){
 			if(in.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)){
 				if(ip.getCurrentTab() instanceof BuildTab){
+					System.out.println(this);
 					bt = (BuildTab) ip.getCurrentTab();
 					bt.setCurrentBuilding(this);
 				}
@@ -55,5 +56,13 @@ public class BuildingButton extends Button{
 		
 		
 		
+	}
+
+	public PatternState getPs() {
+		return ps;
+	}
+
+	public void setPs(PatternState ps) {
+		this.ps = ps;
 	}
 }

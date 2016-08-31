@@ -11,6 +11,7 @@ import de.OFactory.SchokoFactory.game.GameFonts;
 import de.OFactory.SchokoFactory.game.PatternState;
 import de.OFactory.SchokoFactory.inventory.info.InfoPanel;
 import de.OFactory.SchokoFactory.inventory.info.Tab;
+import de.OFactory.SchokoFactory.main.MainState;
 
 public class BuildTab extends Tab{
 
@@ -67,6 +68,8 @@ public class BuildTab extends Tab{
 	
 	public void setCurrentBuilding(BuildingButton bb){
 		this.curbuilding = bb;
+		MainState.curpatternstate = bb.getPs();
+		System.out.println(""+bb.getPs().getName());
 	}
 	
 	public BuildingButton getCurrentBuilding(){
