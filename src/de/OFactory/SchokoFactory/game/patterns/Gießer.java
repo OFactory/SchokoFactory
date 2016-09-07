@@ -4,6 +4,7 @@ import de.OFactory.SchokoFactory.game.Map;
 import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternFrame;
 import de.OFactory.SchokoFactory.game.PatternState;
+import de.OFactory.SchokoFactory.main.MainState;
 
 public class Gieﬂer extends Pattern{
 	
@@ -17,6 +18,12 @@ public class Gieﬂer extends Pattern{
 	@Override
 	public void updateContext() {
 		
+	}
+	
+	// Produziert 100 Tafeln aus dem nichts bei jedem Aufruf. Idealer Weise t‰glich.
+	@Override
+	public void work() {
+		MainState.p.setProduktmenge(MainState.p.getProduktmenge() + 100 );
 	}
 
 	@Override

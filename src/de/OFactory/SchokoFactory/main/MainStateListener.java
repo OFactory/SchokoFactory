@@ -56,7 +56,7 @@ public class MainStateListener implements MouseListener{
 		
 		// InfoPanel Scroll
 		
-		//Mauszeuger im richtigen Bereich? > InfoPanel
+		//Mauszeiger im richtigen Bereich? > InfoPanel
 		if((in.getMouseX() > MainState.gc.getWidth() - MainState.ip.getWidth() && in.getMouseX() < MainState.gc.getWidth()) &&
 				in.getMouseY() > 0 && in.getMouseY() < MainState.ip.getHeight()) {
 			

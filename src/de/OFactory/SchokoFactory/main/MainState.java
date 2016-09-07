@@ -80,7 +80,7 @@ public class MainState extends BasicGameState{
 	
 	// Zeug für Markt
 	public static Player p; //Spieler
-	
+	public static Market m;
 	
 	
 	//-------------------------------------------------------------------------
@@ -91,7 +91,7 @@ public class MainState extends BasicGameState{
 	public static int molten_chokolate;
 	public static int free_molten_chokolate;
 	
-	public static Market m;
+	
 	
 	
 	
@@ -116,7 +116,7 @@ public class MainState extends BasicGameState{
 		
 		// - Market
 		MainState.m = new Market();
-		p = new Player(m, "P", 100000);
+		MainState.p = new Player(m, "P", 100000);
 		MainState.m.setPlayer(Arrays.asList(
 				p,
 				new Player(m,"P2",100000),

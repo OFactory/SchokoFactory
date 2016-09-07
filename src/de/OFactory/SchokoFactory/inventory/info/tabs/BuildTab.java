@@ -20,7 +20,6 @@ public class BuildTab extends Tab{
 		super(ip, img, "Gebäude");
 		
 		addBuildings();
-		System.out.println(buildings);
 	}
 
 	@Override

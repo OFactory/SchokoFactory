@@ -300,6 +300,9 @@ public abstract class Pattern extends GameObject{
 	}
 	
 	public abstract void updateContext();
+	
+	// spezifischer täglicher Arbeitsablauf
+	public abstract void work();
 
 	@Override
 	public void draw(Graphics g) {
@@ -448,5 +451,7 @@ public abstract class Pattern extends GameObject{
 	public void setPatternInfo(HashMap<String, Object> pattern_info) {
 		this.pattern_info = pattern_info;
 	}
+
+
 
 }
