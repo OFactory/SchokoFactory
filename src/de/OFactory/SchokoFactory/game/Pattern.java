@@ -301,8 +301,7 @@ public abstract class Pattern extends GameObject{
 	
 	public abstract void updateContext();
 	
-	// spezifischer täglicher Arbeitsablauf
-	public abstract void work();
+	
 
 	@Override
 	public void draw(Graphics g) {

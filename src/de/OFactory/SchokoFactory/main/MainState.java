@@ -25,7 +25,7 @@ import de.OFactory.SchokoFactory.inventory.info.tabs.BuildTab;
 import de.OFactory.SchokoFactory.inventory.info.tabs.BuildingInfoTab;
 import de.OFactory.SchokoFactory.inventory.info.tabs.EnviromentTab;
 import de.OFactory.SchokoFactory.inventory.info.tabs.MarketInfoTab;
-
+import de.OFactory.SchokoFactory.simulation.Factory;
 import de.OFactory.SchokoFactory.simulation.Market;
 import de.OFactory.SchokoFactory.simulation.Player;
 
@@ -79,8 +79,9 @@ public class MainState extends BasicGameState{
 	public static long delta_t;
 	
 	// Zeug für Markt
-	public static Player p; //Spieler
-	public static Market m;
+	public static Player  p; //Spieler
+	public static Market  m;
+	public static Factory f; //Engine für work();
 	
 	
 	//-------------------------------------------------------------------------
@@ -115,7 +116,8 @@ public class MainState extends BasicGameState{
 		
 		
 		// - Market
-		MainState.m = new Market();
+		MainState.m = new Market(); 
+		MainState.f = new Factory();
 		MainState.p = new Player(m, "P", 100000);
 		MainState.m.setPlayer(Arrays.asList(
 				p,
@@ -225,7 +227,9 @@ public class MainState extends BasicGameState{
 		
 		if(delta_t >= GameSettings.DAY_MILIS){ //Ein Tag(Siehe GameSettings.DAY_MILIS) geht verüber
 			last = 0;
-			m.day();
+			//m.day(); //TODO / by zero (Market.java:176)
+			f.run();
+			
 		}
 		
 		if(last == 0)
