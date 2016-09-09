@@ -227,7 +227,7 @@ public class MainState extends BasicGameState{
 		
 		if(delta_t >= GameSettings.DAY_MILIS){ //Ein Tag(Siehe GameSettings.DAY_MILIS) geht verüber
 			last = 0;
-			//m.day(); //TODO / by zero (Market.java:176)
+			m.day(); //TODO / by zero (Market.java:176)
 			f.run();
 			
 		}

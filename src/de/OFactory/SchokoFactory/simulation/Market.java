@@ -37,14 +37,18 @@ public class Market {
 		
 		this.time++;
 		System.out.println("<Markt> [ " + getDateString() + " ]" );
-		
+		System.out.println("<Markt> Tagesbilanz");	// zum leichteren Debuggen der Markt- und Produktionssimlation
+		for (int i = 0; i < players.size(); i++) {
+			System.out.println(" - P"+i+"  Produktmenge:" + (players.get(i).getProduktmenge() - players.get(i).getAbsatz()));
+			System.out.println(" - P"+i+"  Absatz:" + players.get(i).getAbsatz());
+		}
 	}
 	
 	/** Calculate economic development of market and players **/
 	private void calculation() {
 
 		bedarf = (int)((59*bedarf + summeAbsAlt) / 60 * Math.pow(this.eco , 2) * boni * (Math.pow(getWerbefaktoren(),0.9) + 330)/331);
-		// Bedarf gleicht sich an den alten Absatz über 2 Monate (60 Tage), Gewöhnungseffekt
+		// Bedarf gleicht sich an den alten Absatz über 2 Monate (60 Tage) an, Gewöhnungseffekt
 		
 		summeMoegAbs = getMoegAbs();
 		summeAbs = (summeMoegAbs+bedarf)/2;
@@ -172,10 +176,17 @@ public class Market {
 		for (Player p: p_ohne_diff)
 			c += p.getMoegAbs();
 
-		
-		double f = a / b / c;
-		
-		return f;
+		System.out.println(a+", "+b+", "+c);
+		try {
+			double f = a / b / c;
+			return f;
+		}
+
+		finally{		// ich will eigentlich except(Python) benutzen aber das gibt es nicht :|
+			double f = 1;
+			return f;
+		}
+
 	}
 	
 	/** 

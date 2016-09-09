@@ -25,13 +25,12 @@ public class Gießer extends Pattern implements Workable{
 	
 	// Produziert 100 Tafeln aus dem nichts bei jedem Aufruf. Idealer Weise täglich.
 	public void work() {
-		System.out.println(MainState.p.getProduktmenge());
 		MainState.p.setProduktmenge(MainState.p.getProduktmenge() + produktion );
 	}
 
 	@Override
 	public void updatePatternInfo() {
-		// XXX Mögliche Attribute: Effizienz, Gegoßenes Produkt
+		// XXX Mögliche Attribute: Effizienz, Gegoßenes Produkt, Gerätealter, laufende Kosten
 		
 	}
 }
