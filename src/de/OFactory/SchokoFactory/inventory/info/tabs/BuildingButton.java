@@ -8,6 +8,7 @@ import de.OFactory.SchokoFactory.game.GameFonts;
 import de.OFactory.SchokoFactory.game.PatternState;
 import de.OFactory.SchokoFactory.inventory.Button;
 import de.OFactory.SchokoFactory.inventory.info.InfoPanel;
+import de.OFactory.SchokoFactory.main.Main;
 import de.OFactory.SchokoFactory.main.MainState;
 
 public class BuildingButton extends Button{
@@ -19,19 +20,17 @@ public class BuildingButton extends Button{
 	private PatternState ps;
 	private int price;
 
-	private Color invalid_balance_color = new Color(255, 105,  65);
-	
-
 	public BuildingButton(int ID, InfoPanel ip, PatternState ps, Integer price) {
-		super(ID, ip.getX(), 0, ip.getWidth(), BUTTON_HEIGHT, ps.getName() + "   " + price, 0);
+		super(ID, ip.getX(), 0, ip.getWidth(), BUTTON_HEIGHT, ps.getName(), 0);
 		// TODO Auto-generated constructor stub
 		
 		this.setInfoPanel(ip);
 		this.ps = ps;
+		this.price = price;
 		this.clicked_color		    = new Color(100, 100, 100);
 		this.hovered_color			= new Color(150, 150, 255);
 		this.normal_color  			= new Color( 65, 105, 225);
-		this.invalid_balance_color  = new Color(255, 105,  65);
+		new Color(255, 105,  65);
 	}
 
 	/**
@@ -72,19 +71,26 @@ public class BuildingButton extends Button{
 	 */
 	@Override
 	public void draw(Graphics g){
-		if(this.clicked) {
-			g.setColor(clicked_color);
-			
-			if(this.hovered){ // Durschnittsfarbe
-				g.setColor(new Color((clicked_color.getRed()+hovered_color.getRed())/2, (clicked_color.getGreen()+hovered_color.getGreen())/2, (clicked_color.getBlue()+hovered_color.getBlue())/2));
-			}
-		} else if(MainState.balance < this.price) {
-			g.setColor(invalid_balance_color);
-		} else if(this.hovered)
-			g.setColor(hovered_color);
-		else
-			g.setColor(normal_color);
 		
+		Color dsp_color = new Color(0, 0, 0);
+		
+		if(clicked) {
+			dsp_color = clicked_color;
+			
+			if(hovered){ // Durschnittsfarbe
+				dsp_color = new Color((clicked_color.getRed()+hovered_color.getRed())/2, (clicked_color.getGreen()+hovered_color.getGreen())/2, (clicked_color.getBlue()+hovered_color.getBlue())/2);
+			}
+		} else if(this.hovered)
+			dsp_color = hovered_color;
+		else
+			dsp_color = normal_color;
+		
+		if(Main.money < price){
+			dsp_color = Color.red.darker();
+		}
+		
+		
+		g.setColor(dsp_color);
 		
 		g.fill(this.shape);
 		
@@ -101,11 +107,20 @@ public class BuildingButton extends Button{
 		
 		
 		if(this.content != "") {
-			GameFonts.SUB.drawString( this.x + 100,
-					this.y + (int) 
-					(this.height*0.3),
+			GameFonts.SUB.drawString( x + 100,
+					y + (int) (height*0.3),
 					content,
 					new Color(256 - g.getColor().getRed(), 256 - g.getColor().getGreen(), 256 - g.getColor().getBlue()));
+		}
+		
+		if(price > 0){
+			
+			String str_price = "-" + price + "$";
+			
+			GameFonts.SUB.drawString(x + width - GameFonts.SUB.getWidth(str_price) - 5,
+					y + height - GameFonts.SUB.getHeight() - 5,
+					str_price,
+					Color.red);
 		}
 		
 	}

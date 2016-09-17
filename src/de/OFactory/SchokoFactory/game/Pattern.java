@@ -328,11 +328,13 @@ public abstract class Pattern extends GameObject{
 			
 		}
 		
+		/* DEBUG CLICKBOX
 		g.setColor(Color.pink);
 		g.setLineWidth(2F);
 		
 		if(this.getClickBox() != null)
 			g.draw(this.getClickBox());
+		*/
 		
 	}
 	

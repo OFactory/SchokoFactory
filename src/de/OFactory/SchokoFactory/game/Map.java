@@ -141,7 +141,7 @@ public class Map extends ArrayList<Pattern>{
 	
 	/**
 	 * Zoomt eine Map an die eine bestimmte Stelle (zx,zy) heran bzw. heraus.
-	 * Hierbei kommt es darauf an, ob currpatternscale größer oder kleiner als die vorgergegangene Skalierung ist,
+	 * Hierbei kommt es darauf an, ob currpatternscale größer oder kleiner als die vorhergegangene Skalierung ist,
 	 * und ob die Map herangezoomt bzw. herausgezoomt werden soll.
 	 * Hierbei bewegen sich alle Pattern gleichmäßig um die Zoomstelle herum,
 	 * ähnlich wie die Pixel bei der Zoom-Funktion von Bildern.
@@ -151,12 +151,16 @@ public class Map extends ArrayList<Pattern>{
 	 * @param zy Y-Position des Zoom-Punktes
 	 */
 	public void zoomMap(float curpatternscale, int zx, int zy){
-		int grid_width = 0; // Anzahl Spalten in nter Reihe
-		int i = 0;
-		int twidth  = (int) (MainState.TEXTURE_WIDTH * curpatternscale);
+		
+		int twidth  = (int) (MainState.TEXTURE_WIDTH  * curpatternscale);
 		int theight = (int) (MainState.TEXTURE_HEIGHT * curpatternscale);
 		
-
+		
+		//ALTER ALGORITHMUS : RESTRUKTURIEREN
+		
+		int grid_width = 0; // Anzahl Spalten in nter Reihe
+		int i = 0; 
+		
 		for(int y = 0; y < (this.getWidth()+1)*2-1; y++){ // für jede Reihe
 			if(y >= this.getHeight()+1){ // nte Reihe erreicht(max width)
 				grid_width--;
@@ -170,17 +174,19 @@ public class Map extends ArrayList<Pattern>{
 				
 				p.setX( (int) ( zx - MainState.gc.getWidth()/2 + 
 								x* twidth+//Normal Placement
-								( (this.getWidth()+1-grid_width)*twidth ) / 2 - //Verschiebung durch Anzahl Patterns in Reihe
-								(this.getWidth()+1)*twidth / 3));
+								( (getWidth()+1-grid_width)*twidth ) / 2 - //Verschiebung durch Anzahl Patterns in Reihe
+								(  getWidth()+1)*twidth / 3));
 				p.setY( (int) ( zy - (MainState.gc.getHeight()+1)/2 + 
 								y*theight - //Normal Placement
-								(this.getHeight()+1)*theight / 1.5));
+								(getHeight()+1)*theight / 1.5));
 				
 				
 				
 				i++;
 			}
 		}
+		
+
 	}
 	
 	

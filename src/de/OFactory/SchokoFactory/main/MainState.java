@@ -1,5 +1,6 @@
 package de.OFactory.SchokoFactory.main;
 
+import java.awt.Point;
 import java.util.Arrays;
 
 import org.newdawn.slick.Color;
@@ -63,6 +64,10 @@ public class MainState extends BasicGameState{
 	public static PatternState curpatternstate = null;
 	public static Pattern selected_pattern = null; // ausgewähltes Pattern
 	
+	//Max Dist
+	public static Rectangle view_dimensions = new Rectangle(-100, -100, 800, 600);
+	public static Point     cam_pos = new Point( 0, 0);
+	
 	//Zeug fürs Inventar
 
 	public static Stockpile pile;
@@ -82,6 +87,8 @@ public class MainState extends BasicGameState{
 	public static Player  p; //Spieler
 	public static Market  m;
 	public static Factory f; //Engine für work();
+	
+	
 	
 	
 	//-------------------------------------------------------------------------
@@ -305,6 +312,15 @@ public class MainState extends BasicGameState{
 			MainState.allv_x = - GameSettings.PATTERN_MOVEMENT_SPEED;
 		if(down.contains(in.getMouseX(), in.getMouseY()))
 			MainState.allv_y = - GameSettings.PATTERN_MOVEMENT_SPEED;
+		
+		
+		
+		cam_pos.setLocation(cam_pos.getX() + allv_x, cam_pos.getY() + allv_y);
+		if(!view_dimensions.contains((float) cam_pos.getX(), (float) cam_pos.getY())){
+			cam_pos.setLocation(cam_pos.getX() - allv_x, cam_pos.getY() - allv_y);
+			allv_x = 0;
+			allv_y = 0;
+		}
 	}
 	
 	
@@ -348,6 +364,7 @@ public class MainState extends BasicGameState{
 		g.drawString("CurPattern: " + curpatterninfo,   10,  80);
 		g.drawString("CurState: "   + curpatternstate,  10, 100);
 		g.drawString("Selected: "   + selected_pattern, 10, 120);
+		g.drawString("cam_pos:  "   + cam_pos,          10, 140);
 		
 		// TESTAREA Inc. --------------------------
 		
