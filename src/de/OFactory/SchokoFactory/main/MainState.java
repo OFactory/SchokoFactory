@@ -281,8 +281,13 @@ public class MainState extends BasicGameState{
 			MainState.curpatternstate = PatternState.GIEßER;
 		if(in.isKeyDown(Input.KEY_N))
 			MainState.curpatternstate = null;
+		
+		if(in.isKeyDown(Input.KEY_P))
+			MainState.cam_pos.setLocation(0, 0);
 		if(in.isKeyDown(Input.KEY_2))
 			MainState.molten_chokolate += 100;
+		
+		
 		
 		
 		if(in.isKeyDown(Input.KEY_UP))
@@ -361,10 +366,10 @@ public class MainState extends BasicGameState{
 		
 		g.setColor(new Color(0, 20, 200));
 		g.drawString("State: MainState", 10, 50);
-		g.drawString("CurPattern: " + curpatterninfo,   10,  80);
-		g.drawString("CurState: "   + curpatternstate,  10, 100);
-		g.drawString("Selected: "   + selected_pattern, 10, 120);
-		g.drawString("cam_pos:  "   + cam_pos,          10, 140);
+		g.drawString("CurPattern: " + curpatterninfo,    					  10,  80);
+		g.drawString("CurState: "   + curpatternstate,  					  10, 100);
+		g.drawString("Selected: "   + selected_pattern,       				  10, 120);
+		g.drawString("cam_pos:  "   + cam_pos.getX() + ", " + cam_pos.getY(), 10, 140);
 		
 		// TESTAREA Inc. --------------------------
 		

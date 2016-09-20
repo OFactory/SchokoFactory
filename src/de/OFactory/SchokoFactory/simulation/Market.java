@@ -177,15 +177,31 @@ public class Market {
 			c += p.getMoegAbs();
 
 		System.out.println(a+", "+b+", "+c);
+		
+		if(c != 0){
+			double f = a / b / c;
+			return f;
+		} else {
+			double f = 1;
+			return f;
+		}
+		
+		/*
 		try {
 			double f = a / b / c;
 			return f;
 		}
-
-		finally{		// ich will eigentlich except(Python) benutzen aber das gibt es nicht :|
+		finally
+		{
 			double f = 1;
 			return f;
 		}
+		*/
+		
+		
+		
+		// ich will eigentlich except(Python) benutzen aber das gibt es nicht :|
+		// -> einfach if abfragen
 
 	}
 	
