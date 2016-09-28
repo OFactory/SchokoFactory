@@ -41,7 +41,7 @@ public class Main extends StateBasedGame{
 		
 		this.addState(new MainState());
 		
-		this.addState(new SelectMapState());
+		//this.addState(new SelectMapState());
 		
 		this.addState(new MainMenuState());
 		

@@ -39,8 +39,9 @@ public class Market {
 		System.out.println("<Markt> [ " + getDateString() + " ]" );
 		System.out.println("<Markt> Tagesbilanz");	// zum leichteren Debuggen der Markt- und Produktionssimlation
 		for (int i = 0; i < players.size(); i++) {
-			System.out.println(" - P"+i+"  Produktmenge:" + (players.get(i).getProduktmenge() - players.get(i).getAbsatz()));
-			System.out.println(" - P"+i+"  Absatz:" + players.get(i).getAbsatz());
+			System.out.println(" | P"+i+"  Produktmenge:" + (players.get(i).getProduktmenge() - players.get(i).getAbsatz()));
+			System.out.println(" | P"+i+"  Absatz:" + players.get(i).getAbsatz());
+			System.out.println(" _ P"+i+"  Anteil:" + players.get(i).getMarktanteil());
 		}
 	}
 	

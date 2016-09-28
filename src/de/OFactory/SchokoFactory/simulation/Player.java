@@ -71,8 +71,11 @@ public class Player {
     	umsatz = absatz * preis;
     	money += umsatz;
         produktmenge -= absatz;
-        if (market.getSummeAbs() != 0) 
-        	marktanteil = absatz/market.getSummeAbs();
+        if (market.getSummeAbs() != 0) {
+        	marktanteil = (float)Math.round((float)absatz/market.getSummeAbs() *100d) /100d;  // runde auf 2 Nachkommastellen
+        } else {
+        	marktanteil = 0;
+        }
 
         if (money < 0 && liquide) {
             zinsen = -money / Math.pow(umsatz,2) * market.getSummeUms() * 0.0167 / 5;
@@ -101,20 +104,22 @@ public class Player {
  
     }
     
-	double getMoney() {
+    
+    
+    // Setter und Getter
+    
+	public double getMoney() {
 		return this.money;
 	}
-	void setMoney(int money) {
+	public void setMoney(int money) {
 		this.money = money;
 	}
-	String getName() {
+	public String getName() {
 		return this.name;
 	}
-	void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
 	public boolean isLiquide() {
 		return liquide;
 	}

@@ -29,6 +29,7 @@ import de.OFactory.SchokoFactory.inventory.info.tabs.MarketInfoTab;
 import de.OFactory.SchokoFactory.simulation.Factory;
 import de.OFactory.SchokoFactory.simulation.Market;
 import de.OFactory.SchokoFactory.simulation.Player;
+import de.OFactory.SchokoFactory.simulation.SimpleAI;
 
 /** 
  * Der Hauptstate des Spieles (=MainState)
@@ -128,8 +129,8 @@ public class MainState extends BasicGameState{
 		MainState.p = new Player(m, "P", 100000);
 		MainState.m.setPlayer(Arrays.asList(
 				p,
-				new Player(m,"P2",100000),
-				new Player(m,"P3",100000)
+				new SimpleAI(m,"P2",100000),
+				new SimpleAI(m,"P3",100000)
 				));
 		
 		pile = new Stockpile(0.05); // Stockpile generieren
@@ -155,7 +156,7 @@ public class MainState extends BasicGameState{
 				new BuildTab(ip, patternimg[10]),
 				new MarketInfoTab(ip, patternimg[1]),
 				new EnviromentTab(ip, patternimg[2])));
-		ip.switchTab(1);
+		ip.switchTab(2);
 		
 		msl = new MainStateListener();
 		gc.getInput().addMouseListener(MainState.msl); //MouseListener
@@ -234,8 +235,24 @@ public class MainState extends BasicGameState{
 		
 		if(delta_t >= GameSettings.DAY_MILIS){ //Ein Tag(Siehe GameSettings.DAY_MILIS) geht verüber
 			last = 0;
-			m.day(); //TODO / by zero (Market.java:176)
-			f.run();
+			
+			// Endphase des Tages eingeleitet
+			
+			for (Player p : m.getPlayers()) {
+				if (p instanceof SimpleAI) {
+					((SimpleAI) p).think(); // Aktionen der AIs am Anfang des Tages
+				}
+			}
+			for (Player p : m.getPlayers()) {
+				if (p instanceof SimpleAI) {
+					((SimpleAI) p).runFactory(); // Produktion der AIs
+				}
+			}
+			f.run(); // Produktion des Spieler
+			
+			m.day(); // Berechnung vor Ende des Tages
+			
+			// Ende des Tages
 			
 		}
 		

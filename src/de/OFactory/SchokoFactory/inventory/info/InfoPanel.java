@@ -1,3 +1,4 @@
+
 package de.OFactory.SchokoFactory.inventory.info;
 
 import java.util.List;

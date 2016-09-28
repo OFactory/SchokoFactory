@@ -25,7 +25,7 @@ public class Factory {
 		// aktuell vereinfachte Simulation:
 		// 		Gieﬂer produzieren Tafeln aus Geld
 		
-		// durch alle Patterns iterieren und work() aufrufen
+		// durch alle arbeitenden Patterns iterieren und work() aufrufen
 		for(Pattern p : MainState.field){
 			if(p instanceof Workable){ // Wenn Pattern etwas arbeiten kann
 				((Workable) p).work();
