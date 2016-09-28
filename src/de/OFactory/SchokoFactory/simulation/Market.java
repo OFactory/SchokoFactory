@@ -41,7 +41,7 @@ public class Market {
 		for (int i = 0; i < players.size(); i++) {
 			System.out.println(" | P"+i+"  Produktmenge:" + (players.get(i).getProduktmenge() - players.get(i).getAbsatz()));
 			System.out.println(" | P"+i+"  Absatz:" + players.get(i).getAbsatz());
-			System.out.println(" _ P"+i+"  Anteil:" + players.get(i).getMarktanteil());
+			//System.out.println(" _ P"+i+"  Anteil:" + players.get(i).getMarktanteil());
 		}
 	}
 	
@@ -96,7 +96,7 @@ public class Market {
 			trans = rest_ges;
 		
 		if (trans != 0) {			// kommt es zu Verschiebungen?
-			
+			System.out.println("shift it ___________-");
 			double f = getF();
 			trans *= f;
 			
@@ -111,6 +111,7 @@ public class Market {
 				
 				p.setRest( p.getRest()-p.getZuschuss() );
 				p.setAbsatz( p.getAbsatz()+p.getZuschuss() );
+				System.out.println("____-_"+p.getName()+": "+p.getAbsatz()+"______");
 			}
 		}
 	}
@@ -177,7 +178,7 @@ public class Market {
 		for (Player p: p_ohne_diff)
 			c += p.getMoegAbs();
 
-		System.out.println(a+", "+b+", "+c);
+		//System.out.println(a+", "+b+", "+c);
 		
 		if(c != 0){
 			double f = a / b / c;

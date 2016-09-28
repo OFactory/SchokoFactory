@@ -25,7 +25,7 @@ public class Gieﬂer extends Pattern implements Workable{
 	
 	// Produziert 100 Tafeln aus dem nichts bei jedem Aufruf. Idealer Weise t‰glich.
 	public void work() {
-		MainState.p.setProduktmenge(MainState.p.getProduktmenge() + produktion );
+		MainState.p.addProduktmenge(produktion);
 	}
 
 	@Override

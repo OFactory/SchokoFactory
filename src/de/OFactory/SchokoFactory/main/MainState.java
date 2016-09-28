@@ -245,7 +245,7 @@ public class MainState extends BasicGameState{
 			}
 			for (Player p : m.getPlayers()) {
 				if (p instanceof SimpleAI) {
-					((SimpleAI) p).runFactory(); // Produktion der AIs
+					((SimpleAI) p).runFactories(); // Produktion der AIs
 				}
 			}
 			f.run(); // Produktion des Spieler

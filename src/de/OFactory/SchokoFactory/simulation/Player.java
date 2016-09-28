@@ -15,7 +15,6 @@ public class Player {
 	private double marktanteil;
 	private int produktmenge = 15000;
 	
-	private int fabriken;
 	
 	private double werbefaktor = 1;
 	private double qualitaet = 1;
@@ -54,9 +53,11 @@ public class Player {
     		moegMarktanteil = moegAbs/market.getSummeAbs();
 
     	moegAbs = (int)(moegMarktanteil * market.getSummeAbs());
-    	
+    	System.out.println(moegAbs+","+produktmenge);
     	if (moegAbs > produktmenge) {
     		absatz = produktmenge;
+    		System.out.println("___zu wenige Produkte | Absatz = "+absatz);
+    		System.out.println("____________________  | Produk = "+produktmenge);
     		setRest(0);
     		setDiff_bedarf(moegAbs - produktmenge);	
     	} else {
@@ -70,7 +71,10 @@ public class Player {
     	
     	umsatz = absatz * preis;
     	money += umsatz;
-        produktmenge -= absatz;
+    	//System.out.print(produktmenge+", ");
+    	//if (produktmenge != absatz)
+    	produktmenge -= absatz/2;
+        //System.out.println(produktmenge+", "+absatz);
         if (market.getSummeAbs() != 0) {
         	marktanteil = (float)Math.round((float)absatz/market.getSummeAbs() *100d) /100d;  // runde auf 2 Nachkommastellen
         } else {
@@ -106,13 +110,18 @@ public class Player {
     
     
     
-    // Setter und Getter
+    // Setter und Getter ( und Adder)
     
 	public double getMoney() {
 		return this.money;
 	}
-	public void setMoney(int money) {
+	public void setMoney(double money) {
+
 		this.money = money;
+	}
+	public void addMoney(double delta) {
+		
+		this.money += delta;
 	}
 	public String getName() {
 		return this.name;
@@ -166,13 +175,12 @@ public class Player {
 		return produktmenge;
 	}
 	public void setProduktmenge(int produktmenge) {
+
 		this.produktmenge = produktmenge;
 	}
-	public int getFabriken() {
-		return fabriken;
-	}
-	public void setFabriken(int fabriken) {
-		this.fabriken = fabriken;
+	public void addProduktmenge(int delta) {
+		
+		this.produktmenge += delta;
 	}
 	public double getWerbefaktor() {
 		return werbefaktor;
@@ -212,9 +220,6 @@ public class Player {
 	}
 	public void setAltwerbefaktor(double altwerbefaktor) {
 		this.altwerbefaktor = altwerbefaktor;
-	}
-	public void setMoney(double money) {
-		this.money = money;
 	}
 	public int getRest() {
 		return rest;
