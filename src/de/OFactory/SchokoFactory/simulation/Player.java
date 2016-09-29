@@ -73,7 +73,7 @@ public class Player {
     	money += umsatz;
     	//System.out.print(produktmenge+", ");
     	//if (produktmenge != absatz)
-    	produktmenge -= absatz/2;
+    	produktmenge -= absatz;
         //System.out.println(produktmenge+", "+absatz);
         if (market.getSummeAbs() != 0) {
         	marktanteil = (float)Math.round((float)absatz/market.getSummeAbs() *100d) /100d;  // runde auf 2 Nachkommastellen
