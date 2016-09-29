@@ -38,10 +38,18 @@ public class Market {
 		this.time++;
 		System.out.println("<Markt> [ " + getDateString() + " ]" );
 		System.out.println("<Markt> Tagesbilanz");	// zum leichteren Debuggen der Markt- und Produktionssimlation
+		//System.out.println(" | Bedarf: " + this.bedarf);
+		/**System.out.println(" | SummMoegAbsatz: " + this.getMoegAbs());
 		for (int i = 0; i < players.size(); i++) {
-			System.out.println(" | P"+i+"  Produktmenge:" + (players.get(i).getProduktmenge()));
-			System.out.println(" | P"+i+"  Absatz:" + players.get(i).getAbsatz());
-			//System.out.println(" _ P"+i+"  Anteil:" + players.get(i).getMarktanteil());
+			System.out.println(" | P"+i+"  Money: " + players.get(i).getMoney());
+			System.out.println(" | P"+i+"  Umsatz: " + players.get(i).getUmsatz());
+			System.out.println(" | P"+i+"  Ausgaben: " + players.get(i).getAusgaben());
+			//System.out.println(" _ P"+i+"  Anteil: " + players.get(i).getMarktanteil());
+		}**/
+		
+		// Ausgaben zurücksetzen für den nächsten Tag
+		for (Player p: players) {
+			p.setAusgaben(0);
 		}
 	}
 	
@@ -53,7 +61,7 @@ public class Market {
 		
 		summeMoegAbs = getMoegAbs();
 		summeAbs = (summeMoegAbs+bedarf)/2;
-		
+		System.out.println("("+ summeMoegAbs+"+"+bedarf+")/2 = " + summeAbs);
 		calculateShift();
 		
 		summeAbs = 0;
@@ -61,7 +69,9 @@ public class Market {
 		for (Player p:players) {
 			summeAbs += p.getAbsatz();
 			setSummeUms(getSummeUms() + p.getAbsatz() * p.getPreis());
+			System.out.println("> "+p.getAbsatz());
 		}
+		System.out.println("= "+summeAbs);
 
 		if(summeAbsAlt != 0)		// Division by zero auffangen
 			zuwachs = (double)summeAbs/(double)summeAbsAlt;
@@ -133,7 +143,7 @@ public class Market {
 	}
 	
 	/** 
-	 * Summer der Möglichen Absätze aller Spieler
+	 * Summe der Möglichen Absätze aller Spieler
 	 * 
 	 * @return int Summer der Möglichen Absätze
 	 */
@@ -141,7 +151,7 @@ public class Market {
 		int summe = 0;
 		for (Player p: players) {
 			p.calculateMoegAbs();
-			p.getMoegAbs();
+			//summe += p.getMoegAbs();
 		}
 
 		

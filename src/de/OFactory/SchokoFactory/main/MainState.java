@@ -126,11 +126,11 @@ public class MainState extends BasicGameState{
 		// - Market
 		MainState.m = new Market(); 
 		MainState.f = new Factory();
-		MainState.p = new Player(m, "P", 100000);
+		MainState.p = new Player(m, "P", 9000);
 		MainState.m.setPlayer(Arrays.asList(
 				p,
-				new SimpleAI(m,"P2",100000),
-				new SimpleAI(m,"P3",100000)
+				new SimpleAI(m,"P2",1000),
+				new SimpleAI(m,"P3",1000)
 				));
 		
 		pile = new Stockpile(0.05); // Stockpile generieren

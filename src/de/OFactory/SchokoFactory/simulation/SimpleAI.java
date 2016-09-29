@@ -2,9 +2,10 @@ package de.OFactory.SchokoFactory.simulation;
 
 public class SimpleAI extends Player {
 	
-	private int fabriken = 3;
+	private int fabriken = 4;
 	private int produktion = 100;
 	private int einmaligeFabrikkosten = 2000;
+	private int laufendeFabrikkosten = 30;
 	
 	public SimpleAI(Market market, String name, double money) {
 		super(market, name, money);
@@ -14,12 +15,15 @@ public class SimpleAI extends Player {
 		//System.out.println(name+" hmmmm");
 		// mehr Fabriken benötigt?
 		if (this.getMoegAbs() > this.getProduktmenge()) {
-			buildFactory();
+			if ( this.getMoney() >= einmaligeFabrikkosten ) {
+				buildFactory();
+			}	else System.out.println("Fabrik zu teuer");
 		}
 	}
 	
 	private void buildFactory() {
 		this.addMoney(-einmaligeFabrikkosten);
+		this.addAusgaben(einmaligeFabrikkosten);
 		fabriken += 1;
 		System.out.println("build a factory | #"+fabriken);
 	}
@@ -31,6 +35,8 @@ public class SimpleAI extends Player {
 	
 	public void produce() {
 		this.addProduktmenge(fabriken * produktion);
+		this.addMoney(fabriken * -laufendeFabrikkosten);
+		this.addAusgaben(fabriken * laufendeFabrikkosten);
 	}
 
 	
@@ -47,5 +53,13 @@ public class SimpleAI extends Player {
 	}
 	public void setProduktion(int produktion) {
 		this.produktion = produktion;
+	}
+
+	public int getLaufendeFabrikkosten() {
+		return laufendeFabrikkosten;
+	}
+
+	public void setLaufendeFabrikkosten(int laufendeFabrikkosten) {
+		this.laufendeFabrikkosten = laufendeFabrikkosten;
 	}
 }

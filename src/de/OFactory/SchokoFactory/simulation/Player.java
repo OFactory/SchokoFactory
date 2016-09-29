@@ -12,8 +12,8 @@ public class Player {
 	private double preis = 1;
 	private double umsatz;
 	
-	private double marktanteil;
-	private int produktmenge = 15000;
+	private double marktanteil = 1/3;
+	private int produktmenge = 30000;
 	
 	
 	private double werbefaktor = 1;
@@ -30,6 +30,8 @@ public class Player {
 	private int rest;
 	private int diff_bedarf;
 	
+	private double ausgaben;
+	
 	public Player(Market market, String name, double money) {
 		
 		this.market = market;
@@ -40,11 +42,11 @@ public class Player {
 	}
 	/**First part of the calculation. Gets inputs and works out possible sales(ger.: Absatz). Returns possible sales to Game.**/
     public void calculateMoegAbs() {
-        
+    	
         //get();
         bekanntheit *= Math.pow(werbefaktor,0.9) * qualitaet / altqualitaet;
-        moegAbs = (int)(this.bekanntheit * this.market.getBedarf() * this.market.getBoni() / altwerbefaktor * werbefaktor / Math.pow(preis,1.2));
-
+        moegAbs = (int)(this.bekanntheit * (double)this.market.getBedarf()*0.3 * this.market.getBoni() / altwerbefaktor * werbefaktor / Math.pow(preis,1.2));
+        System.out.println(moegAbs/0.3);
     }
     
     public void calculateDiff() {
@@ -107,7 +109,6 @@ public class Player {
         preis = 0;//Änderung
  
     }
-    
     
     
     // Setter und Getter ( und Adder)
@@ -235,6 +236,15 @@ public class Player {
 	}
 	public int getMoegAbs() {
 		return moegAbs;
+	}
+	public double getAusgaben() {
+		return ausgaben;
+	}
+	public void setAusgaben(double ausgaben) {
+		this.ausgaben = ausgaben;
+	}
+	public void addAusgaben(double delta) {
+		this.ausgaben += delta;
 	}
 
 }
