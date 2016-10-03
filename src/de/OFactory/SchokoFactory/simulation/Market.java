@@ -12,14 +12,15 @@ public class Market {
 	private List<Player> players;
 	
 	private int bedarf = 2000;
-	private double eco = 1;
+	private double eco = Math.pow(3.7, (double)1/360);
+	
 	private double boni = 1;
-	private int summeMoegAbs = 1000;
+	private int summeMoegAbs = 0;
 	private int summeAbs;
 	private double summeUms;
 
 	private double zuwachs;
-	private int summeAbsAlt = 1800;
+	private int summeAbsAlt = 2000;
 	
 	private ArrayList<Player> p_mit_diff = new ArrayList<Player>();
 	private ArrayList<Player> p_ohne_diff = new ArrayList<Player>();
@@ -27,7 +28,7 @@ public class Market {
 	
 	
 	public Market() {
-		
+		System.out.println("eco "+eco);
 	}
 	
 	/** processed every day **/
@@ -69,13 +70,13 @@ public class Market {
 		for (Player p:players) {
 			summeAbs += p.getAbsatz();
 			setSummeUms(getSummeUms() + p.getAbsatz() * p.getPreis());
-			System.out.println("> "+p.getAbsatz());
+			System.out.println("+ "+p.getAbsatz());
 		}
 		System.out.println("= "+summeAbs);
 
 		if(summeAbsAlt != 0)		// Division by zero auffangen
 			zuwachs = (double)summeAbs/(double)summeAbsAlt;
-			
+		
 
 			
 
@@ -151,7 +152,7 @@ public class Market {
 		int summe = 0;
 		for (Player p: players) {
 			p.calculateMoegAbs();
-			//summe += p.getMoegAbs();
+			summe += p.getMoegAbs();
 		}
 
 		
@@ -287,7 +288,8 @@ public class Market {
 			return "±0%";
 		else if (z > 1)
 			s += "+";		// - Zeichen wird automatisch gesetzt
-		s += (z-1)*100 + "%";
+
+		s += String.format("%.2f", (z-1)*100) + "%";
 		
 		return s;
 	}

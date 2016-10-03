@@ -45,21 +45,30 @@ public class Player {
     	
         //get();
         bekanntheit *= Math.pow(werbefaktor,0.9) * qualitaet / altqualitaet;
-        moegAbs = (int)(this.bekanntheit * (double)this.market.getBedarf()*0.3 * this.market.getBoni() / altwerbefaktor * werbefaktor / Math.pow(preis,1.2));
-        System.out.println(moegAbs/0.3);
+        moegAbs = (int)(this.bekanntheit * (double)this.market.getBedarf()/3 * this.market.getBoni() / altwerbefaktor * werbefaktor / Math.pow(preis,1.2));
+        
     }
     
     public void calculateDiff() {
-    	double moegMarktanteil = 0;
-    	if (market.getSummeAbs() != 0) 
-    		moegMarktanteil = moegAbs/market.getSummeAbs();
+    	
+    	if (market.getSummeAbs() != 0) {
+    		System.out.println("0 moegAbs: "+moegAbs);
+    		
+    		double moegMarktanteil = (double)moegAbs/market.getSummeAbs();
+    		
+    		System.out.println("summeAbs: "+market.getSummeAbs());
+    		System.out.println("moegMarktanteil: "+moegMarktanteil);
+	    	System.out.println("1 moegAbs: "+moegAbs);
+	    	moegAbs = (int)(moegMarktanteil * market.getSummeAbs());
+	    	System.out.println("2 moegAbs: "+moegAbs);
+    	} else {
 
-    	moegAbs = (int)(moegMarktanteil * market.getSummeAbs());
+    		moegAbs = 0;
+    	}
+    		
     	System.out.println(moegAbs+","+produktmenge);
     	if (moegAbs > produktmenge) {
     		absatz = produktmenge;
-    		System.out.println("___zu wenige Produkte | Absatz = "+absatz);
-    		System.out.println("____________________  | Produk = "+produktmenge);
     		setRest(0);
     		setDiff_bedarf(moegAbs - produktmenge);	
     	} else {
