@@ -12,12 +12,12 @@ public class Player {
 	private double preis = 1;
 	private double umsatz;
 	
-	private double marktanteil = 1/3;
+	private double marktanteil = (double)1/3;
 	private int produktmenge = 30000;
 	
 	
 	private double werbefaktor = 1;
-	private double qualitaet = 1;
+	private double qualitaet = 1.01;
 	private double bekanntheit = 1;
 
 	
@@ -38,35 +38,31 @@ public class Player {
 		this.name = name;
 		this.money = money;
 		
-		
 	}
 	/**First part of the calculation. Gets inputs and works out possible sales(ger.: Absatz). Returns possible sales to Game.**/
     public void calculateMoegAbs() {
     	
         //get();
         bekanntheit *= Math.pow(werbefaktor,0.9) * qualitaet / altqualitaet;
-        moegAbs = (int)(this.bekanntheit * (double)this.market.getBedarf()/3 * this.market.getBoni() / altwerbefaktor * werbefaktor / Math.pow(preis,1.2));
+        moegAbs = (int)(this.bekanntheit * (double)this.market.getBedarf()* (marktanteil+0.001) * this.market.getBoni() / altwerbefaktor * werbefaktor / Math.pow(preis,1.2));
         
+        altqualitaet = qualitaet;
+        altwerbefaktor = werbefaktor;
     }
     
     public void calculateDiff() {
     	
     	if (market.getSummeAbs() != 0) {
-    		System.out.println("0 moegAbs: "+moegAbs);
     		
     		double moegMarktanteil = (double)moegAbs/market.getSummeAbs();
-    		
-    		System.out.println("summeAbs: "+market.getSummeAbs());
-    		System.out.println("moegMarktanteil: "+moegMarktanteil);
-	    	System.out.println("1 moegAbs: "+moegAbs);
+
 	    	moegAbs = (int)(moegMarktanteil * market.getSummeAbs());
-	    	System.out.println("2 moegAbs: "+moegAbs);
+
     	} else {
 
     		moegAbs = 0;
     	}
     		
-    	System.out.println(moegAbs+","+produktmenge);
     	if (moegAbs > produktmenge) {
     		absatz = produktmenge;
     		setRest(0);

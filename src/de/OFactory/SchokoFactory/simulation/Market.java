@@ -11,8 +11,8 @@ public class Market {
 	private long time = 0; // 1. Januar 2016
 	private List<Player> players;
 	
-	private int bedarf = 2000;
-	private double eco = Math.pow(3.7, (double)1/360);
+	private double bedarf = 2000;
+	private double eco = Math.pow(1.01, (double)1/360);
 	
 	private double boni = 1;
 	private int summeMoegAbs = 0;
@@ -40,13 +40,11 @@ public class Market {
 		System.out.println("<Markt> [ " + getDateString() + " ]" );
 		System.out.println("<Markt> Tagesbilanz");	// zum leichteren Debuggen der Markt- und Produktionssimlation
 		//System.out.println(" | Bedarf: " + this.bedarf);
-		/**System.out.println(" | SummMoegAbsatz: " + this.getMoegAbs());
+		System.out.println(" | SummMoegAbsatz: " + this.getMoegAbs());
 		for (int i = 0; i < players.size(); i++) {
-			System.out.println(" | P"+i+"  Money: " + players.get(i).getMoney());
-			System.out.println(" | P"+i+"  Umsatz: " + players.get(i).getUmsatz());
-			System.out.println(" | P"+i+"  Ausgaben: " + players.get(i).getAusgaben());
+			System.out.println(" | P"+i+"  Absatz: " + players.get(i).getAbsatz());
 			//System.out.println(" _ P"+i+"  Anteil: " + players.get(i).getMarktanteil());
-		}**/
+		}
 		
 		// Ausgaben zurücksetzen für den nächsten Tag
 		for (Player p: players) {
@@ -57,12 +55,11 @@ public class Market {
 	/** Calculate economic development of market and players **/
 	private void calculation() {
 
-		bedarf = (int)((59*bedarf + summeAbsAlt) / 60 * Math.pow(this.eco , 2) * boni * (Math.pow(getWerbefaktoren(),0.9) + 330)/331);
+		bedarf = (59*bedarf + summeAbsAlt) / 60 * Math.pow(this.eco , 2) * boni * (Math.pow(getWerbefaktoren(),0.9) + 330)/331;
 		// Bedarf gleicht sich an den alten Absatz über 2 Monate (60 Tage) an, Gewöhnungseffekt
 		
 		summeMoegAbs = getMoegAbs();
-		summeAbs = (summeMoegAbs+bedarf)/2;
-		System.out.println("("+ summeMoegAbs+"+"+bedarf+")/2 = " + summeAbs);
+		summeAbs = (int)(summeMoegAbs+bedarf)/2;
 		calculateShift();
 		
 		summeAbs = 0;
@@ -70,9 +67,8 @@ public class Market {
 		for (Player p:players) {
 			summeAbs += p.getAbsatz();
 			setSummeUms(getSummeUms() + p.getAbsatz() * p.getPreis());
-			System.out.println("+ "+p.getAbsatz());
 		}
-		System.out.println("= "+summeAbs);
+
 
 		if(summeAbsAlt != 0)		// Division by zero auffangen
 			zuwachs = (double)summeAbs/(double)summeAbsAlt;
@@ -317,11 +313,11 @@ public class Market {
 		this.time = time;
 	}
 
-	public int getBedarf() {
+	public double getBedarf() {
 		return bedarf;
 	}
 
-	public void setBedarf(int bedarf) {
+	public void setBedarf(double bedarf) {
 		this.bedarf = bedarf;
 	}
 

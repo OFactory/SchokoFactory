@@ -86,6 +86,7 @@ public class MainState extends BasicGameState{
 	
 	// Zeug für Markt
 	public static Player  p; //Spieler
+	public static SimpleAI  ai; //Spieler
 	public static Market  m;
 	public static Factory f; //Engine für work();
 	
@@ -127,9 +128,10 @@ public class MainState extends BasicGameState{
 		MainState.m = new Market(); 
 		MainState.f = new Factory();
 		MainState.p = new Player(m, "P", 9000);
+		MainState.ai = new SimpleAI(m,"P2",1000);
 		MainState.m.setPlayer(Arrays.asList(
 				p,
-				new SimpleAI(m,"P2",1000),
+				ai,
 				new SimpleAI(m,"P3",1000)
 				));
 		
@@ -240,7 +242,7 @@ public class MainState extends BasicGameState{
 			
 			for (Player p : m.getPlayers()) {
 				if (p instanceof SimpleAI) {
-					((SimpleAI) p).think(); // Aktionen der AIs am Anfang des Tages
+					((SimpleAI) p).think(); // Aktionen der AIs
 				}
 			}
 			for (Player p : m.getPlayers()) {

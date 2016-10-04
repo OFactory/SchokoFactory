@@ -41,6 +41,12 @@ public class MarketInfoTab extends Tab{
 		GameFonts.SUB.drawString( offx + 10, offy + 290, "Produktmenge: " + MainState.p.getProduktmenge(), INFO_FONT_COLOR);
 		GameFonts.SUB.drawString( offx + 10, offy + 310, "Qualität: "     + MainState.p.getQualitaet(),    INFO_FONT_COLOR);
 		
+		GameFonts.MED.drawString( offx + 10, offy + 350, "Beispiel AI",                                     Color.black);
+		GameFonts.SUB.drawString( offx + 10, offy + 380, "Absatz: "       + MainState.ai.getAbsatz(),       INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 400, "Bekanntheit: "  + MainState.ai.getBekanntheit(),  INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 420, "Marktanteil: "  + MainState.ai.getMarktanteil(),  INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 440, "Produktmenge: " + MainState.ai.getProduktmenge(), INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 460, "Qualität: "     + MainState.ai.getQualitaet(),    INFO_FONT_COLOR);
 	}
 
 	@Override
