@@ -13,11 +13,11 @@ public class Player {
 	private double umsatz;
 	
 	private double marktanteil = (double)1/3;
-	private int produktmenge = 30000;
+	private int produktmenge = 0;
 	
 	
 	private double werbefaktor = 1;
-	private double qualitaet = 1.01;
+	private double qualitaet = 1;
 	private double bekanntheit = 1;
 
 	
@@ -45,7 +45,7 @@ public class Player {
         //get();
         bekanntheit *= Math.pow(werbefaktor,0.9) * qualitaet / altqualitaet;
         moegAbs = (int)(this.bekanntheit * (double)this.market.getBedarf()* (marktanteil+0.001) * this.market.getBoni() / altwerbefaktor * werbefaktor / Math.pow(preis,1.2));
-        
+    
         altqualitaet = qualitaet;
         altwerbefaktor = werbefaktor;
     }

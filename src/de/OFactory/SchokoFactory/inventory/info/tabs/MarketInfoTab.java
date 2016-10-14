@@ -47,6 +47,7 @@ public class MarketInfoTab extends Tab{
 		GameFonts.SUB.drawString( offx + 10, offy + 420, "Marktanteil: "  + MainState.ai.getMarktanteil(),  INFO_FONT_COLOR);
 		GameFonts.SUB.drawString( offx + 10, offy + 440, "Produktmenge: " + MainState.ai.getProduktmenge(), INFO_FONT_COLOR);
 		GameFonts.SUB.drawString( offx + 10, offy + 460, "Qualität: "     + MainState.ai.getQualitaet(),    INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 480, "Geld: "        + MainState.ai.getMoney(),        INFO_FONT_COLOR);
 	}
 
 	@Override

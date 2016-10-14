@@ -9,9 +9,9 @@ import de.OFactory.SchokoFactory.main.MainState;
 
 public class Gieﬂer extends Pattern implements Workable{
 	
-	private int produktion = 100;
-	private int einmaligeFabrikkosten = 2000;
-	private int laufendeFabrikkosten = 30;
+	private int produktion = 200;
+	private int einmaligeFabrikkosten = 4000;
+	private int laufendeFabrikkosten = 50;
 	
 	public Gieﬂer(Map map, int x, int y, int id, int xcoor, int ycoor) {
 		super(map, x, y, PatternState.GIEﬂER, id, xcoor, ycoor);

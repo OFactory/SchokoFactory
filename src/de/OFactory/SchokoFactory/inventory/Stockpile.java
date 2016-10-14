@@ -40,7 +40,7 @@ public class Stockpile implements Drawable, Updateable{
 		
 		this.piles.clear();
 		this.piles.add(Main.company_name);
-		this.piles.add(Main.money + " EUR");
+		this.piles.add(MainState.p.getMoney() + " EUR");
 		this.piles.add(MainState.molten_chokolate+" Liter");
 		this.piles.add(MainState.p.getProduktmenge() + " produktmenge");
 		this.piles.add(MainState.m.getDateString());
