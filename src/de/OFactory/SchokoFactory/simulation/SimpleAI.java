@@ -30,7 +30,7 @@ public class SimpleAI extends Player {
 	}
 	private void investQuality(double amount) {
 		this.addMoney(-amount);
-		this.setQualitaet(this.getQualitaet() + amount / 1800);
+		this.setQualitaet(this.getQualitaet() + amount / this.getQualitaet() / 2200);
 	}
 	
 	private void buildFactory() {
