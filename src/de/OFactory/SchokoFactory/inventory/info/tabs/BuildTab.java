@@ -17,14 +17,14 @@ public class BuildTab extends Tab{
 	ArrayList<BuildingButton> buildings = new ArrayList<BuildingButton>();
 	
 	public BuildTab(InfoPanel ip, Image img) {
-		super(ip, img, "Geb√§ude");
+		super(ip, img, "Geb‰ude");
 		
 		addBuildings();
 	}
 
 	@Override
 	public void drawContent(Graphics g) {
-		GameFonts.MAIN.drawString(getInfoPanel().getX()+20, getInfoPanel().getY()+50, "Geb√§ude", Color.black);
+		GameFonts.MAIN.drawString(getInfoPanel().getX()+20, getInfoPanel().getY()+50, "Geb‰ude", Color.black);
 		//GameFonts.SUB.drawString(getInfoPanel().getX()+20, getInfoPanel().getY()+60, "Kauf alles MAMA!", Color.gray);
 		//GameFonts.SUB.drawString(getInfoPanel().getX()+20, getInfoPanel().getY()+80, "" + this.getInfoPanel().getScroll(), Color.black);
 		
@@ -51,7 +51,7 @@ public class BuildTab extends Tab{
 	private void addBuildings(){
 		this.addBuilding(PatternState.CHEMIEFABRIK, 50);
 		this.addBuilding(PatternState.TANK, 5000);
-		this.addBuilding(PatternState.R√úHRER, 30);
+		this.addBuilding(PatternState.R‹HRER, 30);
 		this.addBuilding(PatternState.FARM, 50);
 		this.addBuilding(PatternState.MOLKEREI, 50);
 		this.addBuilding(PatternState.ZUCKERPLANTAGE, 50);

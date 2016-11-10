@@ -7,7 +7,7 @@ import de.OFactory.SchokoFactory.game.PatternState;
 
 public class Lagerhalle extends Pattern{
 	
-	public static final int LAGERKAPAZITÃ„T_NORMAL = 2000;
+	public static final int LAGERKAPAZITÄT_NORMAL = 2000;
 	
 	
 	public Lagerhalle(Map map, int x, int y, int id, int xcoor, int ycoor) {
@@ -32,7 +32,7 @@ public class Lagerhalle extends Pattern{
 
 	@Override
 	public void updatePatternInfo() {
-		// XXX Mï¿½gliche Attribute: Kapazitï¿½t
+		// XXX Mögliche Attribute: Kapazität
 		
 	}
 	

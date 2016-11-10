@@ -21,7 +21,7 @@ public class MarketInfoTab extends Tab{
 		// TODO Auto-generated constructor stub
 		int offx = getInfoPanel().getX();
 		int offy = getInfoPanel().getY();
-		anteilchart = new CakeChart(1, offx + 20, offy + 520, 100, "mï¿½chte-gern-CakeChart");
+		anteilchart = new CakeChart(1, offx + 20, offy + 520, 100, "möchte-gern-CakeChart");
 		
 	}
 
@@ -45,19 +45,16 @@ public class MarketInfoTab extends Tab{
 		GameFonts.SUB.drawString( offx + 10, offy + 250, "Bekanntheit: "  + MainState.p.getBekanntheit(),   INFO_FONT_COLOR);
 		GameFonts.SUB.drawString( offx + 10, offy + 270, "Marktanteil: "  + MainState.p.getMarktanteil(),   INFO_FONT_COLOR);
 		GameFonts.SUB.drawString( offx + 10, offy + 290, "Produktmenge: " + MainState.p.getProduktmenge(),  INFO_FONT_COLOR);
-		GameFonts.SUB.drawString( offx + 10, offy + 310, "Qualitï¿½t: "     + MainState.p.getQualitaet(),     INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 310, "Qualität: "     + MainState.p.getQualitaet(),     INFO_FONT_COLOR);
 		
 		GameFonts.MED.drawString( offx + 10, offy + 350, "Beispiel AI",                                     Color.black);
 		GameFonts.SUB.drawString( offx + 10, offy + 380, "Absatz: "       + MainState.ai.getAbsatz(),       INFO_FONT_COLOR);
 		GameFonts.SUB.drawString( offx + 10, offy + 400, "Bekanntheit: "  + MainState.ai.getBekanntheit(),  INFO_FONT_COLOR);
 		GameFonts.SUB.drawString( offx + 10, offy + 420, "Marktanteil: "  + MainState.ai.getMarktanteil(),  INFO_FONT_COLOR);
 		GameFonts.SUB.drawString( offx + 10, offy + 440, "Produktmenge: " + MainState.ai.getProduktmenge(), INFO_FONT_COLOR);
-		GameFonts.SUB.drawString( offx + 10, offy + 460, "Qualitï¿½t: "     + MainState.ai.getQualitaet(),    INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 460, "Qualität: "     + MainState.ai.getQualitaet(),    INFO_FONT_COLOR);
 		GameFonts.SUB.drawString( offx + 10, offy + 480, "Geld: "         + MainState.ai.getMoney(),        INFO_FONT_COLOR);
 		
-		int[] anteile = {(int) Math.round(MainState.p.getMarktanteil()*1000), (int) Math.round(MainState.ai.getMarktanteil()*1000)};
-		
-		anteilchart.setSlices(anteile);
 		anteilchart.draw(g);
 		
 	}

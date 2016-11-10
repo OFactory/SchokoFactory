@@ -18,14 +18,14 @@ public class PatternFrame {
 	public static final int TANK_100 = 5;
 	
 	
-	public static final int RÃœHRER_S = 6;
-	public static final int RÃœHRER_E = 9;
+	public static final int RÜHRER_S = 6;
+	public static final int RÜHRER_E = 9;
 	
 	public static final int CHEMIE_S = 10;
 	public static final int CHEMIE_E = 13;
 	
-	public static final int GIEÃŸER_S = 14;
-	public static final int GIEÃŸER_E = 16;
+	public static final int GIEßER_S = 14;
+	public static final int GIEßER_E = 16;
 	
 	public static final int LAGERHALLE_ENDE = 17;
 	public static final int LAGERHALLE_NORMAL = 18;

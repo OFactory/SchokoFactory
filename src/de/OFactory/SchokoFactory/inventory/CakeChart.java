@@ -20,15 +20,16 @@ public class CakeChart implements Drawable{
 	protected int radius;
 	
 	protected Shape shape;
-
-	protected String content;
 	
-	private int[] slices;
+	protected Color hovered_color;
+	protected Color normal_color;
+	protected Color clicked_color;
+	
+	
+	protected String content;
 	
 	protected boolean hovered = false;
 	protected boolean clicked = false;
-	
-	private final Color[] SLICE_COLORS = { Color.blue, Color.yellow, Color.green, Color.red, Color.magenta, Color.orange };
 	
 	
 	
@@ -43,13 +44,16 @@ public class CakeChart implements Drawable{
 		
 		this.content = content;
 		
-		
 
 		this.shape = new Circle(x+radius, y+radius, radius);
+
+		
+		this.clicked_color = new Color(100, 100, 100);
+		this.hovered_color = new Color(150, 150, 255);
+		this.normal_color  = new Color(150, 150, 150);
 		
 	}
 	
-	/*
 	public CakeChart(int ID, int x, int y, int width, int height, String content, Color normal, Color hovered, Color clicked, int cornerradius){
 		
 		this.ID = ID;
@@ -70,7 +74,7 @@ public class CakeChart implements Drawable{
 		this.normal_color  = normal;
 		this.hovered_color = hovered;
 		
-	} */
+	}
 	
 	//-------------------------------------------------------------------------
 	
@@ -103,34 +107,27 @@ public class CakeChart implements Drawable{
 
 
 	public void draw(Graphics g){
+		if(this.clicked) {
+			g.setColor(clicked_color);
+			
+			if(this.hovered){ // Durschnittsfarbe
+				g.setColor(new Color((clicked_color.getRed()+hovered_color.getRed())/2, (clicked_color.getGreen()+hovered_color.getGreen())/2, (clicked_color.getBlue()+hovered_color.getBlue())/2));
+			}	
+		} else if(this.hovered)
+			g.setColor(hovered_color);
+		else
+			g.setColor(normal_color);
 		
 		
-		double total = 0.0D;
-	    for (int i = 0; i < slices.length; i++) {
-	      total += slices[i];
-	    }
-
-	    double curValue = 0.0D;
-	    int startAngle = 0;
-	    for (int i = 0; i < slices.length; i++) {
-	    	startAngle = (int) (curValue * 360 / total);
-	    	int arcAngle = (int) (slices[i] * 360 / total);
-
-	    	g.setColor(SLICE_COLORS[i]);
-	    	g.fillArc(x, y, radius*2, radius*2, startAngle, arcAngle);
-	    	curValue += slices[i];
-	    }
-		
-		//g.fill(this.shape);
+		g.fill(this.shape);
 		
 		g.setColor(Color.black);
 		g.draw(this.shape);
 		
-		
-		/*
 		if(this.content != "") {
 			GameFonts.SUB.drawString( this.x + 2, this.y + this.radius, content, new Color(256 - g.getColor().getRed(), 256 - g.getColor().getGreen(), 256 - g.getColor().getBlue()));
-		} */
+		}
+		
 	}
 	
 	
@@ -169,20 +166,6 @@ public class CakeChart implements Drawable{
 	
 	public int getID() {
 		return this.ID;
-	}
-
-	/**
-	 * @return the slices
-	 */
-	public int[] getSlices() {
-		return slices;
-	}
-
-	/**
-	 * @param slices the slices to set
-	 */
-	public void setSlices(int[] slices) {
-		this.slices = slices;
 	}
 	
 	
