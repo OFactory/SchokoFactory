@@ -4,9 +4,9 @@ import java.util.HashMap;
 
 public enum PatternState {
 	TANK        	(0L, "Tank",		  PatternFrame.TANK_0),
-	RÜHRER  		(1L, "Rührer", 		  PatternFrame.RÜHRER_S),
+	RÃœHRER  		(1L, "RÃ¼hrer", 		  PatternFrame.RÃœHRER_S),
 	CHEMIEFABRIK	(2L, "Chemiefabrik",  PatternFrame.CHEMIE_S),
-	GIEßER			(3L, "Gießer", 		  PatternFrame.GIEßER_S),
+	GIEÃŸER			(3L, "GieÃŸer", 		  PatternFrame.GIEÃŸER_S),
 	LAGERHALLE		(4L, "Lagerhalle", 	  PatternFrame.LAGERHALLE_NORMAL),
 	MOLKEREI		(5L, "Molkerei",	  PatternFrame.MOLKEREI_MODERN),
 	FARM			(6L, "Farm", 		  PatternFrame.FARM),

@@ -5,14 +5,14 @@ import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternFrame;
 import de.OFactory.SchokoFactory.game.PatternState;
 
-public class Rührer extends Pattern{
+public class RÃ¼hrer extends Pattern{
 
 	private boolean active = false;
 	
 	
-	public Rührer(Map map, int x, int y, int id, int xcoor, int ycoor) {
-		super(map, x, y, PatternState.RÜHRER, id, xcoor, ycoor);
-		this.setFrameLoop(PatternFrame.RÜHRER_S, PatternFrame.RÜHRER_E);
+	public RÃ¼hrer(Map map, int x, int y, int id, int xcoor, int ycoor) {
+		super(map, x, y, PatternState.RÃœHRER, id, xcoor, ycoor);
+		this.setFrameLoop(PatternFrame.RÃœHRER_S, PatternFrame.RÃœHRER_E);
 		this.setDelay(4);
 	}
 
@@ -32,7 +32,7 @@ public class Rührer extends Pattern{
 
 	@Override
 	public void updatePatternInfo() {
-		// XXX Mögliche Attribute: Effizienz, Qualität(Verschmutzung des Rührers etc.)
+		// XXX Mï¿½gliche Attribute: Effizienz, Qualitï¿½t(Verschmutzung des Rï¿½hrers etc.)
 		
 	}
 

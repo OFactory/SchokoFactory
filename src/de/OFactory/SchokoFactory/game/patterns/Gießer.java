@@ -7,17 +7,17 @@ import de.OFactory.SchokoFactory.game.PatternState;
 import de.OFactory.SchokoFactory.game.Workable;
 import de.OFactory.SchokoFactory.main.MainState;
 
-public class Gießer extends Pattern implements Workable{
+public class GieÃŸer extends Pattern implements Workable{
 	
 	private int produktion = 200;
 	private int einmaligeFabrikkosten = 4000;
 	private int laufendeFabrikkosten = 50;
 	
-	public Gießer(Map map, int x, int y, int id, int xcoor, int ycoor) {
-		super(map, x, y, PatternState.GIEßER, id, xcoor, ycoor);
+	public GieÃŸer(Map map, int x, int y, int id, int xcoor, int ycoor) {
+		super(map, x, y, PatternState.GIEÃŸER, id, xcoor, ycoor);
 		
 		this.setDelay(6);
-		this.setFrameLoop(PatternFrame.GIEßER_S, PatternFrame.GIEßER_E);
+		this.setFrameLoop(PatternFrame.GIEÃŸER_S, PatternFrame.GIEÃŸER_E);
 		
 		// Kosten:
 		MainState.p.addMoney(-2000);
@@ -29,7 +29,7 @@ public class Gießer extends Pattern implements Workable{
 		
 	}
 	
-	// Produziert 100 Tafeln aus dem nichts bei jedem Aufruf. Idealer Weise täglich.
+	// Produziert 100 Tafeln aus dem nichts bei jedem Aufruf. Idealer Weise tï¿½glich.
 	public void work() {
 		MainState.p.addProduktmenge(produktion);
 		MainState.p.addMoney(-laufendeFabrikkosten);
@@ -38,7 +38,7 @@ public class Gießer extends Pattern implements Workable{
 
 	@Override
 	public void updatePatternInfo() {
-		// XXX Mögliche Attribute: Effizienz, Gegoßenes Produkt, Gerätealter, laufende Kosten
+		// XXX MÃ¶gliche Attribute: Effizienz, Gegoï¿½enes Produkt, Gerï¿½tealter, laufende Kosten
 		
 	}
 

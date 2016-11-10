@@ -14,11 +14,11 @@ import org.newdawn.slick.geom.Shape;
 
 import de.OFactory.SchokoFactory.game.patterns.Chemiefabrik;
 import de.OFactory.SchokoFactory.game.patterns.Farm;
-import de.OFactory.SchokoFactory.game.patterns.Gießer;
+import de.OFactory.SchokoFactory.game.patterns.GieÃŸer;
 import de.OFactory.SchokoFactory.game.patterns.Kakaoplantage;
 import de.OFactory.SchokoFactory.game.patterns.Lagerhalle;
 import de.OFactory.SchokoFactory.game.patterns.Molkerei;
-import de.OFactory.SchokoFactory.game.patterns.Rührer;
+import de.OFactory.SchokoFactory.game.patterns.RÃ¼hrer;
 import de.OFactory.SchokoFactory.game.patterns.Tank;
 import de.OFactory.SchokoFactory.game.patterns.Weizenfeld;
 import de.OFactory.SchokoFactory.game.patterns.Wiese;
@@ -64,7 +64,7 @@ public abstract class Pattern extends GameObject{
 	 * @param ps : PatternState, dessen Klasse ermittelt werden soll
 	 * @param id : id des Patterns in der Map(Map-spezifische Koordinate)
 	 * @return Pattern p der Klasse des PatternStates ps
-	 * @return null : Wenn es keine adäquate Klasse für den PatternState ps gibt
+	 * @return null : Wenn es keine adï¿½quate Klasse fï¿½r den PatternState ps gibt
 	 */
 	public static Pattern getInstance(Map map,int x, int y, PatternState ps, int id, int xcoor, int ycoor){
 		
@@ -76,11 +76,11 @@ public abstract class Pattern extends GameObject{
 				break;
 			case CHEMIEFABRIK: p = new Chemiefabrik(map, x, y, id, xcoor, ycoor);
 				break;
-			case RÜHRER: p = new Rührer(map, x, y, id, xcoor, ycoor);
+			case RÃœHRER: p = new RÃ¼hrer(map, x, y, id, xcoor, ycoor);
 				break;
 			case LAGERHALLE: p = new Lagerhalle(map, x, y, id, xcoor, ycoor);
 				break;
-			case GIEßER: p = new Gießer(map, x, y, id, xcoor, ycoor);
+			case GIEÃŸER: p = new GieÃŸer(map, x, y, id, xcoor, ycoor);
 				break;
 			case KAKAOPLANTAGE: p = new Kakaoplantage(map, x, y, id, xcoor, ycoor);
 				break;
@@ -178,14 +178,14 @@ public abstract class Pattern extends GameObject{
 		
 		//Spezifischer Update Kontext jeder Pattern-Art
 		updateContext();
-		//Spezifischer Update Kontext für die Info eines Pattern jeder Pattern-Art
+		//Spezifischer Update Kontext fï¿½r die Info eines Pattern jeder Pattern-Art
 		updatePatternInfo();
 		//System.out.println("Lots Of Love"); LOL starring
 	}
 
 	/**
     * 
-    * Diese Methode gibt die direkt angrenzenden Nachbarn eines Feldes zurück.
+    * Diese Methode gibt die direkt angrenzenden Nachbarn eines Feldes zurï¿½ck.
     * Die Felder werden nach Himmelsrichtungen
     * 
     *  no: Nordosten,
@@ -199,7 +199,7 @@ public abstract class Pattern extends GameObject{
     * 				nw	P so
     * 				   sw
     * 
-    * Gibt null zurück, wenn es einen der Pattern nicht gibt!
+    * Gibt null zurï¿½ck, wenn es einen der Pattern nicht gibt!
     * Bitte bei Verwendung null checken!
     * 
     * @return ArrayList<Pattern> direkt angrenzende Nachbarn
@@ -238,16 +238,16 @@ public abstract class Pattern extends GameObject{
 	
 	/**
     * 
-    * Diese Methode gibt die indirekt angrenzenden Nachbarn eines Feldes zurück.
-    * Die Felder sind demnach über die Punkte des Feldes verknüpft und teilen sich nicht eine Kante.
+    * Diese Methode gibt die indirekt angrenzenden Nachbarn eines Feldes zurï¿½ck.
+    * Die Felder sind demnach ï¿½ber die Punkte des Feldes verknï¿½pft und teilen sich nicht eine Kante.
     * Die Felder werden nach Himmelsrichtungen
     * 
     *  n: Norden,
     *  no: Nordosten,
     *  o: Osten,
-    *  so:Südosten,
-    *  s: Süden,
-    *  sw:Südwesten,
+    *  so:Sï¿½dosten,
+    *  s: Sï¿½den,
+    *  sw:Sï¿½dwesten,
     *  w: Westen,
     *  nw:Nordwesten
     *  
@@ -257,7 +257,7 @@ public abstract class Pattern extends GameObject{
     * 		nw	P  so
     * 		 W  sw  S
     * 
-    * Gibt null zurück, wenn es einen der Pattern nicht gibt!
+    * Gibt null zurï¿½ck, wenn es einen der Pattern nicht gibt!
     * Bitte bei Verwendung null checken!
     * 
     * @return ArrayList<Pattern> anliegende Pattern
@@ -319,9 +319,9 @@ public abstract class Pattern extends GameObject{
 						filter = new Color(200, 200, 150); // nur GEHOVERED
 				}
 
-			} else if(selected){ //AUSGEWÄHLT
+			} else if(selected){ //AUSGEWï¿½HLT
 				filter = new Color(150, 255, 150);
-			} //NORMAL => WEIß
+			} //NORMAL => WEIï¿½
 			
 			this.getCurrentImage().getScaledCopy(MainState.curpatternscale).draw(this.getX(), this.getY(), filter);
 			
@@ -344,7 +344,7 @@ public abstract class Pattern extends GameObject{
 	
 	/**
 	 * Updated Pattern-Info (HashMap) der Werte eines Objektes
-	 * @return void //TODO überall implementieren
+	 * @return void //TODO ï¿½berall implementieren
 	 */
 	public abstract void updatePatternInfo();
 	

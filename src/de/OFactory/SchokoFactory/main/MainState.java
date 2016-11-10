@@ -41,12 +41,12 @@ import de.OFactory.SchokoFactory.simulation.SimpleAI;
 
 public class MainState extends BasicGameState{
 
-	//Zeug fürs GUI
+	//Zeug fï¿½rs GUI
 	
 	public static MainStateListener msl; //Listener
 	public static GameContainer gc;
 	
-	//Zeug für Pattern
+	//Zeug fï¿½r Pattern
 	
 	public static Map field;
 	
@@ -63,13 +63,13 @@ public class MainState extends BasicGameState{
 	public static final  int TEXTURE_HEIGHT = 64;
 	public static String curpatterninfo;
 	public static PatternState curpatternstate = null;
-	public static Pattern selected_pattern = null; // ausgewähltes Pattern
+	public static Pattern selected_pattern = null; // ausgewï¿½hltes Pattern
 	
 	//Max Dist
 	public static Rectangle view_dimensions = new Rectangle(-100, -100, 800, 600);
 	public static Point     cam_pos = new Point( 0, 0);
 	
-	//Zeug fürs Inventar
+	//Zeug fï¿½rs Inventar
 
 	public static Stockpile pile;
 	public static float curbuttonscale = 0.5F;
@@ -80,15 +80,15 @@ public class MainState extends BasicGameState{
 	public static InfoPanel ip;
 	
 	
-	//Zeug für Zeit -> Simulationsberechnungen
+	//Zeug fï¿½r Zeit -> Simulationsberechnungen
 	public static long last;
 	public static long delta_t;
 	
-	// Zeug für Markt
+	// Zeug fï¿½r Markt
 	public static Player  p; //Spieler
 	public static SimpleAI  ai; //Spieler
 	public static Market  m;
-	public static Factory f; //Engine für work();
+	public static Factory f; //Engine fï¿½r work();
 	
 	
 	
@@ -118,7 +118,7 @@ public class MainState extends BasicGameState{
 	 *              
 	 *  @param GameContainer gc | MainState's GameContainer Instanz
 	 *  @param StateBasedGame sbg | Die Instanz des Spiels
-	 *  @throws SlickException: Falls Etwas beim Initialisieren schief läuft
+	 *  @throws SlickException: Falls Etwas beim Initialisieren schief lï¿½uft
 	 */
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		
@@ -184,7 +184,7 @@ public class MainState extends BasicGameState{
 	 *  @param GameContainer gc | MainState's GameContainer Instanz
 	 *  @param StateBasedGame sbg | Die Instanz des Spiels
 	 *  @param int delta | Zeit, die bis zum letzten Aufruf vergangen ist #Komplex #wurzelausminuseins
-	 *  @throws SlickException: Falls Etwas beim Berechnen schief läuft
+	 *  @throws SlickException: Falls Etwas beim Berechnen schief lï¿½uft
 	 */
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		
@@ -195,11 +195,11 @@ public class MainState extends BasicGameState{
 		
 		if(clicked != null){ // Clicked Pattern
 			
-			if(curpatternstate == null){ // Kein Gebäude ausgewählt: nur Auswahlmöglichkeit
+			if(curpatternstate == null){ // Kein Gebï¿½ude ausgewï¿½hlt: nur Auswahlmï¿½glichkeit
 				if(clicked instanceof Wiese) {
 					selected_pattern = null; // keine Auswahl beim Klicken auf leeres Feld
 				} else {
-					selected_pattern = clicked; // Gebäude auswählen
+					selected_pattern = clicked; // Gebï¿½ude auswï¿½hlen
 					ip.switchTab(0); // Tab wechseln
 				}
 			} else {
@@ -207,10 +207,10 @@ public class MainState extends BasicGameState{
 				if(clicked instanceof Wiese){ //Feld "leer" ( = Wiese)
 					if(curpatternstate != PatternState.WIESE)
 						field.set(clicked.getId(), Pattern.getInstance(MainState.field, clicked.getX(), clicked.getY(), curpatternstate, clicked.getId(), clicked.getXCoordinate(), clicked.getYCoordinate()));
-				} else { //Feld hat ein Gebäude
-					if(curpatternstate == PatternState.WIESE) //Gebäude entfernen (-> Wiese) 
+				} else { //Feld hat ein Gebï¿½ude
+					if(curpatternstate == PatternState.WIESE) //Gebï¿½ude entfernen (-> Wiese) 
 						field.set(clicked.getId(), new Wiese(MainState.field, clicked.getX(), clicked.getY(), clicked.getId(), clicked.getXCoordinate(), clicked.getYCoordinate()));
-					else // Keine Wiese: Gebäude Auswählen
+					else // Keine Wiese: Gebï¿½ude Auswï¿½hlen
 						selected_pattern = clicked;
 						
 				}
@@ -220,7 +220,7 @@ public class MainState extends BasicGameState{
 		
 		
 		
-		GameUtils.refreshSize(); // Testen, ob Größe sich verändert hat -> Ausprinten
+		GameUtils.refreshSize(); // Testen, ob Grï¿½ï¿½e sich verï¿½ndert hat -> Ausprinten
 		
 		for(Pattern p : field) //jedes Pattern zeichnen
 			if(p != null)
@@ -235,7 +235,7 @@ public class MainState extends BasicGameState{
 		//Tag berechnen
 		delta_t = System.currentTimeMillis() - last;
 		
-		if(delta_t >= GameSettings.DAY_MILIS){ //Ein Tag(Siehe GameSettings.DAY_MILIS) geht verüber
+		if(delta_t >= GameSettings.DAY_MILIS){ //Ein Tag(Siehe GameSettings.DAY_MILIS) geht verï¿½ber
 			last = 0;
 			
 			// Endphase des Tages eingeleitet
@@ -273,9 +273,9 @@ public class MainState extends BasicGameState{
 		// TESTAREA End. --------------------------------------
 	}
 	
-	/** Ändert den aktuellen Pattern-Zustand curpatternstate
-	 *  Ändert die aktuelle Geschwindigkeit in x und y Richtung zur vektorisierten Konstante GameSettings.PATTERN_MOVEMENT_SPEED
-	 *  Erstellt Bereiche im Fenster up,left,right,down mit denen der Spieler über das Feld scrollen kann
+	/** ï¿½ndert den aktuellen Pattern-Zustand curpatternstate
+	 *  ï¿½ndert die aktuelle Geschwindigkeit in x und y Richtung zur vektorisierten Konstante GameSettings.PATTERN_MOVEMENT_SPEED
+	 *  Erstellt Bereiche im Fenster up,left,right,down mit denen der Spieler ï¿½ber das Feld scrollen kann
 	 *  
 	 *  @param GameContainer gc | MainState's GameContainer Instanz
 	 *  @param Input in |  MainState's Input Instanz
@@ -289,7 +289,7 @@ public class MainState extends BasicGameState{
 		if(in.isKeyDown(Input.KEY_C))
 			MainState.curpatternstate = PatternState.CHEMIEFABRIK;
 		if(in.isKeyDown(Input.KEY_R))
-			MainState.curpatternstate = PatternState.RÜHRER;
+			MainState.curpatternstate = PatternState.RÃœHRER;
 		if(in.isKeyDown(Input.KEY_L))
 			MainState.curpatternstate = PatternState.LAGERHALLE;
 		if(in.isKeyDown(Input.KEY_M))
@@ -297,7 +297,7 @@ public class MainState extends BasicGameState{
 		if(in.isKeyDown(Input.KEY_F))
 			MainState.curpatternstate = PatternState.FARM;
 		if(in.isKeyDown(Input.KEY_G))
-			MainState.curpatternstate = PatternState.GIEßER;
+			MainState.curpatternstate = PatternState.GIEÃŸER;
 		if(in.isKeyDown(Input.KEY_N))
 			MainState.curpatternstate = null;
 		
@@ -354,7 +354,7 @@ public class MainState extends BasicGameState{
 	 *  @param GameContainer gc | MainState's GameContainer Instanz
 	 *  @param StateBasedGame sbg | Die Instanz des Spiels
 	 *  @param Graphics g | MainState's Grafikinstanz, hiermit zeichnet man (Bsp.: g.fillRect(x, y, w, h))
-	 *  @throws SlickException: Falls Etwas beim Zeichnen schief läuft #KeineFarbeMehr #lowbudget
+	 *  @throws SlickException: Falls Etwas beim Zeichnen schief lï¿½uft #KeineFarbeMehr #lowbudget
 	 */
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 
@@ -368,7 +368,7 @@ public class MainState extends BasicGameState{
 				p.draw(g); 
 	
 		
-		//Kaufmenü zeichnen (Rechts)
+		//Kaufmenï¿½ zeichnen (Rechts)
 //		g.setColor(new Color(220, 220, 220));
 //		g.fillRect(gc.getWidth()/5*4, 0, gc.getWidth()/5, gc.getHeight());  
 //		g.setColor(Color.black); 
