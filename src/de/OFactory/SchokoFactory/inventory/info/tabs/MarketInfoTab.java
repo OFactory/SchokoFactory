@@ -55,7 +55,7 @@ public class MarketInfoTab extends Tab{
 		GameFonts.SUB.drawString( offx + 10, offy + 460, "Qualität: "     + MainState.ai.getQualitaet(),    INFO_FONT_COLOR);
 		GameFonts.SUB.drawString( offx + 10, offy + 480, "Geld: "         + MainState.ai.getMoney(),        INFO_FONT_COLOR);
 		
-		int[] slices = {MainState.p.getAbsatz(), MainState.ai.getAbsatz()};
+		int[] slices = {MainState.p.getAbsatz(), MainState.ai.getAbsatz(), MainState.ai.getAbsatz()};
 		anteilchart.setSlices(slices);
 		anteilchart.draw(g);
 		

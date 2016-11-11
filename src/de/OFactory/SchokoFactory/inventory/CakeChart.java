@@ -77,7 +77,6 @@ public class CakeChart implements Drawable{
 
 	public void draw(Graphics g){
 		
-		
 		double total = 0.0D;
 	    for (int i = 0; i < slices.length; i++) {
 	      total += slices[i];
@@ -86,11 +85,11 @@ public class CakeChart implements Drawable{
 	    double curValue = 0.0D;
 	    int startAngle = 0;
 	    for (int i = 0; i < slices.length; i++) {
-	    	startAngle = (int) (curValue * 360 / total);
-	    	int arcAngle = (int) (slices[i] * 360 / total);
+	    	startAngle = (int) Math.ceil(curValue * 360 / total);
+	    	int arcAngle = (int) Math.ceil(slices[i] * 360 / total);
 
 	    	g.setColor(SLICE_COLORS[i]);
-	    	g.fillArc(x, y, radius*2, radius*2, startAngle, arcAngle);
+	    	g.fillArc(x, y, radius*2, radius*2, startAngle, startAngle + arcAngle);
 	    	curValue += slices[i];
 	    }
 		
