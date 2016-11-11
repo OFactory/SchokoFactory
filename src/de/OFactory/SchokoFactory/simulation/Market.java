@@ -42,8 +42,7 @@ public class Market {
 		//System.out.println(" | Bedarf: " + this.bedarf);
 		System.out.println(" | SummMoegAbsatz: " + this.getMoegAbs());
 		for (int i = 0; i < players.size(); i++) {
-			System.out.println(" | P"+i+"  Absatz: " + players.get(i).getAbsatz());
-			//System.out.println(" _ P"+i+"  Anteil: " + players.get(i).getMarktanteil());
+			System.out.println(" | P"+i+"  moegAbsatz: " + players.get(i).getMoegAbs());
 		}
 		
 		// Ausgaben zurücksetzen für den nächsten Tag

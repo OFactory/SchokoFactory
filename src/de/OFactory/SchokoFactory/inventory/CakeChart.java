@@ -91,6 +91,7 @@ public class CakeChart implements Drawable{
 	    	g.setColor(SLICE_COLORS[i]);
 	    	g.fillArc(x, y, radius*2, radius*2, startAngle, startAngle + arcAngle);
 	    	curValue += slices[i];
+	    	
 	    }
 		
 		//g.fill(this.shape);

@@ -15,7 +15,7 @@ public class SimpleAI extends Player {
 		//System.out.println(name+" hmmmm");
 		// mehr Fabriken benötigt?
 		
-		if (this.getMoegAbs() > this.getAbsatz()*(1+1/(float)this.getFabriken())) {		// Der Faktor 1+1/(float)this.getFabriken())
+		if (this.getMoegAbs() > this.getAbsatz()*(1+0.5/(float)this.getFabriken())) {		// Der Faktor 1+1/(float)this.getFabriken())
 			if ( this.getMoney() >= einmaligeFabrikkosten ) {							// sorgt für eine Berücksichtigung des Produktonsanstiegs.
 				buildFactory();															// (fabriken+1) / fabriken ist 1+1/fabriken
 			}	else System.out.println("Fabrik zu teuer");								// Bei 4 Fabriken: 1.25 (25% Produktionsanstieg nach Kauf)
