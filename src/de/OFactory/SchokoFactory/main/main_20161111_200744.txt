@@ -1,0 +1,6 @@
+WARNING - 20:07:45: First conversion pass
+ERROR - 20:07:45: java.net.MalformedURLException: unknown protocol: pathmap
+WARNING - 20:08:21: Convert de.OFactory.SchokoFactory.main
+WARNING - 20:08:21: First conversion pass
+ERROR - 20:08:21: org.xml.sax.SAXParseExceptionpublicId: /SchokoFactory/src/de/OFactory/SchokoFactory/main/Drawable.java; systemId: file:///SchokoFactory/src/de/OFactory/SchokoFactory/main/Drawable.java; lineNumber: 1; columnNumber: 1; Content ist nicht zulässig in Prolog.
+ERROR - 20:08:21: org.xml.sax.SAXParseExceptionpublicId: /SchokoFactory/src/de/OFactory/SchokoFactory/main/Drawable.java; systemId: file:///SchokoFactory/src/de/OFactory/SchokoFactory/main/Drawable.java; lineNumber: 1; columnNumber: 1; Content ist nicht zulässig in Prolog.

@@ -45,11 +45,13 @@ public class MainStateListener implements MouseListener{
 			if(MainState.curpatternscale + change/GameSettings.ZOOM_STEP >= GameSettings.ZOOM_MIN &&
 					MainState.curpatternscale + change/GameSettings.ZOOM_STEP <= GameSettings.ZOOM_MAX){
 				
-				MainState.curpatternscale += change/GameSettings.ZOOM_STEP; //ZOOM IN/OUT
+				double delta_scale = change/GameSettings.ZOOM_STEP;
+				
+				MainState.curpatternscale += delta_scale; //ZOOM IN/OUT
 				MainState.field.zoomMap(
-						MainState.curpatternscale,
+						delta_scale,
 						in.getMouseX(),
-						in.getMouseY()); //Map neu anordnen
+						in.getMouseY()); //Map neu anordnen 
 				//TODO Zoomfunktion verbessern!
 			}
 		}

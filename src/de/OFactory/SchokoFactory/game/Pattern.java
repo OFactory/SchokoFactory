@@ -8,6 +8,7 @@ import java.util.HashMap;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Shape;
@@ -115,8 +116,8 @@ public abstract class Pattern extends GameObject{
 	public void update(GameContainer gc) {
 		
 		Polygon p = new Polygon();
-		int off_x = this.getCurrentImage().getScaledCopy(MainState.curpatternscale).getWidth();
-		int off_y = this.getCurrentImage().getScaledCopy(MainState.curpatternscale).getHeight();
+		int off_x = this.getCurrentImage().getScaledCopy((float) MainState.curpatternscale).getWidth();
+		int off_y = this.getCurrentImage().getScaledCopy((float) MainState.curpatternscale).getHeight();
 		p.addPoint(getX() + off_x*0.1F,   getY() + off_y*0.82F);
 		p.addPoint(getX() + off_x/2,      getY() + off_y*0.68F);
 		p.addPoint(getX() + off_x*0.9F,   getY() + off_y*0.82F);		
@@ -323,9 +324,12 @@ public abstract class Pattern extends GameObject{
 				filter = new Color(150, 255, 150);
 			} //NORMAL => WEIß
 			
-			this.getCurrentImage().getScaledCopy(MainState.curpatternscale).draw(this.getX(), this.getY(), filter);
-			
-			
+			Image img = this.getCurrentImage().getScaledCopy((float) MainState.curpatternscale);
+			img.draw(this.getX(), this.getY(), filter);
+			/* DÈBUG
+			g.setColor(Color.green);
+			g.drawRect(getX(), getY(), img.getWidth(), img.getHeight());
+			g.drawString(this.getX() + " | " + this.getY(), this.getX()-10, this.getY()-10); */
 		}
 		
 		/* DEBUG CLICKBOX

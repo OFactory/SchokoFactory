@@ -45,12 +45,13 @@ public class MainState extends BasicGameState{
 	
 	public static MainStateListener msl; //Listener
 	public static GameContainer gc;
+	public static Graphics g;
 	
 	//Zeug für Pattern
 	
 	public static Map field;
 	
-	public static float curpatternscale = 0.7F;
+	public static double curpatternscale = 0.7D;
 	public static Image   patternimg_raw = ResourceManager.loadImage("assets/textures/patterns/patterns.png");
 	public static Image[] patternimg = ResourceManager.loadPics(patternimg_raw, 50); //Bild splitten -> Einzelne Bilder (Image[])
 	public static Pattern hoveredpattern; //Gehoverter Pattern
@@ -136,7 +137,7 @@ public class MainState extends BasicGameState{
 				));
 		
 		pile = new Stockpile(0.05); // Stockpile generieren
-		//field = Map.generateMap(GameSettings.STANDARD_MAP_SIZE_WIDTH, GameSettings.STANDARD_MAP_SIZE_HEIGHT); // Feld generieren
+		//field = Map.generateMap(1, 1); // Feld generieren
 		//field.setName("Test");
 		
 		//long time_1 = System.currentTimeMillis();
@@ -257,7 +258,6 @@ public class MainState extends BasicGameState{
 			// Ende des Tages
 			
 		}
-		
 		if(last == 0)
 			last = System.currentTimeMillis(); //last neu ausrechnen
 		
@@ -357,9 +357,11 @@ public class MainState extends BasicGameState{
 	 *  @throws SlickException: Falls Etwas beim Zeichnen schief läuft #KeineFarbeMehr #lowbudget
 	 */
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-
 		
-		g.setColor(new Color(69, 166, 76)); //TODO Farben auslagern
+		//g.scale(curpatternscale, curpatternscale);
+		
+		g.setColor(Color.black);
+		//g.setColor(new Color(69, 166, 76)); //TODO Farben auslagern
 		g.fillRect(0, 0, Main.width, Main.height); //Hintergrund
 	
 		
@@ -389,6 +391,7 @@ public class MainState extends BasicGameState{
 		g.drawString("CurState: "   + curpatternstate,  					  10, 100);
 		g.drawString("Selected: "   + selected_pattern,       				  10, 120);
 		g.drawString("cam_pos:  "   + cam_pos.getX() + ", " + cam_pos.getY(), 10, 140);
+		g.drawString("pat_cale: "   + curpatternscale,                        10, 160);
 		
 		// TESTAREA Inc. --------------------------
 		

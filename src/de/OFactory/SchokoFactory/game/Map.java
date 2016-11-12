@@ -150,42 +150,17 @@ public class Map extends ArrayList<Pattern>{
 	 * @param zx X-Position des Zoom-Punktes
 	 * @param zy Y-Position des Zoom-Punktes
 	 */
-	public void zoomMap(float curpatternscale, int zx, int zy){
+	public void zoomMap(double in_scale, int zx, int zy){
 		
-		int twidth  = (int) (MainState.TEXTURE_WIDTH  * curpatternscale);
-		int theight = (int) (MainState.TEXTURE_HEIGHT * curpatternscale);
+		double scale = -in_scale;
 		
-		
-		//ALTER ALGORITHMUS : RESTRUKTURIEREN
-		
-		int grid_width = 0; // Anzahl Spalten in nter Reihe
-		int i = 0; 
-		
-		for(int y = 0; y < (this.getWidth()+1)*2-1; y++){ // für jede Reihe
-			if(y >= this.getHeight()+1){ // nte Reihe erreicht(max width)
-				grid_width--;
-			} else {
-				grid_width = y;
-			}
+		for(Pattern p: this){
+			int rel_x = zx - p.getX();
+			int rel_y = zy - p.getY();
 			
-			for(int x = 0; x < grid_width; x++){ // für jede Spalte
-				
-				Pattern p = this.get(i);
-				
-				p.setX( (int) ( zx - MainState.gc.getWidth()/2 + 
-								x* twidth+//Normal Placement
-								( (getWidth()+1-grid_width)*twidth ) / 2 - //Verschiebung durch Anzahl Patterns in Reihe
-								(  getWidth()+1)*twidth / 3));
-				p.setY( (int) ( zy - (MainState.gc.getHeight()+1)/2 + 
-								y*theight - //Normal Placement
-								(getHeight()+1)*theight / 1.5));
-				
-				
-				
-				i++;
-			}
+			p.setX(p.getX() + (int) (rel_x*scale));
+			p.setY(p.getY() + (int) (rel_y*scale));
 		}
-		
 
 	}
 	
