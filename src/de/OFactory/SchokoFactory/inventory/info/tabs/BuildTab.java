@@ -49,19 +49,19 @@ public class BuildTab extends Tab{
 	}
 	
 	private void addBuildings(){
-		this.addBuilding(PatternState.CHEMIEFABRIK, 50);
-		this.addBuilding(PatternState.TANK, 5000);
-		this.addBuilding(PatternState.RÜHRER, 30);
-		this.addBuilding(PatternState.FARM, 50);
-		this.addBuilding(PatternState.MOLKEREI, 50);
-		this.addBuilding(PatternState.ZUCKERPLANTAGE, 50);
-		this.addBuilding(PatternState.KAKAOPLANTAGE, 50);
-		this.addBuilding(PatternState.LAGERHALLE, 50);
+		this.addBuilding(PatternState.CHEMIEFABRIK);
+		this.addBuilding(PatternState.TANK);
+		this.addBuilding(PatternState.RÜHRER);
+		this.addBuilding(PatternState.FARM);
+		this.addBuilding(PatternState.MOLKEREI);
+		this.addBuilding(PatternState.ZUCKERPLANTAGE);
+		this.addBuilding(PatternState.KAKAOPLANTAGE);
+		this.addBuilding(PatternState.LAGERHALLE);
 	}
 	
 	
-	public void addBuilding(PatternState state, int price){
-		buildings.add(new BuildingButton(0, getInfoPanel(), state, price));
+	public void addBuilding(PatternState state){
+		buildings.add(new BuildingButton(0, getInfoPanel(), state));
 	}
 	
 	

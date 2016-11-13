@@ -29,6 +29,7 @@ public abstract class Tab implements Drawable, Updateable{
 		this.ip = ip;
 		this.display = img;
 		this.setName(name);
+		
 	}
 	
 	public void update(GameContainer gc) {
@@ -70,7 +71,6 @@ public abstract class Tab implements Drawable, Updateable{
 	
 	public abstract void drawContent(Graphics g);
 	public abstract void updateContent(GameContainer gc);
-	
 	
 	public boolean isActive() {
 		return ip.activetab == this;

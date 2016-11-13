@@ -9,6 +9,7 @@ import de.OFactory.SchokoFactory.main.MainState;
 
 public class Gieﬂer extends Pattern implements Workable{
 	
+	private boolean working = true;
 	private int produktion = 200;
 	private int einmaligeFabrikkosten = 4000;
 	private int laufendeFabrikkosten = 50;
@@ -31,9 +32,11 @@ public class Gieﬂer extends Pattern implements Workable{
 	
 	// Produziert 100 Tafeln aus dem nichts bei jedem Aufruf. Idealer Weise t‰glich.
 	public void work() {
-		MainState.p.addProduktmenge(produktion);
-		MainState.p.addMoney(-laufendeFabrikkosten);
-		MainState.p.addAusgaben(laufendeFabrikkosten);
+		if(this.isWorking()){
+			MainState.p.addProduktmenge(produktion);
+			MainState.p.addMoney(-laufendeFabrikkosten);
+			MainState.p.addAusgaben(laufendeFabrikkosten);
+		}
 	}
 
 	@Override
@@ -53,5 +56,25 @@ public class Gieﬂer extends Pattern implements Workable{
 	}
 	public void setLaufendeFabrikkosten(int laufendeFabrikkosten) {
 		this.laufendeFabrikkosten = laufendeFabrikkosten;
+	}
+
+	/**
+	 * @return the working
+	 */
+	public boolean isWorking() {
+		return working;
+	}
+
+	/**
+	 * @param working the working to set
+	 */
+	public void setWorking(boolean working) {
+		if(working){
+			this.setFrameLoop(PatternFrame.GIEﬂER_S, PatternFrame.GIEﬂER_E);
+		} else {
+			this.setPatternFrame(PatternFrame.GIEﬂER_S);
+		
+		}
+		this.working = working;
 	}
 }

@@ -8,7 +8,6 @@ import de.OFactory.SchokoFactory.game.GameFonts;
 import de.OFactory.SchokoFactory.game.PatternState;
 import de.OFactory.SchokoFactory.inventory.Button;
 import de.OFactory.SchokoFactory.inventory.info.InfoPanel;
-import de.OFactory.SchokoFactory.main.Main;
 import de.OFactory.SchokoFactory.main.MainState;
 
 public class BuildingButton extends Button{
@@ -18,15 +17,13 @@ public class BuildingButton extends Button{
 	
 	private InfoPanel ip;
 	private PatternState ps;
-	private int price;
 
-	public BuildingButton(int ID, InfoPanel ip, PatternState ps, Integer price) {
+	public BuildingButton(int ID, InfoPanel ip, PatternState ps) {
 		super(ID, ip.getX(), 0, ip.getWidth(), BUTTON_HEIGHT, ps.getName(), 0);
 		// TODO Auto-generated constructor stub
 		
 		this.setInfoPanel(ip);
 		this.ps = ps;
-		this.price = price;
 		this.clicked_color		    = new Color(100, 100, 100);
 		this.hovered_color			= new Color(150, 150, 255);
 		this.normal_color  			= new Color( 65, 105, 225);
@@ -85,7 +82,7 @@ public class BuildingButton extends Button{
 		else
 			dsp_color = normal_color;
 		
-		if(Main.money < price){
+		if(MainState.p.getMoney() < this.getPatternState().getPrice()){
 			dsp_color = Color.red.darker();
 		}
 		
@@ -113,9 +110,9 @@ public class BuildingButton extends Button{
 					new Color(256 - g.getColor().getRed(), 256 - g.getColor().getGreen(), 256 - g.getColor().getBlue()));
 		}
 		
-		if(price > 0){
+		if(this.getPatternState().getPrice() > 0){
 			
-			String str_price = "-" + price + "$";
+			String str_price = "-" + getPatternState().getPrice() + "$";
 			
 			GameFonts.SUB.drawString(x + width - GameFonts.SUB.getWidth(str_price) - 5,
 					y + height - GameFonts.SUB.getHeight() - 5,

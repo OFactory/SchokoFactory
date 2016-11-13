@@ -1,5 +1,8 @@
 package de.OFactory.SchokoFactory.inventory;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -31,6 +34,8 @@ public class Button implements Drawable{
 	
 	protected boolean hovered = false;
 	protected boolean clicked = false;
+	
+	protected ActionListener al;
 	
 	
 	
@@ -98,12 +103,16 @@ public class Button implements Drawable{
 		if(this.hovered){
 			if(in.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)){
 				this.clicked = true;
+				al.actionPerformed(new ActionEvent(this, 0, "click"));
 			}
 		}
 		
 		
 		
-		
+	}
+	
+	public void addActionListener(ActionListener al){
+		this.al = al;
 	}
 	
 	public void updateShape(){
