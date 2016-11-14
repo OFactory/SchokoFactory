@@ -1,6 +1,8 @@
 package de.OFactory.SchokoFactory.main;
 
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Arrays;
 
 import org.newdawn.slick.Color;
@@ -11,6 +13,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -20,6 +23,7 @@ import de.OFactory.SchokoFactory.game.Map;
 import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternState;
 import de.OFactory.SchokoFactory.game.patterns.Wiese;
+import de.OFactory.SchokoFactory.inventory.Button;
 import de.OFactory.SchokoFactory.inventory.Stockpile;
 import de.OFactory.SchokoFactory.inventory.info.InfoPanel;
 import de.OFactory.SchokoFactory.inventory.info.tabs.BuildTab;
@@ -90,6 +94,11 @@ public class MainState extends BasicGameState{
 	public static SimpleAI  ai; //Spieler
 	public static Market  m;
 	public static Factory f; //Engine für work();
+	
+	//Zeug für Markeinstellungen
+	public static TextField txt_preis;
+	public static TextField txt_werbung;
+	public static Button    btn_bestätigen;
 	
 	
 	
@@ -164,6 +173,26 @@ public class MainState extends BasicGameState{
 		msl = new MainStateListener();
 		gc.getInput().addMouseListener(MainState.msl); //MouseListener
 		
+		txt_preis = new TextField(gc, gc.getDefaultFont(), 800, 760, 200, 20);
+		txt_werbung = new TextField(gc, gc.getDefaultFont(), 800, 800, 200, 20);
+		btn_bestätigen = new Button(0, 800, 820, 200, 30, "set",0);
+		btn_bestätigen.addActionListener(new ActionListener() {		
+			public void actionPerformed(ActionEvent e) {
+				try {
+					double werbung  = Double.parseDouble(txt_werbung.getText());
+					double preis    = Double.parseDouble(txt_preis.getText());
+					
+					MainState.p.setPreis(preis);
+					MainState.p.investQuality(werbung);
+					
+				} catch(Exception ex){
+					System.err.println("ERROR 003: Konnte " + txt_preis.getText() + " / " + txt_werbung.getText() + " nicht zu einem Integer konvertieren!");
+					ex.printStackTrace();
+				}
+				
+			}
+		});
+		
 		// TESTAREA Inc. ------------------------------------------------------------
 		
 		//b1 = new BuyButton(0, 1, 2, gc.getWidth()/80*65, gc.getHeight()/15, "-30");
@@ -193,6 +222,8 @@ public class MainState extends BasicGameState{
 		patternMovement(gc, in); // Bewegung der Pattern
 		
 		MainState.gc = gc;
+		
+		btn_bestätigen.update(gc.getInput());
 		
 		if(clicked != null){ // Clicked Pattern
 			
@@ -392,6 +423,16 @@ public class MainState extends BasicGameState{
 		g.drawString("Selected: "   + selected_pattern,       				  10, 120);
 		g.drawString("cam_pos:  "   + cam_pos.getX() + ", " + cam_pos.getY(), 10, 140);
 		g.drawString("pat_cale: "   + curpatternscale,                        10, 160);
+		
+		
+		g.setColor(Color.white);
+		txt_preis.render(gc, g);
+		txt_werbung.render(gc, g);
+		
+		g.drawString("Preis:",   730, 760);
+		g.drawString("Werbung:", 730, 800);
+		
+		btn_bestätigen.draw(g);
 		
 		// TESTAREA Inc. --------------------------
 		

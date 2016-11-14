@@ -28,10 +28,7 @@ public class SimpleAI extends Player {
 			else System.out.println("zu teuer");
 		}
 	}
-	private void investQuality(double amount) {
-		this.addMoney(-amount);
-		this.setQualitaet(this.getQualitaet() + amount / this.getQualitaet() / 2200);
-	}
+
 	
 	private void buildFactory() {
 		this.addMoney(-einmaligeFabrikkosten);

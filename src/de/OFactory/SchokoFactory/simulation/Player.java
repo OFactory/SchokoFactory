@@ -73,6 +73,11 @@ public class Player {
     		setDiff_bedarf(0);
     	}
     }
+    
+	public void investQuality(double amount) {
+		this.addMoney(-amount);
+		this.setQualitaet(this.getQualitaet() + amount / this.getQualitaet() / 2200);
+	}
 
     public void finalCalculation() {
     	
