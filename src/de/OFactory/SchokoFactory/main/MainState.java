@@ -24,6 +24,7 @@ import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternState;
 import de.OFactory.SchokoFactory.game.patterns.Wiese;
 import de.OFactory.SchokoFactory.inventory.Button;
+import de.OFactory.SchokoFactory.inventory.Pausepile;
 import de.OFactory.SchokoFactory.inventory.Stockpile;
 import de.OFactory.SchokoFactory.inventory.info.InfoPanel;
 import de.OFactory.SchokoFactory.inventory.info.tabs.BuildTab;
@@ -77,6 +78,7 @@ public class MainState extends BasicGameState{
 	//Zeug fürs Inventar
 
 	public static Stockpile pile;
+	public static Pausepile pausepile;
 	public static float curbuttonscale = 0.5F;
 	public static Image   buybuttonimg_raw = ResourceManager.loadImage("assets/textures/gui/buy_buttons.png").getScaledCopy(curbuttonscale);
 	public static Image[] buybuttonimg = ResourceManager.loadPics(buybuttonimg_raw, 6);
@@ -145,7 +147,8 @@ public class MainState extends BasicGameState{
 				new SimpleAI(m,"P3",1000)
 				));
 		
-		pile = new Stockpile(0.05); // Stockpile generieren
+		pile      = new Stockpile(45); // Stockpile generieren
+		pausepile = new Pausepile(45, 30);
 		//field = Map.generateMap(1, 1); // Feld generieren
 		//field.setName("Test");
 		
@@ -263,6 +266,7 @@ public class MainState extends BasicGameState{
 		}
 		
 		pile.update(gc); //Stockpiles updaten
+		pausepile.update(gc);
 		
 		//Tag berechnen
 		delta_t = System.currentTimeMillis() - last;
@@ -409,6 +413,7 @@ public class MainState extends BasicGameState{
 		
 		//Stockpiles Zeichnen (Oben)
 		pile.draw(g);
+		pausepile.draw(g);
 		
 		//Developer Info
 		g.setColor(new Color(200, 200, 200, 0.5F));

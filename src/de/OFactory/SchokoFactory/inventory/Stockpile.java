@@ -20,17 +20,17 @@ public class Stockpile implements Drawable, Updateable{
 	protected ArrayList<String> piles = new ArrayList<String>();
 	protected double padding_top;
 	protected Rectangle shape;
+	protected int height;
 	
-	public Stockpile(double padding_top){
-		this.padding_top = padding_top;
+	public Stockpile(int height){
 		
+		this.height = height;
 		this.shape = new Rectangle(0, 0, 100, 20);
 		
 	}
 	
 	public int getHeight(){
-		return (int) (padding_top*Display.getHeight());
-
+		return height;
 	}
 
 	public void update(GameContainer gc) {	
@@ -50,7 +50,7 @@ public class Stockpile implements Drawable, Updateable{
 	public void draw(Graphics g) {
 		
 		//Stockpile Hintergrund mit #Verlauf
-		ShapeFill stockpileFill = new GradientFill(0, 2, new Color(42, 81, 170), 0, this.shape.getWidth(), new Color(74, 107, 182));
+		ShapeFill stockpileFill = new GradientFill(0, this.getHeight(), new Color(203, 201, 201),  0, 0, new Color(230, 230, 230));
 		g.fill(this.shape, stockpileFill);
 		 
 		
@@ -67,6 +67,8 @@ public class Stockpile implements Drawable, Updateable{
 		int padding = 20;
 		float textheight = this.shape.getHeight()/3;
 		float space = this.shape.getWidth()/this.piles.size();
+		
+		g.setColor(new Color(142, 146, 140));
 		
 		for(String s : this.piles){	
 			g.drawString(s, space*this.piles.indexOf(s)+padding, textheight);
