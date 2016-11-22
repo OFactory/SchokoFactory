@@ -11,7 +11,7 @@ public class Gieﬂer extends Pattern implements Workable{
 	
 	private int produktion = 200;
 	private int einmaligeFabrikkosten = 4000;
-	private int laufendeFabrikkosten = 50;
+	private int laufendeFabrikkosten = 100;
 	
 	public Gieﬂer(Map map, int x, int y, int id, int xcoor, int ycoor) {
 		super(map, x, y, PatternState.GIEﬂER, id, xcoor, ycoor);
