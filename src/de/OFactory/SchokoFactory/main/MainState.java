@@ -268,6 +268,7 @@ public class MainState extends BasicGameState{
 		
 		//b1.update(gc);
 		//b2.update(gc);
+		
 		ip.update(gc);
 		
 		// TESTAREA End. --------------------------------------

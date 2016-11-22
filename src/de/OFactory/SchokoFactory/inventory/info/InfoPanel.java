@@ -6,7 +6,7 @@ import java.util.List;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-
+import org.lwjgl.opengl.Display;
 import de.OFactory.SchokoFactory.main.Drawable;
 import de.OFactory.SchokoFactory.main.Updateable;
 
@@ -46,9 +46,12 @@ public class InfoPanel implements Drawable, Updateable{
 	//update Tab position
 	public void update(GameContainer gc) {
 		
-		int tabsize = this.getWidth()/tabs.size();
-		int i = 0;
+		this.setX(Display.getWidth()-this.getWidth());
 
+		int tabsize = this.getWidth()/tabs.size();
+
+		
+		int i = 0;
 		for( Tab t : tabs ){
 			t.update(gc);
 			t.setX(this.getX() + i * tabsize);

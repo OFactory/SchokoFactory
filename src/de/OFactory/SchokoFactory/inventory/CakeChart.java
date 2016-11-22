@@ -49,7 +49,7 @@ public class CakeChart implements Drawable{
 	
 	public void update(Input in){
 		
-		
+
 		if(this.shape.contains(in.getMouseX(), in.getMouseY())) {
 			this.hovered = true;
 		} else {
@@ -69,7 +69,7 @@ public class CakeChart implements Drawable{
 	
 	public void updateShape(){
 
-		this.shape = new Circle(this.getX(), this.getY(), this.getRadius());
+		this.shape = new Circle(this.getX()+radius, this.getY()+radius, this.getRadius());
 
 	}
 	
@@ -89,7 +89,7 @@ public class CakeChart implements Drawable{
 	    	int arcAngle = (int) Math.ceil(slices[i] * 360 / total);
 
 	    	g.setColor(SLICE_COLORS[i]);
-	    	g.fillArc(x, y, radius*2, radius*2, startAngle, startAngle + arcAngle);
+	    	g.fillArc(this.getX(), this.getY(), radius*2, radius*2, startAngle, startAngle + arcAngle);
 	    	curValue += slices[i];
 	    	
 	    }
