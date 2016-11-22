@@ -128,7 +128,6 @@ public class MainState extends BasicGameState{
 		MainState.m = new Market(); 
 		MainState.f = new Factory();
 		MainState.p = new Player(m, "P", 9000);
-		MainState.p.setQualitaet(1.2);
 		MainState.ai = new SimpleAI(m,"P2",1000);
 		MainState.m.setPlayer(Arrays.asList(
 				p,

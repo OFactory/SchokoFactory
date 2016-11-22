@@ -5,7 +5,7 @@ public class SimpleAI extends Player {
 	private int fabriken = 4;
 	private int produktion = 200;
 	private int einmaligeFabrikkosten = 4000;
-	private int laufendeFabrikkosten = 100;
+	private int laufendeFabrikkosten = 50;
 	
 	public SimpleAI(Market market, String name, double money) {
 		super(market, name, money);
