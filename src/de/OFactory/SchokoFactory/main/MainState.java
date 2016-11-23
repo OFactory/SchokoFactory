@@ -3,6 +3,7 @@ package de.OFactory.SchokoFactory.main;
 import java.awt.Point;
 import java.util.Arrays;
 
+import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -136,7 +137,7 @@ public class MainState extends BasicGameState{
 				));
 		
 		pile = new Stockpile(0.05); // Stockpile generieren
-		//field = Map.generateMap(GameSettings.STANDARD_MAP_SIZE_WIDTH, GameSettings.STANDARD_MAP_SIZE_HEIGHT); // Feld generieren
+		//field = Map.generateMap(20, 20);// GameSettings.STANDARD_MAP_SIZE_HEIGHT); // Feld generieren //GameSettings.STANDARD_MAP_SIZE_WIDTH
 		//field.setName("Test");
 		
 		//long time_1 = System.currentTimeMillis();
@@ -238,6 +239,8 @@ public class MainState extends BasicGameState{
 		if(delta_t >= GameSettings.DAY_MILIS){ //Ein Tag(Siehe GameSettings.DAY_MILIS) geht verüber
 			last = 0;
 			
+			long calctimelast = System.currentTimeMillis();
+			
 			// Endphase des Tages eingeleitet
 			
 			for (Player p : m.getPlayers()) {
@@ -255,6 +258,8 @@ public class MainState extends BasicGameState{
 			m.day(); // Berechnung vor Ende des Tages
 			
 			// Ende des Tages
+			
+			System.out.println("Berechnungsdauer der Simulation: " + (System.currentTimeMillis() - calctimelast));
 			
 		}
 		
@@ -324,10 +329,10 @@ public class MainState extends BasicGameState{
 		else 
 			MainState.allv_x = 0;
 		
-		Shape up = new Rectangle(0, 0, gc.getWidth()/5*4, gc.getHeight()/10);
-		Shape left = new Rectangle(0, 0, gc.getWidth()/10, gc.getHeight());
-		Shape right = new Rectangle(gc.getWidth()/10*7, 0, gc.getWidth()/10, gc.getHeight());
-		Shape down = new Rectangle(0, gc.getHeight()/10*9, gc.getWidth()/5*4, gc.getHeight()/5);
+		Shape up = new Rectangle(0, 0, Display.getWidth(), 10);
+		Shape left = new Rectangle(0, 0, 10, Display.getHeight());
+		Shape right = new Rectangle(Display.getWidth()-10, 0, 10, Display.getHeight());
+		Shape down = new Rectangle(0, Display.getHeight()-10, Display.getWidth(), Display.getHeight()-10);
 		
 		if(up.contains(in.getMouseX(), in.getMouseY()))
 			MainState.allv_y = + GameSettings.PATTERN_MOVEMENT_SPEED;
@@ -340,7 +345,7 @@ public class MainState extends BasicGameState{
 		
 		
 		
-		cam_pos.setLocation(cam_pos.getX() + allv_x, cam_pos.getY() + allv_y);
+		cam_pos.setLocation(0, 0);//cam_pos.getX() + allv_x, cam_pos.getY() + allv_y);
 		if(!view_dimensions.contains((float) cam_pos.getX(), (float) cam_pos.getY())){
 			cam_pos.setLocation(cam_pos.getX() - allv_x, cam_pos.getY() - allv_y);
 			allv_x = 0;
