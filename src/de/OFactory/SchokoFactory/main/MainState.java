@@ -239,7 +239,7 @@ public class MainState extends BasicGameState{
 		if(delta_t >= GameSettings.DAY_MILIS){ //Ein Tag(Siehe GameSettings.DAY_MILIS) geht verüber
 			last = 0;
 			
-			long calctimelast = System.currentTimeMillis();
+			long t1 = System.currentTimeMillis();
 			
 			// Endphase des Tages eingeleitet
 			
@@ -259,8 +259,8 @@ public class MainState extends BasicGameState{
 			
 			// Ende des Tages
 			
-			System.out.println("Berechnungsdauer der Simulation: " + (System.currentTimeMillis() - calctimelast));
-			
+			System.out.println("Berechnungsdauer der Simulation: " + (System.currentTimeMillis() - t1));
+
 		}
 		
 		if(last == 0)
@@ -329,14 +329,14 @@ public class MainState extends BasicGameState{
 		else 
 			MainState.allv_x = 0;
 		
-		Shape up = new Rectangle(0, 0, Display.getWidth(), 10);
-		Shape left = new Rectangle(0, 0, 10, Display.getHeight());
-		Shape right = new Rectangle(Display.getWidth()-10, 0, 10, Display.getHeight());
-		Shape down = new Rectangle(0, Display.getHeight()-10, Display.getWidth(), Display.getHeight()-10);
+		Shape up = new Rectangle(0, 0, Display.getWidth(), 20);
+		Shape left = new Rectangle(0, 0, 20, Display.getHeight());
+		Shape right = new Rectangle(Display.getWidth()-20, 0, 20, Display.getHeight());
+		Shape down = new Rectangle(0, Display.getHeight()-20, Display.getWidth(), Display.getHeight()-20);
 		
 		if(up.contains(in.getMouseX(), in.getMouseY()))
 			MainState.allv_y = + GameSettings.PATTERN_MOVEMENT_SPEED;
-		if(left.contains(in.getMouseX(), in.getMouseY()))
+		if(left.contains(in.getMouseX()+1, in.getMouseY()))
 			MainState.allv_x = + GameSettings.PATTERN_MOVEMENT_SPEED;
 		if(right.contains(in.getMouseX(), in.getMouseY()))
 			MainState.allv_x = - GameSettings.PATTERN_MOVEMENT_SPEED;
