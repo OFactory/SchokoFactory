@@ -189,6 +189,11 @@ public class MainState extends BasicGameState{
 	 */
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		
+		
+		if(gc.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
+			Display.destroy();
+		}
+		
 		Input in = gc.getInput(); //Inputinstanz holen
 		patternMovement(gc, in); // Bewegung der Pattern
 		
@@ -395,6 +400,7 @@ public class MainState extends BasicGameState{
 		g.drawString("CurState: "   + curpatternstate,  					  10, 100);
 		g.drawString("Selected: "   + selected_pattern,       				  10, 120);
 		g.drawString("cam_pos:  "   + cam_pos.getX() + ", " + cam_pos.getY(), 10, 140);
+		g.drawString("Schlieﬂen mit <Escape>", 10, 160);
 		
 		// TESTAREA Inc. --------------------------
 		
