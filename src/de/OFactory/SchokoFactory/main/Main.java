@@ -1,7 +1,9 @@
 package de.OFactory.SchokoFactory.main;
 
 
+import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -20,9 +22,9 @@ public class Main extends StateBasedGame{
 	
 	
 	//Variablen
-	
-	public static final int BASE_HEIGTH = 1280;
-	public static final int BASE_WIDTH  = 850;
+
+	public static final int BASE_HEIGTH = 1080;
+	public static final int BASE_WIDTH  = 1920;
 	
 	public static int height = BASE_HEIGTH;
 	public static int width  = BASE_WIDTH;
@@ -54,14 +56,22 @@ public class Main extends StateBasedGame{
 	
 	//Starten des Spiels
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws LWJGLException {
 		try {
 			AppGameContainer app = new AppGameContainer(new Main("SchokoFactory")); // Spiel Title = Basic
-			app.setDisplayMode(BASE_HEIGTH, BASE_WIDTH, false); // Fenstergröße
+			app.setDisplayMode(BASE_WIDTH, BASE_HEIGTH, true); // Fenstergröße
 			app.setTargetFrameRate(60); // Framerate auf 60 beschränkt
 			
 			//Resizable setzen
 			Display.setResizable(true);
+			
+			DisplayMode[] modes = Display.getAvailableDisplayModes();
+			System.out.println("Mögliche Auflösungen:     (alles andere gibt Fehlermeldungen)");
+	        for (int i=0;i<modes.length;i++) {
+	            DisplayMode current = modes[i];
+	            System.out.println("  "+current.getWidth() + "x" + current.getHeight());
+	        }
+
 			
 			app.setVSync(true); // VSync benutzen
 			app.start(); // Spiel starten

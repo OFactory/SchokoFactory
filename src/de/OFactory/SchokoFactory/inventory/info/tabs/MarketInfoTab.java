@@ -21,7 +21,7 @@ public class MarketInfoTab extends Tab{
 		// TODO Auto-generated constructor stub
 		int offx = getInfoPanel().getX();
 		int offy = getInfoPanel().getY();
-		anteilchart = new CakeChart(1, offx + 20, offy + 520, 100, "möchte-gern-CakeChart");
+		anteilchart = new CakeChart(1, offx + 20, offy + 530, 100, "möchte-gern-CakeChart");
 		
 	}
 
@@ -58,7 +58,7 @@ public class MarketInfoTab extends Tab{
 		int[] slices = {MainState.p.getAbsatz(), MainState.ai.getAbsatz(), MainState.ai.getAbsatz()};
 		anteilchart.setSlices(slices);
 		anteilchart.draw(g);
-		
+		anteilchart.setX(offx+20);
 	}
 
 	@Override

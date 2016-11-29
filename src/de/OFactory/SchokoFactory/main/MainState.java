@@ -150,6 +150,7 @@ public class MainState extends BasicGameState{
 		pile      = new Stockpile(45); // Stockpile generieren
 		pausepile = new Pausepile(45, 30);
 		//field = Map.generateMap(1, 1); // Feld generieren
+		//field = Map.generateMap(20, 20);// GameSettings.STANDARD_MAP_SIZE_HEIGHT); // Feld generieren //GameSettings.STANDARD_MAP_SIZE_WIDTH
 		//field.setName("Test");
 		
 		//long time_1 = System.currentTimeMillis();
