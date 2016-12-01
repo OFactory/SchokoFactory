@@ -164,9 +164,9 @@ public class MainState extends BasicGameState{
 		
 		// InfoPanel + TABS
 		int x =      gc.getWidth()/5*4;
-		int y =      gc.getHeight()/20;
+		int y =      75;//gc.getHeight()/14;
 		int width =  gc.getWidth()/20*4;
-		int height = gc.getHeight()/20*19;
+		int height = gc.getHeight()-y;
 		
 		ip = new InfoPanel(x, y, width, height);
 		ip.setTabs(Arrays.asList(
