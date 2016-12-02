@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 
 import org.lwjgl.opengl.Display;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -102,10 +101,12 @@ public class MainState extends BasicGameState{
 	//Zeug für Markeinstellungen
 	public static TextField txt_preis;
 	public static TextField txt_werbung;
+	public static TextField txt_qualitaet;
 	public static Button    btn_bestätigen;
 	
-	
-	
+	public static double inpreis;
+	public static double inwerbung;
+	public static double inqualitaet;
 	
 	//-------------------------------------------------------------------------
 	
@@ -181,18 +182,24 @@ public class MainState extends BasicGameState{
 		
 		txt_preis = new TextField(gc, gc.getDefaultFont(), 800, 760, 200, 20);
 		txt_werbung = new TextField(gc, gc.getDefaultFont(), 800, 800, 200, 20);
-		btn_bestätigen = new Button(0, 800, 820, 200, 30, "set",0);
+		txt_qualitaet = new TextField(gc, gc.getDefaultFont(), 800, 840, 200, 20);
+		
+		txt_preis.setText("1");
+		txt_werbung.setText("0");
+		txt_qualitaet.setText("0");
+		
+		btn_bestätigen = new Button(0, 800, 870, 200, 35, "set",2);
 		btn_bestätigen.addActionListener(new ActionListener() {		
 			public void actionPerformed(ActionEvent e) {
 				try {
-					double werbung  = Double.parseDouble(txt_werbung.getText());
-					double preis    = Double.parseDouble(txt_preis.getText());
+					inwerbung  = Double.parseDouble(txt_werbung.getText());
+					inpreis    = Double.parseDouble(txt_preis.getText());
+					inqualitaet = Double.parseDouble(txt_qualitaet.getText());
 					
-					MainState.p.setPreis(preis);
-					MainState.p.investQuality(werbung);
+
 					
 				} catch(Exception ex){
-					System.err.println("ERROR 003: Konnte " + txt_preis.getText() + " / " + txt_werbung.getText() + " nicht zu einem Integer konvertieren!");
+					System.err.println("ERROR 003: Konnte " + txt_preis.getText() + " / " + txt_werbung.getText() + " / " + txt_qualitaet.getText() + " nicht zu einem Integer konvertieren!");
 					ex.printStackTrace();
 				}
 				
@@ -236,6 +243,9 @@ public class MainState extends BasicGameState{
 		
 		btn_bestätigen.update(gc.getInput());
 		
+
+
+		
 		if(clicked != null){ // Clicked Pattern
 			
 			if(curpatternstate == null){ // Kein Gebäude ausgewählt: nur Auswahlmöglichkeit
@@ -258,7 +268,9 @@ public class MainState extends BasicGameState{
 						
 				}
 			}
-				
+			
+			
+
 		}
 		
 		
@@ -296,6 +308,10 @@ public class MainState extends BasicGameState{
 				}
 			}
 			f.run(); // Produktion des Spieler
+			
+			MainState.p.setPreis(inpreis);
+			MainState.p.investAdverts(inwerbung);
+			MainState.p.investQuality(inqualitaet);
 			
 			m.day(); // Berechnung vor Ende des Tages
 			
@@ -386,7 +402,7 @@ public class MainState extends BasicGameState{
 		
 		
 		
-		cam_pos.setLocation(cam_pos.getX() + allv_x, cam_pos.getY() + allv_y);
+		//cam_pos.setLocation(cam_pos.getX() + allv_x, cam_pos.getY() + allv_y);
 		if(!view_dimensions.contains((float) cam_pos.getX(), (float) cam_pos.getY())){
 			cam_pos.setLocation(cam_pos.getX() - allv_x, cam_pos.getY() - allv_y);
 			allv_x = 0;
@@ -445,9 +461,15 @@ public class MainState extends BasicGameState{
 		g.setColor(Color.white);
 		txt_preis.render(gc, g);
 		txt_werbung.render(gc, g);
+		txt_qualitaet.render(gc, g);
 		
-		g.drawString("Preis:",   730, 760);
-		g.drawString("Werbung:", 730, 800);
+		g.drawString("Preis:",   720, 760);
+		g.drawString("Werbung:", 720, 800);
+		g.drawString("Qualität:", 720, 840);
+		
+		g.drawString(""+(float)Math.round(p.getPreis()*100d) /100d,   1010, 760);
+		g.drawString(""+(float)Math.round(p.getWerbefaktor()*100d) /100d, 1010, 800);
+		g.drawString(""+(float)Math.round(p.getQualitaet()*100d) /100d, 1010, 840);
 		
 		btn_bestätigen.draw(g);
 		

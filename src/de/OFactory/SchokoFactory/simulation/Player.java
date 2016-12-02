@@ -79,6 +79,11 @@ public class Player {
 		this.setQualitaet(this.getQualitaet() + amount / this.getQualitaet() / 2200);
 	}
 
+    public void investAdverts(double amount) {
+    	this.addMoney(-amount);
+    	this.setWerbefaktor(1+amount/11000);
+    }
+	
     public void finalCalculation() {
     	
     	umsatz = absatz * preis;
@@ -105,6 +110,8 @@ public class Player {
             zinsen = 0;
     	
     }
+    
+
 
 	/**Get inputs from GUI(in Market.java).**/
     @SuppressWarnings("unused") //PLS USE
