@@ -258,8 +258,10 @@ public class MainState extends BasicGameState{
 			} else {
 			
 				if(clicked instanceof Wiese){ //Feld "leer" ( = Wiese)
-					if(curpatternstate != PatternState.WIESE)
+					if(curpatternstate != PatternState.WIESE) {
 						field.set(clicked.getId(), Pattern.getInstance(MainState.field, clicked.getX(), clicked.getY(), curpatternstate, clicked.getId(), clicked.getXCoordinate(), clicked.getYCoordinate()));
+						curpatternstate = null;
+					}
 				} else { //Feld hat ein Gebäude
 					if(curpatternstate == PatternState.WIESE) //Gebäude entfernen (-> Wiese) 
 						field.set(clicked.getId(), new Wiese(MainState.field, clicked.getX(), clicked.getY(), clicked.getId(), clicked.getXCoordinate(), clicked.getYCoordinate()));
@@ -386,14 +388,14 @@ public class MainState extends BasicGameState{
 		else 
 			MainState.allv_x = 0;
 		
-		Shape up = new Rectangle(0, 0, Display.getWidth(), 20);
-		Shape left = new Rectangle(0, 0, 20, Display.getHeight());
-		Shape right = new Rectangle(Display.getWidth()-20, 0, 20, Display.getHeight());
-		Shape down = new Rectangle(0, Display.getHeight()-20, Display.getWidth(), Display.getHeight()-20);
+		Shape up = new Rectangle(-1, -1, Display.getWidth()+1, 20);
+		Shape left = new Rectangle(-1, -1, 20, Display.getHeight()+2);
+		Shape right = new Rectangle(Display.getWidth()-20, -1, 20, Display.getHeight()+2);
+		Shape down = new Rectangle(-1, Display.getHeight()-20, Display.getWidth()+1, Display.getHeight()+1);
 		
 		if(up.contains(in.getMouseX(), in.getMouseY()))
 			MainState.allv_y = + GameSettings.PATTERN_MOVEMENT_SPEED;
-		if(left.contains(in.getMouseX()+1, in.getMouseY()))
+		if(left.contains(in.getMouseX(), in.getMouseY()))
 			MainState.allv_x = + GameSettings.PATTERN_MOVEMENT_SPEED;
 		if(right.contains(in.getMouseX(), in.getMouseY()))
 			MainState.allv_x = - GameSettings.PATTERN_MOVEMENT_SPEED;
@@ -467,9 +469,9 @@ public class MainState extends BasicGameState{
 		g.drawString("Werbung:", 720, 800);
 		g.drawString("Qualität:", 720, 840);
 		
-		g.drawString(""+(float)Math.round(p.getPreis()*100d) /100d,   1010, 760);
-		g.drawString(""+(float)Math.round(p.getWerbefaktor()*100d) /100d, 1010, 800);
-		g.drawString(""+(float)Math.round(p.getQualitaet()*100d) /100d, 1010, 840);
+		g.drawString(""+p.getPreis(),   1010, 760);
+		g.drawString(""+inwerbung, 1010, 800);
+		g.drawString(""+inqualitaet, 1010, 840);
 		
 		btn_bestätigen.draw(g);
 		
@@ -501,5 +503,9 @@ public class MainState extends BasicGameState{
 	public void mousePressed(int button, int x, int y) {
 		msl.mousePressed(button, x, y);
 	}
-
+	
+	@Override
+	public void mouseClicked(int button, int x, int y, int clickCount) {
+		msl.mouseClicked(button, x, y, clickCount);
+	}
 }

@@ -27,7 +27,7 @@ public class BuildingInfoTab extends Tab{
 		super(ip, img, "i Gebäudeinformation");
 		// TODO Auto-generated constructor stub
 		
-		work_button = new Button(15, 1050, 500, 250, 50, "Aus/An- schalten", 0);
+		work_button = new Button(15, ip.getX()+20, 500, 250, 50, "Aus/An- schalten", 0);
 		work_button.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				
