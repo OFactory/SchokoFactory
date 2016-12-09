@@ -56,7 +56,7 @@ public class Market {
 
 		bedarf = (59*bedarf + summeAbsAlt) / 60 * Math.pow(this.eco , 2) * boni * (Math.pow(getWerbefaktoren(),0.9) + 330)/331;
 		// Bedarf gleicht sich an den alten Absatz über 2 Monate (60 Tage) an, Gewöhnungseffekt
-		
+		bedarf = (float)Math.round((float)bedarf *100d) /100d;
 		summeMoegAbs = getMoegAbs();
 		summeAbs = (int)(summeMoegAbs+bedarf)/2;
 		calculateShift();
@@ -283,8 +283,8 @@ public class Market {
 			return "±0%";
 		else if (z > 1)
 			s += "+";		// - Zeichen wird automatisch gesetzt
-
-		s += String.format("%.2f", (z-1)*100) + "%";
+		z = (float)Math.round((float)z *100d) /100d;
+		s += z + "%";
 		
 		return s;
 	}

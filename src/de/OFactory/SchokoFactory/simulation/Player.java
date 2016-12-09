@@ -76,7 +76,7 @@ public class Player {
     
 	public void investQuality(double amount) {
 		this.addMoney(-amount);
-		this.setQualitaet(this.getQualitaet() + amount / this.getQualitaet() / 2200);
+		this.setQualitaet(this.getQualitaet() + amount / this.getQualitaet() / 2500);
 	}
 
     public void investAdverts(double amount) {
@@ -88,23 +88,26 @@ public class Player {
     	
     	umsatz = absatz * preis;
     	money += umsatz;
-    	//System.out.print(produktmenge+", ");
-    	//if (produktmenge != absatz)
+
     	produktmenge -= absatz;
-        //System.out.println(produktmenge+", "+absatz);
+
         if (market.getSummeAbs() != 0) {
         	marktanteil = (float)Math.round((float)absatz/market.getSummeAbs() *100d) /100d;  // runde auf 2 Nachkommastellen
         } else {
         	marktanteil = 0;
         }
 
+        System.out.println("Zinsen: " + -money / Math.pow(umsatz,2) * market.getSummeUms() * 0.0167 / 5);
+        
         if (money < 0 && liquide) {
             zinsen = -money / Math.pow(umsatz,2) * market.getSummeUms() * 0.0167 / 5;
+            
             if (zinsen < 0.03) 
                 zinsen = 0.03;
             money += zinsen*money;
             if (zinsen > 0.20) 
                 liquide = false;
+            	System.out.println(name + " bankrott ______________________________________________________________");
 
         } else
             zinsen = 0;

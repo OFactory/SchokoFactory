@@ -104,7 +104,7 @@ public class MainState extends BasicGameState{
 	public static TextField txt_qualitaet;
 	public static Button    btn_bestätigen;
 	
-	public static double inpreis;
+	public static double inpreis = 1;
 	public static double inwerbung;
 	public static double inqualitaet;
 	
