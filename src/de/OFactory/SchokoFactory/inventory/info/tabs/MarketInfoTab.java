@@ -62,11 +62,15 @@ public class MarketInfoTab extends Tab{
 		anteilchart.draw(g);
 		anteilchart.setX(offx+20);
 		
-		wachstumschart.addPoint(MainState.m.getSummeAbs());
+		
 		wachstumschart.draw(g);
 		
 	}
 
+	public void addToWachtumsChart(int value){
+		wachstumschart.addPoint(value);
+	}
+	
 	@Override
 	public void updateContent(GameContainer gc) {
 		// TODO Auto-generated method stub

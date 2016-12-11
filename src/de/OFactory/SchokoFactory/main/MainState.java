@@ -315,6 +315,11 @@ public class MainState extends BasicGameState{
 			MainState.p.investAdverts(inwerbung);
 			MainState.p.investQuality(inqualitaet);
 			
+			if(ip.getCurrentTab() instanceof MarketInfoTab){
+				MarketInfoTab mit = (MarketInfoTab) ip.getCurrentTab();
+				mit.addToWachtumsChart(MainState.m.getSummeAbs());
+			}
+			
 			m.day(); // Berechnung vor Ende des Tages
 			
 			// Ende des Tages

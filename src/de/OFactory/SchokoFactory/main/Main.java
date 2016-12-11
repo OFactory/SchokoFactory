@@ -23,8 +23,8 @@ public class Main extends StateBasedGame{
 	
 	//Variablen
 
-	public static final int BASE_HEIGTH = 1080;
-	public static final int BASE_WIDTH  = 1920;
+	public static final int BASE_HEIGTH = 1000;
+	public static final int BASE_WIDTH  = 1700;
 	
 	public static int height = BASE_HEIGTH;
 	public static int width  = BASE_WIDTH;
@@ -59,7 +59,7 @@ public class Main extends StateBasedGame{
 	public static void main(String[] args) throws LWJGLException {
 		try {
 			AppGameContainer app = new AppGameContainer(new Main("SchokoFactory")); // Spiel Title = Basic
-			app.setDisplayMode(BASE_WIDTH, BASE_HEIGTH, true); // Fenstergröße
+			app.setDisplayMode(BASE_WIDTH, BASE_HEIGTH, false); // Fenstergröße
 			app.setTargetFrameRate(60); // Framerate auf 60 beschränkt
 			
 			//Resizable setzen
