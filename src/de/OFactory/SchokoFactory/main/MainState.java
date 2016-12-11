@@ -118,7 +118,8 @@ public class MainState extends BasicGameState{
 	
 	
 	
-	
+	//Tabs
+	public static MarketInfoTab mtab;
 	
 	
 	
@@ -170,10 +171,11 @@ public class MainState extends BasicGameState{
 		int height = gc.getHeight()-y;
 		
 		ip = new InfoPanel(x, y, width, height);
+		mtab = new MarketInfoTab(ip, patternimg[1]);
 		ip.setTabs(Arrays.asList(
 				new BuildingInfoTab(ip, patternimg[3]),
 				new BuildTab(ip, patternimg[10]),
-				new MarketInfoTab(ip, patternimg[1]),
+				mtab,
 				new EnviromentTab(ip, patternimg[2])));
 		ip.switchTab(2);
 		
@@ -316,6 +318,8 @@ public class MainState extends BasicGameState{
 			MainState.p.investQuality(inqualitaet);
 			
 			m.day(); // Berechnung vor Ende des Tages
+			mtab.wachstumschart.addPoint(m.getSummeAbs());
+			System.out.println(m.getSummeAbs());
 			
 			// Ende des Tages
 			

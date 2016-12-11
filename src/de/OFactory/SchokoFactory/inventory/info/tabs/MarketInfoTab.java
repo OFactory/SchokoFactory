@@ -15,7 +15,7 @@ import de.OFactory.SchokoFactory.main.MainState;
 public class MarketInfoTab extends Tab{
 	
 	private CakeChart anteilchart;
-	private LineChart wachstumschart;
+	public LineChart wachstumschart;
 	public static final Color INFO_FONT_COLOR = new Color(50, 100, 200);
 	
 	public MarketInfoTab(InfoPanel ip, Image img) {
@@ -62,7 +62,7 @@ public class MarketInfoTab extends Tab{
 		anteilchart.draw(g);
 		anteilchart.setX(offx+20);
 		
-		wachstumschart.addPoint(MainState.m.getSummeAbs());
+
 		wachstumschart.draw(g);
 		
 	}

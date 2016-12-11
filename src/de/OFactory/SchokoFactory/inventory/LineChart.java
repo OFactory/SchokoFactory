@@ -2,6 +2,7 @@ package de.OFactory.SchokoFactory.inventory;
 
 import java.util.ArrayList;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
@@ -37,20 +38,31 @@ public class LineChart implements Updateable, Drawable{
 	public void draw(Graphics g) {
 
 		g.draw(this.shape);
-		int px = 0;
-		int apx = 0;
-		int apy = points.get(0);
-		int dx = this.width/points.size();
-		
-		for (int py:points) {
+		g.setColor(Color.blue);
+		g.setLineWidth(2);
+		if (points.size() > 0) {
+			int max = getMax(points);
+			int px = 0;
+			int apx = 0;
+			int apy = (int)((float)points.get(0)/max*this.height * 0.9);
+			int dx = (int)((float)this.width/points.size());
+			if (dx == 0) {
+				dx = 1;
+			}		
 			
-			px = px + dx;
-			py = py/this.height*10;
-			g.drawLine(this.x + apx, this.y + this.height - apy, this.x + px, this.y + this.height - py);
-			apx = px;
-			apy = py;
-			
+			for (int py:points) {
+				
+				px = px + dx;
+
+				py = (int)((float)py/max * this.height * 0.9);
+				g.drawLine(this.x + apx, this.y + this.height - apy, this.x + px, this.y + this.height - py);
+				
+				apx = px;
+				apy = py;
+				
+			}
 		}
+		g.setLineWidth(1);
 	}
 
 	public void update(GameContainer gc) {
@@ -63,5 +75,14 @@ public class LineChart implements Updateable, Drawable{
 		points.add(value);
 
 	}
-
+	
+	public int getMax(ArrayList<Integer> list){
+	    int max = Integer.MIN_VALUE;
+	    for(int i=0; i<list.size(); i++){
+	        if(list.get(i) > max){
+	            max = list.get(i);
+	        }
+	    }
+	    return max;
+	}
 }
