@@ -10,8 +10,8 @@ import de.OFactory.SchokoFactory.main.MainState;
 public class Gieﬂer extends Pattern implements Workable{
 	
 	private boolean working = true;
-	private int produktion = 200;
-	private int einmaligeFabrikkosten = 4000;
+	private int produktion = 100;
+	private int einmaligeFabrikkosten = 200;
 	private int laufendeFabrikkosten = 50;
 	
 	public Gieﬂer(Map map, int x, int y, int id, int xcoor, int ycoor) {
@@ -21,8 +21,8 @@ public class Gieﬂer extends Pattern implements Workable{
 		this.setFrameLoop(PatternFrame.GIEﬂER_S, PatternFrame.GIEﬂER_E);
 		
 		// Kosten:
-		MainState.p.addMoney(-2000);
-		MainState.p.addAusgaben(2000);
+		MainState.p.addMoney(-400);
+		MainState.p.addAusgaben(400);
 	}
 
 	@Override

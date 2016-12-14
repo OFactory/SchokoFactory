@@ -6,6 +6,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
 import de.OFactory.SchokoFactory.game.GameFonts;
+import de.OFactory.SchokoFactory.inventory.BlockChart;
 import de.OFactory.SchokoFactory.inventory.CakeChart;
 import de.OFactory.SchokoFactory.inventory.LineChart;
 import de.OFactory.SchokoFactory.inventory.info.InfoPanel;
@@ -15,7 +16,7 @@ import de.OFactory.SchokoFactory.main.MainState;
 public class MarketInfoTab extends Tab{
 	
 	private CakeChart anteilchart;
-	public LineChart wachstumschart;
+	public BlockChart wachstumschart; // oder als LineChart()
 	public static final Color INFO_FONT_COLOR = new Color(50, 100, 200);
 	
 	public MarketInfoTab(InfoPanel ip, Image img) {
@@ -24,7 +25,7 @@ public class MarketInfoTab extends Tab{
 		int offx = getInfoPanel().getX();
 		int offy = getInfoPanel().getY();
 		anteilchart = new CakeChart(1, offx + 20, offy + 500, 100, "möchte-gern-CakeChart");
-		wachstumschart = new LineChart(offx + 20, offy + 720, 300, 160);
+		wachstumschart = new BlockChart(offx + 20, offy + 720, 300, 160); // oder als LineChart()
 	}
 
 	@Override

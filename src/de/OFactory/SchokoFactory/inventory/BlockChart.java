@@ -11,7 +11,7 @@ import org.newdawn.slick.geom.Shape;
 import de.OFactory.SchokoFactory.main.Drawable;
 import de.OFactory.SchokoFactory.main.Updateable;
 
-public class LineChart implements Updateable, Drawable{
+public class BlockChart implements Updateable, Drawable{
 
 	int x;
 	int y;
@@ -23,7 +23,7 @@ public class LineChart implements Updateable, Drawable{
 	ArrayList<Integer> points = new ArrayList<Integer>();
 	
 	
-	public LineChart(int x, int y, int width, int height){
+	public BlockChart(int x, int y, int width, int height){
 		
 		
 		this.x = x;
@@ -43,24 +43,23 @@ public class LineChart implements Updateable, Drawable{
 		if (points.size() > 0) {
 			int max = getMax(points);
 			int px = 0;
-			int apx = 0;
-			int apy = (int)((float)points.get(0)/max*this.height * 0.9);
+
 			int dx = (int)((float)this.width/points.size());
 			if (dx == 0) {
 				dx = 1;
 			} else if (dx > this.width/5)
-				dx = this.width/5;	
+				dx = this.width/5;
 			
 			for (int py:points) {
 				
-				px = px + dx;
+				
 
 				py = (int)((float)py/max * this.height * 0.9);
-				g.drawLine(this.x + apx, this.y + this.height - apy, this.x + px, this.y + this.height - py);
+				g.fillRect(this.x + px, this.y + this.height - py, dx/3*2, py);
 				
-				apx = px;
-				apy = py;
 				
+				px = px + dx;
+
 			}
 		}
 		g.setLineWidth(1);

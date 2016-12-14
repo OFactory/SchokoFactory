@@ -11,8 +11,8 @@ public class Market {
 	private long time = 0; // 1. Januar 2016
 	private List<Player> players;
 	
-	private double bedarf = 2000;
-	private double eco = 1;//Math.pow(1.01, (double)1/360);
+	private double bedarf = 450;
+	private double eco = 1; //Math.pow(1.01, (double)1/360);
 	
 	private double boni = 1;
 	private int summeMoegAbs = 0;
@@ -20,7 +20,7 @@ public class Market {
 	private double summeUms;
 
 	private double zuwachs;
-	private int summeAbsAlt = 1800;
+	private int summeAbsAlt = 450;
 	
 	private ArrayList<Player> p_mit_diff = new ArrayList<Player>();
 	private ArrayList<Player> p_ohne_diff = new ArrayList<Player>();

@@ -2,9 +2,9 @@ package de.OFactory.SchokoFactory.simulation;
 
 public class SimpleAI extends Player {
 	
-	private int fabriken = 4;
-	private int produktion = 200;
-	private int einmaligeFabrikkosten = 4000;
+	private int fabriken = 2;
+	private int produktion = 100;
+	private int einmaligeFabrikkosten = 200;
 	private int laufendeFabrikkosten = 50;
 	
 	public SimpleAI(Market market, String name, double money) {
