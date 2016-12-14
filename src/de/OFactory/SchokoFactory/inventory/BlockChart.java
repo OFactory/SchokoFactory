@@ -53,9 +53,11 @@ public class BlockChart implements Updateable, Drawable{
 			for (int py:points) {
 				
 				
-
+				int thickness =  dx/3*2;
+				if (thickness == 0)
+					thickness = 1;
 				py = (int)((float)py/max * this.height * 0.9);
-				g.fillRect(this.x + px, this.y + this.height - py, dx/3*2, py);
+				g.fillRect(this.x + px, this.y + this.height - py, thickness, py);
 				
 				
 				px = px + dx;

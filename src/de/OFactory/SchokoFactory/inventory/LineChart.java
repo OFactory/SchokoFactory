@@ -8,6 +8,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
+import de.OFactory.SchokoFactory.game.GameFonts;
 import de.OFactory.SchokoFactory.main.Drawable;
 import de.OFactory.SchokoFactory.main.Updateable;
 
@@ -41,12 +42,17 @@ public class LineChart implements Updateable, Drawable{
 		g.setColor(Color.blue);
 		g.setLineWidth(2);
 		if (points.size() > 0) {
+			
+				
 			int max = getMax(points);
+			int charheight = GameFonts.SUB.getHeight("b");
+			g.drawString(" "+max, (int)this.x+this.width, (int)(this.y + this.height*0.1 - charheight/2));
+			
 			int px = 0;
 			int apx = 0;
 			int apy = (int)((float)points.get(0)/max*this.height * 0.9);
 			int dx = (int)((float)this.width/points.size());
-			if (dx == 0) {
+			if (dx < 1) {
 				dx = 1;
 			} else if (dx > this.width/5)
 				dx = this.width/5;	
@@ -74,6 +80,8 @@ public class LineChart implements Updateable, Drawable{
 	
 	public void addPoint(int value) {
 		points.add(value);
+		if (points.size() > this.width)
+			points.remove(0);
 
 	}
 	
