@@ -8,7 +8,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
-import de.OFactory.SchokoFactory.game.GameFonts;
 import de.OFactory.SchokoFactory.main.Drawable;
 import de.OFactory.SchokoFactory.main.Updateable;
 
@@ -44,20 +43,26 @@ public class LineChart implements Updateable, Drawable{
 			
 				
 			int max = getMax(points);
-			//int charheight = GameFonts.SUB.getHeight("b");
-			//g.drawString(" "+max, (int)this.x+this.width, (int)(this.y + this.height*0.1 - charheight/2));
 			
 			
 			int z = 0;
 			int d = 100;
-			while ((int)max/d > 10)
+			while ((int)max/d > 6)
 				d *= 10;
+				d /= 4;
 				
 				
 			for (int i = 0; i < (int)max/d+1; i ++) {
 				int y = (int)((float)i*d/max * this.height * 0.9);
-				g.drawLine(this.x,this.y + this.height - y, this.x+this.width, this.y + this.height - y);
-				g.drawString(z+"", (int)this.x+this.width, (int)this.y + this.height - y - 10);
+				if (i % 2 == 0) {
+					g.setColor(Color.darkGray);
+					g.drawString(z+"", (int)this.x+this.width+10, (int)this.y + this.height - y - 10);
+					g.drawLine(this.x,this.y + this.height - y, this.x+this.width+5, this.y + this.height - y);
+				} else {
+					g.setColor(Color.lightGray);
+					g.drawLine(this.x,this.y + this.height - y, this.x+this.width, this.y + this.height - y);
+				}
+				
 				z += d;
 			}
 			g.setColor(Color.blue);

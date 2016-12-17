@@ -1,5 +1,7 @@
 package de.OFactory.SchokoFactory.inventory.info.tabs;
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -9,6 +11,7 @@ import de.OFactory.SchokoFactory.game.GameFonts;
 import de.OFactory.SchokoFactory.inventory.BlockChart;
 import de.OFactory.SchokoFactory.inventory.CakeChart;
 import de.OFactory.SchokoFactory.inventory.LineChart;
+import de.OFactory.SchokoFactory.inventory.LinesChart;
 import de.OFactory.SchokoFactory.inventory.info.InfoPanel;
 import de.OFactory.SchokoFactory.inventory.info.Tab;
 import de.OFactory.SchokoFactory.main.MainState;
@@ -16,7 +19,7 @@ import de.OFactory.SchokoFactory.main.MainState;
 public class MarketInfoTab extends Tab{
 	
 	private CakeChart anteilchart;
-	public LineChart wachstumschart; // oder als LineChart()
+	public LinesChart wachstumschart; // oder als LineChart()
 	public static final Color INFO_FONT_COLOR = new Color(50, 100, 200);
 	
 	public MarketInfoTab(InfoPanel ip, Image img) {
@@ -25,7 +28,7 @@ public class MarketInfoTab extends Tab{
 		int offx = getInfoPanel().getX();
 		int offy = getInfoPanel().getY();
 		anteilchart = new CakeChart(1, offx + 20, offy + 500, 100, "möchte-gern-CakeChart");
-		wachstumschart = new LineChart(offx + 20, offy + 720, 300, 160); // oder als LineChart()
+		wachstumschart = new LinesChart(offx + 20, offy + 710, 300, 180); // oder als LineChart()
 	}
 
 	@Override
@@ -64,6 +67,7 @@ public class MarketInfoTab extends Tab{
 		anteilchart.setX(offx+20);
 		
 		//wachstumschart.addPoint(MainState.m.getSummeAbs());
+
 		wachstumschart.draw(g);
 		
 	}

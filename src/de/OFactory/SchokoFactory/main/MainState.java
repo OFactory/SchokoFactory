@@ -3,6 +3,7 @@ package de.OFactory.SchokoFactory.main;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.lwjgl.opengl.Display;
@@ -178,6 +179,22 @@ public class MainState extends BasicGameState{
 				mtab,
 				new EnviromentTab(ip, patternimg[2])));
 		ip.switchTab(2);
+
+		
+		ArrayList<Integer> l1 = new ArrayList<Integer>();
+		ArrayList<Integer> l2 = new ArrayList<Integer>();
+		ArrayList<Integer> l3 = new ArrayList<Integer>();
+		ArrayList<Integer> l4 = new ArrayList<Integer>();
+		
+		l1.add(450);
+		l2.add(150);
+		l3.add(150);
+		l4.add(150);
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<Integer>[] lines = (ArrayList<Integer>[]) new ArrayList[] {l1,l2,l3,l4};
+		
+		mtab.wachstumschart.setLines(lines);
 		
 		msl = new MainStateListener();
 		gc.getInput().addMouseListener(MainState.msl); //MouseListener
@@ -320,8 +337,11 @@ public class MainState extends BasicGameState{
 			MainState.p.investQuality(inqualitaet);
 			
 			m.day(); // Berechnung vor Ende des Tages
-			mtab.wachstumschart.addPoint(m.getSummeAbs());
-			System.out.println(m.getSummeAbs());
+			
+			int[] points = {MainState.m.getSummeAbs(), MainState.p.getAbsatz(), MainState.ai.getAbsatz(), MainState.ai.getAbsatz()};
+
+			mtab.wachstumschart.addPoints(points);
+
 			
 			// Ende des Tages
 			
