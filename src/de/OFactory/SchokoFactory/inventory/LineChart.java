@@ -39,14 +39,29 @@ public class LineChart implements Updateable, Drawable{
 	public void draw(Graphics g) {
 
 		g.draw(this.shape);
-		g.setColor(Color.blue);
-		g.setLineWidth(2);
+		
 		if (points.size() > 0) {
 			
 				
 			int max = getMax(points);
-			int charheight = GameFonts.SUB.getHeight("b");
-			g.drawString(" "+max, (int)this.x+this.width, (int)(this.y + this.height*0.1 - charheight/2));
+			//int charheight = GameFonts.SUB.getHeight("b");
+			//g.drawString(" "+max, (int)this.x+this.width, (int)(this.y + this.height*0.1 - charheight/2));
+			
+			
+			int z = 0;
+			int d = 100;
+			while ((int)max/d > 10)
+				d *= 10;
+				
+				
+			for (int i = 0; i < (int)max/d+1; i ++) {
+				int y = (int)((float)i*d/max * this.height * 0.9);
+				g.drawLine(this.x,this.y + this.height - y, this.x+this.width, this.y + this.height - y);
+				g.drawString(z+"", (int)this.x+this.width, (int)this.y + this.height - y - 10);
+				z += d;
+			}
+			g.setColor(Color.blue);
+			g.setLineWidth(2);
 			
 			int px = 0;
 			int apx = 0;
@@ -68,8 +83,10 @@ public class LineChart implements Updateable, Drawable{
 				apy = py;
 				
 			}
+			
+			g.setLineWidth(1);
 		}
-		g.setLineWidth(1);
+		
 	}
 
 	public void update(GameContainer gc) {
