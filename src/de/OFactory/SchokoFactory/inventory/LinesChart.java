@@ -21,6 +21,8 @@ public class LinesChart extends LineChart implements Updateable, Drawable{
 	int width;
 	protected int height;
 	
+	int dx; //Abstand x-Achse zwischen Punkten
+	
 	protected Shape shape;
 	
 	private ArrayList<Integer>[] lines;
@@ -85,16 +87,16 @@ public class LinesChart extends LineChart implements Updateable, Drawable{
 		g.setLineWidth(2);
 		
 		
-		System.out.println("height "+height);
+
 		
 		int i = 0;
 		for (ArrayList<Integer> points: lines) {
 			
-			System.out.println("p0 "+points.get(0));
+
 			int px = 0;
 			int apx = 0;
 			int apy = (int)((float)points.get(0)/max*this.height * 0.9);
-			int dx = (int)((float)this.width/points.size());
+			dx = (int)((float)this.width/points.size());
 			if (dx < 1) {
 				dx = 1;
 			} else if (dx > this.width/5)
@@ -107,6 +109,7 @@ public class LinesChart extends LineChart implements Updateable, Drawable{
 				py = (int)((float)py/max * this.height * 0.9);
 				g.setColor(LINE_COLORS[i]);
 				g.drawLine(this.x + apx, this.y + this.height - apy, this.x + px, this.y + this.height - py);
+
 				
 				apx = px;
 				apy = py;
@@ -116,6 +119,15 @@ public class LinesChart extends LineChart implements Updateable, Drawable{
 		}
 		
 		g.setLineWidth(1);
+		g.setColor(Color.darkGray);
+		
+		for (int f = 0; f <= lines[0].size(); f++) {
+			
+			g.drawLine(this.x + f*dx, this.y + this.height, this.x + f*dx, this.y + this.height + 5);
+					
+		}
+		
+
 		
 		
 	}
@@ -123,8 +135,6 @@ public class LinesChart extends LineChart implements Updateable, Drawable{
 	public void addPoints(int[] points) {
 		
 		for (int i = 0; i <= points.length-1; i++) {
-			System.out.println("addPoint:"+i);
-			System.out.println(points[i]);
 			this.lines[i].add(points[i]);
 			if (this.lines[i].size() > this.width)
 				this.lines[i].remove(0);

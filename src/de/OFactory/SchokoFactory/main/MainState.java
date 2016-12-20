@@ -28,6 +28,7 @@ import de.OFactory.SchokoFactory.game.patterns.Wiese;
 import de.OFactory.SchokoFactory.inventory.Button;
 import de.OFactory.SchokoFactory.inventory.Pausepile;
 import de.OFactory.SchokoFactory.inventory.Stockpile;
+import de.OFactory.SchokoFactory.inventory.info.EcoScreen;
 import de.OFactory.SchokoFactory.inventory.info.InfoPanel;
 import de.OFactory.SchokoFactory.inventory.info.tabs.BuildTab;
 import de.OFactory.SchokoFactory.inventory.info.tabs.BuildingInfoTab;
@@ -87,6 +88,8 @@ public class MainState extends BasicGameState{
 	//public static BuyButton b1;
 	//public static BuyButton b2;s
 	public static InfoPanel ip;
+	public static EcoScreen ecoscreen;
+	
 	
 	
 	//Zeug für Zeit -> Simulationsberechnungen
@@ -180,6 +183,9 @@ public class MainState extends BasicGameState{
 				new EnviromentTab(ip, patternimg[2])));
 		ip.switchTab(2);
 
+		
+		ecoscreen = new EcoScreen(0, y, gc.getWidth(), height);
+		
 		
 		ArrayList<Integer> l1 = new ArrayList<Integer>();
 		ArrayList<Integer> l2 = new ArrayList<Integer>();
@@ -398,6 +404,11 @@ public class MainState extends BasicGameState{
 			MainState.molten_chokolate += 100;
 		
 		
+		if(in.isKeyDown(Input.KEY_E)) {
+			ecoscreen.toggle();
+			System.out.println("e gedrückt");
+		}
+		
 		
 		
 		if(in.isKeyDown(Input.KEY_UP))
@@ -504,6 +515,7 @@ public class MainState extends BasicGameState{
 		// TESTAREA Inc. --------------------------
 		
 		ip.draw(g);
+		ecoscreen.draw(g);
 		
 		//Buttons #just4funs
 		//b1.draw(g);
