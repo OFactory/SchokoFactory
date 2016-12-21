@@ -22,7 +22,7 @@ public class LinesChart extends LineChart implements Updateable, Drawable{
 	int width;
 	protected int height;
 	
-	int dx; //Abstand x-Achse zwischen Punkten
+	double dx; //Abstand x-Achse zwischen Punkten
 	
 	protected Shape shape;
 	
@@ -97,16 +97,18 @@ public class LinesChart extends LineChart implements Updateable, Drawable{
 			int px = 0;
 			int apx = 0;
 			int apy = (int)((float)points.get(0)/max*this.height * 0.9);
-			dx = (int)((float)this.width/points.size());
+			dx = (double)this.width/points.size();
 			if (dx < 1) {
 				dx = 1;
 			} else if (dx > this.width/5)
 				dx = this.width/5;	
 			
-			for (int py:points) {
+			//for (int py:points) {
+			for (int n = 0; n < points.size();n++) {
 				
-				px = px + dx;
 
+				px = (int)(n*dx);
+				int py = points.get(n);
 				py = (int)((float)py/max * this.height * 0.9);
 				g.setColor(LINE_COLORS[i]);
 				g.drawLine(this.x + apx, this.y + this.height - apy, this.x + px, this.y + this.height - py);
@@ -134,8 +136,7 @@ public class LinesChart extends LineChart implements Updateable, Drawable{
 		
 		
 		//Monate
-		//System.out.println(lines[0].size()-MainState.m.getDay()-1);
-		//System.out.println(MainState.m.getTime());
+
 		for (long f = MainState.m.getTime()-lines[0].size()+1 +30; f <= MainState.m.getTime(); f+=30) {
 			int shift = 0;
 			if (MainState.m.getTime()-lines[0].size() +1 != 0) {
@@ -144,8 +145,8 @@ public class LinesChart extends LineChart implements Updateable, Drawable{
 			} else
 				System.out.println(MainState.m.getTime()-lines[0].size());
 
-			g.drawLine(this.x + (f-(MainState.m.getTime()-lines[0].size()+1))*dx - shift, this.y, this.x + (f-(MainState.m.getTime()-lines[0].size()+1))*dx - shift, this.y + this.height);
-			g.drawString((f+1)/30+"", this.x + (f-(MainState.m.getTime()-lines[0].size()+1))*dx - dx*15 - shift - 5, this.y + this.height + 5);
+			g.drawLine(this.x + (int)((f-(MainState.m.getTime()-lines[0].size()+1))*dx - shift*dx), this.y, this.x + (int)((f-(MainState.m.getTime()-lines[0].size()+1))*dx - shift*dx), this.y + this.height);
+			g.drawString((f+1)/30+"", this.x + (int)((f-(MainState.m.getTime()-lines[0].size()+1))*dx - dx*15 - shift*dx) - 5, this.y + this.height + 5);
 		}
 		
 		

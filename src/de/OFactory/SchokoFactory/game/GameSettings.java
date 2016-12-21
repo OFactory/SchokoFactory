@@ -10,5 +10,5 @@ public class GameSettings {
 	public static final int STANDARD_MAP_SIZE_WIDTH = 10;
 	public static final int STANDARD_MAP_SIZE_HEIGHT = 10;
 	
-	public static final long DAY_MILIS = 20;
+	public static final long DAY_MILIS = 2000;
 }
