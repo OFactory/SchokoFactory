@@ -69,6 +69,7 @@ public class MarketInfoTab extends Tab{
 		//wachstumschart.addPoint(MainState.m.getSummeAbs());
 
 		wachstumschart.draw(g);
+		wachstumschart.setX(offx+20);
 		
 	}
 

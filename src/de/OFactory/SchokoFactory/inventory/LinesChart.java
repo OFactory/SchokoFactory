@@ -3,6 +3,7 @@ package de.OFactory.SchokoFactory.inventory;
 import java.util.ArrayList;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
@@ -142,8 +143,7 @@ public class LinesChart extends LineChart implements Updateable, Drawable{
 			if (MainState.m.getTime()-lines[0].size() +1 != 0) {
 				shift = (int)(MainState.m.getTime()%30);		// irgendwie wackelt hier ein Frame ... fixme
 				System.out.println(shift);
-			} else
-				System.out.println(MainState.m.getTime()-lines[0].size());
+			} 
 
 			g.drawLine(this.x + (int)((f-(MainState.m.getTime()-lines[0].size()+1))*dx - shift*dx), this.y, this.x + (int)((f-(MainState.m.getTime()-lines[0].size()+1))*dx - shift*dx), this.y + this.height);
 			g.drawString((f+1)/30+"", this.x + (int)((f-(MainState.m.getTime()-lines[0].size()+1))*dx - dx*15 - shift*dx) - 5, this.y + this.height + 5);
@@ -152,6 +152,12 @@ public class LinesChart extends LineChart implements Updateable, Drawable{
 		
 	}
 
+	public void update(GameContainer gc) {
+
+		this.shape = new Rectangle(this.x, this.y, this.width, this.height);
+		
+	}
+	
 	public void addPoints(int[] points) {
 		
 		for (int i = 0; i <= points.length-1; i++) {
@@ -177,4 +183,13 @@ public class LinesChart extends LineChart implements Updateable, Drawable{
 	public void setLines(ArrayList<Integer>[] lines) {
 		this.lines = lines;
 	}
+	
+	public int getX() {
+		return this.x;
+	}
+	
+	public void setX(int x) {
+		this.x = x;
+	}
+	
 }

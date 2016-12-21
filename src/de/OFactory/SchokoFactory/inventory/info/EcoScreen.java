@@ -38,8 +38,8 @@ public class EcoScreen  implements Drawable, Updateable{
 		int offx = this.x + 20;
 		int offy = this.y + 20;
 		
-		anteilchart = new CakeChart(1, offx + 20, offy + 625, 150, "möchte-gern-CakeChart");
-		wachstumschart = new LinesChart(offx + 20 + 300 + 20, offy + 625, 500, 285);
+		anteilchart = new CakeChart(1, offx + 20, offy + 635, 150, "möchte-gern-CakeChart");
+		wachstumschart = new LinesChart(offx + 20 + 300 + 20, offy + 635, 500, 285);
 		
 	}
 
@@ -68,7 +68,7 @@ public class EcoScreen  implements Drawable, Updateable{
 			
 					
 			
-			GameFonts.MAIN.drawString( offx + 55, offy - 30,  "Economy Screen",           		                    Color.black);
+			GameFonts.MAIN.drawString( offx + 55, offy - 40,  "Economy Screen",           		                    Color.black);
 			
 			GameFonts.MED.drawString( offx + 10, offy + 20,  "Marktinformation",                                Color.black);
 			GameFonts.SUB.drawString( offx + 10, offy + 50,  "Datum: "        + MainState.m.getDateString(),    INFO_FONT_COLOR);
@@ -97,7 +97,7 @@ public class EcoScreen  implements Drawable, Updateable{
 			
 			
 			//Diagrammbox
-			g.fillRect(offx, offy + 550, 950, 350);
+			g.fillRect(offx, offy + 560, 960, 360);
 			
 			int[] slices = {MainState.p.getAbsatz(), MainState.ai.getAbsatz(), MainState.ai.getAbsatz()};
 			anteilchart.setSlices(slices);
