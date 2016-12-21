@@ -126,7 +126,8 @@ public class MainState extends BasicGameState{
 	public static MarketInfoTab mtab;
 	
 	
-	
+	//Key-Events
+	public static boolean E_Down = false;
 	
 	
 	
@@ -201,6 +202,7 @@ public class MainState extends BasicGameState{
 		ArrayList<Integer>[] lines = (ArrayList<Integer>[]) new ArrayList[] {l1,l2,l3,l4};
 		
 		mtab.wachstumschart.setLines(lines);
+		ecoscreen.wachstumschart.setLines(lines);
 		
 		msl = new MainStateListener();
 		gc.getInput().addMouseListener(MainState.msl); //MouseListener
@@ -347,7 +349,7 @@ public class MainState extends BasicGameState{
 			int[] points = {MainState.m.getSummeAbs(), MainState.p.getAbsatz(), MainState.ai.getAbsatz(), MainState.ai.getAbsatz()};
 
 			mtab.wachstumschart.addPoints(points);
-
+			//ecoscreen.wachstumschart.addPoints(points);
 			
 			// Ende des Tages
 			
@@ -404,11 +406,15 @@ public class MainState extends BasicGameState{
 			MainState.molten_chokolate += 100;
 		
 		
-		if(in.isKeyDown(Input.KEY_E)) {
-			ecoscreen.toggle();
-			System.out.println("e gedrückt");
+		if(in.isKeyDown(Input.KEY_E)) 
+			E_Down = true;
+		else {
+			if (E_Down)					// toggle nur beim loslassen ausführen
+										// dann wenn isKeyDown falsch ist und im letzten update() wahr war
+										// fällt dir was ein wie man die zusätzliche Variable umgehen kann?
+				ecoscreen.toggle();
+			E_Down = false;
 		}
-		
 		
 		
 		if(in.isKeyDown(Input.KEY_UP))
@@ -484,9 +490,9 @@ public class MainState extends BasicGameState{
 		
 		//Developer Info
 		g.setColor(new Color(200, 200, 200, 0.5F));
-		g.fillRect(0, gc.getHeight()/20, gc.getWidth()/4, gc.getHeight()/6);	
+		g.fillRect(0, 45, gc.getWidth()/4, gc.getHeight()/6);	
 		g.setColor(Color.black);
-		g.drawRect(0, gc.getHeight()/20, gc.getWidth()/4, gc.getHeight()/6);
+		g.drawRect(0, 45, gc.getWidth()/4, gc.getHeight()/6);
 		
 		g.setColor(new Color(0, 20, 200));
 		g.drawString("State: MainState", 10, 50);

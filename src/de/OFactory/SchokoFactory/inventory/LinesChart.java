@@ -8,6 +8,7 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
 import de.OFactory.SchokoFactory.main.Drawable;
+import de.OFactory.SchokoFactory.main.MainState;
 import de.OFactory.SchokoFactory.main.Updateable;
 
 public class LinesChart extends LineChart implements Updateable, Drawable{
@@ -121,13 +122,31 @@ public class LinesChart extends LineChart implements Updateable, Drawable{
 		g.setLineWidth(1);
 		g.setColor(Color.darkGray);
 		
-		for (int f = 0; f <= lines[0].size(); f++) {
+		int df = 1;
+		while (this.width/(int)lines[0].size()*df < 20)
+			df *= 2;
+		
+		/*for (int f = 0; f <= lines[0].size(); f+=df) {
 			
 			g.drawLine(this.x + f*dx, this.y + this.height, this.x + f*dx, this.y + this.height + 5);
-					
-		}
+			g.drawString(f+"", this.x + f*dx - 3, this.y + this.height + 5);
+		}*/
 		
+		
+		//Monate
+		//System.out.println(lines[0].size()-MainState.m.getDay()-1);
+		//System.out.println(MainState.m.getTime());
+		for (long f = MainState.m.getTime()-lines[0].size()+1 +30; f <= MainState.m.getTime(); f+=30) {
+			int shift = 0;
+			if (MainState.m.getTime()-lines[0].size() +1 != 0) {
+				shift = (int)(MainState.m.getTime()%30);		// irgendwie wackelt hier ein Frame ... fixme
+				System.out.println(shift);
+			} else
+				System.out.println(MainState.m.getTime()-lines[0].size());
 
+			g.drawLine(this.x + (f-(MainState.m.getTime()-lines[0].size()+1))*dx - shift, this.y, this.x + (f-(MainState.m.getTime()-lines[0].size()+1))*dx - shift, this.y + this.height);
+			g.drawString((f+1)/30+"", this.x + (f-(MainState.m.getTime()-lines[0].size()+1))*dx - dx*15 - shift - 5, this.y + this.height + 5);
+		}
 		
 		
 	}

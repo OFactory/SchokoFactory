@@ -48,17 +48,17 @@ public class MarketInfoTab extends Tab{
 
 		GameFonts.MED.drawString( offx + 10, offy + 200, "Spieler",                                         Color.black);
 		GameFonts.SUB.drawString( offx + 10, offy + 230, "Absatz: "       + MainState.p.getAbsatz(),        INFO_FONT_COLOR);
-		GameFonts.SUB.drawString( offx + 10, offy + 250, "Bekanntheit: "  + MainState.p.getBekanntheit(),   INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 250, "Bekanntheit: "  + round(MainState.p.getBekanntheit(),2), INFO_FONT_COLOR);
 		GameFonts.SUB.drawString( offx + 10, offy + 270, "Marktanteil: "  + MainState.p.getMarktanteil(),   INFO_FONT_COLOR);
 		GameFonts.SUB.drawString( offx + 10, offy + 290, "Produktmenge: " + MainState.p.getProduktmenge(),  INFO_FONT_COLOR);
-		GameFonts.SUB.drawString( offx + 10, offy + 310, "Qualität: "     + MainState.p.getQualitaet(),     INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 310, "Qualität: "     + round(MainState.p.getQualitaet(),2),     INFO_FONT_COLOR);
 		
 		GameFonts.MED.drawString( offx + 10, offy + 350, "Beispiel AI",                                     Color.black);
 		GameFonts.SUB.drawString( offx + 10, offy + 380, "Absatz: "       + MainState.ai.getAbsatz(),       INFO_FONT_COLOR);
-		GameFonts.SUB.drawString( offx + 10, offy + 400, "Bekanntheit: "  + MainState.ai.getBekanntheit(),  INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 400, "Bekanntheit: "  + round(MainState.ai.getBekanntheit(),2), INFO_FONT_COLOR);
 		GameFonts.SUB.drawString( offx + 10, offy + 420, "Marktanteil: "  + MainState.ai.getMarktanteil(),  INFO_FONT_COLOR);
 		GameFonts.SUB.drawString( offx + 10, offy + 440, "Produktmenge: " + MainState.ai.getProduktmenge(), INFO_FONT_COLOR);
-		GameFonts.SUB.drawString( offx + 10, offy + 460, "Qualität: "     + MainState.ai.getQualitaet(),    INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 460, "Qualität: "     + round(MainState.ai.getQualitaet(),2), INFO_FONT_COLOR);
 		GameFonts.SUB.drawString( offx + 10, offy + 480, "Geld: "         + MainState.ai.getMoney(),        INFO_FONT_COLOR);
 		
 		int[] slices = {MainState.p.getAbsatz(), MainState.ai.getAbsatz(), MainState.ai.getAbsatz()};
@@ -72,6 +72,11 @@ public class MarketInfoTab extends Tab{
 		
 	}
 
+	public double round(double d, int digits) {
+		return (float)Math.round((float)d *Math.pow(10, digits)) /Math.pow(10, digits);
+	}
+	
+	
 	@Override
 	public void updateContent(GameContainer gc) {
 		// TODO Auto-generated method stub
