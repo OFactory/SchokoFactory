@@ -68,7 +68,7 @@ public class Market {
 			setSummeUms(getSummeUms() + p.getAbsatz() * p.getPreis());
 		}
 
-
+		
 		if(summeAbsAlt != 0)		// Division by zero auffangen
 			zuwachs = (double)summeAbs/(double)summeAbsAlt;
 		
@@ -102,10 +102,10 @@ public class Market {
 			trans = rest_ges;
 		
 		if (trans != 0) {			// kommt es zu Verschiebungen?
-			System.out.println("shift it ___________-");
+			
 			double f = getF();
 			trans *= f;
-			
+			System.out.println("shift it _ f: "+f+"\ntrans: "+trans);
 			int divisor = 0;
 			for (Player p: p_ohne_diff)
 				divisor += p.getMoegAbs();
@@ -143,13 +143,12 @@ public class Market {
 	 * 
 	 * @return int Summer der Möglichen Absätze
 	 */
-	private int getMoegAbs() {
+	public int getMoegAbs() {
 		int summe = 0;
 		for (Player p: players) {
 			p.calculateMoegAbs();
 			summe += p.getMoegAbs();
 		}
-
 		
 		return summe;
 	}

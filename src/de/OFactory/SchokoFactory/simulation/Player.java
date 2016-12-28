@@ -44,7 +44,7 @@ public class Player {
     	
         //get();
         bekanntheit *= Math.pow(werbefaktor,0.9) * qualitaet / altqualitaet;
-        moegAbs = (int)(this.bekanntheit * (double)this.market.getBedarf()* (marktanteil+0.001) * this.market.getBoni() / altwerbefaktor * werbefaktor / Math.pow(preis,1.2));
+        moegAbs = (int)(this.bekanntheit * (double)this.market.getBedarf()* (marktanteil+0.005) * this.market.getBoni() / altwerbefaktor * werbefaktor / Math.pow(preis,1.2));
     
         altqualitaet = qualitaet;
         altwerbefaktor = werbefaktor;
@@ -54,7 +54,7 @@ public class Player {
     	
     	if (market.getSummeAbs() != 0) {
     		
-    		double moegMarktanteil = (double)moegAbs/market.getSummeAbs();
+    		double moegMarktanteil = (double)moegAbs/market.getMoegAbs();
 
 	    	moegAbs = (int)(moegMarktanteil * market.getSummeAbs());
 
