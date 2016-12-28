@@ -52,7 +52,10 @@ public class MainStateListener implements MouseListener{
 						delta_scale,
 						in.getMouseX(),
 						in.getMouseY()); //Map neu anordnen 
-				//TODO Zoomfunktion verbessern!
+				
+				// Cam_Pos ändern
+				//MainState.view_dimensions.setBounds(x, y, width, height);
+
 			}
 		}
 		

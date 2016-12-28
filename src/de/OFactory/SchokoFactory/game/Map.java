@@ -158,8 +158,8 @@ public class Map extends ArrayList<Pattern>{
 			int rel_x = zx - p.getX();
 			int rel_y = zy - p.getY();
 			
-			p.setX(p.getX() + (int) (rel_x*scale));
-			p.setY(p.getY() + (int) (rel_y*scale));
+			p.setX(p.getX() + (int) Math.round(rel_x*scale));
+			p.setY(p.getY() + (int) Math.round(rel_y*scale));
 		}
 
 	}

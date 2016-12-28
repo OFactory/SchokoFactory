@@ -43,13 +43,11 @@ public class EcoScreen  implements Drawable, Updateable{
 		
 	}
 
-	@Override
 	public void update(GameContainer gc) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void draw(Graphics g) {
 		if (this.show) {
 			//Hintergrund

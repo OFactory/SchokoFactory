@@ -1,16 +1,12 @@
 package de.OFactory.SchokoFactory.inventory.info.tabs;
 
-import java.util.ArrayList;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
 import de.OFactory.SchokoFactory.game.GameFonts;
-import de.OFactory.SchokoFactory.inventory.BlockChart;
 import de.OFactory.SchokoFactory.inventory.CakeChart;
-import de.OFactory.SchokoFactory.inventory.LineChart;
 import de.OFactory.SchokoFactory.inventory.LinesChart;
 import de.OFactory.SchokoFactory.inventory.info.InfoPanel;
 import de.OFactory.SchokoFactory.inventory.info.Tab;
