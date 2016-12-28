@@ -78,28 +78,37 @@ public class EcoScreen  implements Drawable, Updateable{
 			GameFonts.SUB.drawString( offx + 10, offy + 140, "Absatz: "       + MainState.m.getSummeAbs(),      INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 10, offy + 160, "Wachstum: "     + MainState.m.getZuwachsString(), INFO_FONT_COLOR);
 
-			GameFonts.MED.drawString( offx + 10, offy + 200, "Spieler",                                         Color.black);
+			GameFonts.MED.drawString( offx + 10, offy + 200, "Spieler",                                         Color.blue);
 			GameFonts.SUB.drawString( offx + 10, offy + 230, "Absatz: "       + MainState.p.getAbsatz(),        INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 10, offy + 250, "Bekanntheit: "  + round(MainState.p.getBekanntheit(),2), INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 10, offy + 270, "Marktanteil: "  + MainState.p.getMarktanteil(),   INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 10, offy + 290, "Produktmenge: " + MainState.p.getProduktmenge(),  INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 10, offy + 310, "Qualität: "     + round(MainState.p.getQualitaet(),2),     INFO_FONT_COLOR);
 			
-			GameFonts.MED.drawString( offx + 10, offy + 350, "Beispiel AI",                                     Color.black);
-			GameFonts.SUB.drawString( offx + 10, offy + 380, "Absatz: "       + MainState.ai.getAbsatz(),       INFO_FONT_COLOR);
-			GameFonts.SUB.drawString( offx + 10, offy + 400, "Bekanntheit: "  + round(MainState.ai.getBekanntheit(),2), INFO_FONT_COLOR);
-			GameFonts.SUB.drawString( offx + 10, offy + 420, "Marktanteil: "  + MainState.ai.getMarktanteil(),  INFO_FONT_COLOR);
-			GameFonts.SUB.drawString( offx + 10, offy + 440, "Produktmenge: " + MainState.ai.getProduktmenge(), INFO_FONT_COLOR);
-			GameFonts.SUB.drawString( offx + 10, offy + 460, "Qualität: "     + round(MainState.ai.getQualitaet(),2), INFO_FONT_COLOR);
-			GameFonts.SUB.drawString( offx + 10, offy + 480, "Geld: "         + MainState.ai.getMoney(),        INFO_FONT_COLOR);
+			GameFonts.MED.drawString( offx + 10, offy + 350, "AI1",                                  		     Color.yellow);
+			GameFonts.SUB.drawString( offx + 10, offy + 380, "Absatz: "       + MainState.ai1.getAbsatz(),       INFO_FONT_COLOR);
+			GameFonts.SUB.drawString( offx + 10, offy + 400, "Bekanntheit: "  + round(MainState.ai1.getBekanntheit(),2), INFO_FONT_COLOR);
+			GameFonts.SUB.drawString( offx + 10, offy + 420, "Marktanteil: "  + MainState.ai1.getMarktanteil(),  INFO_FONT_COLOR);
+			GameFonts.SUB.drawString( offx + 10, offy + 440, "Produktmenge: " + MainState.ai1.getProduktmenge(), INFO_FONT_COLOR);
+			GameFonts.SUB.drawString( offx + 10, offy + 460, "Qualität: "     + round(MainState.ai1.getQualitaet(),2), INFO_FONT_COLOR);
+			GameFonts.SUB.drawString( offx + 10, offy + 480, "Geld: "         + MainState.ai1.getMoney(),        INFO_FONT_COLOR);
+			GameFonts.SUB.drawString( offx + 10, offy + 500, "Preis: "        + MainState.ai1.getPreis(),        INFO_FONT_COLOR);
+			GameFonts.SUB.drawString( offx + 10, offy + 520, "Diff: "         + MainState.ai1.getDiff(),         INFO_FONT_COLOR);
 			
-			
-			
+			GameFonts.MED.drawString( offx + 300, offy + 350, "AI2",                                  	          Color.green);
+			GameFonts.SUB.drawString( offx + 300, offy + 380, "Absatz: "       + MainState.ai2.getAbsatz(),       INFO_FONT_COLOR);
+			GameFonts.SUB.drawString( offx + 300, offy + 400, "Bekanntheit: "  + round(MainState.ai2.getBekanntheit(),2), INFO_FONT_COLOR);
+			GameFonts.SUB.drawString( offx + 300, offy + 420, "Marktanteil: "  + MainState.ai2.getMarktanteil(),  INFO_FONT_COLOR);
+			GameFonts.SUB.drawString( offx + 300, offy + 440, "Produktmenge: " + MainState.ai2.getProduktmenge(), INFO_FONT_COLOR);
+			GameFonts.SUB.drawString( offx + 300, offy + 460, "Qualität: "     + round(MainState.ai2.getQualitaet(),2), INFO_FONT_COLOR);
+			GameFonts.SUB.drawString( offx + 300, offy + 480, "Geld: "         + MainState.ai2.getMoney(),        INFO_FONT_COLOR);
+			GameFonts.SUB.drawString( offx + 300, offy + 500, "Preis: "        + MainState.ai2.getPreis(),        INFO_FONT_COLOR);
+			GameFonts.SUB.drawString( offx + 300, offy + 520, "Diff: "         + MainState.ai2.getDiff(),         INFO_FONT_COLOR);
 			
 			//Diagrammbox
 			g.fillRect(offx, offy + 560, 960, 360);
 			
-			int[] slices = {MainState.p.getAbsatz(), MainState.ai.getAbsatz(), MainState.ai.getAbsatz()};
+			int[] slices = {MainState.p.getAbsatz(), MainState.ai1.getAbsatz(), MainState.ai2.getAbsatz()};
 			anteilchart.setSlices(slices);
 			anteilchart.draw(g);
 			anteilchart.setX(offx+20);

@@ -53,15 +53,15 @@ public class MarketInfoTab extends Tab{
 		GameFonts.SUB.drawString( offx + 10, offy + 290, "Produktmenge: " + MainState.p.getProduktmenge(),  INFO_FONT_COLOR);
 		GameFonts.SUB.drawString( offx + 10, offy + 310, "Qualität: "     + round(MainState.p.getQualitaet(),2),     INFO_FONT_COLOR);
 		
-		GameFonts.MED.drawString( offx + 10, offy + 350, "Beispiel AI",                                     Color.black);
-		GameFonts.SUB.drawString( offx + 10, offy + 380, "Absatz: "       + MainState.ai.getAbsatz(),       INFO_FONT_COLOR);
-		GameFonts.SUB.drawString( offx + 10, offy + 400, "Bekanntheit: "  + round(MainState.ai.getBekanntheit(),2), INFO_FONT_COLOR);
-		GameFonts.SUB.drawString( offx + 10, offy + 420, "Marktanteil: "  + MainState.ai.getMarktanteil(),  INFO_FONT_COLOR);
-		GameFonts.SUB.drawString( offx + 10, offy + 440, "Produktmenge: " + MainState.ai.getProduktmenge(), INFO_FONT_COLOR);
-		GameFonts.SUB.drawString( offx + 10, offy + 460, "Qualität: "     + round(MainState.ai.getQualitaet(),2), INFO_FONT_COLOR);
-		GameFonts.SUB.drawString( offx + 10, offy + 480, "Geld: "         + MainState.ai.getMoney(),        INFO_FONT_COLOR);
+		GameFonts.MED.drawString( offx + 10, offy + 350, "AI2",                                              Color.black);
+		GameFonts.SUB.drawString( offx + 10, offy + 380, "Absatz: "       + MainState.ai2.getAbsatz(),       INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 400, "Bekanntheit: "  + round(MainState.ai2.getBekanntheit(),2), INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 420, "Marktanteil: "  + MainState.ai2.getMarktanteil(),  INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 440, "Produktmenge: " + MainState.ai2.getProduktmenge(), INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 460, "Qualität: "     + round(MainState.ai2.getQualitaet(),2), INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 10, offy + 480, "Geld: "         + MainState.ai2.getMoney(),        INFO_FONT_COLOR);
 		
-		int[] slices = {MainState.p.getAbsatz(), MainState.ai.getAbsatz(), MainState.ai.getAbsatz()};
+		int[] slices = {MainState.p.getAbsatz(), MainState.ai1.getAbsatz(), MainState.ai2.getAbsatz()};
 		anteilchart.setSlices(slices);
 		anteilchart.draw(g);
 		anteilchart.setX(offx+20);

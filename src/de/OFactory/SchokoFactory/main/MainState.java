@@ -34,6 +34,7 @@ import de.OFactory.SchokoFactory.inventory.info.tabs.BuildTab;
 import de.OFactory.SchokoFactory.inventory.info.tabs.BuildingInfoTab;
 import de.OFactory.SchokoFactory.inventory.info.tabs.EnviromentTab;
 import de.OFactory.SchokoFactory.inventory.info.tabs.MarketInfoTab;
+import de.OFactory.SchokoFactory.simulation.BetterAI;
 import de.OFactory.SchokoFactory.simulation.Factory;
 import de.OFactory.SchokoFactory.simulation.Market;
 import de.OFactory.SchokoFactory.simulation.Player;
@@ -98,7 +99,8 @@ public class MainState extends BasicGameState{
 	
 	// Zeug für Markt
 	public static Player  p; //Spieler
-	public static SimpleAI  ai; //Spieler
+	public static SimpleAI  ai1; //Spieler
+	public static BetterAI  ai2; //Spieler
 	public static Market  m;
 	public static Factory f; //Engine für work();
 	
@@ -130,6 +132,9 @@ public class MainState extends BasicGameState{
 	public static boolean E_Down = false;
 	
 	
+	// Spiel läuft oder pausiert
+	public static boolean run = true;
+	
 	
 	//-------------------------------------------------------------------------
 	
@@ -148,13 +153,13 @@ public class MainState extends BasicGameState{
 		// - Market
 		MainState.m = new Market(); 
 		MainState.f = new Factory();
-		MainState.p = new Player(m, "P", 9000);
-		MainState.ai = new SimpleAI(m,"P2",1000);
+		MainState.p = new Player(m, "P", 1800);
+		MainState.ai1 = new SimpleAI(m,"P2",1000);
+		MainState.ai2 = new BetterAI(m,"P2",1000);
 		MainState.m.setPlayer(Arrays.asList(
 				p,
-				ai,
-				new SimpleAI(m,"P3",1000)
-				));
+				ai1,
+				ai2));
 		
 		pile      = new Stockpile(45); // Stockpile generieren
 		pausepile = new Pausepile(45, 30);
@@ -261,6 +266,9 @@ public class MainState extends BasicGameState{
 		if(gc.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
 			Display.destroy();
 		}
+		if(gc.getInput().isKeyPressed(Input.KEY_SPACE)) {
+			run = !run;
+		}
 		
 		
 		Input in = gc.getInput(); //Inputinstanz holen
@@ -322,7 +330,7 @@ public class MainState extends BasicGameState{
 		//Tag berechnen
 		delta_t = System.currentTimeMillis() - last;
 		
-		if(delta_t >= GameSettings.DAY_MILIS){ //Ein Tag(Siehe GameSettings.DAY_MILIS) geht verüber
+		if(delta_t >= GameSettings.DAY_MILIS && run){ //Ein Tag(Siehe GameSettings.DAY_MILIS) geht verüber
 			last = 0;
 			
 			long t1 = System.currentTimeMillis();
@@ -332,10 +340,16 @@ public class MainState extends BasicGameState{
 				if (p instanceof SimpleAI) {
 					((SimpleAI) p).think(); // Aktionen der AIs
 				}
+				else if (p instanceof BetterAI) {
+					((BetterAI) p).think(); // Aktionen der AIs
+				}
 			}
 			for (Player p : m.getPlayers()) {
 				if (p instanceof SimpleAI) {
 					((SimpleAI) p).runFactories(); // Produktion der AIs
+				}
+				else if (p instanceof BetterAI) {
+					((BetterAI) p).runFactories(); // Produktion der AIs
 				}
 			}
 			f.run(); // Produktion des Spieler
@@ -346,7 +360,7 @@ public class MainState extends BasicGameState{
 			
 			m.day(); // Berechnung vor Ende des Tages
 			
-			int[] points = {MainState.m.getSummeAbs(), MainState.p.getAbsatz(), MainState.ai.getAbsatz(), MainState.ai.getAbsatz()};
+			int[] points = {MainState.m.getSummeAbs(), MainState.p.getAbsatz(), MainState.ai1.getAbsatz(), MainState.ai2.getAbsatz()};
 
 			mtab.wachstumschart.addPoints(points);
 			//ecoscreen.wachstumschart.addPoints(points);
