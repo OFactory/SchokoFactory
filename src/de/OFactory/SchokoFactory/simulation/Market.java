@@ -37,17 +37,23 @@ public class Market {
 		calculation();
 		
 		this.time++;
+		//printStuff();
+
+		
+		// Ausgaben zurücksetzen für den nächsten Tag
+		for (Player p: players) {
+			p.setAusgaben(0);
+		}
+	}
+	
+	@SuppressWarnings("unused")
+	private void printStuff() {
 		System.out.println("<Markt> [ " + getDateString() + " ]" );
 		System.out.println("<Markt> Tagesbilanz");	// zum leichteren Debuggen der Markt- und Produktionssimlation
 		//System.out.println(" | Bedarf: " + this.bedarf);
 		System.out.println(" | SummMoegAbsatz: " + this.getMoegAbs());
 		for (int i = 0; i < players.size(); i++) {
 			System.out.println(" | P"+i+"  moegAbsatz: " + players.get(i).getMoegAbs());
-		}
-		
-		// Ausgaben zurücksetzen für den nächsten Tag
-		for (Player p: players) {
-			p.setAusgaben(0);
 		}
 	}
 	

@@ -55,12 +55,12 @@ public class BetterAI extends AI {
 		// gönnung
 		if (this.getMoney() > 1000) {
 			if (diff > 0)
-				investQuality(this.getMoney()/10);
+				investQuality(this.getMoney()/8);
 			if (diff < 0) 
-				for (int i=0; i < this.getMoney()/2000;i++) 
+				for (int i=0; i < this.getMoney()/1800;i++) 
 					buildFactory();	buildFactory();
 		}
-			
+		
 
 	}
 
