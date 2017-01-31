@@ -60,7 +60,7 @@ public abstract class Tab implements Drawable, Updateable{
 		
 		g.fillRect(x, y, size, size);
 		g.setColor(Color.black);
-		g.drawRect(x, y, size, size);
+		//g.drawRect(x, y, size, size);
 		
 		//g.drawImage(display.getScaledCopy(size/display.getWidth()), -30);
 		//display.draw(x, y-500);

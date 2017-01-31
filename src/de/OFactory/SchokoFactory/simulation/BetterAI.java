@@ -57,8 +57,8 @@ public class BetterAI extends AI {
 			if (diff > 0)
 				investQuality(this.getMoney()/8);
 			if (diff < 0) 
-				for (int i=0; i < this.getMoney()/1800;i++) 
-					buildFactory();	buildFactory();
+				for (int i=0; i < this.getMoney()*0.3/200;i++) 
+					buildFactory();	
 		}
 		
 
