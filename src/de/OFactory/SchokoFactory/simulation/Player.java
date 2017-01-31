@@ -32,6 +32,10 @@ public class Player {
 	
 	private double ausgaben;
 	
+	private double[] preisliste = new double[] {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+	private double[] qualiliste = new double[] {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+	private double[] werbeliste = new double[] {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+	
 	public Player(Market market, String name, double money) {
 		
 		this.market = market;
@@ -42,7 +46,30 @@ public class Player {
 	/**First part of the calculation. Gets inputs and works out possible sales(ger.: Absatz). Returns possible sales to Game.**/
     public void calculateMoegAbs() {
     	
-        //get();
+    	int item = (int)market.getTime() % 15;
+    	
+    	werbeliste[item] = this.werbefaktor;
+
+    	double werbefaktor = 0;		// Variable preis wird hier noch als Summe in der Liste verwendet.
+        for (double p:this.werbeliste)
+        	werbefaktor += p;
+        werbefaktor /= this.werbeliste.length;
+    	
+    	qualiliste[item] = this.qualitaet;
+
+    	double qualitaet = 0;		// Variable preis wird hier noch als Summe in der Liste verwendet.
+        for (double p:this.qualiliste)
+        	qualitaet += p;
+        qualitaet /= this.qualiliste.length;
+    	
+    	
+    	preisliste[item] = this.preis;
+
+    	double preis = 0;		// Variable preis wird hier noch als Summe in der Liste verwendet.
+        for (double p:this.preisliste)
+        	preis += p;
+        preis /= this.preisliste.length;
+
         bekanntheit *= Math.pow(werbefaktor,0.9) * qualitaet / altqualitaet;
         moegAbs = (int)(this.bekanntheit * (double)this.market.getBedarf()* (marktanteil+0.005) * this.market.getBoni() / altwerbefaktor * werbefaktor / preis);
     
@@ -265,6 +292,18 @@ public class Player {
 	}
 	public void addAusgaben(double delta) {
 		this.ausgaben += delta;
+	}
+	public double[] getPreisliste() {
+		return preisliste;
+	}
+	public void setPreisliste(double[] preisliste) {
+		this.preisliste = preisliste;
+	}
+	public double[] getQualiliste() {
+		return qualiliste;
+	}
+	public void setQualiliste(double[] qualiliste) {
+		this.qualiliste = qualiliste;
 	}
 
 }
