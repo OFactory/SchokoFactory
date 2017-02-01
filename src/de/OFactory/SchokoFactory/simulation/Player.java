@@ -70,9 +70,13 @@ public class Player {
         	preis += p;
         preis /= this.preisliste.length;
 
+        //ungebremst:						// nicht zutreffendes bitte auskommentieren
+        //bekanntheit *= Math.pow(this.werbefaktor,0.9) * this.qualitaet / altqualitaet;
+        //moegAbs = (int)(this.bekanntheit * (double)this.market.getBedarf()* (marktanteil+0.005) * this.market.getBoni() / altwerbefaktor * this.werbefaktor / this.preis);
+        //gebremst:
         bekanntheit *= Math.pow(werbefaktor,0.9) * qualitaet / altqualitaet;
         moegAbs = (int)(this.bekanntheit * (double)this.market.getBedarf()* (marktanteil+0.005) * this.market.getBoni() / altwerbefaktor * werbefaktor / preis);
-    
+        
         altqualitaet = qualitaet;
         altwerbefaktor = werbefaktor;
     }

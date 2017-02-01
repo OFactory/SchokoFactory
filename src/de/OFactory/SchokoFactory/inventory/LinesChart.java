@@ -30,7 +30,7 @@ public class LinesChart extends LineChart implements Updateable, Drawable{
 	private ArrayList<Integer>[] lines;
 	ArrayList<Integer> points = new ArrayList<Integer>();
 	
-	private final Color[] LINE_COLORS = { Color.red, Color.blue, Color.yellow, Color.green, Color.magenta, Color.orange };
+	private final Color[] LINE_COLORS = { Color.red, Color.blue, Color.yellow, Color.green, /*Color.magenta, Color.orange*/ new Color(0, 0, 255, 0.3F), new Color(255, 255, 0, 0.3F), new Color(0, 255, 0, 0.5F)};
 	
 	
 	

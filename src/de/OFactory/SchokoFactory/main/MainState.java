@@ -197,14 +197,20 @@ public class MainState extends BasicGameState{
 		ArrayList<Integer> l2 = new ArrayList<Integer>();
 		ArrayList<Integer> l3 = new ArrayList<Integer>();
 		ArrayList<Integer> l4 = new ArrayList<Integer>();
+		ArrayList<Integer> l5 = new ArrayList<Integer>();
+		ArrayList<Integer> l6 = new ArrayList<Integer>();
+		ArrayList<Integer> l7 = new ArrayList<Integer>();
 		
 		l1.add(450);
 		l2.add(150);
 		l3.add(150);
 		l4.add(150);
+		l5.add(150);
+		l6.add(150);
+		l7.add(150);
 		
 		@SuppressWarnings("unchecked")
-		ArrayList<Integer>[] lines = (ArrayList<Integer>[]) new ArrayList[] {l1,l2,l3,l4};
+		ArrayList<Integer>[] lines = (ArrayList<Integer>[]) new ArrayList[] {l1,l2,l3,l4,l5,l6,l7};
 		
 		mtab.wachstumschart.setLines(lines);
 		ecoscreen.wachstumschart.setLines(lines);
@@ -360,7 +366,7 @@ public class MainState extends BasicGameState{
 			
 			m.day(); // Berechnung vor Ende des Tages
 			
-			int[] points = {MainState.m.getSummeAbs(), MainState.p.getAbsatz(), MainState.ai1.getAbsatz(), MainState.ai2.getAbsatz()};
+			int[] points = {MainState.m.getSummeAbs(), MainState.p.getAbsatz(), MainState.ai1.getAbsatz(), MainState.ai2.getAbsatz(), MainState.p.getMoegAbs(), MainState.ai1.getMoegAbs(), MainState.ai2.getMoegAbs()};
 
 			mtab.wachstumschart.addPoints(points);
 			//ecoscreen.wachstumschart.addPoints(points);
