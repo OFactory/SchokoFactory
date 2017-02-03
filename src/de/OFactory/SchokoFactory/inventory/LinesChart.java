@@ -141,7 +141,7 @@ public class LinesChart extends LineChart implements Updateable, Drawable{
 		for (long f = MainState.m.getTime()-lines[0].size()+1 +30; f <= MainState.m.getTime(); f+=30) {
 			int shift = 0;
 			if (MainState.m.getTime()-lines[0].size() +1 != 0) {
-				shift = (int)(MainState.m.getTime()%30);		// irgendwie wackelt hier ein Frame ... fixme
+				shift = (int)(MainState.m.getTime() % 30);		// irgendwie wackelt hier ein Frame ... fixme
 
 			} 
 

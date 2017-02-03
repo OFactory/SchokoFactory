@@ -1,5 +1,7 @@
 package de.OFactory.SchokoFactory.simulation;
 
+import de.OFactory.SchokoFactory.main.MainState;
+
 public class Player {
 	
 	Market market;
@@ -46,36 +48,34 @@ public class Player {
 	/**First part of the calculation. Gets inputs and works out possible sales(ger.: Absatz). Returns possible sales to Game.**/
     public void calculateMoegAbs() {
     	
+    	setPreis(MainState.inpreis);
+		investAdverts(MainState.inwerbung);
+		investQuality(MainState.inqualitaet);
+    	
+    	// 15 Tage Verschiebung
     	int item = (int)market.getTime() % 15;
     	
     	werbeliste[item] = this.werbefaktor;
-
-    	double werbefaktor = 0;		// Variable preis wird hier noch als Summe in der Liste verwendet.
+    	double werbefaktor = 0;		// Variable werbefaktor wird hier noch als Summe aus der Liste verwendet.
         for (double p:this.werbeliste)
         	werbefaktor += p;
         werbefaktor /= this.werbeliste.length;
-    	
+        
     	qualiliste[item] = this.qualitaet;
-
-    	double qualitaet = 0;		// Variable preis wird hier noch als Summe in der Liste verwendet.
+    	double qualitaet = 0;		// Variable qualitaet wird hier noch als Summe aus der Liste verwendet.
         for (double p:this.qualiliste)
         	qualitaet += p;
         qualitaet /= this.qualiliste.length;
-    	
-    	
+        
     	preisliste[item] = this.preis;
-
-    	double preis = 0;		// Variable preis wird hier noch als Summe in der Liste verwendet.
+    	double preis = 0;		// Variable preis wird hier noch als Summe aus der Liste verwendet.
         for (double p:this.preisliste)
         	preis += p;
         preis /= this.preisliste.length;
 
-        //ungebremst:						// nicht zutreffendes bitte auskommentieren
-        //bekanntheit *= Math.pow(this.werbefaktor,0.9) * this.qualitaet / altqualitaet;
-        //moegAbs = (int)(this.bekanntheit * (double)this.market.getBedarf()* (marktanteil+0.005) * this.market.getBoni() / altwerbefaktor * this.werbefaktor / this.preis);
-        //gebremst:
-        bekanntheit *= Math.pow(werbefaktor,0.9) * qualitaet / altqualitaet;
-        moegAbs = (int)(this.bekanntheit * (double)this.market.getBedarf()* (marktanteil+0.005) * this.market.getBoni() / altwerbefaktor * werbefaktor / preis);
+
+        bekanntheit += werbefaktor-1;
+        moegAbs = (int)((0.01*bekanntheit+0.99) * (double)this.market.getBedarf()* (marktanteil+0.005) * this.market.getBoni() * Math.pow(werbefaktor / altwerbefaktor, 4)  / preis  * (qualitaet / altqualitaet));
         
         altqualitaet = qualitaet;
         altwerbefaktor = werbefaktor;
@@ -107,12 +107,12 @@ public class Player {
     
 	public void investQuality(double amount) {
 		this.addMoney(-amount);
-		this.setQualitaet(this.getQualitaet() + amount / this.getQualitaet() / 2500);
+		this.setQualitaet(this.getQualitaet() + amount / 1 / 10000);
 	}
 
     public void investAdverts(double amount) {
     	this.addMoney(-amount);
-    	this.setWerbefaktor(1+amount/11000);
+    	this.setWerbefaktor(1+amount/10000);
     }
 	
     public void finalCalculation() {

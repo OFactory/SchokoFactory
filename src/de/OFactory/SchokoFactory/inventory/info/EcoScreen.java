@@ -7,11 +7,12 @@ import org.newdawn.slick.Graphics;
 import de.OFactory.SchokoFactory.game.GameFonts;
 import de.OFactory.SchokoFactory.inventory.CakeChart;
 import de.OFactory.SchokoFactory.inventory.LinesChart;
+import de.OFactory.SchokoFactory.main.Daily;
 import de.OFactory.SchokoFactory.main.Drawable;
 import de.OFactory.SchokoFactory.main.MainState;
 import de.OFactory.SchokoFactory.main.Updateable;
 
-public class EcoScreen  implements Drawable, Updateable{
+public class EcoScreen  implements Drawable, Updateable, Daily{
 
 	//Position
 	private int x;
@@ -40,6 +41,8 @@ public class EcoScreen  implements Drawable, Updateable{
 		
 		anteilchart = new CakeChart(1, offx + 20, offy + 635, 150, "möchte-gern-CakeChart");
 		wachstumschart = new LinesChart(offx + 20 + 300 + 20, offy + 635, 500, 285);
+		
+		MainState.dailys.add(this);
 		
 	}
 
@@ -117,6 +120,12 @@ public class EcoScreen  implements Drawable, Updateable{
 		}
 		
 		
+	}
+	
+	public void day() {
+		int[] points = {MainState.m.getSummeAbs(), MainState.p.getAbsatz(), MainState.ai1.getAbsatz(), MainState.ai2.getAbsatz(), MainState.p.getMoegAbs(), MainState.ai1.getMoegAbs(), MainState.ai2.getMoegAbs()};
+
+		wachstumschart.addPoints(points);
 	}
 	
 	public double round(double d, int digits) {

@@ -97,6 +97,8 @@ public class MainState extends BasicGameState{
 	public static long last;
 	public static long delta_t;
 	
+	public static ArrayList<Daily> dailys = new ArrayList<Daily>();
+	
 	// Zeug für Markt
 	public static Player  p; //Spieler
 	public static SimpleAI  ai1; //Spieler
@@ -147,6 +149,7 @@ public class MainState extends BasicGameState{
 	 *  @throws SlickException: Falls Etwas beim Initialisieren schief läuft
 	 */
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
+		
 		
 		
 		
@@ -360,16 +363,11 @@ public class MainState extends BasicGameState{
 			}
 			f.run(); // Produktion des Spieler
 			
-			MainState.p.setPreis(inpreis);
-			MainState.p.investAdverts(inwerbung);
-			MainState.p.investQuality(inqualitaet);
 			
-			m.day(); // Berechnung vor Ende des Tages
 			
-			int[] points = {MainState.m.getSummeAbs(), MainState.p.getAbsatz(), MainState.ai1.getAbsatz(), MainState.ai2.getAbsatz(), MainState.p.getMoegAbs(), MainState.ai1.getMoegAbs(), MainState.ai2.getMoegAbs()};
-
-			mtab.wachstumschart.addPoints(points);
-			//ecoscreen.wachstumschart.addPoints(points);
+			for(Daily d:dailys)
+				d.day(); // Berechnung vor Ende des Tages
+			
 			
 			// Ende des Tages
 			

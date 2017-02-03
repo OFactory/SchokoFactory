@@ -3,9 +3,13 @@ package de.OFactory.SchokoFactory.simulation;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.OFactory.SchokoFactory.main.Daily;
+import de.OFactory.SchokoFactory.main.MainState;
 
 
-public class Market {
+
+public class Market implements Daily {
+	
 	
 	private int startingYear = 2016;
 	private long time = 0; // 1. Januar 2016
@@ -29,6 +33,7 @@ public class Market {
 	
 	public Market() {
 		System.out.println("eco "+eco);
+		MainState.dailys.add(this);
 	}
 	
 	/** processed every day **/
