@@ -97,6 +97,8 @@ public class MainState extends BasicGameState{
 	public static long last;
 	public static long delta_t;
 	
+	public static ArrayList<Daily> dailys = new ArrayList<Daily>();
+	
 	// Zeug für Markt
 	public static Player  p; //Spieler
 	public static SimpleAI  ai1; //Spieler
@@ -150,6 +152,7 @@ public class MainState extends BasicGameState{
 		
 		
 		
+		
 		// - Market
 		MainState.m = new Market(); 
 		MainState.f = new Factory();
@@ -161,8 +164,8 @@ public class MainState extends BasicGameState{
 				ai1,
 				ai2));
 		
-		pile      = new Stockpile(45); // Stockpile generieren
-		pausepile = new Pausepile(45, 30);
+		pile      = new Stockpile(50); // Stockpile generieren
+		pausepile = new Pausepile(50, 30);
 		//field = Map.generateMap(1, 1); // Feld generieren
 		//field = Map.generateMap(20, 20);// GameSettings.STANDARD_MAP_SIZE_HEIGHT); // Feld generieren //GameSettings.STANDARD_MAP_SIZE_WIDTH
 		//field.setName("Test");
@@ -176,7 +179,7 @@ public class MainState extends BasicGameState{
 		
 		// InfoPanel + TABS
 		int x =      gc.getWidth()/5*4;
-		int y =      75;//gc.getHeight()/14;
+		int y =      80;//gc.getHeight()/14;
 		int width =  gc.getWidth()/20*4;
 		int height = gc.getHeight()-y;
 		
@@ -197,14 +200,20 @@ public class MainState extends BasicGameState{
 		ArrayList<Integer> l2 = new ArrayList<Integer>();
 		ArrayList<Integer> l3 = new ArrayList<Integer>();
 		ArrayList<Integer> l4 = new ArrayList<Integer>();
+		ArrayList<Integer> l5 = new ArrayList<Integer>();
+		ArrayList<Integer> l6 = new ArrayList<Integer>();
+		ArrayList<Integer> l7 = new ArrayList<Integer>();
 		
 		l1.add(450);
 		l2.add(150);
 		l3.add(150);
 		l4.add(150);
+		l5.add(150);
+		l6.add(150);
+		l7.add(150);
 		
 		@SuppressWarnings("unchecked")
-		ArrayList<Integer>[] lines = (ArrayList<Integer>[]) new ArrayList[] {l1,l2,l3,l4};
+		ArrayList<Integer>[] lines = (ArrayList<Integer>[]) new ArrayList[] {l1,l2,l3,l4,l5,l6,l7};
 		
 		mtab.wachstumschart.setLines(lines);
 		ecoscreen.wachstumschart.setLines(lines);
@@ -354,16 +363,11 @@ public class MainState extends BasicGameState{
 			}
 			f.run(); // Produktion des Spieler
 			
-			MainState.p.setPreis(inpreis);
-			MainState.p.investAdverts(inwerbung);
-			MainState.p.investQuality(inqualitaet);
 			
-			m.day(); // Berechnung vor Ende des Tages
 			
-			int[] points = {MainState.m.getSummeAbs(), MainState.p.getAbsatz(), MainState.ai1.getAbsatz(), MainState.ai2.getAbsatz()};
-
-			mtab.wachstumschart.addPoints(points);
-			//ecoscreen.wachstumschart.addPoints(points);
+			for(Daily d:dailys)
+				d.day(); // Berechnung vor Ende des Tages
+			
 			
 			// Ende des Tages
 			
@@ -503,18 +507,18 @@ public class MainState extends BasicGameState{
 		pausepile.draw(g);
 		
 		//Developer Info
-		g.setColor(new Color(200, 200, 200, 0.5F));
-		g.fillRect(0, 45, gc.getWidth()/4, gc.getHeight()/6);	
+		g.setColor(new Color(200, 200, 200, 0.4F));
+		g.fillRect(0, 80, gc.getWidth()/6, gc.getHeight()/7);	
 		g.setColor(Color.black);
-		g.drawRect(0, 45, gc.getWidth()/4, gc.getHeight()/6);
+		//g.drawRect(0, 45, gc.getWidth()/4, gc.getHeight()/6);
 		
-		g.setColor(new Color(0, 20, 200));
-		g.drawString("State: MainState", 10, 50);
-		g.drawString("CurPattern: " + curpatterninfo,    					  10,  80);
-		g.drawString("CurState: "   + curpatternstate,  					  10, 100);
-		g.drawString("Selected: "   + selected_pattern,       				  10, 120);
-		g.drawString("cam_pos:  "   + cam_pos.getX() + ", " + cam_pos.getY(), 10, 140);
-		g.drawString("pat_cale: "   + curpatternscale,                        10, 160);
+		g.setColor(new Color(0, 20, 200, 150));
+		g.drawString("State: MainState", 10, 90);
+		g.drawString("CurPattern: " + curpatterninfo,    					  10,  110);
+		g.drawString("CurState: "   + curpatternstate,  					  10, 130);
+		g.drawString("Selected: "   + selected_pattern,       				  10, 150);
+		g.drawString("cam_pos:  "   + cam_pos.getX() + ", " + cam_pos.getY(), 10, 170);
+		g.drawString("pat_cale: "   + curpatternscale,                        10, 190);
 		
 		
 		g.setColor(Color.white);

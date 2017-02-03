@@ -7,11 +7,12 @@ import org.newdawn.slick.Graphics;
 import de.OFactory.SchokoFactory.game.GameFonts;
 import de.OFactory.SchokoFactory.inventory.CakeChart;
 import de.OFactory.SchokoFactory.inventory.LinesChart;
+import de.OFactory.SchokoFactory.main.Daily;
 import de.OFactory.SchokoFactory.main.Drawable;
 import de.OFactory.SchokoFactory.main.MainState;
 import de.OFactory.SchokoFactory.main.Updateable;
 
-public class EcoScreen  implements Drawable, Updateable{
+public class EcoScreen  implements Drawable, Updateable, Daily{
 
 	//Position
 	private int x;
@@ -41,6 +42,8 @@ public class EcoScreen  implements Drawable, Updateable{
 		anteilchart = new CakeChart(1, offx + 20, offy + 635, 150, "möchte-gern-CakeChart");
 		wachstumschart = new LinesChart(offx + 20 + 300 + 20, offy + 635, 500, 285);
 		
+		MainState.dailys.add(this);
+		
 	}
 
 	public void update(GameContainer gc) {
@@ -54,7 +57,7 @@ public class EcoScreen  implements Drawable, Updateable{
 			g.setColor(InfoPanel.BG_COLOR);
 			g.fillRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
 			g.setColor(Color.black);
-			g.drawRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+			//g.drawRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
 			
 			//Inhalt
 			int offx = this.x + 20;
@@ -89,7 +92,7 @@ public class EcoScreen  implements Drawable, Updateable{
 			GameFonts.SUB.drawString( offx + 10, offy + 420, "Marktanteil: "  + MainState.ai1.getMarktanteil(),  INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 10, offy + 440, "Produktmenge: " + MainState.ai1.getProduktmenge(), INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 10, offy + 460, "Qualität: "     + round(MainState.ai1.getQualitaet(),2), INFO_FONT_COLOR);
-			GameFonts.SUB.drawString( offx + 10, offy + 480, "Geld: "         + MainState.ai1.getMoney(),        INFO_FONT_COLOR);
+			GameFonts.SUB.drawString( offx + 10, offy + 480, "Geld: "         + round(MainState.ai1.getMoney(),2),        INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 10, offy + 500, "Preis: "        + MainState.ai1.getPreis(),        INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 10, offy + 520, "Diff: "         + MainState.ai1.getDiff(),         INFO_FONT_COLOR);
 			
@@ -99,7 +102,7 @@ public class EcoScreen  implements Drawable, Updateable{
 			GameFonts.SUB.drawString( offx + 300, offy + 420, "Marktanteil: "  + MainState.ai2.getMarktanteil(),  INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 300, offy + 440, "Produktmenge: " + MainState.ai2.getProduktmenge(), INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 300, offy + 460, "Qualität: "     + round(MainState.ai2.getQualitaet(),2), INFO_FONT_COLOR);
-			GameFonts.SUB.drawString( offx + 300, offy + 480, "Geld: "         + MainState.ai2.getMoney(),        INFO_FONT_COLOR);
+			GameFonts.SUB.drawString( offx + 300, offy + 480, "Geld: "         + round(MainState.ai2.getMoney(),2),        INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 300, offy + 500, "Preis: "        + MainState.ai2.getPreis(),        INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 300, offy + 520, "Diff: "         + MainState.ai2.getDiff(),         INFO_FONT_COLOR);
 			
@@ -117,6 +120,12 @@ public class EcoScreen  implements Drawable, Updateable{
 		}
 		
 		
+	}
+	
+	public void day() {
+		int[] points = {MainState.m.getSummeAbs(), MainState.p.getAbsatz(), MainState.ai1.getAbsatz(), MainState.ai2.getAbsatz(), MainState.p.getMoegAbs(), MainState.ai1.getMoegAbs(), MainState.ai2.getMoegAbs()};
+
+		wachstumschart.addPoints(points);
 	}
 	
 	public double round(double d, int digits) {

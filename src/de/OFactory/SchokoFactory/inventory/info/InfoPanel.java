@@ -12,7 +12,7 @@ import de.OFactory.SchokoFactory.main.Updateable;
 
 public class InfoPanel implements Drawable, Updateable{
 	
-	public static final Color BG_COLOR = new Color(200, 200, 200); //#FiftyShadesOfGrey
+	public static final Color BG_COLOR = new Color(217, 216, 216); //#FiftyShadesOfGrey
 	
 	//Position
 	private int x;
@@ -30,6 +30,7 @@ public class InfoPanel implements Drawable, Updateable{
 	
 	private List<Tab> tabs;
 	public Tab activetab;
+	private int tabsize;
 
 	//standard Konstruktor of live
 	public InfoPanel(int x, int y, int width, int height){
@@ -57,6 +58,7 @@ public class InfoPanel implements Drawable, Updateable{
 			t.setX(this.getX() + i * tabsize);
 			t.setY(gc.getHeight() - tabsize);
 			t.setSize(tabsize);
+			this.setTabsize(tabsize);
 			i++;
 		}
 		
@@ -72,7 +74,7 @@ public class InfoPanel implements Drawable, Updateable{
 		g.setColor(InfoPanel.BG_COLOR);
 		g.fillRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
 		g.setColor(Color.black);
-		g.drawRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+		//g.drawRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
 	
 		//Tabs
 		for(Tab t : tabs)
@@ -173,6 +175,16 @@ public class InfoPanel implements Drawable, Updateable{
 	
 	public void addScroll(int change){
 		this.setScroll(this.getScroll() + change);
+	}
+
+
+	public int getTabsize() {
+		return tabsize;
+	}
+
+
+	public void setTabsize(int tabsize) {
+		this.tabsize = tabsize;
 	}
 
 

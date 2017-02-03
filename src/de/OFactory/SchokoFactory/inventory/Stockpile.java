@@ -10,10 +10,11 @@ import org.newdawn.slick.ShapeFill;
 import org.newdawn.slick.fills.GradientFill;
 import org.newdawn.slick.geom.Rectangle;
 
+import de.OFactory.SchokoFactory.game.GameFonts;
 import de.OFactory.SchokoFactory.main.Drawable;
-import de.OFactory.SchokoFactory.main.Main;
 import de.OFactory.SchokoFactory.main.MainState;
 import de.OFactory.SchokoFactory.main.Updateable;
+
 
 public class Stockpile implements Drawable, Updateable{
 	
@@ -39,11 +40,12 @@ public class Stockpile implements Drawable, Updateable{
 		
 		
 		this.piles.clear();
-		this.piles.add(Main.company_name);
+		this.piles.add(MainState.m.getDateString());
+		this.piles.add("Bundesregierung erhöht Steuern ... ");//Infolge dessen steigt der Milchpreis um 3.6% ...");
 		this.piles.add(MainState.p.getMoney() + " EUR");
 		this.piles.add(MainState.molten_chokolate+" Liter");
 		this.piles.add(MainState.p.getProduktmenge() + " produktmenge");
-		this.piles.add(MainState.m.getDateString());
+		
 		
 	}
 
@@ -68,7 +70,8 @@ public class Stockpile implements Drawable, Updateable{
 		float textheight = this.shape.getHeight()/3;
 		float space = this.shape.getWidth()/this.piles.size();
 		
-		g.setColor(new Color(142, 146, 140));
+		g.setColor(new Color(135, 135, 135));
+		g.setFont(GameFonts.SUB);
 		
 		for(String s : this.piles){	
 			g.drawString(s, space*this.piles.indexOf(s)+padding, textheight);

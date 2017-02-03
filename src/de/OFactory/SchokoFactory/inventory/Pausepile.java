@@ -24,7 +24,7 @@ public class Pausepile extends Stockpile{
 	
 	public void draw(Graphics g){
 		//Stockpile Hintergrund mit #Verlauf
-		ShapeFill stockpileFill = new GradientFill(0, this.getHeight(), new Color(146, 146, 146),  0, 0, new Color(175, 175, 175));
+		ShapeFill stockpileFill = new GradientFill(0, this.getHeight(), new Color(148, 148, 148),  0, 100, new Color(175, 175, 175));
 		g.fill( this.shape, stockpileFill);
 		 
 		
