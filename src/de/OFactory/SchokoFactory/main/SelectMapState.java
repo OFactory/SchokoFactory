@@ -8,15 +8,22 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import de.OFactory.SchokoFactory.inventory.TextView;
+
 public class SelectMapState extends BasicGameState{
 
+	TextView txt_test;
+	
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		// TODO Auto-generated method stub
+		
+		txt_test = new TextView("Dies ist ein Test! Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.", 200, 200, 500);
 		
 	}
 
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		g.drawString("Maps:", 50, 50);
+		txt_test.draw(g);
 		
 		File folder = new File("saves");
 		File[] listOfFiles = folder.listFiles();

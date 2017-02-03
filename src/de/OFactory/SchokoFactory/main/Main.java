@@ -3,7 +3,6 @@ package de.OFactory.SchokoFactory.main;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -40,12 +39,14 @@ public class Main extends StateBasedGame{
 	
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
+		this.addState(new SelectMapState());
 		
-		this.addState(new MainState());
+		//this.addState(new MainState());
 		
-		//this.addState(new SelectMapState());
 		
-		this.addState(new MainMenuState());
+		
+		//this.addState(new MainMenuState());
+		
 		
 		
 		
@@ -65,12 +66,13 @@ public class Main extends StateBasedGame{
 			//Resizable setzen
 			Display.setResizable(true);
 			
+			/*
 			DisplayMode[] modes = Display.getAvailableDisplayModes();
 			System.out.println("Mögliche Auflösungen:     (alles andere gibt Fehlermeldungen)");
 	        for (int i=0;i<modes.length;i++) {
 	            DisplayMode current = modes[i];
 	            System.out.println("  "+current.getWidth() + "x" + current.getHeight());
-	        }
+	        } */
 
 			
 			app.setVSync(true); // VSync benutzen
