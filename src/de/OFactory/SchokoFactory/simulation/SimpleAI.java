@@ -1,6 +1,9 @@
 package de.OFactory.SchokoFactory.simulation;
 
-public class SimpleAI extends AI {
+import de.OFactory.SchokoFactory.main.Daily;
+import de.OFactory.SchokoFactory.main.MainState;
+
+public class SimpleAI extends AI implements Daily{
 	
 	private int fabriken = 2;
 	private int produktion = 100;
@@ -11,24 +14,29 @@ public class SimpleAI extends AI {
 	
 	public SimpleAI(Market market, String name, double money) {
 		super(market, name, money);
+		MainState.dailys.add(this);
+	}
+	
+	public void day() {
+		runFactories();
+		think();
 	}
 	
 	public void think() {
-		//System.out.println(name+" hmmmm");
+
 		// mehr Fabriken benötigt?
 		
 		diff = this.getProduktmenge() - lastProduktmenge;
 		if (this.getMoegAbs() > this.getAbsatz()*(1+0.5/(float)this.getFabriken())) {		// Der Faktor 1+1/(float)this.getFabriken())
 			if ( this.getMoney() >= einmaligeFabrikkosten ) {							// sorgt für eine Berücksichtigung des Produktonsanstiegs.
 				buildFactory();															// (fabriken+1) / fabriken ist 1+1/fabriken
-			}	else System.out.println("Fabrik zu teuer");								// Bei 4 Fabriken: 1.25 (25% Produktionsanstieg nach Kauf)
+			}																			// Bei 4 Fabriken: 1.25 (25% Produktionsanstieg nach Kauf)
 		}
 		if (this.getProduktmenge() > 0) {
 			if ( this.getMoney() >= this.getProduktmenge()/10 ) {
-				System.out.println("genug Geld");
 				investQuality(this.getProduktmenge()/10);
 			}	
-			else System.out.println("zu teuer");
+
 		}
 	}
 
@@ -37,11 +45,10 @@ public class SimpleAI extends AI {
 		this.addMoney(-einmaligeFabrikkosten);
 		this.addAusgaben(einmaligeFabrikkosten);
 		fabriken += 1;
-		System.out.println("build a factory | #"+fabriken);
+		System.out.println("SimpleAI: build a factory | #"+fabriken);
 	}
 	
 	public void runFactories() {
-		//System.out.println(name+" working");
 		produce();
 	}
 	

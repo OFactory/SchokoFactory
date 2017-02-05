@@ -32,16 +32,15 @@ public class Market implements Daily {
 	
 	
 	public Market() {
-		System.out.println("eco "+eco);
 		MainState.dailys.add(this);
 	}
 	
 	/** processed every day **/
 	public void day() {
-		
+
 		calculation();
-		
 		this.time++;
+		
 		//printStuff();
 
 		
@@ -56,9 +55,8 @@ public class Market implements Daily {
 		System.out.println("<Markt> [ " + getDateString() + " ]" );
 		System.out.println("<Markt> Tagesbilanz");	// zum leichteren Debuggen der Markt- und Produktionssimlation
 		//System.out.println(" | Bedarf: " + this.bedarf);
-		System.out.println(" | SummMoegAbsatz: " + this.getMoegAbs());
 		for (int i = 0; i < players.size(); i++) {
-			System.out.println(" | P"+i+"  moegAbsatz: " + players.get(i).getMoegAbs());
+			System.out.println(" | P"+i+"  produktmenge: " + players.get(i).getProduktmenge());
 		}
 	}
 	
@@ -68,7 +66,7 @@ public class Market implements Daily {
 		bedarf = (59*bedarf + summeAbsAlt) / 60 * Math.pow(this.eco , 2) * boni * (Math.pow(getWerbefaktoren(),0.9) + 330)/331;
 		// Bedarf gleicht sich an den alten Absatz über 2 Monate (60 Tage) an, Gewöhnungseffekt
 		bedarf = (float)Math.round((float)bedarf *100d) /100d;
-		summeMoegAbs = getMoegAbs();
+		summeMoegAbs = calcMoegAbs();
 		summeAbs = (int)(summeMoegAbs+bedarf)/2;
 		calculateShift();
 		
@@ -154,7 +152,7 @@ public class Market implements Daily {
 	 * 
 	 * @return int Summer der Möglichen Absätze
 	 */
-	public int getMoegAbs() {
+	public int calcMoegAbs() {
 		int summe = 0;
 		for (Player p: players) {
 			p.calculateMoegAbs();
@@ -163,6 +161,9 @@ public class Market implements Daily {
 		
 		return summe;
 	}
+	
+	
+
 	
 	private int getDiff_ges() {
 		int summe = 0;
@@ -320,6 +321,14 @@ public class Market implements Daily {
 
 	public void setTime(long time) {
 		this.time = time;
+	}
+	
+	public int getSummeMoegAbs() {
+		return this.summeMoegAbs;
+	}
+	
+	public void setSummeMoegAbs(int value) {
+		this.summeMoegAbs = value;
 	}
 
 	public double getBedarf() {

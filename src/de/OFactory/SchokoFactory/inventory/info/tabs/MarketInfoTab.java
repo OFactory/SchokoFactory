@@ -13,9 +13,10 @@ import de.OFactory.SchokoFactory.inventory.CakeChart;
 import de.OFactory.SchokoFactory.inventory.LinesChart;
 import de.OFactory.SchokoFactory.inventory.info.InfoPanel;
 import de.OFactory.SchokoFactory.inventory.info.Tab;
+import de.OFactory.SchokoFactory.main.Daily;
 import de.OFactory.SchokoFactory.main.MainState;
 
-public class MarketInfoTab extends Tab{
+public class MarketInfoTab extends Tab implements Daily{
 	
 	private CakeChart anteilchart;
 	public LinesChart wachstumschart; // oder als LineChart()
@@ -28,6 +29,8 @@ public class MarketInfoTab extends Tab{
 		int offy = getInfoPanel().getY();
 		anteilchart = new CakeChart(1, offx + 35, offy + 540, 60, "möchte-gern-CakeChart");
 		wachstumschart = new LinesChart(offx + 35, offy + 690, 290, 180); // oder als LineChart()
+		MainState.dailys.add(this);
+		
 	}
 
 	@Override
@@ -79,6 +82,12 @@ public class MarketInfoTab extends Tab{
 		
 	}
 
+	public void day() {
+		int[] points = {MainState.m.getSummeAbs(), MainState.p.getAbsatz(), MainState.ai1.getAbsatz(), MainState.ai2.getAbsatz(), MainState.p.getMoegAbs(), MainState.ai1.getMoegAbs(), MainState.ai2.getMoegAbs()};
+
+		this.wachstumschart.addPoints(points);
+	}
+	
 	public double round(double d, int digits) {
 		return (float)Math.round((float)d *Math.pow(10, digits)) /Math.pow(10, digits);
 	}

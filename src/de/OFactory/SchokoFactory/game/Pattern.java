@@ -125,7 +125,7 @@ public abstract class Pattern extends GameObject{
 		
 		
 		this.setClickBox(p);
-		this.selected = MainState.selected_pattern == this;
+		this.selected = Map.selected_pattern == this;
 		
 		//Animation tick
 		
@@ -161,11 +161,11 @@ public abstract class Pattern extends GameObject{
 		
 		
 		if(this.hovered && in.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)){
-			MainState.clicked = this;
+			Map.clicked = this;
 			
 		} else {
-			if(MainState.clicked == this)
-				MainState.clicked = null;
+			if(Map.clicked == this)
+				Map.clicked = null;
 		}
 		
 		//Pattern aus Bildschirmrand?
@@ -311,7 +311,7 @@ public abstract class Pattern extends GameObject{
 			Color filter = Color.white;
 			
 			if(this.hovered){ //GEHOVERED
-				if(MainState.clicked == this) { //GEKLICKT
+				if(Map.clicked == this) { //GEKLICKT
 					filter = new Color(100, 255, 255); // GEKLICKT
 				} else { // GEHOVERED
 					if(this instanceof Wiese && MainState.curpatternstate != null && MainState.curpatternstate != PatternState.WIESE)

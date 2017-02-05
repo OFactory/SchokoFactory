@@ -3,6 +3,7 @@ package de.OFactory.SchokoFactory.inventory.info;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 
 import de.OFactory.SchokoFactory.game.GameFonts;
 import de.OFactory.SchokoFactory.inventory.CakeChart;
@@ -27,7 +28,7 @@ public class EcoScreen  implements Drawable, Updateable, Daily{
 	public static final Color INFO_FONT_COLOR = new Color(50, 100, 200);
 	public static final Color BOX_COLOR = new Color(220, 220, 220);
 	
-	
+	private boolean E_Down = false;
 	
 	public EcoScreen(int x, int y, int width, int height) {
 		
@@ -47,7 +48,15 @@ public class EcoScreen  implements Drawable, Updateable, Daily{
 	}
 
 	public void update(GameContainer gc) {
-		// TODO Auto-generated method stub
+		if(gc.getInput().isKeyDown(Input.KEY_E)) 
+			E_Down = true;
+		else {
+			if (E_Down)					// toggle nur beim loslassen ausführen
+										// dann wenn isKeyDown falsch ist und im letzten update() wahr war
+										// fällt dir was ein wie man die zusätzliche Variable umgehen kann?
+				toggle();
+			E_Down = false;
+		}
 		
 	}
 
@@ -125,7 +134,7 @@ public class EcoScreen  implements Drawable, Updateable, Daily{
 	public void day() {
 		int[] points = {MainState.m.getSummeAbs(), MainState.p.getAbsatz(), MainState.ai1.getAbsatz(), MainState.ai2.getAbsatz(), MainState.p.getMoegAbs(), MainState.ai1.getMoegAbs(), MainState.ai2.getMoegAbs()};
 
-		wachstumschart.addPoints(points);
+		this.wachstumschart.addPoints(points);
 	}
 	
 	public double round(double d, int digits) {
@@ -133,10 +142,7 @@ public class EcoScreen  implements Drawable, Updateable, Daily{
 	}
 	
 	public void toggle() {
-		if (this.show) 
-			this.show = false;
-		else
-			this.show = true;
+		this.show = !this.show;
 	}
 	
 	public boolean isShow() {
