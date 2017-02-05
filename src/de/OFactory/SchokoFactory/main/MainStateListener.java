@@ -1,11 +1,13 @@
 package de.OFactory.SchokoFactory.main;
 
 import org.newdawn.slick.Input;
+import org.newdawn.slick.KeyListener;
 import org.newdawn.slick.MouseListener;
 
 import de.OFactory.SchokoFactory.game.GameSettings;
+import de.OFactory.SchokoFactory.game.PatternState;
 
-public class MainStateListener implements MouseListener{
+public class MainStateListener implements MouseListener, KeyListener{
 
 	//TODO Mausvariablen
 	
@@ -95,6 +97,45 @@ public class MainStateListener implements MouseListener{
 	}
 
 	public void mouseDragged(int oldx, int oldy, int newx, int newy) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(int key, char c) {
+		System.out.println(key+";"+c);
+		/*
+		switch(c) { 
+		case 't':
+			MainState.curpatternstate = PatternState.TANK;
+			System.out.println("t");
+		case 'w':
+			MainState.curpatternstate = PatternState.WIESE;
+		case 'c':
+			MainState.curpatternstate = PatternState.CHEMIEFABRIK;
+		case 'r':
+			MainState.curpatternstate = PatternState.RÜHRER;
+		case 'l':
+			MainState.curpatternstate = PatternState.LAGERHALLE;
+		case 'm':
+			MainState.curpatternstate = PatternState.MOLKEREI;
+		case 'f':
+			MainState.curpatternstate = PatternState.FARM;
+		case 'g':
+			MainState.curpatternstate = PatternState.GIEßER;
+		case 'n':
+			MainState.curpatternstate = null;
+		
+		case 'p':
+			MainState.cam_pos.setLocation(0, 0);
+		case '2':
+			MainState.molten_chokolate += 100;
+		
+		}*/
+	}
+
+	@Override
+	public void keyReleased(int key, char c) {
 		// TODO Auto-generated method stub
 		
 	}

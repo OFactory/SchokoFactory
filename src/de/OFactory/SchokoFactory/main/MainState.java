@@ -198,7 +198,7 @@ public class MainState extends BasicGameState{
 		
 		msl = new MainStateListener();
 		gc.getInput().addMouseListener(MainState.msl); //MouseListener
-		
+		gc.getInput().addKeyListener(MainState.msl);
 		
 		// - Inputs für Preis, Werbe- und Qualitätsinvestitionen 		(hässliche Kackscheiße, die ins InfoPanel gehört)
 		txt_preis = new TextField(gc, gc.getDefaultFont(), 800, 760, 200, 20);
@@ -439,6 +439,7 @@ public class MainState extends BasicGameState{
 	
 	//-------------------------------------------------------------------------
 
+	
 	@Override
 	public int getID() {
 		return 1;
@@ -458,4 +459,10 @@ public class MainState extends BasicGameState{
 	public void mouseClicked(int button, int x, int y, int clickCount) {
 		msl.mouseClicked(button, x, y, clickCount);
 	}
+	
+	@Override
+	public void keyPressed(int key, char c) {
+		msl.keyPressed(key, c);
+	}
+	
 }
