@@ -56,7 +56,7 @@ public class TextView implements Drawable{
 	 */
 	public void draw(Graphics g) {
 		g.setColor(Color.white);
-		g.drawRect(x, y, max_width, line_amount * ( getFont().getHeight("A") + SPACE_Y ) + getMarginTop());
+		g.drawRect(x, y, getMaxWidth(), line_amount * ( getFont().getHeight("A") + SPACE_Y ) + getMarginTop());
 		flow();
 	}
 	
@@ -70,7 +70,7 @@ public class TextView implements Drawable{
 		
 		for(String wort : getText().split(" ") ){
 			
-			if(getFont().getWidth(wort) < getMaxWidth() - getMarginRight() - cur_x){ // Passt wort in Zeile?
+			if(getFont().getWidth(wort) < getMaxWidth() - cur_x){ // Passt wort in Zeile?
 				getFont().drawString(cur_x, cur_y, wort);
 				cur_x += getFont().getWidth(wort) + SPACE_X;
 			} else { // Nein
