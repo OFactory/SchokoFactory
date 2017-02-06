@@ -33,8 +33,8 @@ public class BuildingInfoTab extends Tab{
 				
 				System.out.println(e.getActionCommand());
 				
-				if(MainState.selected_pattern != null && MainState.selected_pattern.getPatternState() == PatternState.GIEﬂER){
-					Gieﬂer wa = (Gieﬂer) MainState.selected_pattern;
+				if(MainState.field.selected_pattern != null && MainState.field.selected_pattern.getPatternState() == PatternState.GIEﬂER){
+					Gieﬂer wa = (Gieﬂer) MainState.field.selected_pattern;
 					wa.setWorking(!wa.isWorking());
 				}
 			}
@@ -51,11 +51,11 @@ public class BuildingInfoTab extends Tab{
 		
 		int x = getInfoPanel().getX();
 		int y = getInfoPanel().getY();
-		Pattern p = MainState.selected_pattern;
+		Pattern p = MainState.field.selected_pattern;
 		
 		GameFonts.SUB.drawString(x + ml, y+20, "Geb‰udeinformation", Color.black);
 		
-		if(MainState.selected_pattern != null){
+		if(MainState.field.selected_pattern != null){
 			GameFonts.MED.drawString(x + ml, y+50, p.getPatternState().getName(), Color.black);
 			GameFonts.MED.drawString(x + ml, y+70, p.getId() + ""				, Color.black);
 			
@@ -72,12 +72,12 @@ public class BuildingInfoTab extends Tab{
 			
 			//TODO Pattern Information
 			
-			double scale = PATTERN_IMAGE_SCALE/MainState.selected_pattern.getCurrentImage().getWidth();
-			MainState.selected_pattern.getCurrentImage().getScaledCopy((float) scale).draw(x + 20, y-80);
+			double scale = PATTERN_IMAGE_SCALE/MainState.field.selected_pattern.getCurrentImage().getWidth();
+			MainState.field.selected_pattern.getCurrentImage().getScaledCopy((float) scale).draw(x + 20, y-80);
 			
 			//System.out.println(MainState.selected_pattern.getPatternState().isWorking());
 			
-			if(MainState.selected_pattern.getPatternState().isWorking()){
+			if(MainState.field.selected_pattern.getPatternState().isWorking()){
 				work_button.draw(g);
 			}
 			
@@ -90,7 +90,7 @@ public class BuildingInfoTab extends Tab{
 
 	@Override
 	public void updateContent(GameContainer gc) {
-		if(MainState.selected_pattern != null && MainState.selected_pattern.getPatternState().isWorking()){
+		if(MainState.field.selected_pattern != null && MainState.field.selected_pattern.getPatternState().isWorking()){
 			work_button.update(gc.getInput());
 		}
 		

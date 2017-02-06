@@ -85,49 +85,51 @@ public class LinesChart extends LineChart implements Updateable, Drawable{
 			
 			z += d;
 		}
-		g.setColor(Color.blue);
-		g.setLineWidth(2);
+
+		
 		
 		
 
-		
-		int i = 0;
-		for (ArrayList<Integer> points: lines) {
-			
-
-			int px = 0;
-			int apx = 0;
-			int apy = (int)((float)points.get(0)/max*this.height * 0.9);
-			dx = (double)this.width/points.size();
-			if (dx < 1) {
-				dx = 1;
-			} else if (dx > this.width/5)
-				dx = this.width/5;	
-			
-			//for (int py:points) {
-			for (int n = 0; n < points.size();n++) {
+		if (lines[0].size() != 0) {
+			g.setLineWidth(2);
+			int i = 0;
+			for (ArrayList<Integer> points: lines) {
 				
-
-				px = (int)(n*dx);
-				int py = points.get(n);
-				py = (int)((float)py/max * this.height * 0.9);
-				g.setColor(LINE_COLORS[i]);
-				g.drawLine(this.x + apx, this.y + this.height - apy, this.x + px, this.y + this.height - py);
-
+	
+				int px = 0;
+				int apx = 0;
+				int apy = (int)((float)points.get(0)/max*this.height * 0.9);
+				dx = (double)this.width/points.size();
+				if (dx < 1) {
+					dx = 1;
+				} else if (dx > this.width/5)
+					dx = this.width/5;	
 				
-				apx = px;
-				apy = py;
-				
+				//for (int py:points) {
+				for (int n = 0; n < points.size();n++) {
+					
+	
+					px = (int)(n*dx);
+					int py = points.get(n);
+					py = (int)((float)py/max * this.height * 0.9);
+					g.setColor(LINE_COLORS[i]);
+					g.drawLine(this.x + apx, this.y + this.height - apy, this.x + px, this.y + this.height - py);
+	
+					
+					apx = px;
+					apy = py;
+					
+				}
+			i++;
 			}
-		i++;
-		}
 		
-		g.setLineWidth(1);
-		g.setColor(Color.darkGray);
 		
-		int df = 1;
-		while (this.width/(int)lines[0].size()*df < 20)
-			df *= 2;
+			g.setLineWidth(1);
+			g.setColor(Color.darkGray);
+			
+			int df = 1;
+			while (this.width/(int)lines[0].size()*df < 20)
+				df *= 2;
 		
 		/*for (int f = 0; f <= lines[0].size(); f+=df) {
 			
@@ -138,17 +140,17 @@ public class LinesChart extends LineChart implements Updateable, Drawable{
 		
 		//Monate
 
-		for (long f = MainState.m.getTime()-lines[0].size()+1 +30; f <= MainState.m.getTime(); f+=30) {
-			int shift = 0;
-			if (MainState.m.getTime()-lines[0].size() +1 != 0) {
-				shift = (int)(MainState.m.getTime() % 30);		// irgendwie wackelt hier ein Frame ... fixme
-
-			} 
-
-			g.drawLine(this.x + (int)((f-(MainState.m.getTime()-lines[0].size()+1))*dx - shift*dx), this.y, this.x + (int)((f-(MainState.m.getTime()-lines[0].size()+1))*dx - shift*dx), this.y + this.height);
-			g.drawString((f+1)/30+"", this.x + (int)((f-(MainState.m.getTime()-lines[0].size()+1))*dx - dx*15 - shift*dx) - 5, this.y + this.height + 5);
+			for (long f = MainState.m.getTime()-lines[0].size()+1 +30; f <= MainState.m.getTime(); f+=30) {
+				int shift = 0;
+				if (MainState.m.getTime()-lines[0].size() +1 != 0) {
+					shift = (int)(MainState.m.getTime() % 30);		// irgendwie wackelt hier ein Frame ... fixme
+	
+				} 
+	
+				g.drawLine(this.x + (int)((f-(MainState.m.getTime()-lines[0].size()+1))*dx - shift*dx), this.y, this.x + (int)((f-(MainState.m.getTime()-lines[0].size()+1))*dx - shift*dx), this.y + this.height);
+				g.drawString((f+1)/30+"", this.x + (int)((f-(MainState.m.getTime()-lines[0].size()+1))*dx - dx*15 - shift*dx) - 5, this.y + this.height + 5);
+			}
 		}
-		
 		
 	}
 
@@ -162,12 +164,10 @@ public class LinesChart extends LineChart implements Updateable, Drawable{
 		
 		for (int i = 0; i <= points.length-1; i++) {
 			this.lines[i].add(points[i]);
-			if (this.lines[i].size() > this.width)
-				this.lines[i].remove(0);
+			if (lines[i].size() > this.width)
+				lines[i].remove(0);
 		}
 			
-		
-
 	}
 	
 	/**

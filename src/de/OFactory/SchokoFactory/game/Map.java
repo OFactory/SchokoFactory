@@ -7,11 +7,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Input;
+
 import de.OFactory.SchokoFactory.game.patterns.Wiese;
 import de.OFactory.SchokoFactory.main.MainState;
+import de.OFactory.SchokoFactory.main.Updateable;
 import sun.util.calendar.LocalGregorianCalendar.Date;
 
-public class Map extends ArrayList<Pattern>{
+public class Map extends ArrayList<Pattern> implements Updateable{
 
 	public final static String SAVE_PATH_DIR = "saves";
 	
@@ -20,6 +24,10 @@ public class Map extends ArrayList<Pattern>{
 	private Date lastedit;
 	private int height;
 	private int width;
+	
+	public static Pattern hoveredpattern; //Gehoverter Pattern
+	public static Pattern clicked;        //Geklickter Pattern
+	public static Pattern selected_pattern = null; // ausgewähltes Pattern
 	
 	//TODO Info ADDEN
 	
@@ -30,6 +38,47 @@ public class Map extends ArrayList<Pattern>{
 	public Map(String name){
 		super();
 		this.setName(name);
+	}
+	
+	public void update(GameContainer gc) {
+		if(clicked != null){ // Clicked Pattern
+
+			if(MainState.curpatternstate == null){ // Kein Gebäude ausgewählt: nur Auswahlmöglichkeit
+				if(clicked instanceof Wiese) {
+					selected_pattern = null; // keine Auswahl beim Klicken auf leeres Feld
+				} else {
+					selected_pattern = clicked; // Gebäude auswählen
+					MainState.ip.switchTab(0); // Tab wechseln
+				}
+			} else {
+			
+				if(clicked instanceof Wiese){ //Feld "leer" ( = Wiese)
+					if(MainState.curpatternstate != PatternState.WIESE) {
+
+						if (!(MainState.curpatternstate == PatternState.GIEßER && MainState.p.getMoney() < 200)){
+							set(clicked.getId(), Pattern.getInstance(this, clicked.getX(), clicked.getY(), MainState.curpatternstate, clicked.getId(), clicked.getXCoordinate(), clicked.getYCoordinate()));
+						}
+						MainState.curpatternstate = null;
+					}
+				} else { //Feld hat ein Gebäude
+					if(MainState.curpatternstate == PatternState.WIESE) //Gebäude entfernen (-> Wiese) 
+						set(clicked.getId(), new Wiese(MainState.field, clicked.getX(), clicked.getY(), clicked.getId(), clicked.getXCoordinate(), clicked.getYCoordinate()));
+					else // Keine Wiese: Gebäude Auswählen
+						selected_pattern = clicked;
+						
+				}
+			}
+			
+
+		}
+						
+		for(Pattern p : this) //jedes Pattern zeichnen
+			if(p != null)
+				p.update(gc);
+		
+		if(gc.getInput().isKeyPressed(Input.KEY_S)){ 
+			saveMap();
+		}
 	}
 	
 	/** Erstellt ein Feld (=Liste) von Patterns aus einer Angebebenen Breite und Höhe
@@ -384,6 +433,8 @@ public class Map extends ArrayList<Pattern>{
 	public void setWidth(int width) {
 		this.width = width;
 	}
+
+
 	
 
 }

@@ -1,6 +1,9 @@
 package de.OFactory.SchokoFactory.simulation;
 
-public class BetterAI extends AI {
+import de.OFactory.SchokoFactory.main.Daily;
+import de.OFactory.SchokoFactory.main.MainState;
+
+public class BetterAI extends AI implements Daily{
 	
 	private int fabriken = 2;
 	private int produktion = 100;
@@ -11,14 +14,18 @@ public class BetterAI extends AI {
 	
 	public BetterAI(Market market, String name, double money) {
 		super(market, name, money);
+		MainState.dailys.add(this);
 
 	}
 	
+	public void day() {
+		runFactories();
+		think();
+	}
+	
 	public void think() {
-		//System.out.println(name+" hmmmm");
-		// mehr Fabriken benötigt?
-		//System.out.println((1+0.94/(float)this.getFabriken())+" : "+this.getFabriken());
-		
+
+		// mehr Fabriken benötigt?		
 		
 		// Ausgleichsmechaniken
 		diff = this.getProduktmenge() - lastProduktmenge;
@@ -31,14 +38,12 @@ public class BetterAI extends AI {
 			//noetige Investition 'invest'
 			int invest = this.getProduktmenge()/10;
 			if ( this.getMoney()-1000 >= invest ) {
-				System.out.println("genug Geld");
 				investQuality(this.getProduktmenge()/10);
 			}
 			else if (this.getMoney() > 1000)
 				investQuality(this.getMoney()-1000);
 			
 			else{
-				System.out.println("zu teuer");
 				this.setPreis(this.getPreis()-0.01);
 			}
 		} else {
@@ -47,7 +52,6 @@ public class BetterAI extends AI {
 				for (int i=0; i < (diff+produktion)/produktion;i++) 
 					buildFactory();		
 			}	else {																	
-				System.out.println("Fabrik zu teuer -> Preis erhöhen");
 				this.setPreis(this.getPreis()+0.01);
 			}
 		}
@@ -69,7 +73,7 @@ public class BetterAI extends AI {
 		this.addMoney(-einmaligeFabrikkosten);
 		this.addAusgaben(einmaligeFabrikkosten);
 		fabriken += 1;
-		System.out.println("build a factory | #"+fabriken);
+		System.out.println("BetterAI: build a factory | #"+fabriken);
 	}
 	
 	public void runFactories() {

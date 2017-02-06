@@ -24,7 +24,7 @@ import de.OFactory.SchokoFactory.game.GameUtils;
 import de.OFactory.SchokoFactory.game.Map;
 import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternState;
-import de.OFactory.SchokoFactory.game.patterns.Wiese;
+
 import de.OFactory.SchokoFactory.inventory.Button;
 import de.OFactory.SchokoFactory.inventory.Pausepile;
 import de.OFactory.SchokoFactory.inventory.Stockpile;
@@ -63,8 +63,7 @@ public class MainState extends BasicGameState{
 	public static double curpatternscale = 0.7D;
 	public static Image   patternimg_raw = ResourceManager.loadImage("assets/textures/patterns/patterns.png");
 	public static Image[] patternimg = ResourceManager.loadPics(patternimg_raw, 50); //Bild splitten -> Einzelne Bilder (Image[])
-	public static Pattern hoveredpattern; //Gehoverter Pattern
-	public static Pattern clicked;        //Geklickter Pattern
+
 	
 	public static int allv_y; //Geschwindigkeit y
 	public static int allv_x; //Geschwindidkeit  x
@@ -73,7 +72,7 @@ public class MainState extends BasicGameState{
 	public static final  int TEXTURE_HEIGHT = 64;
 	public static String curpatterninfo;
 	public static PatternState curpatternstate = null;
-	public static Pattern selected_pattern = null; // ausgewähltes Pattern
+
 	
 	//Max Dist
 	public static Rectangle view_dimensions = new Rectangle(-100, -100, 800, 600);
@@ -129,11 +128,7 @@ public class MainState extends BasicGameState{
 	//Tabs
 	public static MarketInfoTab mtab;
 	
-	
-	//Key-Events
-	public static boolean E_Down = false;
-	
-	
+
 	// Spiel läuft oder pausiert
 	public static boolean run = true;
 	
@@ -151,33 +146,32 @@ public class MainState extends BasicGameState{
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		
 		
+		System.out.println("\n\n SchokoFactory MainState          -   Game-Log \n");	
 		
-		
-		// - Market
-		MainState.m = new Market(); 
-		MainState.f = new Factory();
-		MainState.p = new Player(m, "P", 1800);
+		// - Initialisierung der Objekte für die Marktsimulation
+		MainState.f = new Factory();					// Reihenfolge beachten, damit die day()-Methoden in der richtigen Reihenfolge ausgeführt werden.
+		MainState.p = new Player(m, "P1", 1800);		// Wichtig: fabrik, dann ais, dann markt
 		MainState.ai1 = new SimpleAI(m,"P2",1000);
-		MainState.ai2 = new BetterAI(m,"P2",1000);
+		MainState.ai2 = new BetterAI(m,"P3",1000);
+		
+		MainState.m = new Market(); 
 		MainState.m.setPlayer(Arrays.asList(
 				p,
 				ai1,
 				ai2));
 		
+		
+		// - Initialisierung der Map | Auslesen des Speichers und Generieren der Map
+		field = Map.readSavedMap("saves/Test.sf");
+		//field = Map.generateMap(20, 20);// GameSettings.STANDARD_MAP_SIZE_HEIGHT); // Feld generieren //GameSettings.STANDARD_MAP_SIZE_WIDTH
+				//field.setName("Test");
+		
+		
+		// - Initialisierung Stockpile und Unterklassen
 		pile      = new Stockpile(50); // Stockpile generieren
 		pausepile = new Pausepile(50, 30);
-		//field = Map.generateMap(1, 1); // Feld generieren
-		//field = Map.generateMap(20, 20);// GameSettings.STANDARD_MAP_SIZE_HEIGHT); // Feld generieren //GameSettings.STANDARD_MAP_SIZE_WIDTH
-		//field.setName("Test");
 		
-		//long time_1 = System.currentTimeMillis();
-		field = Map.readSavedMap("saves/Test.sf");
-		//System.out.println(System.currentTimeMillis()-time_1);
-		
-		//System.out.println(field);
-		//System.out.println(field.getSaveString());
-		
-		// InfoPanel + TABS
+		// - Initialisierung InfoPanel und Unterklassen wie z.B Tabs
 		int x =      gc.getWidth()/5*4;
 		int y =      80;//gc.getHeight()/14;
 		int width =  gc.getWidth()/20*4;
@@ -192,35 +186,21 @@ public class MainState extends BasicGameState{
 				new EnviromentTab(ip, patternimg[2])));
 		ip.switchTab(2);
 
-		
-		ecoscreen = new EcoScreen(0, y, gc.getWidth(), height);
-		
-		
-		ArrayList<Integer> l1 = new ArrayList<Integer>();
-		ArrayList<Integer> l2 = new ArrayList<Integer>();
-		ArrayList<Integer> l3 = new ArrayList<Integer>();
-		ArrayList<Integer> l4 = new ArrayList<Integer>();
-		ArrayList<Integer> l5 = new ArrayList<Integer>();
-		ArrayList<Integer> l6 = new ArrayList<Integer>();
-		ArrayList<Integer> l7 = new ArrayList<Integer>();
-		
-		l1.add(450);
-		l2.add(150);
-		l3.add(150);
-		l4.add(150);
-		l5.add(150);
-		l6.add(150);
-		l7.add(150);
-		
+		// - Initialisierung des Economy-Screens und Inhalten
+		ecoscreen = new EcoScreen(0, y, gc.getWidth(), height);	
 		@SuppressWarnings("unchecked")
-		ArrayList<Integer>[] lines = (ArrayList<Integer>[]) new ArrayList[] {l1,l2,l3,l4,l5,l6,l7};
-		
-		mtab.wachstumschart.setLines(lines);
-		ecoscreen.wachstumschart.setLines(lines);
+		ArrayList<Integer>[] lines1 = (ArrayList<Integer>[]) new ArrayList[] {new ArrayList<Integer>(),new ArrayList<Integer>(),new ArrayList<Integer>(),new ArrayList<Integer>(),new ArrayList<Integer>(),new ArrayList<Integer>(),new ArrayList<Integer>()};
+		@SuppressWarnings("unchecked")
+		ArrayList<Integer>[] lines2 = (ArrayList<Integer>[]) new ArrayList[] {new ArrayList<Integer>(),new ArrayList<Integer>(),new ArrayList<Integer>(),new ArrayList<Integer>(),new ArrayList<Integer>(),new ArrayList<Integer>(),new ArrayList<Integer>()};
+
+		mtab.wachstumschart.setLines(lines1);
+		ecoscreen.wachstumschart.setLines(lines2);
 		
 		msl = new MainStateListener();
 		gc.getInput().addMouseListener(MainState.msl); //MouseListener
+		gc.getInput().addKeyListener(MainState.msl);
 		
+		// - Inputs für Preis, Werbe- und Qualitätsinvestitionen 		(hässliche Kackscheiße, die ins InfoPanel gehört)
 		txt_preis = new TextField(gc, gc.getDefaultFont(), 800, 760, 200, 20);
 		txt_werbung = new TextField(gc, gc.getDefaultFont(), 800, 800, 200, 20);
 		txt_qualitaet = new TextField(gc, gc.getDefaultFont(), 800, 840, 200, 20);
@@ -247,15 +227,11 @@ public class MainState extends BasicGameState{
 			}
 		});
 		
-		// TESTAREA Inc. ------------------------------------------------------------
-		
-		//b1 = new BuyButton(0, 1, 2, gc.getWidth()/80*65, gc.getHeight()/15, "-30");
-		//b2 = new BuyButton(3, 4, 5, gc.getWidth()/80*73, gc.getHeight()/15, "-30");
-		
+
+		// - damit die Tanks nicht so traurig aussehen [bleibt hier nicht mehr lange]
 		molten_chokolate = 3600;
 		free_molten_chokolate = molten_chokolate;
 		
-		// TESTAREA End. ------------------------------------------------------------
 		
 
 	}
@@ -272,12 +248,7 @@ public class MainState extends BasicGameState{
 	 */
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		
-		if(gc.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
-			Display.destroy();
-		}
-		if(gc.getInput().isKeyPressed(Input.KEY_SPACE)) {
-			run = !run;
-		}
+
 		
 		
 		Input in = gc.getInput(); //Inputinstanz holen
@@ -285,56 +256,17 @@ public class MainState extends BasicGameState{
 		
 		MainState.gc = gc;
 		
-		btn_bestätigen.update(gc.getInput());
-		
-
-
-		
-		if(clicked != null){ // Clicked Pattern
-			
-			if(curpatternstate == null){ // Kein Gebäude ausgewählt: nur Auswahlmöglichkeit
-				if(clicked instanceof Wiese) {
-					selected_pattern = null; // keine Auswahl beim Klicken auf leeres Feld
-				} else {
-					selected_pattern = clicked; // Gebäude auswählen
-					ip.switchTab(0); // Tab wechseln
-				}
-			} else {
-			
-				if(clicked instanceof Wiese){ //Feld "leer" ( = Wiese)
-					if(curpatternstate != PatternState.WIESE) {
-						if (!(curpatternstate == PatternState.GIEßER && p.getMoney() < 200)){
-							field.set(clicked.getId(), Pattern.getInstance(MainState.field, clicked.getX(), clicked.getY(), curpatternstate, clicked.getId(), clicked.getXCoordinate(), clicked.getYCoordinate()));
-						}
-						curpatternstate = null;
-					}
-				} else { //Feld hat ein Gebäude
-					if(curpatternstate == PatternState.WIESE) //Gebäude entfernen (-> Wiese) 
-						field.set(clicked.getId(), new Wiese(MainState.field, clicked.getX(), clicked.getY(), clicked.getId(), clicked.getXCoordinate(), clicked.getYCoordinate()));
-					else // Keine Wiese: Gebäude Auswählen
-						selected_pattern = clicked;
-						
-				}
-			}
-			
-			
-
+		if(in.isKeyPressed(Input.KEY_ESCAPE)) {
+			Display.destroy();
 		}
-		
+		if(in.isKeyPressed(Input.KEY_SPACE)) {
+			run = !run;
+		}
 		
 		
 		GameUtils.refreshSize(); // Testen, ob Größe sich verändert hat -> Ausprinten
 		
-		for(Pattern p : field) //jedes Pattern zeichnen
-			if(p != null)
-				p.update(gc);
-		
-		if(in.isKeyPressed(Input.KEY_S)){ // Speichertest
-			field.saveMap();
-		}
-		
-		pile.update(gc); //Stockpiles updaten
-		pausepile.update(gc);
+
 		
 		//Tag berechnen
 		delta_t = System.currentTimeMillis() - last;
@@ -343,51 +275,23 @@ public class MainState extends BasicGameState{
 			last = 0;
 			
 			long t1 = System.currentTimeMillis();
-			// Endphase des Tages eingeleitet
-			
-			for (Player p : m.getPlayers()) {
-				if (p instanceof SimpleAI) {
-					((SimpleAI) p).think(); // Aktionen der AIs
-				}
-				else if (p instanceof BetterAI) {
-					((BetterAI) p).think(); // Aktionen der AIs
-				}
-			}
-			for (Player p : m.getPlayers()) {
-				if (p instanceof SimpleAI) {
-					((SimpleAI) p).runFactories(); // Produktion der AIs
-				}
-				else if (p instanceof BetterAI) {
-					((BetterAI) p).runFactories(); // Produktion der AIs
-				}
-			}
-			f.run(); // Produktion des Spieler
-			
-			
-			
+
 			for(Daily d:dailys)
-				d.day(); // Berechnung vor Ende des Tages
-			
-			
-			// Ende des Tages
-			
-			System.out.println("Berechnungsdauer der Simulation: " + (System.currentTimeMillis() - t1));
+				d.day();
+					
+			System.out.println("Berechnungsdauer der Simulation (Tag "+m.getTime()+"): " + (System.currentTimeMillis() - t1) + " ms");
 
 		}
 		
 		if(last == 0)
 			last = System.currentTimeMillis(); //last neu ausrechnen
 		
-		
-		// TESTAREA Inc. --------------------------------------
-		
-		//m.day();
-		
-		//b1.update(gc);
-		//b2.update(gc);
 		ip.update(gc);
-		
-		// TESTAREA End. --------------------------------------
+		pile.update(gc); //Stockpiles updaten
+		pausepile.update(gc);
+		ecoscreen.update(gc);
+		field.update(gc);
+		btn_bestätigen.update(gc.getInput());
 	}
 	
 	/** Ändert den aktuellen Pattern-Zustand curpatternstate
@@ -424,15 +328,7 @@ public class MainState extends BasicGameState{
 			MainState.molten_chokolate += 100;
 		
 		
-		if(in.isKeyDown(Input.KEY_E)) 
-			E_Down = true;
-		else {
-			if (E_Down)					// toggle nur beim loslassen ausführen
-										// dann wenn isKeyDown falsch ist und im letzten update() wahr war
-										// fällt dir was ein wie man die zusätzliche Variable umgehen kann?
-				ecoscreen.toggle();
-			E_Down = false;
-		}
+
 		
 		
 		if(in.isKeyDown(Input.KEY_UP))
@@ -510,13 +406,12 @@ public class MainState extends BasicGameState{
 		g.setColor(new Color(200, 200, 200, 0.4F));
 		g.fillRect(0, 80, gc.getWidth()/6, gc.getHeight()/7);	
 		g.setColor(Color.black);
-		//g.drawRect(0, 45, gc.getWidth()/4, gc.getHeight()/6);
 		
 		g.setColor(new Color(0, 20, 200, 150));
 		g.drawString("State: MainState", 10, 90);
 		g.drawString("CurPattern: " + curpatterninfo,    					  10,  110);
 		g.drawString("CurState: "   + curpatternstate,  					  10, 130);
-		g.drawString("Selected: "   + selected_pattern,       				  10, 150);
+		g.drawString("Selected: "   + Map.selected_pattern,       				  10, 150);
 		g.drawString("cam_pos:  "   + cam_pos.getX() + ", " + cam_pos.getY(), 10, 170);
 		g.drawString("pat_cale: "   + curpatternscale,                        10, 190);
 		
@@ -536,21 +431,15 @@ public class MainState extends BasicGameState{
 		
 		btn_bestätigen.draw(g);
 		
-		// TESTAREA Inc. --------------------------
-		
+
 		ip.draw(g);
 		ecoscreen.draw(g);
-		
-		//Buttons #just4funs
-		//b1.draw(g);
-		//b2.draw(g);
-		
-		
-		// TESTARE End. ---------------------------
+
 	}
 	
 	//-------------------------------------------------------------------------
 
+	
 	@Override
 	public int getID() {
 		return 1;
@@ -570,4 +459,10 @@ public class MainState extends BasicGameState{
 	public void mouseClicked(int button, int x, int y, int clickCount) {
 		msl.mouseClicked(button, x, y, clickCount);
 	}
+	
+	@Override
+	public void keyPressed(int key, char c) {
+		msl.keyPressed(key, c);
+	}
+	
 }

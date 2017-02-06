@@ -39,21 +39,17 @@ public class Player {
 	private double[] werbeliste = new double[] {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
 	
 	public Player(Market market, String name, double money) {
-		
+
 		this.market = market;
 		this.name = name;
 		this.money = money;
 		
 	}
 	/**First part of the calculation. Gets inputs and works out possible sales(ger.: Absatz). Returns possible sales to Game.**/
-    public void calculateMoegAbs() {
-    	
-    	setPreis(MainState.inpreis);
-		investAdverts(MainState.inwerbung);
-		investQuality(MainState.inqualitaet);
+	public void calculateMoegAbs() {
     	
     	// 15 Tage Verschiebung
-    	int item = (int)market.getTime() % 15;
+    	int item = (int)MainState.m.getTime() % 15;
     	
     	werbeliste[item] = this.werbefaktor;
     	double werbefaktor = 0;		// Variable werbefaktor wird hier noch als Summe aus der Liste verwendet.
@@ -75,7 +71,7 @@ public class Player {
 
 
         bekanntheit += werbefaktor-1;
-        moegAbs = (int)((0.01*bekanntheit+0.99) * (double)this.market.getBedarf()* (marktanteil+0.005) * this.market.getBoni() * Math.pow(werbefaktor / altwerbefaktor, 4)  / preis  * (qualitaet / altqualitaet));
+        moegAbs = (int)((0.01*bekanntheit+0.99) * (double)MainState.m.getBedarf()* (marktanteil+0.005) * MainState.m.getBoni() * Math.pow(werbefaktor / altwerbefaktor, 4)  / preis  * (qualitaet / altqualitaet));
         
         altqualitaet = qualitaet;
         altwerbefaktor = werbefaktor;
@@ -83,11 +79,11 @@ public class Player {
     
     public void calculateDiff() {
     	
-    	if (market.getSummeAbs() != 0) {
+    	if (MainState.m.getSummeAbs() != 0) {
     		
-    		double moegMarktanteil = (double)moegAbs/market.getMoegAbs();
+    		double moegMarktanteil = (double)moegAbs/MainState.m.getSummeMoegAbs();
 
-	    	moegAbs = (int)(moegMarktanteil * market.getSummeAbs());
+	    	moegAbs = (int)(moegMarktanteil * MainState.m.getSummeAbs());
 
     	} else {
 
@@ -122,16 +118,16 @@ public class Player {
 
     	produktmenge -= absatz;
 
-        if (market.getSummeAbs() != 0) {
-        	marktanteil = (float)Math.round((float)absatz/market.getSummeAbs() *100d) /100d;  // runde auf 2 Nachkommastellen
+        if (MainState.m.getSummeAbs() != 0) {
+        	marktanteil = (float)Math.round((float)absatz/MainState.m.getSummeAbs() *100d) /100d;  // runde auf 2 Nachkommastellen
         } else {
         	marktanteil = 0;
         }
 
-        System.out.println("Zinsen: " + -money / Math.pow(umsatz,2) * market.getSummeUms() * 0.0167 / 5);
+        //System.out.println("Zinsen: " + -money / Math.pow(umsatz,2) * MainState.m.getSummeUms() * 0.0167 / 5);
         
         if (money < 0 && liquide) {
-            zinsen = -money / Math.pow(umsatz,2) * market.getSummeUms() * 0.0167 / 5;
+            zinsen = -money / Math.pow(umsatz,2) * MainState.m.getSummeUms() * 0.0167 / 5;
             
             if (zinsen < 0.03) 
                 zinsen = 0.03;
