@@ -48,6 +48,8 @@ public class EcoScreen  implements Drawable, Updateable, Daily{
 	}
 
 	public void update(GameContainer gc) {
+		
+		
 		if(gc.getInput().isKeyDown(Input.KEY_E)) 
 			E_Down = true;
 		else {

@@ -1,6 +1,11 @@
 package de.OFactory.SchokoFactory.main;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -8,38 +13,81 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import de.OFactory.SchokoFactory.inventory.TextView;
+import de.OFactory.SchokoFactory.game.Map;
+import de.OFactory.SchokoFactory.inventory.Button;
 
 public class SelectMapState extends BasicGameState{
 
-	TextView txt_test;
+	ArrayList<Button> buttons = new ArrayList<Button>();
 	
-	public void init(GameContainer container, StateBasedGame game) throws SlickException {
+	public void init(GameContainer gc, final StateBasedGame sbg) throws SlickException {
 		// TODO Auto-generated method stub
+		File folder = new File("saves");
+		File[] listOfFiles = folder.listFiles();
+		int height = gc.getHeight()/(listOfFiles.length + 2);
 		
-		txt_test = new TextView("Dies ist ein Test! Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.", 200, 200, 500);
+		// TODO Auto-generated method stub
+		for (int i = 0; i < listOfFiles.length; i++) {
+		      if (listOfFiles[i].isFile()) {
+		    	  
+		    	  
+		    	  final File f = listOfFiles[i];
+		    	  Button b = new Button(i, 0, height*i, gc.getWidth(), height, f.getName(), 0);
+		    	  b.addActionListener(new ActionListener() {
+					
+					public void actionPerformed(ActionEvent e) {
+						
+
+						
+						sbg.enterState(1);
+						MainState.field = Map.readSavedMap(f.getPath());
+						
+					}
+				  });
+		    	  
+		    	  
+		        buttons.add(b);
+		      } else if (listOfFiles[i].isDirectory()) {
+		    	  //ORDNER
+		      }
+		}
 		
+		Button generate = new Button(-1, 0, listOfFiles.length * height, gc.getWidth(), height, "Neue Map(20x20)", 0);
+		generate.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				sbg.enterState(1);
+				MainState.field = Map.generateMap(20, 20);
+				SimpleDateFormat df = new SimpleDateFormat( "dd-MM-YYYY HH-mm-ss,S" );
+				MainState.field.setName("" + df.format(new Date()));
+				
+			}
+		});
+		buttons.add(generate);
+		
+		Button exit = new Button(-1, 0, (listOfFiles.length+1) * height, gc.getWidth(), height, "Zurück", 0);
+		exit.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				sbg.enterState(0);
+				
+			}
+		});
+		buttons.add(exit);
 	}
 
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-		g.drawString("Maps:", 50, 50);
-		txt_test.draw(g);
 		
-		File folder = new File("saves");
-		File[] listOfFiles = folder.listFiles();
-
-	    for (int i = 0; i < listOfFiles.length; i++) {
-	      if (listOfFiles[i].isFile()) {
-	        g.drawString("saves/" + listOfFiles[i].getName().subSequence(0, listOfFiles[i].getName().length() - 3), 50, 50 + (i+1) * 20);
-	      } else if (listOfFiles[i].isDirectory()) {
-	    	  //ORDNER
-	      }
-	    }
-		
+		for(Button b : buttons){
+			b.draw(g);
+		}
+		g.drawString("Maps:(auch für NOAH LOL)", 50, 50);
 	}
 
-	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-		// TODO Auto-generated method stub
+	public void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException {
+		for(Button b : buttons){
+			b.update(gc.getInput());
+		}
 		
 	}
 	

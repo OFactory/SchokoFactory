@@ -24,20 +24,34 @@ public class Button implements Drawable{
 	
 	protected Shape shape;
 	
-	protected Color hovered_color;
-	protected Color normal_color;
-	protected Color clicked_color;
-	
-	protected int cornerradius;
-	
+	protected Color hovered_color = new Color(150, 150, 255);
+	protected Color normal_color  = new Color(150, 150, 150);
+	protected Color clicked_color = new Color(100, 100, 100);
+
 	protected String content;
 	
 	protected boolean hovered = false;
 	protected boolean clicked = false;
 	
+	protected Object source;
+	
 	protected ActionListener al;
+
+	private int cornerradius;
 	
-	
+	public Button(int ID, int x, int y, int width, int height, String content){
+		
+		this.ID = ID;
+		
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		
+		this.content = content;
+
+		
+	}
 	
 	public Button(int ID, int x, int y, int width, int height, String content, int cornerradius){
 		
@@ -58,9 +72,6 @@ public class Button implements Drawable{
 			this.shape = new Rectangle(x, y, width, height);
 		}
 		
-		this.clicked_color = new Color(100, 100, 100);
-		this.hovered_color = new Color(150, 150, 255);
-		this.normal_color  = new Color(150, 150, 150);
 		
 	}
 	
@@ -153,6 +164,14 @@ public class Button implements Drawable{
 	//-------------------------------------------------------------------------
 	
 	//Setters & Getters
+	
+	public void setSource(Object o){
+		this.source = o;
+	}
+	
+	public Object getSource(){
+		return this.source;
+	}
 	
 	public void setX(int x) {
 		this.x = x;

@@ -24,12 +24,12 @@ import de.OFactory.SchokoFactory.game.GameUtils;
 import de.OFactory.SchokoFactory.game.Map;
 import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternState;
-
 import de.OFactory.SchokoFactory.inventory.Button;
 import de.OFactory.SchokoFactory.inventory.Pausepile;
 import de.OFactory.SchokoFactory.inventory.Stockpile;
 import de.OFactory.SchokoFactory.inventory.info.EcoScreen;
 import de.OFactory.SchokoFactory.inventory.info.InfoPanel;
+import de.OFactory.SchokoFactory.inventory.info.PauseScreen;
 import de.OFactory.SchokoFactory.inventory.info.tabs.BuildTab;
 import de.OFactory.SchokoFactory.inventory.info.tabs.BuildingInfoTab;
 import de.OFactory.SchokoFactory.inventory.info.tabs.EnviromentTab;
@@ -55,6 +55,7 @@ public class MainState extends BasicGameState{
 	public static MainStateListener msl; //Listener
 	public static GameContainer gc;
 	public static Graphics g;
+	public static StateBasedGame sbg;
 	
 	//Zeug für Pattern
 	
@@ -87,9 +88,9 @@ public class MainState extends BasicGameState{
 	public static Image[] buybuttonimg = ResourceManager.loadPics(buybuttonimg_raw, 6);
 	//public static BuyButton b1;
 	//public static BuyButton b2;s
-	public static InfoPanel ip;
-	public static EcoScreen ecoscreen;
-	
+	public static InfoPanel   ip;
+	public static EcoScreen   ecoscreen;
+	public static PauseScreen pausescreen;
 	
 	
 	//Zeug für Zeit -> Simulationsberechnungen
@@ -145,8 +146,16 @@ public class MainState extends BasicGameState{
 	 */
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		
-		
+		MainState.sbg = sbg;
 		System.out.println("\n\n SchokoFactory MainState          -   Game-Log \n");	
+		
+		// - Tastatur "machen"
+		/*try {
+			Keyboard.create();
+		} catch (LWJGLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}*/
 		
 		// - Initialisierung der Objekte für die Marktsimulation
 		MainState.f = new Factory();					// Reihenfolge beachten, damit die day()-Methoden in der richtigen Reihenfolge ausgeführt werden.
@@ -162,7 +171,8 @@ public class MainState extends BasicGameState{
 		
 		
 		// - Initialisierung der Map | Auslesen des Speichers und Generieren der Map
-		field = Map.readSavedMap("saves/Test.sf");
+		if(field == null)
+			field = Map.readSavedMap("saves/Test.sf");
 		//field = Map.generateMap(20, 20);// GameSettings.STANDARD_MAP_SIZE_HEIGHT); // Feld generieren //GameSettings.STANDARD_MAP_SIZE_WIDTH
 				//field.setName("Test");
 		
@@ -186,6 +196,9 @@ public class MainState extends BasicGameState{
 				new EnviromentTab(ip, patternimg[2])));
 		ip.switchTab(2);
 
+		// - Initialisierung Pause Screen
+		pausescreen = new PauseScreen(gc);
+		
 		// - Initialisierung des Economy-Screens und Inhalten
 		ecoscreen = new EcoScreen(0, y, gc.getWidth(), height);	
 		@SuppressWarnings("unchecked")
@@ -256,9 +269,10 @@ public class MainState extends BasicGameState{
 		
 		MainState.gc = gc;
 		
+		/*
 		if(in.isKeyPressed(Input.KEY_ESCAPE)) {
 			Display.destroy();
-		}
+		}*/
 		if(in.isKeyPressed(Input.KEY_SPACE)) {
 			run = !run;
 		}
@@ -290,6 +304,7 @@ public class MainState extends BasicGameState{
 		pile.update(gc); //Stockpiles updaten
 		pausepile.update(gc);
 		ecoscreen.update(gc);
+		pausescreen.update(gc);
 		field.update(gc);
 		btn_bestätigen.update(gc.getInput());
 	}
@@ -411,7 +426,7 @@ public class MainState extends BasicGameState{
 		g.drawString("State: MainState", 10, 90);
 		g.drawString("CurPattern: " + curpatterninfo,    					  10,  110);
 		g.drawString("CurState: "   + curpatternstate,  					  10, 130);
-		g.drawString("Selected: "   + Map.selected_pattern,       				  10, 150);
+		g.drawString("Selected: "   + field.selected_pattern,       	      10, 150);
 		g.drawString("cam_pos:  "   + cam_pos.getX() + ", " + cam_pos.getY(), 10, 170);
 		g.drawString("pat_cale: "   + curpatternscale,                        10, 190);
 		
@@ -434,6 +449,7 @@ public class MainState extends BasicGameState{
 
 		ip.draw(g);
 		ecoscreen.draw(g);
+		pausescreen.draw(g);
 
 	}
 	

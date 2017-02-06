@@ -25,9 +25,9 @@ public class Map extends ArrayList<Pattern> implements Updateable{
 	private int height;
 	private int width;
 	
-	public static Pattern hoveredpattern; //Gehoverter Pattern
-	public static Pattern clicked;        //Geklickter Pattern
-	public static Pattern selected_pattern = null; // ausgewähltes Pattern
+	public Pattern hoveredpattern; //Gehoverter Pattern
+	public Pattern clicked;        //Geklickter Pattern
+	public Pattern selected_pattern = null; // ausgewähltes Pattern
 	
 	//TODO Info ADDEN
 	

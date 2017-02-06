@@ -103,7 +103,7 @@ public class MainStateListener implements MouseListener, KeyListener{
 
 	public void keyPressed(int key, char c) {
 		System.out.println(key+";"+c);
-		/*
+
 		switch(c) { 
 		case 't':
 			MainState.curpatternstate = PatternState.TANK;
@@ -130,7 +130,7 @@ public class MainStateListener implements MouseListener, KeyListener{
 		case '2':
 			MainState.molten_chokolate += 100;
 		
-		}*/
+		}
 	}
 
 	public void keyReleased(int key, char c) {
