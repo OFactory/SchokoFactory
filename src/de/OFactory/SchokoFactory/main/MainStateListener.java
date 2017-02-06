@@ -101,7 +101,6 @@ public class MainStateListener implements MouseListener, KeyListener{
 		
 	}
 
-	@Override
 	public void keyPressed(int key, char c) {
 		System.out.println(key+";"+c);
 		/*
@@ -134,7 +133,6 @@ public class MainStateListener implements MouseListener, KeyListener{
 		}*/
 	}
 
-	@Override
 	public void keyReleased(int key, char c) {
 		// TODO Auto-generated method stub
 		
