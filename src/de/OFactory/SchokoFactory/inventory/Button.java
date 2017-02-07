@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.Font;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Rectangle;
@@ -33,6 +34,17 @@ public class Button implements Drawable{
 	protected boolean hovered = false;
 	protected boolean clicked = false;
 	
+	protected Font font = GameFonts.MAIN;
+	
+	
+	public Font getFont() {
+		return font;
+	}
+
+	public void setFont(Font font) {
+		this.font = font;
+	}
+
 	protected Object source;
 	
 	protected ActionListener al;
@@ -153,7 +165,7 @@ public class Button implements Drawable{
 		g.draw(this.shape);
 		
 		if(this.content != "") {
-			GameFonts.SUB.drawString( this.x + 20, this.y + (int) (this.height*0.3), content, new Color(256 - g.getColor().getRed(), 256 - g.getColor().getGreen(), 256 - g.getColor().getBlue()));
+			getFont().drawString( x + width/2 - ( getFont().getWidth(content)/2 ), y + height/2 - ( getFont().getHeight(content)/2 ) , content, new Color(256 - g.getColor().getRed(), 256 - g.getColor().getGreen(), 256 - g.getColor().getBlue()));
 		}
 		
 	}

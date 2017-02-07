@@ -7,6 +7,8 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import de.OFactory.SchokoFactory.inventory.Button;
 import de.OFactory.SchokoFactory.main.Drawable;
@@ -20,6 +22,7 @@ public class PauseScreen implements Drawable, Updateable{
 	private int height;
 	
 	Button hauptmenü;
+	private boolean show;
 	
 	public PauseScreen(GameContainer gc){
 		setWidth(gc.getWidth());
@@ -30,21 +33,36 @@ public class PauseScreen implements Drawable, Updateable{
 			
 			public void actionPerformed(ActionEvent e) {
 				MainState.field.saveMap();
-				MainState.sbg.enterState(2);
+				MainState.sbg.enterState(2,  new FadeOutTransition(), new FadeInTransition());
 				
 			}
 		});
 	}
 
 	public void update(GameContainer gc) {
-		if(gc.getInput().isKeyDown(Input.KEY_ESCAPE)){
-			MainState.run = !MainState.run;
-			toggle();
+		
+		Input in = gc.getInput();
+		in.enableKeyRepeat();
+		
+		if(in.isKeyDown(Input.KEY_ESCAPE)) 
+			show = true;
+		else {
+			if (show)				
+				toggle();
+			show = false;
 		}
 		
 		if(active){
 			hauptmenü.update(gc.getInput());
 		}
+	}
+
+	public boolean isShow() {
+		return show;
+	}
+
+	public void setShow(boolean show) {
+		this.show = show;
 	}
 
 	public void draw(Graphics g) {

@@ -12,6 +12,8 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import de.OFactory.SchokoFactory.game.Map;
 import de.OFactory.SchokoFactory.inventory.Button;
@@ -39,9 +41,9 @@ public class SelectMapState extends BasicGameState{
 						
 
 						
-						sbg.enterState(1);
+						sbg.enterState(1,  new FadeOutTransition(), new FadeInTransition());
 						MainState.field = Map.readSavedMap(f.getPath());
-						
+						MainState.pausescreen.setShow(false);
 					}
 				  });
 		    	  
@@ -56,10 +58,11 @@ public class SelectMapState extends BasicGameState{
 		generate.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				sbg.enterState(1);
+				sbg.enterState(1,  new FadeOutTransition(), new FadeInTransition());
 				MainState.field = Map.generateMap(20, 20);
 				SimpleDateFormat df = new SimpleDateFormat( "dd-MM-YYYY HH-mm-ss,S" );
 				MainState.field.setName("" + df.format(new Date()));
+				MainState.pausescreen.setShow(false);
 				
 			}
 		});
@@ -69,7 +72,7 @@ public class SelectMapState extends BasicGameState{
 		exit.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				sbg.enterState(0);
+				sbg.enterState(0,  new FadeOutTransition(), new FadeInTransition());
 				
 			}
 		});
@@ -85,6 +88,9 @@ public class SelectMapState extends BasicGameState{
 	}
 
 	public void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException {
+		
+		gc.getInput().clearKeyPressedRecord();
+		
 		for(Button b : buttons){
 			b.update(gc.getInput());
 		}

@@ -54,6 +54,7 @@ public class MainState extends BasicGameState{
 	
 	public static MainStateListener msl; //Listener
 	public static GameContainer gc;
+	public static Input in;
 	public static Graphics g;
 	public static StateBasedGame sbg;
 	
@@ -147,15 +148,8 @@ public class MainState extends BasicGameState{
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		
 		MainState.sbg = sbg;
+		MainState.in  = gc.getInput();
 		System.out.println("\n\n SchokoFactory MainState          -   Game-Log \n");	
-		
-		// - Tastatur "machen"
-		/*try {
-			Keyboard.create();
-		} catch (LWJGLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}*/
 		
 		// - Initialisierung der Objekte für die Marktsimulation
 		MainState.f = new Factory();					// Reihenfolge beachten, damit die day()-Methoden in der richtigen Reihenfolge ausgeführt werden.
@@ -206,12 +200,15 @@ public class MainState extends BasicGameState{
 		@SuppressWarnings("unchecked")
 		ArrayList<Integer>[] lines2 = (ArrayList<Integer>[]) new ArrayList[] {new ArrayList<Integer>(),new ArrayList<Integer>(),new ArrayList<Integer>(),new ArrayList<Integer>(),new ArrayList<Integer>(),new ArrayList<Integer>(),new ArrayList<Integer>()};
 
+	
 		mtab.wachstumschart.setLines(lines1);
 		ecoscreen.wachstumschart.setLines(lines2);
 		
+		// LISTENER
+		
 		msl = new MainStateListener();
-		gc.getInput().addMouseListener(MainState.msl); //MouseListener
-		gc.getInput().addKeyListener(MainState.msl);
+		in.addMouseListener(MainState.msl); //MouseListener
+		in.addKeyListener(  MainState.msl);
 		
 		// - Inputs für Preis, Werbe- und Qualitätsinvestitionen 		(hässliche Kackscheiße, die ins InfoPanel gehört)
 		txt_preis = new TextField(gc, gc.getDefaultFont(), 800, 760, 200, 20);
@@ -226,8 +223,8 @@ public class MainState extends BasicGameState{
 		btn_bestätigen.addActionListener(new ActionListener() {		
 			public void actionPerformed(ActionEvent e) {
 				try {
-					inwerbung  = Double.parseDouble(txt_werbung.getText());
-					inpreis    = Double.parseDouble(txt_preis.getText());
+					inwerbung   = Double.parseDouble(txt_werbung.getText());
+					inpreis     = Double.parseDouble(txt_preis.getText());
 					inqualitaet = Double.parseDouble(txt_qualitaet.getText());
 					
 
@@ -260,11 +257,11 @@ public class MainState extends BasicGameState{
 	 *  @throws SlickException: Falls Etwas beim Berechnen schief läuft
 	 */
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		
 
 		
 		
 		Input in = gc.getInput(); //Inputinstanz holen
+		in.enableKeyRepeat();
 		patternMovement(gc, in); // Bewegung der Pattern
 		
 		MainState.gc = gc;
@@ -306,7 +303,7 @@ public class MainState extends BasicGameState{
 		ecoscreen.update(gc);
 		pausescreen.update(gc);
 		field.update(gc);
-		btn_bestätigen.update(gc.getInput());
+		btn_bestätigen.update(in);
 	}
 	
 	/** Ändert den aktuellen Pattern-Zustand curpatternstate
@@ -318,34 +315,8 @@ public class MainState extends BasicGameState{
 	 */
 	private void patternMovement(GameContainer gc, Input in) {
 		
-		if(in.isKeyDown(Input.KEY_T))
-			MainState.curpatternstate = PatternState.TANK;
-		if(in.isKeyDown(Input.KEY_W))
-			MainState.curpatternstate = PatternState.WIESE;
-		if(in.isKeyDown(Input.KEY_C))
-			MainState.curpatternstate = PatternState.CHEMIEFABRIK;
-		if(in.isKeyDown(Input.KEY_R))
-			MainState.curpatternstate = PatternState.RÜHRER;
-		if(in.isKeyDown(Input.KEY_L))
-			MainState.curpatternstate = PatternState.LAGERHALLE;
-		if(in.isKeyDown(Input.KEY_M))
-			MainState.curpatternstate = PatternState.MOLKEREI;
-		if(in.isKeyDown(Input.KEY_F))
-			MainState.curpatternstate = PatternState.FARM;
-		if(in.isKeyDown(Input.KEY_G))
-			MainState.curpatternstate = PatternState.GIEßER;
-		if(in.isKeyDown(Input.KEY_N))
-			MainState.curpatternstate = null;
 		
-		if(in.isKeyDown(Input.KEY_P))
-			MainState.cam_pos.setLocation(0, 0);
-		if(in.isKeyDown(Input.KEY_2))
-			MainState.molten_chokolate += 100;
-		
-		
-
-		
-		
+		// - Movement mit Pfeiltasten
 		if(in.isKeyDown(Input.KEY_UP))
 			MainState.allv_y = + GameSettings.PATTERN_MOVEMENT_SPEED;
 		else if(in.isKeyDown(Input.KEY_DOWN))
@@ -360,6 +331,7 @@ public class MainState extends BasicGameState{
 		else 
 			MainState.allv_x = 0;
 		
+		// - Movement für Randbewegung mit dem Mauszeiger
 		Shape up = new Rectangle(-1, -1, Display.getWidth()+1, 20);
 		Shape left = new Rectangle(-1, -1, 20, Display.getHeight()+2);
 		Shape right = new Rectangle(Display.getWidth()-20, -1, 20, Display.getHeight()+2);
@@ -394,24 +366,14 @@ public class MainState extends BasicGameState{
 	 *  @throws SlickException: Falls Etwas beim Zeichnen schief läuft #KeineFarbeMehr #lowbudget
 	 */
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-		
-		//g.scale(curpatternscale, curpatternscale);
-		
+
 		g.setColor(Color.black);
-		//g.setColor(new Color(69, 166, 76)); //TODO Farben auslagern
 		g.fillRect(0, 0, Main.width, Main.height); //Hintergrund
 	
 		
 		for(Pattern p : field) //Alle Patterns in field Zeichnen
 			if(p != null)
 				p.draw(g); 
-	
-		
-		//Kaufmenü zeichnen (Rechts)
-//		g.setColor(new Color(220, 220, 220));
-//		g.fillRect(gc.getWidth()/5*4, 0, gc.getWidth()/5, gc.getHeight());  
-//		g.setColor(Color.black); 
-//		g.drawRect(gc.getWidth()/5*4, 0, gc.getWidth()/5, gc.getHeight());
 		
 		//Stockpiles Zeichnen (Oben)
 		pile.draw(g);
