@@ -7,6 +7,9 @@ import org.newdawn.slick.ShapeFill;
 import org.newdawn.slick.fills.GradientFill;
 import org.newdawn.slick.geom.Rectangle;
 
+import de.OFactory.SchokoFactory.game.GameFonts;
+import de.OFactory.SchokoFactory.main.MainState;
+
 
 public class Pausepile extends Stockpile{
 
@@ -31,10 +34,11 @@ public class Pausepile extends Stockpile{
 		g.setColor(Color.black);
 		
 		//Zeugs drauf printen
-		//Font font = new Font("Verdana", Font.BOLD, (int) (this.shape.getHeight()/2));
-		//TrueTypeFont ttf = new TrueTypeFont(font, true);
-
-		//ttf.drawString(8, 10, "LOOOL");
+		if (!MainState.run)
+			GameFonts.MAIN.drawString( 1400, offset-3,  "II", Color.black);
+		else
+			GameFonts.MAIN.drawString( 1400, offset-4,  ">", Color.black);
+		GameFonts.SUB.drawString( 1500, offset+2,  "(Pause mit Leertaste)", Color.black);
 	}
 
 }

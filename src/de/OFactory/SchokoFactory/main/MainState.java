@@ -266,14 +266,7 @@ public class MainState extends BasicGameState{
 		
 		MainState.gc = gc;
 		
-		/*
-		if(in.isKeyPressed(Input.KEY_ESCAPE)) {
-			Display.destroy();
-		}*/
-		if(in.isKeyPressed(Input.KEY_SPACE)) {
-			run = !run;
-		}
-		
+
 		
 		GameUtils.refreshSize(); // Testen, ob Größe sich verändert hat -> Ausprinten
 		

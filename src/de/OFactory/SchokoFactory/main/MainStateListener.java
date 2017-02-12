@@ -108,27 +108,49 @@ public class MainStateListener implements MouseListener, KeyListener{
 		case 't':
 			MainState.curpatternstate = PatternState.TANK;
 			System.out.println("t");
+			break;
 		case 'w':
 			MainState.curpatternstate = PatternState.WIESE;
+			break;
 		case 'c':
 			MainState.curpatternstate = PatternState.CHEMIEFABRIK;
+			break;
 		case 'r':
 			MainState.curpatternstate = PatternState.RÜHRER;
+			break;
 		case 'l':
 			MainState.curpatternstate = PatternState.LAGERHALLE;
+			break;
 		case 'm':
 			MainState.curpatternstate = PatternState.MOLKEREI;
+			break;
 		case 'f':
 			MainState.curpatternstate = PatternState.FARM;
+			break;
 		case 'g':
 			MainState.curpatternstate = PatternState.GIEßER;
+			break;
 		case 'n':
 			MainState.curpatternstate = null;
+			break;
 		
 		case 'p':
 			MainState.cam_pos.setLocation(0, 0);
+			break;
 		case '2':
 			MainState.molten_chokolate += 100;
+			break;
+			
+		case 'e':
+			MainState.ecoscreen.toggle();
+			break;
+			
+		case ' ':
+			MainState.run = !MainState.run;
+			break;
+			
+		default:
+			break;
 		
 		}
 	}
