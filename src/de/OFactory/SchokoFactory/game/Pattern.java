@@ -39,6 +39,8 @@ public abstract class Pattern extends GameObject{
 	private int xcoor;
 	private int ycoor;
 	
+	private int hovery;
+	
 	public boolean hovered = false;
 	public boolean selected = false;
 	
@@ -128,22 +130,23 @@ public abstract class Pattern extends GameObject{
 		this.selected = m.selected_pattern == this;
 		
 		//Animation tick
-		
-		if(!(img_e == img_b)){ // Animation vorhanden
-			this.i++;
-		
-		
-			if(this.i == getDelay()){
-				if(this.getCurrentImagePosition() >= img_e)
-					this.setCurrentImagePosition(img_b);
-				else
-					this.setCurrentImagePosition(this.getCurrentImagePosition()+1);
+		if(MainState.run){
+			if(!(img_e == img_b)){ // Animation vorhanden
+				this.i++;
+			
+			
+				if(this.i == getDelay()){
+					if(this.getCurrentImagePosition() >= img_e)
+						this.setCurrentImagePosition(img_b);
+					else
+						this.setCurrentImagePosition(this.getCurrentImagePosition()+1);
+					
+					this.i = 0;
+				}
 				
-				this.i = 0;
+				
+				
 			}
-			
-			
-			
 		}
 		
 		Input in = gc.getInput();
@@ -174,9 +177,7 @@ public abstract class Pattern extends GameObject{
 			this.rendered = false; // --> Nicht rendern
 		else
 			this.rendered = true;
-		
-		
-		
+
 		//Spezifischer Update Kontext jeder Pattern-Art
 		updateContext();
 		//Spezifischer Update Kontext f¸r die Info eines Pattern jeder Pattern-Art
@@ -339,7 +340,13 @@ public abstract class Pattern extends GameObject{
 		if(this.getClickBox() != null)
 			g.draw(this.getClickBox());
 		*/
-		
+		if(this instanceof Gieﬂer){
+			Gieﬂer gi = (Gieﬂer) this;
+			if(!gi.isWorking()){
+				setHoverY(this.ycoor + (int) Math.sin(System.currentTimeMillis()/10000));
+				
+			}
+		}
 	}
 	
 	public String toString(){
@@ -455,6 +462,20 @@ public abstract class Pattern extends GameObject{
 	 */
 	public void setPatternInfo(HashMap<String, Object> pattern_info) {
 		this.pattern_info = pattern_info;
+	}
+
+	/**
+	 * @return the hovery
+	 */
+	public int getHoverY() {
+		return hovery;
+	}
+
+	/**
+	 * @param hovery the hovery to set
+	 */
+	public void setHoverY(int hovery) {
+		this.hovery = hovery;
 	}
 
 
