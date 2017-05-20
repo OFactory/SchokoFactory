@@ -299,6 +299,11 @@ public class MainState extends BasicGameState{
 		btn_bestätigen.update(in);
 	}
 	
+	public static boolean isMouseInPlayArea(GameContainer gc){
+		Input in = gc.getInput();
+		return in.getMouseX() < gc.getWidth()/5*4;
+	}
+	
 	/** Ändert den aktuellen Pattern-Zustand curpatternstate
 	 *  Ändert die aktuelle Geschwindigkeit in x und y Richtung zur vektorisierten Konstante GameSettings.PATTERN_MOVEMENT_SPEED
 	 *  Erstellt Bereiche im Fenster up,left,right,down mit denen der Spieler über das Feld scrollen kann

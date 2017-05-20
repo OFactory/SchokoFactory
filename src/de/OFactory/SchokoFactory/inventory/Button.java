@@ -34,6 +34,9 @@ public class Button implements Drawable{
 	protected boolean hovered = false;
 	protected boolean clicked = false;
 	
+	protected boolean clickable = true;
+	protected int     cooldown_counter = 0;
+	
 	protected Font font = GameFonts.MAIN;
 	
 	
@@ -123,12 +126,25 @@ public class Button implements Drawable{
 			this.hovered = false;
 		}
 		
-		if(this.hovered){
+		if(!clickable)
+			cooldown_counter++;
+		
+		if(cooldown_counter == 10){
+			cooldown_counter = 0;
+			clickable = true;
+			clicked = false;
+		}
+		
+		if(hovered && clickable){
 			if(in.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)){
-				this.clicked = true;
+				clickable = false;
+				cooldown_counter = 0;
+				clicked = true;
 				al.actionPerformed(new ActionEvent(this, 0, "click"));
 			}
 		}
+		
+		
 		
 		
 		

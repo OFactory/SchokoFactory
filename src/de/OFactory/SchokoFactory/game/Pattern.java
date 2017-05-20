@@ -155,7 +155,7 @@ public abstract class Pattern extends GameObject{
 		this.setX(this.getX() + MainState.allv_x);
 		
 		
-		if(this.getClickBox().contains(in.getMouseX(), in.getMouseY())){
+		if(this.getClickBox().contains(in.getMouseX(), in.getMouseY()) && MainState.isMouseInPlayArea(gc)){
 			this.hovered = true;
 			MainState.curpatterninfo = this.getXcoor()+" "+this.getYcoor() + " (" + this.getPatternState() + ") ";
 		} else {
@@ -359,10 +359,6 @@ public abstract class Pattern extends GameObject{
 	 */
 	public abstract void updatePatternInfo();
 	
-	public void putPatternInfo(String s, Object o){
-		pattern_info.putIfAbsent(s, o);
-	}
-	
 	
 	////////////////////////////////////////// Setter & Getter ///////////
 
@@ -462,6 +458,14 @@ public abstract class Pattern extends GameObject{
 	 */
 	public void setPatternInfo(HashMap<String, Object> pattern_info) {
 		this.pattern_info = pattern_info;
+	}
+	
+	public void putPatternInfo(String s, Object o){
+		pattern_info.putIfAbsent(s, o);
+	}
+	
+	public void clearPatternInfo(){
+		pattern_info.clear();
 	}
 
 	/**

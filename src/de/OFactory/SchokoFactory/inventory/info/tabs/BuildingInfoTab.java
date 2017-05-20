@@ -59,15 +59,25 @@ public class BuildingInfoTab extends Tab{
 			GameFonts.MED.drawString(x + ml, y+50, p.getPatternState().getName(), Color.black);
 			GameFonts.MED.drawString(x + ml, y+70, p.getId() + ""				, Color.black);
 			
-			int start = 400;
-			int step  = 20;
+			int pos  = 400;
+			int step = 20;
 			HashMap<String, Object> info = p.getPatternInfo();
 			//System.out.println(info);
 			
-			int i = 0;
 			for(String s : info.keySet()){
-				GameFonts.MED.drawString(x + ml, start + step*i, s + ": " + info.get(s), Color.black);
-				i++;
+				if(info.get(s) instanceof Button){
+					Button b = (Button) info.get(s);
+					b.setX(x + ml);
+					b.setY(pos);
+					b.setHeight(30);
+					b.setWidth(getInfoPanel().getWidth()-ml*2);
+					b.draw(g);
+					pos+=50;
+				} else {
+					GameFonts.MED.drawString(x + ml, pos, s + ": " + info.get(s), Color.black);
+					pos+=step;
+				}
+				
 			}
 			
 			//TODO Pattern Information
@@ -78,6 +88,7 @@ public class BuildingInfoTab extends Tab{
 			//System.out.println(MainState.selected_pattern.getPatternState().isWorking());
 			
 			if(MainState.field.selected_pattern.getPatternState().isWorking()){
+				work_button.setY(pos + 40);
 				work_button.draw(g);
 			}
 			
@@ -90,9 +101,22 @@ public class BuildingInfoTab extends Tab{
 
 	@Override
 	public void updateContent(GameContainer gc) {
-		if(MainState.field.selected_pattern != null && MainState.field.selected_pattern.getPatternState().isWorking()){
-			work_button.update(gc.getInput());
+		if(MainState.field.selected_pattern != null){
+			if(MainState.field.selected_pattern.getPatternState().isWorking())
+				work_button.update(gc.getInput());
+			
+			Pattern p = MainState.field.selected_pattern;
+			HashMap<String, Object> info = p.getPatternInfo();
+			for(String s : info.keySet()){
+				if(info.get(s) instanceof Button){
+					Button b = (Button) info.get(s);
+					b.update(gc.getInput());
+				}
+				
+			}
+			
 		}
+		
 		
 	}
 

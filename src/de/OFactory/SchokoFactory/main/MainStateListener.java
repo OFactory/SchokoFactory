@@ -4,7 +4,6 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.KeyListener;
 import org.newdawn.slick.MouseListener;
 
-import de.OFactory.SchokoFactory.game.GameSettings;
 import de.OFactory.SchokoFactory.game.PatternState;
 
 public class MainStateListener implements MouseListener, KeyListener{
@@ -38,7 +37,7 @@ public class MainStateListener implements MouseListener, KeyListener{
 		
 		
 		// Hauptspiel ZOOM:
-		
+		/* ZOOM DEAKTIVIERT
 		//Mauszeiger im richtigem Bereich? > Fenster
 		if((in.getMouseX() > 0 && in.getMouseX() < MainState.gc.getWidth() - MainState.ip.getWidth()) &&
 				in.getMouseY() < MainState.gc.getHeight() && in.getMouseY() > MainState.pile.getHeight() ){
@@ -60,6 +59,7 @@ public class MainStateListener implements MouseListener, KeyListener{
 
 			}
 		}
+		*/
 		
 		// InfoPanel Scroll
 		
