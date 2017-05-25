@@ -1,7 +1,5 @@
 package de.OFactory.SchokoFactory.game.patterns;
 
-import org.newdawn.slick.Image;
-
 import de.OFactory.SchokoFactory.game.Map;
 import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternState;
@@ -18,7 +16,7 @@ public class Gewächshaus extends Pattern{
 
 	@Override
 	public void updateContext() {
-		Image source = this.getPatternState().getSource();
+
 		if (this.plants == "Kakao"){
 			setFrame(0);
 		} else  // -> Zucker

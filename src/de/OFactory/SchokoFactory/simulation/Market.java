@@ -29,7 +29,7 @@ public class Market implements Daily {
 	private ArrayList<Player> p_mit_diff = new ArrayList<Player>();
 	private ArrayList<Player> p_ohne_diff = new ArrayList<Player>();
 	
-	private ArrayList<Integer>[] listeAbsatz;
+	//private ArrayList<Integer>[] listeAbsatz;
 	
 	
 	

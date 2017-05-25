@@ -3,7 +3,7 @@ package de.OFactory.SchokoFactory.game.patterns;
 import de.OFactory.SchokoFactory.game.Map;
 import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternState;
-import de.OFactory.SchokoFactory.main.ResourceManager;
+
 
 public class Rührer extends Pattern{
 
