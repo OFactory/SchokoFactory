@@ -1,6 +1,5 @@
 package de.OFactory.SchokoFactory.game;
 
-
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,352 +14,399 @@ import org.newdawn.slick.geom.Shape;
 
 import de.OFactory.SchokoFactory.game.patterns.Chemiefabrik;
 import de.OFactory.SchokoFactory.game.patterns.Farm;
+import de.OFactory.SchokoFactory.game.patterns.Gewächshaus;
 import de.OFactory.SchokoFactory.game.patterns.Gießer;
-import de.OFactory.SchokoFactory.game.patterns.Kakaoplantage;
+import de.OFactory.SchokoFactory.game.patterns.Hof;
 import de.OFactory.SchokoFactory.game.patterns.Lagerhalle;
 import de.OFactory.SchokoFactory.game.patterns.Molkerei;
+import de.OFactory.SchokoFactory.game.patterns.PRBüro;
 import de.OFactory.SchokoFactory.game.patterns.Rührer;
 import de.OFactory.SchokoFactory.game.patterns.Tank;
-import de.OFactory.SchokoFactory.game.patterns.Weizenfeld;
+import de.OFactory.SchokoFactory.game.patterns.Feld;
 import de.OFactory.SchokoFactory.game.patterns.Wiese;
-import de.OFactory.SchokoFactory.game.patterns.Zuckerplantage;
+import de.OFactory.SchokoFactory.game.patterns.Labor;
 import de.OFactory.SchokoFactory.main.MainState;
 
-public abstract class Pattern extends GameObject{
-	
+public abstract class Pattern extends GameObject {
+
 	private PatternState ps;
+
 	private boolean rendered = true;
 	private Shape clickbox;
-	
+
 	private int id;
-	
+
 	private HashMap<String, Object> pattern_info = new HashMap<String, Object>();
-	
+
 	private int xcoor;
 	private int ycoor;
-	
+
 	private int hovery;
-	
+
 	public boolean hovered = false;
 	public boolean selected = false;
-	
-	private Map m;
 
-	public Pattern(Map map, int x, int y, PatternState ps, int id, int xcoor, int ycoor) {
-		super(x, y, MainState.patternimg);
+	private Map m;
+	
+	private Image img;
+	private int frame = 0;
+	private int frame_start = 0;	//frame_start = frame_end -> keine Animation
+	private int frame_end = 0;
+	private int frame_total = 1;
+
+	private int i = 0;
+
+	private int delay = 10;
+
+	public Pattern(Map map, int x, int y, PatternState ps, int id, int xcoor,
+			int ycoor) {
+		super(x, y);
 		this.m = map;
 		this.ps = ps;
 		this.setId(id);
 		this.xcoor = xcoor;
 		this.ycoor = ycoor;
 		
+		Image source = this.ps.getSource();
+		setImg(source.getSubImage(frame*source.getWidth()/frame_total, 0, source.getWidth()/frame_total, source.getHeight()));
+
 	}
-	
-	/** Liefert ein Pattern eines Patternstates 
-	 * unter Parametersierung aller Attribute des Patterns (x, y, id)
-	 * Liefer null wenn keine PatternKlasse vorhanden
+
+	/**
+	 * Liefert ein Pattern eines Patternstates unter Parametersierung aller
+	 * Attribute des Patterns (x, y, id) Liefer null wenn keine PatternKlasse
+	 * vorhanden
 	 * 
 	 * Patternklasse = extends Pattern;
 	 * 
-	 * @param x : x-Koordinate
-	 * @param y : y-Koordinate
-	 * @param ps : PatternState, dessen Klasse ermittelt werden soll
-	 * @param id : id des Patterns in der Map(Map-spezifische Koordinate)
+	 * @param x
+	 *            : x-Koordinate
+	 * @param y
+	 *            : y-Koordinate
+	 * @param ps
+	 *            : PatternState, dessen Klasse ermittelt werden soll
+	 * @param id
+	 *            : id des Patterns in der Map(Map-spezifische Koordinate)
 	 * @return Pattern p der Klasse des PatternStates ps
 	 * @return null : Wenn es keine adäquate Klasse für den PatternState ps gibt
 	 */
-	public static Pattern getInstance(Map map,int x, int y, PatternState ps, int id, int xcoor, int ycoor){
-		
+	public static Pattern getInstance(Map map, int x, int y, PatternState ps,
+			int id, int xcoor, int ycoor) {
+
 		Pattern p = null;
-		
-		switch(ps){ //SWITCH-CASE FOR THE WIN
-		
-			case WIESE: p = new Wiese(map, x, y, id, xcoor, ycoor);
-				break;
-			case CHEMIEFABRIK: p = new Chemiefabrik(map, x, y, id, xcoor, ycoor);
-				break;
-			case RÜHRER: p = new Rührer(map, x, y, id, xcoor, ycoor);
-				break;
-			case LAGERHALLE: p = new Lagerhalle(map, x, y, id, xcoor, ycoor);
-				break;
-			case GIEßER: p = new Gießer(map, x, y, id, xcoor, ycoor);
-				break;
-			case KAKAOPLANTAGE: p = new Kakaoplantage(map, x, y, id, xcoor, ycoor);
-				break;
-			case MOLKEREI: p = new Molkerei(map, x, y, id, xcoor, ycoor);
-				break;
-			case WEIZENFELD: p = new Weizenfeld(map, x, y, id, xcoor, ycoor);
-				break;
-			case TANK: p = new Tank(map, x, y, id, xcoor, ycoor);
-				break;
-			case ZUCKERPLANTAGE: p = new Zuckerplantage(map, x, y, id, xcoor, ycoor);
-				break;
-			case FARM: p = new Farm(map, x, y, id, xcoor, ycoor);
-				break;
-			default: System.err.print("ERR <005>: Kann dem PatternState \"" + ps + "\" keine Klasse zuweisen! return null;");
-				break;
-			
+
+		switch (ps) { // SWITCH-CASE FOR THE WIN
+
+		case WIESE:
+			p = new Wiese(map, x, y, id, xcoor, ycoor);
+			break;
+		case CHEMIEFABRIK:
+			p = new Chemiefabrik(map, x, y, id, xcoor, ycoor);
+			break;
+		case RÜHRER:
+			p = new Rührer(map, x, y, id, xcoor, ycoor);
+			break;
+		case LAGER:
+			p = new Lagerhalle(map, x, y, id, xcoor, ycoor);
+			break;
+		case GIEßER:
+			p = new Gießer(map, x, y, id, xcoor, ycoor);
+			break;
+		case FELD:
+			p = new Feld(map, x, y, id, xcoor, ycoor);
+			break;
+		case HOF:
+			p = new Hof(map, x, y, id, xcoor, ycoor);
+			break;
+		case MOLKEREI:
+			p = new Molkerei(map, x, y, id, xcoor, ycoor);
+			break;
+		case LABOR:
+			p = new Labor(map, x, y, id, xcoor, ycoor);
+			break;
+		case TANK:
+			p = new Tank(map, x, y, id, xcoor, ycoor);
+			break;
+		case GEWÄCHSHAUS:
+			p = new Gewächshaus(map, x, y, id, xcoor, ycoor);
+			break;
+		case FARM:
+			p = new Farm(map, x, y, id, xcoor, ycoor);
+			break;
+		case PRBÜRO:
+			p = new PRBüro(map, x, y, id, xcoor, ycoor);
+			break;
+		default:
+			System.err.print("ERR <005>: Kann dem PatternState \"" + ps
+					+ "\" keine Klasse zuweisen! return null;");
+			break;
+
 		}
 
 		return p;
+
+	}
+
+	/**
+	 * Updated die Texturen auf die Aktuelle Skalierung (MainState.curscale);
+	 */
+	public void updateTexture() {
 		
 	}
 	
-	/**
-	 *  Updated die Texturen auf die Aktuelle Skalierung (MainState.curscale);
-	 */
-	public void updateTexture(){
-		this.setImage(MainState.patternimg);
+	public void setAnimation(int start, int end, int total, int delay){
+		this.frame_start = start;
+		this.frame_end = end;
+		this.frame_total = total;
+		this.delay = delay;
+		
 	}
-	
 
 	@Override
 	public void update(GameContainer gc) {
 		
-		Polygon p = new Polygon();
-		int off_x = this.getCurrentImage().getScaledCopy((float) MainState.curpatternscale).getWidth();
-		int off_y = this.getCurrentImage().getScaledCopy((float) MainState.curpatternscale).getHeight();
-		p.addPoint(getX() + off_x*0.1F,   getY() + off_y*0.82F);
-		p.addPoint(getX() + off_x/2,      getY() + off_y*0.68F);
-		p.addPoint(getX() + off_x*0.9F,   getY() + off_y*0.82F);		
-		p.addPoint(getX() + off_x/2,      getY() + off_y*0.95F);
-		
-		
-		this.setClickBox(p);
-		this.selected = m.selected_pattern == this;
-		
-		//Animation tick
-		if(MainState.run){
-			if(!(img_e == img_b)){ // Animation vorhanden
-				this.i++;
+		if (this.frame_start < this.frame_end){		// falls eine Animation eingestellt ist
+			updateAnimation();
 			
+		} else{
 			
-				if(this.i == getDelay()){
-					if(this.getCurrentImagePosition() >= img_e)
-						this.setCurrentImagePosition(img_b);
-					else
-						this.setCurrentImagePosition(this.getCurrentImagePosition()+1);
-					
-					this.i = 0;
-				}
-				
-				
-				
-			}
 		}
 		
+		Polygon p = new Polygon();
+		
+		int off_x = img.getScaledCopy((float) MainState.curpatternscale).getWidth();
+		int off_y = img.getScaledCopy((float) MainState.curpatternscale).getHeight();
+		p.addPoint(getX() + off_x * 0.1F, getY() + off_y * 0.82F);
+		p.addPoint(getX() + off_x / 2, getY() + off_y * 0.68F);
+		p.addPoint(getX() + off_x * 0.9F, getY() + off_y * 0.82F);
+		p.addPoint(getX() + off_x / 2, getY() + off_y * 0.95F);
+
+		this.setClickBox(p);
+		this.selected = m.selected_pattern == this;
+
 		Input in = gc.getInput();
 
 		this.setY(this.getY() + MainState.allv_y);
 		this.setX(this.getX() + MainState.allv_x);
-		
-		
-		if(this.getClickBox().contains(in.getMouseX(), in.getMouseY()) && MainState.isMouseInPlayArea(gc)){
+
+		if (this.getClickBox().contains(in.getMouseX(), in.getMouseY())
+				&& MainState.isMouseInPlayArea(gc)) {
 			this.hovered = true;
-			MainState.curpatterninfo = this.getXcoor()+" "+this.getYcoor() + " (" + this.getPatternState() + ") ";
+			MainState.curpatterninfo = this.getXcoor() + " " + this.getYcoor()
+					+ " (" + this.getPatternState() + ") ";
 		} else {
 			this.hovered = false;
 		}
-		
-		
-		if(this.hovered && in.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)){
+
+		if (this.hovered && in.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
 			m.clicked = this;
-			
+
 		} else {
-			if(m.clicked == this)
+			if (m.clicked == this)
 				m.clicked = null;
 		}
-		
-		//Pattern aus Bildschirmrand?
-		if(this.getX() > gc.getWidth() || this.getX() + this.getCurrentImage().getWidth()*MainState.curpatternscale < 0
-				|| this.getY() > gc.getHeight() || this.getY() + this.getCurrentImage().getHeight()*MainState.curpatternscale < 0)
+
+		// Pattern aus Bildschirmrand?
+		if (this.getX() > gc.getWidth()
+				|| this.getX() + img.getWidth()
+						* MainState.curpatternscale < 0
+				|| this.getY() > gc.getHeight()
+				|| this.getY() + img.getHeight()
+						* MainState.curpatternscale < 0)
 			this.rendered = false; // --> Nicht rendern
 		else
 			this.rendered = true;
 
-		//Spezifischer Update Kontext jeder Pattern-Art
+		// Spezifischer Update Kontext jeder Pattern-Art
 		updateContext();
-		//Spezifischer Update Kontext für die Info eines Pattern jeder Pattern-Art
+		// Spezifischer Update Kontext für die Info eines Pattern jeder
+		// Pattern-Art
 		updatePatternInfo();
-		//System.out.println("Lots Of Love"); LOL starring
+		// System.out.println("Lots Of Love"); LOL starring
+	}
+	
+	private void updateAnimation(){
+		if (i >= delay){
+			i = 0;
+			if (frame > frame_end)
+				frame = frame_start;
+			else {
+				Image source = this.ps.getSource();
+				setImg(source.getSubImage(frame*source.getWidth()/frame_total, 0, source.getWidth()/frame_total, source.getHeight()));
+				frame++;
+			}
+				
+		}
+		i++;
 	}
 
 	/**
-    * 
-    * Diese Methode gibt die direkt angrenzenden Nachbarn eines Feldes zurück.
-    * Die Felder werden nach Himmelsrichtungen
-    * 
-    *  no: Nordosten,
-    *  so: Suedosten,
-    *  sw: Suedwesten,
-    *  nw: Nordwesten
-    * 
-    * geordnet.   
-    * 					
-    * 				   no
-    * 				nw	P so
-    * 				   sw
-    * 
-    * Gibt null zurück, wenn es einen der Pattern nicht gibt!
-    * Bitte bei Verwendung null checken!
-    * 
-    * @return ArrayList<Pattern> direkt angrenzende Nachbarn
-    */
-	public ArrayList<Pattern> getPatternNeighbours(){
-	   
+	 * 
+	 * Diese Methode gibt die direkt angrenzenden Nachbarn eines Feldes zurück.
+	 * Die Felder werden nach Himmelsrichtungen
+	 * 
+	 * no: Nordosten, so: Suedosten, sw: Suedwesten, nw: Nordwesten
+	 * 
+	 * geordnet.
+	 * 
+	 * no nw P so sw
+	 * 
+	 * Gibt null zurück, wenn es einen der Pattern nicht gibt! Bitte bei
+	 * Verwendung null checken!
+	 * 
+	 * @return ArrayList<Pattern> direkt angrenzende Nachbarn
+	 */
+	public ArrayList<Pattern> getPatternNeighbours() {
+
 		ArrayList<Pattern> ps = new ArrayList<Pattern>();
 		ArrayList<Point> dirs = new ArrayList<Point>();
-		dirs.add(new Point(-1,  0)); //NO
-		dirs.add(new Point( 0,  1)); //SO
-		dirs.add(new Point( 1,  0)); //SW
-		dirs.add(new Point( 0, -1)); //NW
-    
-	    for(Point dir : dirs){
-	    	
-	    	boolean success = false;
-	    	
-	    	for(Pattern pt : this.getMap()) {
-	    		
-	    		if(success == false){ //Suche noch nicht erfolgreich
-		    		if(pt.getXCoordinate() == this.getXCoordinate() + dir.getX() &&
-		    				pt.getYCoordinate() == this.getYCoordinate() + dir.getY()) {
-		    			ps.add(pt);
-		    			success = true;
-		    		}
-	    		}
-		    }
-	    	
-	    	if(success == false)
-	    		ps.add(null);
-	    }
-	    
-	    
-	    return ps;
+		dirs.add(new Point(-1, 0)); // NO
+		dirs.add(new Point(0, 1)); // SO
+		dirs.add(new Point(1, 0)); // SW
+		dirs.add(new Point(0, -1)); // NW
+
+		for (Point dir : dirs) {
+
+			boolean success = false;
+
+			for (Pattern pt : this.getMap()) {
+
+				if (success == false) { // Suche noch nicht erfolgreich
+					if (pt.getXCoordinate() == this.getXCoordinate()
+							+ dir.getX()
+							&& pt.getYCoordinate() == this.getYCoordinate()
+									+ dir.getY()) {
+						ps.add(pt);
+						success = true;
+					}
+				}
+			}
+
+			if (success == false)
+				ps.add(null);
+		}
+
+		return ps;
 	}
-	
+
 	/**
-    * 
-    * Diese Methode gibt die indirekt angrenzenden Nachbarn eines Feldes zurück.
-    * Die Felder sind demnach über die Punkte des Feldes verknüpft und teilen sich nicht eine Kante.
-    * Die Felder werden nach Himmelsrichtungen
-    * 
-    *  n: Norden,
-    *  no: Nordosten,
-    *  o: Osten,
-    *  so:Südosten,
-    *  s: Süden,
-    *  sw:Südwesten,
-    *  w: Westen,
-    *  nw:Nordwesten
-    *  
-    * geordnet.   
-    * 
-    * 		 N  no  O
-    * 		nw	P  so
-    * 		 W  sw  S
-    * 
-    * Gibt null zurück, wenn es einen der Pattern nicht gibt!
-    * Bitte bei Verwendung null checken!
-    * 
-    * @return ArrayList<Pattern> anliegende Pattern
-    */
-	public ArrayList<Pattern> getPatternNears(){
-	   
-		
+	 * 
+	 * Diese Methode gibt die indirekt angrenzenden Nachbarn eines Feldes
+	 * zurück. Die Felder sind demnach über die Punkte des Feldes verknüpft und
+	 * teilen sich nicht eine Kante. Die Felder werden nach Himmelsrichtungen
+	 * 
+	 * n: Norden, no: Nordosten, o: Osten, so:Südosten, s: Süden, sw:Südwesten,
+	 * w: Westen, nw:Nordwesten
+	 * 
+	 * geordnet.
+	 * 
+	 * N no O nw P so W sw S
+	 * 
+	 * Gibt null zurück, wenn es einen der Pattern nicht gibt! Bitte bei
+	 * Verwendung null checken!
+	 * 
+	 * @return ArrayList<Pattern> anliegende Pattern
+	 */
+	public ArrayList<Pattern> getPatternNears() {
+
 		ArrayList<Pattern> ps = new ArrayList<Pattern>();
 		ArrayList<Point> dirs = new ArrayList<Point>();
-		dirs.add(new Point(-1, -1)); //N
-		dirs.add(new Point(-1,  0)); //NO
-		dirs.add(new Point(-1,  1)); //O
-		dirs.add(new Point( 0,  1)); //SO
-		dirs.add(new Point( 1,  1)); //S
-		dirs.add(new Point( 1,  0)); //SW
-		dirs.add(new Point( 1, -1)); //W
-		dirs.add(new Point( 0, -1)); //NW
-    
-		 for(Point dir : dirs){
-		    	
-		    	boolean success = false;
-		    	
-		    	for(Pattern pt : this.getMap()) {
-		    		
-		    		if(success == false){ //Suche noch nicht erfolgreich
-			    		if(pt.getXCoordinate() == this.getXCoordinate() + dir.getX() &&
-			    				pt.getYCoordinate() == this.getYCoordinate() + dir.getY()) {
-			    			ps.add(pt);
-			    			success = true;
-			    		}
-		    		}
-			    }
-		    	
-		    	if(success == false)
-		    		ps.add(null);
-		    }
-	    
-	    
-	    return ps;
+		dirs.add(new Point(-1, -1)); // N
+		dirs.add(new Point(-1, 0)); // NO
+		dirs.add(new Point(-1, 1)); // O
+		dirs.add(new Point(0, 1)); // SO
+		dirs.add(new Point(1, 1)); // S
+		dirs.add(new Point(1, 0)); // SW
+		dirs.add(new Point(1, -1)); // W
+		dirs.add(new Point(0, -1)); // NW
+
+		for (Point dir : dirs) {
+
+			boolean success = false;
+
+			for (Pattern pt : this.getMap()) {
+
+				if (success == false) { // Suche noch nicht erfolgreich
+					if (pt.getXCoordinate() == this.getXCoordinate()
+							+ dir.getX()
+							&& pt.getYCoordinate() == this.getYCoordinate()
+									+ dir.getY()) {
+						ps.add(pt);
+						success = true;
+					}
+				}
+			}
+
+			if (success == false)
+				ps.add(null);
+		}
+
+		return ps;
 	}
-	
+
 	public abstract void updateContext();
-	
-	
 
 	@Override
 	public void draw(Graphics g) {
-		if(this.isRendered()) {
-			
+		if (this.isRendered()) {
+
 			Color filter = Color.white;
-			
-			if(this.hovered){ //GEHOVERED
-				if(m.clicked == this) { //GEKLICKT
+
+			if (this.hovered) { // GEHOVERED
+				if (m.clicked == this) { // GEKLICKT
 					filter = new Color(100, 255, 255); // GEKLICKT
 				} else { // GEHOVERED
-					if(this instanceof Wiese && MainState.curpatternstate != null && MainState.curpatternstate != PatternState.WIESE)
-						filter = new Color(255, 100, 100); //GEHOVERED + WIESE
+					if (this instanceof Wiese
+							&& MainState.curpatternstate != null
+							&& MainState.curpatternstate != PatternState.WIESE)
+						filter = new Color(255, 100, 100); // GEHOVERED + WIESE
 					else
 						filter = new Color(200, 200, 150); // nur GEHOVERED
 				}
 
-			} else if(selected){ //AUSGEWÄHLT
+			} else if (selected) { // AUSGEWÄHLT
 				filter = new Color(150, 255, 150);
-			} //NORMAL => WEIß
-			
-			Image img = this.getCurrentImage().getScaledCopy((float) MainState.curpatternscale);
-			img.draw(this.getX(), this.getY(), filter);
-			/* DÈBUG
-			g.setColor(Color.green);
-			g.drawRect(getX(), getY(), img.getWidth(), img.getHeight());
-			g.drawString(this.getX() + " | " + this.getY(), this.getX()-10, this.getY()-10); */
+			} // NORMAL => WEIß
+
+			// Image img = ResourceManager.pttrn_chemfab.getScaledCopy((float)
+			// MainState.curpatternscale);//this.getCurrentImage().getScaledCopy((float)
+			// MainState.curpatternscale);
+
+			img.getScaledCopy((float) MainState.curpatternscale).draw(this.getX(), this.getY(), filter);
+			/*
+			 * DÈBUG g.setColor(Color.green); g.drawRect(getX(), getY(),
+			 * img.getWidth(), img.getHeight()); g.drawString(this.getX() +
+			 * " | " + this.getY(), this.getX()-10, this.getY()-10);
+			 */
 		}
-		
-		/* DEBUG CLICKBOX
-		g.setColor(Color.pink);
-		g.setLineWidth(2F);
-		
-		if(this.getClickBox() != null)
-			g.draw(this.getClickBox());
-		*/
-		if(this instanceof Gießer){
+
+		/*
+		 * DEBUG CLICKBOX g.setColor(Color.pink); g.setLineWidth(2F);
+		 * 
+		 * if(this.getClickBox() != null) g.draw(this.getClickBox());
+		 */
+		if (this instanceof Gießer) {
 			Gießer gi = (Gießer) this;
-			if(!gi.isWorking()){
-				setHoverY(this.ycoor + (int) Math.sin(System.currentTimeMillis()/10000));
-				
+			if (!gi.isWorking()) {
+				setHoverY(this.ycoor
+						+ (int) Math.sin(System.currentTimeMillis() / 10000));
+
 			}
 		}
 	}
-	
-	public String toString(){
+
+	public String toString() {
 		return "Pattern(" + this.getId() + ", " + this.getPatternState() + ")";
 	}
-	
+
 	/**
 	 * Updated Pattern-Info (HashMap) der Werte eines Objektes
+	 * 
 	 * @return void //TODO überall implementieren
 	 */
 	public abstract void updatePatternInfo();
-	
-	
-	////////////////////////////////////////// Setter & Getter ///////////
+
+	// //////////////////////////////////////// Setter & Getter ///////////
 
 	public PatternState getPatternState() {
 		return ps;
@@ -377,12 +423,12 @@ public abstract class Pattern extends GameObject{
 	public void setRendered(boolean rendered) {
 		this.rendered = rendered;
 	}
-	
-	public Shape getClickBox(){
+
+	public Shape getClickBox() {
 		return this.clickbox;
 	}
-	
-	public void setClickBox(Shape s){
+
+	public void setClickBox(Shape s) {
 		this.clickbox = s;
 	}
 
@@ -410,12 +456,13 @@ public abstract class Pattern extends GameObject{
 	}
 
 	/**
-	 * @param xcoor Die X-Koordinate des Patterns auf der Map m
+	 * @param xcoor
+	 *            Die X-Koordinate des Patterns auf der Map m
 	 */
 	public void setXCoordinate(int xcoor) {
 		this.xcoor = xcoor;
 	}
-	
+
 	/**
 	 * @return die Y-Koordinate des Patterns auf der Map m
 	 */
@@ -424,7 +471,8 @@ public abstract class Pattern extends GameObject{
 	}
 
 	/**
-	 * @param xcoor Die Y-Koordinate des Patterns auf der Map m
+	 * @param xcoor
+	 *            Die Y-Koordinate des Patterns auf der Map m
 	 */
 	public void setYCoordinate(int ycoor) {
 		this.ycoor = ycoor;
@@ -454,17 +502,18 @@ public abstract class Pattern extends GameObject{
 	}
 
 	/**
-	 * @param pattern_info the pattern_info to set
+	 * @param pattern_info
+	 *            the pattern_info to set
 	 */
 	public void setPatternInfo(HashMap<String, Object> pattern_info) {
 		this.pattern_info = pattern_info;
 	}
-	
-	public void putPatternInfo(String s, Object o){
+
+	public void putPatternInfo(String s, Object o) {
 		pattern_info.putIfAbsent(s, o);
 	}
-	
-	public void clearPatternInfo(){
+
+	public void clearPatternInfo() {
 		pattern_info.clear();
 	}
 
@@ -476,12 +525,59 @@ public abstract class Pattern extends GameObject{
 	}
 
 	/**
-	 * @param hovery the hovery to set
+	 * @param hovery
+	 *            the hovery to set
 	 */
 	public void setHoverY(int hovery) {
 		this.hovery = hovery;
 	}
 
+	public void setImg(Image img) {
+		this.img = img;
+	}
 
+	public Image getImg() {
+		return img;
+	}
+
+	public int getFrame() {
+		return frame;
+	}
+
+	public void setFrame(int frame) {
+		this.frame = frame;
+	}
+
+	public int getFrame_start() {
+		return frame_start;
+	}
+
+	public void setFrame_start(int frame_start) {
+		this.frame_start = frame_start;
+	}
+
+	public int getFrame_end() {
+		return frame_end;
+	}
+
+	public void setFrame_end(int frame_end) {
+		this.frame_end = frame_end;
+	}
+
+	public int getFrame_total() {
+		return frame_total;
+	}
+
+	public void setFrame_total(int frame_total) {
+		this.frame_total = frame_total;
+	}
+
+	public int getDelay() {
+		return delay;
+	}
+
+	public void setDelay(int delay) {
+		this.delay = delay;
+	}
 
 }

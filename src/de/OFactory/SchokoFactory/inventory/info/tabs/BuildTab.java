@@ -54,9 +54,9 @@ public class BuildTab extends Tab{
 		this.addBuilding(PatternState.RÜHRER);
 		this.addBuilding(PatternState.FARM);
 		this.addBuilding(PatternState.MOLKEREI);
-		this.addBuilding(PatternState.ZUCKERPLANTAGE);
-		this.addBuilding(PatternState.KAKAOPLANTAGE);
-		this.addBuilding(PatternState.LAGERHALLE);
+		this.addBuilding(PatternState.FARM);
+		this.addBuilding(PatternState.FELD);
+		this.addBuilding(PatternState.LAGER);
 	}
 	
 	

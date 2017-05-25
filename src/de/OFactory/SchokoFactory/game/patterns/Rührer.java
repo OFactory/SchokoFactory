@@ -2,8 +2,8 @@ package de.OFactory.SchokoFactory.game.patterns;
 
 import de.OFactory.SchokoFactory.game.Map;
 import de.OFactory.SchokoFactory.game.Pattern;
-import de.OFactory.SchokoFactory.game.PatternFrame;
 import de.OFactory.SchokoFactory.game.PatternState;
+import de.OFactory.SchokoFactory.main.ResourceManager;
 
 public class Rührer extends Pattern{
 
@@ -12,8 +12,11 @@ public class Rührer extends Pattern{
 	
 	public Rührer(Map map, int x, int y, int id, int xcoor, int ycoor) {
 		super(map, x, y, PatternState.RÜHRER, id, xcoor, ycoor);
-		this.setFrameLoop(PatternFrame.RÜHRER_S, PatternFrame.RÜHRER_E);
-		this.setDelay(4);
+		
+		setImg(ResourceManager.pttrn_giesser.getSubImage(0,0,709,944));
+		//start,end,total,delay
+		this.setAnimation(0,7,9,3);
+		
 	}
 
 	@Override

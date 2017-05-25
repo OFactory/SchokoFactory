@@ -13,44 +13,25 @@ public abstract class GameObject implements Updateable, Drawable{
 	
 	private int x;
 	private int y;
-	private Image[] img;
-	private int curimg = 0;
-	protected int img_b = 0;
-	protected int img_e = 0;
+
 	
-	protected int i = 0;
-	private int delay = 10;
+
 	
 	private Shape clickbox;
 	
 	
-	public GameObject( int x, int y, Image[] img){
+	public GameObject( int x, int y){
 		this.x = x;
 		this.y = y;
-		this.img = img;
+
 		
 	}
 	
 	public void update(GameContainer gc){
 		
-		//Animation tick
+		//Animation tick is in every single animated class
 		
-		if(!(img_e == img_b)){ // Animation vorhanden
-			this.i++;
-		
-		
-			if(this.i == getDelay()){
-				if(this.curimg > img_e)
-					this.curimg = img_b;
-				else
-					this.curimg++;
-				
-				this.i = 0;
-			}
-			
-			
-			
-		}
+
 		
 		
 		
@@ -79,52 +60,10 @@ public abstract class GameObject implements Updateable, Drawable{
 		return this.y;
 	}
 	
-	public void setImage(Image[] img) {
-		this.img = img;
-	}
-	
-	public Image[] getImage() {
-		return this.img;
-	}
-	
-	public void setCurrentImagePosition(int f){
-		this.curimg = f;
-	}
-	
-	public int getCurrentImagePosition(){
-		return this.curimg;
-	}
-	
-	public void setPatternFrame(int f) {
-		this.img_b = f;
-		this.img_e = f;
-		this.curimg = f;
-	}
-	
-	public void setFrameLoop(int f1, int f2){
-		this.img_b = f1;
-		this.img_e = f2;
-		this.curimg = f1 + 1;
-	}
-	
 
-	public Image getCurrentImage() {
-		return this.img[curimg];
-	}
-	
-	public void setCurrentImage(Image img) {
-		this.img[curimg] = img;
-	}
 
-	public int getDelay() {
-		return delay;
-	}
-
-	public void setDelay(int delay) {
-		this.delay = delay;
-	}
 	
-	public boolean checkOpaqueColor(int x, int y){
+	/*public boolean checkOpaqueColor(int x, int y){
 		
 		//Punkte in Bezug auf die jeweiligen Images
 		int xpos = x - this.x;
@@ -141,7 +80,7 @@ public abstract class GameObject implements Updateable, Drawable{
 		
 		return true;
 		
-	}
+	}*/
 
 	public Shape getClickbox() {
 		return clickbox;

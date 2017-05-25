@@ -82,8 +82,8 @@ public class BuildingInfoTab extends Tab{
 			
 			//TODO Pattern Information
 			
-			double scale = PATTERN_IMAGE_SCALE/MainState.field.selected_pattern.getCurrentImage().getWidth();
-			MainState.field.selected_pattern.getCurrentImage().getScaledCopy((float) scale).draw(x + 20, y-80);
+			double scale = PATTERN_IMAGE_SCALE/MainState.field.selected_pattern.getImg().getWidth();
+			MainState.field.selected_pattern.getImg().getScaledCopy((float) scale).draw(x + 40, y + 70);
 			
 			//System.out.println(MainState.selected_pattern.getPatternState().isWorking());
 			

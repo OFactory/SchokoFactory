@@ -29,6 +29,8 @@ public class Market implements Daily {
 	private ArrayList<Player> p_mit_diff = new ArrayList<Player>();
 	private ArrayList<Player> p_ohne_diff = new ArrayList<Player>();
 	
+	private ArrayList<Integer>[] listeAbsatz;
+	
 	
 	
 	public Market() {
@@ -39,6 +41,7 @@ public class Market implements Daily {
 	public void day() {
 
 		calculation();
+		saveData();
 		this.time++;
 		
 		//printStuff();
@@ -50,6 +53,12 @@ public class Market implements Daily {
 		}
 	}
 	
+	private void saveData() {
+		//int[] absaetze = {MainState.m.getSummeAbs(), MainState.p.getAbsatz(), MainState.ai1.getAbsatz(), MainState.ai2.getAbsatz(), MainState.p.getMoegAbs(), MainState.ai1.getMoegAbs(), MainState.ai2.getMoegAbs()};
+		//listeAbsatz.append(absaetze);
+		
+	}
+
 	@SuppressWarnings("unused")
 	private void printStuff() {
 		System.out.println("<Markt> [ " + getDateString() + " ]" );

@@ -62,7 +62,7 @@ public class MainState extends BasicGameState{
 	
 	public static Map field;
 	
-	public static double curpatternscale = 0.7D;
+	public static double curpatternscale = 0.3D;
 	public static Image   patternimg_raw = ResourceManager.loadImage("assets/textures/patterns/patterns.png");
 	public static Image[] patternimg = ResourceManager.loadPics(patternimg_raw, 50); //Bild splitten -> Einzelne Bilder (Image[])
 
@@ -70,8 +70,8 @@ public class MainState extends BasicGameState{
 	public static int allv_y; //Geschwindigkeit y
 	public static int allv_x; //Geschwindidkeit  x
 	
-	public static final  int TEXTURE_WIDTH = 200;
-	public static final  int TEXTURE_HEIGHT = 64;
+	public static final  int TEXTURE_WIDTH = 707;
+	public static final  int TEXTURE_HEIGHT = 234;
 	public static String curpatterninfo;
 	public static PatternState curpatternstate = null;
 
