@@ -10,6 +10,20 @@ import org.newdawn.slick.util.ResourceLoader;
 
 public class ResourceManager {
 	
+	public static Image pttrn_hof = loadImage("assets/textures/patterns/pttrn_hof.png");
+	public static Image pttrn_molkerei = loadImage("assets/textures/patterns/pttrn_molkerei.png");
+	public static Image pttrn_farm = loadImage("assets/textures/patterns/pttrn_farm.png");
+	public static Image pttrn_feld = loadImage("assets/textures/patterns/pttrn_feld.png");
+	public static Image pttrn_gewaechshaus = loadImage("assets/textures/patterns/pttrn_gewaechshaus.png");
+	public static Image pttrn_chemfab = loadImage("assets/textures/patterns/pttrn_chemfab.png");
+	public static Image pttrn_labor = loadImage("assets/textures/patterns/pttrn_labor.png");
+	public static Image pttrn_ruehrer = loadImage("assets/textures/patterns/pttrn_ruehrer.png");
+	public static Image pttrn_tank = loadImage("assets/textures/patterns/pttrn_tank.png");
+	public static Image pttrn_giesser = loadImage("assets/textures/patterns/pttrn_giesser.png");
+	public static Image pttrn_lager = loadImage("assets/textures/patterns/pttrn_lager.png");
+	public static Image pttrn_prbuero = loadImage("assets/textures/patterns/pttrn_prbuero.png");
+	public static Image pttrn_gras = loadImage("assets/textures/patterns/pttrn_gras.png");
+	
 	public static Image loadImage(String file){
 		try {
 			return new Image(file);
@@ -20,6 +34,22 @@ public class ResourceManager {
 		
 		return null;
 		
+	}
+	
+	public static void loadImages(){
+		// Patterns
+		/*Image pttrn_hof = loadImage("assets/textures/patterns/pttrn_hof.png");
+		Image pttrn_molkerei = loadImage("assets/textures/patterns/pttrn_molkerei.png");
+		Image pttrn_farm = loadImage("assets/textures/patterns/pttrn_farm.png");
+		Image pttrn_feld = loadImage("assets/textures/patterns/pttrn_feld.png");
+		Image pttrn_gewaechshaus = loadImage("assets/textures/patterns/pttrn_gewaechshaus.png");
+		Image pttrn_chemfab = loadImage("assets/textures/patterns/pttrn_chemfab.png");
+		Image pttrn_labor = loadImage("assets/textures/patterns/pttrn_labor.png");
+		Image pttrn_ruehrer = loadImage("assets/textures/patterns/pttrn_ruehrer.png");
+		Image pttrn_tank = loadImage("assets/textures/patterns/pttrn_tank.png");
+		Image pttrn_giesser = loadImage("assets/textures/patterns/pttrn_giesser.png");
+		Image pttrn_lager = loadImage("assets/textures/patterns/pttrn_lager.png");
+		Image pttrn_prbuero = loadImage("assets/textures/patterns/pttrn_prbuero.png");*/
 	}
 	
 	public static TrueTypeFont loadFont(String file){

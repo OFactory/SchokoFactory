@@ -2,6 +2,7 @@ package de.OFactory.SchokoFactory.inventory.info.tabs;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 
 import de.OFactory.SchokoFactory.game.GameFonts;
@@ -97,8 +98,10 @@ public class BuildingButton extends Button{
 		
 		// On TOP
 		
-		//Siehe DisplayFrame in PatternFrame.java
-		MainState.patternimg[ps.getDisplayFrame()].getScaledCopy(0.3F).draw(x + 15, y-50);
+		// Bild zeichnen
+		Image source = ps.getSource();
+		Image img = source.getSubImage(0, 0, 709, source.getHeight());
+		img.getScaledCopy(0.1F).draw(x + 15, y - 25);
 		
 		
 		

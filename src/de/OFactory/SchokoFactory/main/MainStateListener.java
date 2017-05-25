@@ -119,7 +119,7 @@ public class MainStateListener implements MouseListener, KeyListener{
 			MainState.curpatternstate = PatternState.RÜHRER;
 			break;
 		case 'l':
-			MainState.curpatternstate = PatternState.LAGERHALLE;
+			MainState.curpatternstate = PatternState.LAGER;
 			break;
 		case 'm':
 			MainState.curpatternstate = PatternState.MOLKEREI;
@@ -129,6 +129,15 @@ public class MainStateListener implements MouseListener, KeyListener{
 			break;
 		case 'g':
 			MainState.curpatternstate = PatternState.GIEßER;
+			break;
+		case 'ö':
+			MainState.curpatternstate = PatternState.LABOR;
+			break;
+		case 'k':
+			MainState.curpatternstate = PatternState.FELD;
+			break;
+		case 'q':
+			MainState.curpatternstate = PatternState.GEWÄCHSHAUS;
 			break;
 		case 'n':
 			MainState.curpatternstate = null;

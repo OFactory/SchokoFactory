@@ -1,9 +1,10 @@
 package de.OFactory.SchokoFactory.game.patterns;
 
 
+import org.newdawn.slick.Image;
+
 import de.OFactory.SchokoFactory.game.Map;
 import de.OFactory.SchokoFactory.game.Pattern;
-import de.OFactory.SchokoFactory.game.PatternFrame;
 import de.OFactory.SchokoFactory.game.PatternState;
 import de.OFactory.SchokoFactory.main.MainState;
 
@@ -14,7 +15,7 @@ public class Tank extends Pattern{
 
 	public Tank(Map map, int x, int y, int id, int xcoor, int ycoor) {
 		super(map, x, y, PatternState.TANK, id, xcoor, ycoor);
-		this.setPatternFrame(PatternFrame.TANK_0);
+
 		
 	}
 	
@@ -39,19 +40,19 @@ public class Tank extends Pattern{
 		}
 		
 		
-
+		Image source = this.getPatternState().getSource();
 		if(		   this.stored_amount < 0.2*this.capacity) { // 1-20%
-			this.setPatternFrame(PatternFrame.TANK_0  );
+			setImg(source.getSubImage(0*source.getWidth()/6, 0, source.getWidth()/6, source.getHeight()));
 		} else if (this.stored_amount < 0.4*this.capacity) { // 21-40%
-			this.setPatternFrame(PatternFrame.TANK_20 );
+			setImg(source.getSubImage(1*source.getWidth()/6, 0, source.getWidth()/6, source.getHeight()));
 		} else if (this.stored_amount < 0.6*this.capacity) { // 41-60%
-			this.setPatternFrame(PatternFrame.TANK_40 );
+			setImg(source.getSubImage(2*source.getWidth()/6, 0, source.getWidth()/6, source.getHeight()));
 		} else if (this.stored_amount < 0.8*this.capacity) { // 61-80%
-			this.setPatternFrame(PatternFrame.TANK_60 );
+			setImg(source.getSubImage(3*source.getWidth()/6, 0, source.getWidth()/6, source.getHeight()));
 		} else if (this.stored_amount < 1*  this.capacity) { // 81-99%
-			this.setPatternFrame(PatternFrame.TANK_80 );
+			setImg(source.getSubImage(4*source.getWidth()/6, 0, source.getWidth()/6, source.getHeight()));
 		} else if (this.stored_amount == 1* this.capacity) { // 100%
-			this.setPatternFrame(PatternFrame.TANK_100);
+			setImg(source.getSubImage(5*source.getWidth()/6, 0, source.getWidth()/6, source.getHeight()));
 		}
 		
 		

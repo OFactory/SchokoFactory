@@ -2,30 +2,36 @@ package de.OFactory.SchokoFactory.game;
 
 import java.util.HashMap;
 
+import org.newdawn.slick.Image;
+
+import de.OFactory.SchokoFactory.main.ResourceManager;
+
 public enum PatternState {
-	TANK        	(0L, "Tank",		  PatternFrame.TANK_0,	          30, false),
-	RÜHRER  		(1L, "Rührer", 		  PatternFrame.RÜHRER_S,          50, true),
-	CHEMIEFABRIK	(2L, "Chemiefabrik",  PatternFrame.CHEMIE_S,		  60, false),
-	GIEßER			(3L, "Gießer", 		  PatternFrame.GIEßER_S,		  70, true),
-	LAGERHALLE		(4L, "Lagerhalle", 	  PatternFrame.LAGERHALLE_NORMAL, 80, false),
-	MOLKEREI		(5L, "Molkerei",	  PatternFrame.MOLKEREI_MODERN,   90, true),
-	FARM			(6L, "Farm", 		  PatternFrame.FARM,			 100, true),
-	WEIZENFELD		(7L, "Weizenfeld", 	  PatternFrame.TANK_0,			 150, true), //TODO BILDER
-	KAKAOPLANTAGE	(8L, "Kakaoplantage", PatternFrame.TANK_0,			2300, true), //TODO BILDER
-	ZUCKERPLANTAGE	(9L, "Zuckerplantage",PatternFrame.TANK_0,   	   60000, true), //TODO BILDER
-	WIESE			(10L, "Wiese",		  PatternFrame.WIESE_1,            0, false);
+	TANK        	(0L, "Tank",		  ResourceManager.pttrn_tank,	  	30, false),
+	RÜHRER  		(1L, "Rührer", 		  ResourceManager.pttrn_ruehrer,    50, true),
+	CHEMIEFABRIK	(2L, "Chemiefabrik",  ResourceManager.pttrn_chemfab,	60, false),
+	GIEßER			(3L, "Gießer", 		  ResourceManager.pttrn_giesser,	70, true),
+	LAGER			(4L, "Lagerhalle", 	  ResourceManager.pttrn_lager, 		80, false),
+	MOLKEREI		(5L, "Molkerei",	  ResourceManager.pttrn_molkerei,   90, true),
+	FARM			(6L, "Farm", 		  ResourceManager.pttrn_farm,		100, true),
+	FELD			(7L, "Feld", 	      ResourceManager.pttrn_feld,		150, true),
+	GEWÄCHSHAUS		(8L, "Gewächshaus",   ResourceManager.pttrn_gewaechshaus,150, true),
+	HOF				(9L, "Hof", 	      ResourceManager.pttrn_hof,		150, true), 
+	LABOR			(10L, "Labor", 		  ResourceManager.pttrn_labor,		150, true),
+	PRBÜRO			(11L, "PRBuero", 	  ResourceManager.pttrn_prbuero,	150, true),
+	WIESE			(12L, "Wiese",		  ResourceManager.pttrn_gras,       0, false);
 	
 	private String name;
 	private Long id;
-	private int displayframe;
+	private Image source;
 	private int price = 0;
 	private boolean work;
 	
-	private PatternState(Long id, String name, int displayframe, int price, boolean work){
+	private PatternState(Long id, String name, Image source, int price, boolean work){
 		this.name = name;
 		this.id = id;
 		this.price = price;
-		this.displayframe = displayframe;
+		this.setSource(source);
 		this.work = work;
 	}
 	
@@ -60,11 +66,13 @@ public enum PatternState {
 	}
 
 
-	/**
-	 * @return int displayframe | Der Index des zu darstellenden Bildes des Patterns
-	 */
-	public int getDisplayFrame() {
-		return displayframe;
+
+	public Image getSource() {
+		return source;
+	}
+
+	public void setSource(Image source) {
+		this.source = source;
 	}
 
 	

@@ -126,20 +126,20 @@ public class LinesChart extends LineChart implements Updateable, Drawable{
 		
 			g.setLineWidth(1);
 			g.setColor(Color.darkGray);
-			
-			int df = 1;
+			/*
+			int df = 30;
 			while (this.width/(int)lines[0].size()*df < 20)
 				df *= 2;
 		
-		/*for (int f = 0; f <= lines[0].size(); f+=df) {
-			
-			g.drawLine(this.x + f*dx, this.y + this.height, this.x + f*dx, this.y + this.height + 5);
-			g.drawString(f+"", this.x + f*dx - 3, this.y + this.height + 5);
-		}*/
+			for (int f = 0; f <= lines[0].size(); f+=df) {
+				
+				g.drawLine((float)(this.x + f*dx), (float)this.y + this.height, (float)(this.x + f*dx), (float)this.y + this.height + 5);
+				g.drawString(f+"", (float)(this.x + f*dx - 3), (float)this.y + this.height + 5);
+			}*/
 		
 		
 		//Monate
-
+			/*
 			for (long f = MainState.m.getTime()-lines[0].size()+1 +30; f <= MainState.m.getTime(); f+=30) {
 				int shift = 0;
 				if (MainState.m.getTime()-lines[0].size() +1 != 0) {
@@ -149,7 +149,7 @@ public class LinesChart extends LineChart implements Updateable, Drawable{
 	
 				g.drawLine(this.x + (int)((f-(MainState.m.getTime()-lines[0].size()+1))*dx - shift*dx), this.y, this.x + (int)((f-(MainState.m.getTime()-lines[0].size()+1))*dx - shift*dx), this.y + this.height);
 				g.drawString((f+1)/30+"", this.x + (int)((f-(MainState.m.getTime()-lines[0].size()+1))*dx - dx*15 - shift*dx) - 5, this.y + this.height + 5);
-			}
+			}*/
 		}
 		
 	}
