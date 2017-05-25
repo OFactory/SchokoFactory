@@ -101,7 +101,7 @@ public class BuildingButton extends Button{
 		// Bild zeichnen
 		Image source = ps.getSource();
 		Image img = source.getSubImage(0, 0, 709, source.getHeight());
-		img.getScaledCopy(0.1F).draw(x + 15, y - 25);
+		img.getScaledCopy(0.1F).draw(x + 15, y - 20);
 		
 		
 		

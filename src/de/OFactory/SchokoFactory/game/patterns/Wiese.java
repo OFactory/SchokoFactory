@@ -20,7 +20,7 @@ public class Wiese extends Pattern{
 		
 		this.type = GameUtils.randInt(0, 12);
 		
-		setImg(source.getSubImage(type*source.getWidth()/13, 0, source.getWidth()/13, source.getHeight()));
+		setFrame(type);
 		
 		
 	}

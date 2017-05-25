@@ -21,13 +21,11 @@ public class Gieﬂer extends Pattern implements Workable, Drawable{
 	private int alter = 0;
 	private int effizienz = 100;
 	
-	private int frame = 0;
-	private int i = 0;
-	private int delay = 10;
+
 	
 	public Gieﬂer(Map map, int x, int y, int id, int xcoor, int ycoor) {
 		super(map, x, y, PatternState.GIEﬂER, id, xcoor, ycoor);
-		setImg(ResourceManager.pttrn_giesser.getSubImage(0,0,709,944));
+
 		//start,end,total,delay
 		setAnimation(0,3,5,2);
 		
@@ -48,8 +46,8 @@ public class Gieﬂer extends Pattern implements Workable, Drawable{
 		if(!this.isWorking()){
 			//Bild laden
 			Image phover = ResourceManager.loadImage("assets/textures/patterns/hovers/pause_hover.png");
-			float xpos = getX() + getImg().getWidth()/2 - phover.getWidth()/2;
-			float ypos = (float) (getY() + getImg().getHeight()/3 + 2*Math.sin(System.currentTimeMillis()/200));
+			float xpos = getX() + ResourceManager.pattern_width/2 - phover.getWidth()/2;
+			float ypos = (float) (getY() + ResourceManager.pattern_height/3 + 2*Math.sin(System.currentTimeMillis()/200));
 			
 			phover.draw(xpos, ypos, 0.05F);
 			

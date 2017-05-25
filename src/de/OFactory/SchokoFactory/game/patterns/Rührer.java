@@ -13,7 +13,7 @@ public class Rührer extends Pattern{
 	public Rührer(Map map, int x, int y, int id, int xcoor, int ycoor) {
 		super(map, x, y, PatternState.RÜHRER, id, xcoor, ycoor);
 		
-		setImg(ResourceManager.pttrn_giesser.getSubImage(0,0,709,944));
+
 		//start,end,total,delay
 		this.setAnimation(0,7,9,3);
 		

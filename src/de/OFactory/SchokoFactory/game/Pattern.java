@@ -26,6 +26,7 @@ import de.OFactory.SchokoFactory.game.patterns.Feld;
 import de.OFactory.SchokoFactory.game.patterns.Wiese;
 import de.OFactory.SchokoFactory.game.patterns.Labor;
 import de.OFactory.SchokoFactory.main.MainState;
+import de.OFactory.SchokoFactory.main.ResourceManager;
 
 public abstract class Pattern extends GameObject {
 
@@ -48,7 +49,7 @@ public abstract class Pattern extends GameObject {
 
 	private Map m;
 	
-	private Image img;
+	//private Image img;
 	private int frame = 0;
 	private int frame_start = 0;	//frame_start = frame_end -> keine Animation
 	private int frame_end = 0;
@@ -67,8 +68,6 @@ public abstract class Pattern extends GameObject {
 		this.xcoor = xcoor;
 		this.ycoor = ycoor;
 		
-		Image source = this.ps.getSource();
-		setImg(source.getSubImage(frame*source.getWidth()/frame_total, 0, source.getWidth()/frame_total, source.getHeight()));
 
 	}
 
@@ -173,6 +172,8 @@ public abstract class Pattern extends GameObject {
 		}
 		
 		Polygon p = new Polygon();
+		Image source = this.ps.getSource();
+		Image img = source.getSubImage(frame*ResourceManager.pattern_width, 0, ResourceManager.pattern_width, ResourceManager.pattern_height);
 		
 		int off_x = img.getScaledCopy((float) MainState.curpatternscale).getWidth();
 		int off_y = img.getScaledCopy((float) MainState.curpatternscale).getHeight();
@@ -228,11 +229,11 @@ public abstract class Pattern extends GameObject {
 	private void updateAnimation(){
 		if (i >= delay){
 			i = 0;
-			if (frame > frame_end)
+			if (frame+1 > frame_end)
 				frame = frame_start;
 			else {
-				Image source = this.ps.getSource();
-				setImg(source.getSubImage(frame*source.getWidth()/frame_total, 0, source.getWidth()/frame_total, source.getHeight()));
+				//Image source = this.ps.getSource();
+				//setImg(source.getSubImage(frame*source.getWidth()/frame_total, 0, source.getWidth()/frame_total, source.getHeight()));
 				frame++;
 			}
 				
@@ -372,6 +373,10 @@ public abstract class Pattern extends GameObject {
 			// MainState.curpatternscale);//this.getCurrentImage().getScaledCopy((float)
 			// MainState.curpatternscale);
 
+			
+			Image source = this.ps.getSource();
+			Image img = source.getSubImage(frame*ResourceManager.pattern_width, 0, ResourceManager.pattern_width, ResourceManager.pattern_height);
+			
 			img.getScaledCopy((float) MainState.curpatternscale).draw(this.getX(), this.getY(), filter);
 			/*
 			 * DÈBUG g.setColor(Color.green); g.drawRect(getX(), getY(),
@@ -532,13 +537,7 @@ public abstract class Pattern extends GameObject {
 		this.hovery = hovery;
 	}
 
-	public void setImg(Image img) {
-		this.img = img;
-	}
 
-	public Image getImg() {
-		return img;
-	}
 
 	public int getFrame() {
 		return frame;

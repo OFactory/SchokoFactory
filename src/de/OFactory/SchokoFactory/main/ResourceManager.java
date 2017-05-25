@@ -10,6 +10,9 @@ import org.newdawn.slick.util.ResourceLoader;
 
 public class ResourceManager {
 	
+	public static int pattern_height = 944;
+	public static int pattern_width = 709;
+	
 	public static Image pttrn_hof = loadImage("assets/textures/patterns/pttrn_hof.png");
 	public static Image pttrn_molkerei = loadImage("assets/textures/patterns/pttrn_molkerei.png");
 	public static Image pttrn_farm = loadImage("assets/textures/patterns/pttrn_farm.png");

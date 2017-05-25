@@ -17,6 +17,7 @@ import de.OFactory.SchokoFactory.inventory.Button;
 import de.OFactory.SchokoFactory.inventory.info.InfoPanel;
 import de.OFactory.SchokoFactory.inventory.info.Tab;
 import de.OFactory.SchokoFactory.main.MainState;
+import de.OFactory.SchokoFactory.main.ResourceManager;
 
 public class BuildingInfoTab extends Tab{
 
@@ -81,9 +82,9 @@ public class BuildingInfoTab extends Tab{
 			}
 			
 			//TODO Pattern Information
-			
-			double scale = PATTERN_IMAGE_SCALE/MainState.field.selected_pattern.getImg().getWidth();
-			MainState.field.selected_pattern.getImg().getScaledCopy((float) scale).draw(x + 40, y + 70);
+			Image img = MainState.field.selected_pattern.getPatternState().getSource().getSubImage(0, 0, ResourceManager.pattern_width, ResourceManager.pattern_height);
+			double scale = PATTERN_IMAGE_SCALE/img.getWidth();
+			img.getScaledCopy((float) scale).draw(x + 40, y + 70);
 			
 			//System.out.println(MainState.selected_pattern.getPatternState().isWorking());
 			

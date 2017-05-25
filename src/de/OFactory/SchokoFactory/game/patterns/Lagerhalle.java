@@ -1,7 +1,5 @@
 package de.OFactory.SchokoFactory.game.patterns;
 
-import org.newdawn.slick.Image;
-
 import de.OFactory.SchokoFactory.game.Map;
 import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternState;
@@ -24,16 +22,15 @@ public class Lagerhalle extends Pattern{
 		
 		Pattern swp = this.getPatternNeighbours().get(2);
 		Pattern sop = this.getPatternNeighbours().get(1);
-		Image source = this.getPatternState().getSource();
 		
 		if ((sop instanceof Lagerhalle)) //Rechts unten Lagerhalle
-			setImg(source.getSubImage(2*source.getWidth()/3, 0, source.getWidth()/3, source.getHeight()));
+			setFrame(2);
 			
 		else if(!(swp instanceof Lagerhalle)) //Links unten KEINE Lagerhalle
-			setImg(source.getSubImage(0*source.getWidth()/3, 0, source.getWidth()/3, source.getHeight()));
+			setFrame(0);
 		
 		else
-			setImg(source.getSubImage(1*source.getWidth()/3, 0, source.getWidth()/3, source.getHeight()));
+			setFrame(1);
 		
 	}
 

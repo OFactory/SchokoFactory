@@ -40,19 +40,19 @@ public class Tank extends Pattern{
 		}
 		
 		
-		Image source = this.getPatternState().getSource();
+
 		if(		   this.stored_amount < 0.2*this.capacity) { // 1-20%
-			setImg(source.getSubImage(0*source.getWidth()/6, 0, source.getWidth()/6, source.getHeight()));
+			setFrame(0);
 		} else if (this.stored_amount < 0.4*this.capacity) { // 21-40%
-			setImg(source.getSubImage(1*source.getWidth()/6, 0, source.getWidth()/6, source.getHeight()));
+			setFrame(1);
 		} else if (this.stored_amount < 0.6*this.capacity) { // 41-60%
-			setImg(source.getSubImage(2*source.getWidth()/6, 0, source.getWidth()/6, source.getHeight()));
+			setFrame(2);
 		} else if (this.stored_amount < 0.8*this.capacity) { // 61-80%
-			setImg(source.getSubImage(3*source.getWidth()/6, 0, source.getWidth()/6, source.getHeight()));
+			setFrame(3);
 		} else if (this.stored_amount < 1*  this.capacity) { // 81-99%
-			setImg(source.getSubImage(4*source.getWidth()/6, 0, source.getWidth()/6, source.getHeight()));
+			setFrame(4);
 		} else if (this.stored_amount == 1* this.capacity) { // 100%
-			setImg(source.getSubImage(5*source.getWidth()/6, 0, source.getWidth()/6, source.getHeight()));
+			setFrame(5);
 		}
 		
 		

@@ -70,8 +70,8 @@ public class MainState extends BasicGameState{
 	public static int allv_y; //Geschwindigkeit y
 	public static int allv_x; //Geschwindidkeit  x
 	
-	public static final  int TEXTURE_WIDTH = 707;
-	public static final  int TEXTURE_HEIGHT = 234;
+	public static final  int TEXTURE_WIDTH = 709;
+	public static final  int TEXTURE_HEIGHT = 236;
 	public static String curpatterninfo;
 	public static PatternState curpatternstate = null;
 
@@ -365,7 +365,7 @@ public class MainState extends BasicGameState{
 	 */
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 
-		g.setColor(Color.black);
+		g.setColor(new Color(151, 207, 66));
 		g.fillRect(0, 0, Main.width, Main.height); //Hintergrund
 	
 		

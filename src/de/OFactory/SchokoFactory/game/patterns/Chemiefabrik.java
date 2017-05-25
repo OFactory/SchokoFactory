@@ -26,7 +26,7 @@ public class Chemiefabrik extends Pattern{
 	public Chemiefabrik(Map map, int x, int y, int id, int xcoor, int ycoor) {
 		super(map, x, y, PatternState.CHEMIEFABRIK, id, xcoor, ycoor);
 		//start,end,total,delay
-		setImg(ResourceManager.pttrn_giesser.getSubImage(0,0,709,944));
+
 		setAnimation(0,7,9,3);
 
 	}

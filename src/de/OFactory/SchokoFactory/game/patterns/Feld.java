@@ -21,9 +21,9 @@ public class Feld extends Pattern{
 	public void updateContext() {
 		Image source = this.getPatternState().getSource();
 		if (this.plants == "Kakao"){
-			setImg(source.getSubImage(0*source.getWidth()/2, 0, source.getWidth()/2, source.getHeight()));
+			setFrame(0);
 		} else  // -> Zucker
-			setImg(source.getSubImage(1*source.getWidth()/2, 0, source.getWidth()/2, source.getHeight()));
+			setFrame(1);
 			
 	}
 
