@@ -1,9 +1,10 @@
 package de.OFactory.SchokoFactory.game.patterns;
 
+import java.io.Serializable;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
-import de.OFactory.SchokoFactory.game.Map;
 import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternState;
 import de.OFactory.SchokoFactory.game.Workable;
@@ -11,7 +12,9 @@ import de.OFactory.SchokoFactory.main.Drawable;
 import de.OFactory.SchokoFactory.main.MainState;
 import de.OFactory.SchokoFactory.main.ResourceManager;
 
-public class Gieﬂer extends Pattern implements Workable, Drawable{
+public class Gieﬂer extends Pattern implements Workable, Drawable, Serializable{
+	
+	private static final long serialVersionUID = 3L;
 	
 	private boolean working = true;
 	private int produktion = 100;
@@ -23,8 +26,8 @@ public class Gieﬂer extends Pattern implements Workable, Drawable{
 	
 
 	
-	public Gieﬂer(Map map, int x, int y, int id, int xcoor, int ycoor) {
-		super(map, x, y, PatternState.GIEﬂER, id, xcoor, ycoor);
+	public Gieﬂer(int x, int y, int id, int xcoor, int ycoor) {
+		super(x, y, PatternState.GIEﬂER, id, xcoor, ycoor);
 
 		//start,end,total,delay
 		setAnimation(0,3,5,2);

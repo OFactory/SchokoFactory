@@ -1,6 +1,7 @@
 package de.OFactory.SchokoFactory.game;
 
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -28,7 +29,9 @@ import de.OFactory.SchokoFactory.game.patterns.Labor;
 import de.OFactory.SchokoFactory.main.MainState;
 import de.OFactory.SchokoFactory.main.ResourceManager;
 
-public abstract class Pattern extends GameObject {
+public abstract class Pattern extends GameObject implements Serializable {
+
+	private static final long serialVersionUID = -1672562077428577840L;
 
 	private PatternState ps;
 
@@ -46,8 +49,6 @@ public abstract class Pattern extends GameObject {
 
 	public boolean hovered = false;
 	public boolean selected = false;
-
-	private Map m;
 	
 	//private Image img;
 	private int frame = 0;
@@ -58,11 +59,10 @@ public abstract class Pattern extends GameObject {
 	private int i = 0;
 
 	private int delay = 10;
-
-	public Pattern(Map map, int x, int y, PatternState ps, int id, int xcoor,
+	
+	public Pattern(int x, int y, PatternState ps, int id, int xcoor,
 			int ycoor) {
 		super(x, y);
-		this.m = map;
 		this.ps = ps;
 		this.setId(id);
 		this.xcoor = xcoor;
@@ -97,43 +97,43 @@ public abstract class Pattern extends GameObject {
 		switch (ps) { // SWITCH-CASE FOR THE WIN
 
 		case WIESE:
-			p = new Wiese(map, x, y, id, xcoor, ycoor);
+			p = new Wiese(x, y, id, xcoor, ycoor);
 			break;
 		case CHEMIEFABRIK:
-			p = new Chemiefabrik(map, x, y, id, xcoor, ycoor);
+			p = new Chemiefabrik(x, y, id, xcoor, ycoor);
 			break;
 		case RÜHRER:
-			p = new Rührer(map, x, y, id, xcoor, ycoor);
+			p = new Rührer(x, y, id, xcoor, ycoor);
 			break;
 		case LAGER:
-			p = new Lagerhalle(map, x, y, id, xcoor, ycoor);
+			p = new Lagerhalle( x, y, id, xcoor, ycoor);
 			break;
 		case GIEßER:
-			p = new Gießer(map, x, y, id, xcoor, ycoor);
+			p = new Gießer(x, y, id, xcoor, ycoor);
 			break;
 		case FELD:
-			p = new Feld(map, x, y, id, xcoor, ycoor);
+			p = new Feld(x, y, id, xcoor, ycoor);
 			break;
 		case HOF:
-			p = new Hof(map, x, y, id, xcoor, ycoor);
+			p = new Hof(x, y, id, xcoor, ycoor);
 			break;
 		case MOLKEREI:
-			p = new Molkerei(map, x, y, id, xcoor, ycoor);
+			p = new Molkerei(x, y, id, xcoor, ycoor);
 			break;
 		case LABOR:
-			p = new Labor(map, x, y, id, xcoor, ycoor);
+			p = new Labor(x, y, id, xcoor, ycoor);
 			break;
 		case TANK:
-			p = new Tank(map, x, y, id, xcoor, ycoor);
+			p = new Tank(x, y, id, xcoor, ycoor);
 			break;
 		case GEWÄCHSHAUS:
-			p = new Gewächshaus(map, x, y, id, xcoor, ycoor);
+			p = new Gewächshaus(x, y, id, xcoor, ycoor);
 			break;
 		case FARM:
-			p = new Farm(map, x, y, id, xcoor, ycoor);
+			p = new Farm(x, y, id, xcoor, ycoor);
 			break;
 		case PRBÜRO:
-			p = new PRBüro(map, x, y, id, xcoor, ycoor);
+			p = new PRBüro(x, y, id, xcoor, ycoor);
 			break;
 		default:
 			System.err.print("ERR <005>: Kann dem PatternState \"" + ps
@@ -183,7 +183,7 @@ public abstract class Pattern extends GameObject {
 		p.addPoint(getX() + off_x / 2, getY() + off_y * 0.95F);
 
 		this.setClickBox(p);
-		this.selected = m.selected_pattern == this;
+		this.selected = MainState.field.selected_pattern == this;
 
 		Input in = gc.getInput();
 
@@ -200,11 +200,11 @@ public abstract class Pattern extends GameObject {
 		}
 
 		if (this.hovered && in.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-			m.clicked = this;
+			MainState.field.clicked = this;
 
 		} else {
-			if (m.clicked == this)
-				m.clicked = null;
+			if (MainState.field.clicked == this)
+				MainState.field.clicked = null;
 		}
 
 		// Pattern aus Bildschirmrand?
@@ -270,7 +270,7 @@ public abstract class Pattern extends GameObject {
 
 			boolean success = false;
 
-			for (Pattern pt : this.getMap()) {
+			for (Pattern pt : MainState.field) {
 
 				if (success == false) { // Suche noch nicht erfolgreich
 					if (pt.getXCoordinate() == this.getXCoordinate()
@@ -325,7 +325,7 @@ public abstract class Pattern extends GameObject {
 
 			boolean success = false;
 
-			for (Pattern pt : this.getMap()) {
+			for (Pattern pt : MainState.field) {
 
 				if (success == false) { // Suche noch nicht erfolgreich
 					if (pt.getXCoordinate() == this.getXCoordinate()
@@ -354,7 +354,7 @@ public abstract class Pattern extends GameObject {
 			Color filter = Color.white;
 
 			if (this.hovered) { // GEHOVERED
-				if (m.clicked == this) { // GEKLICKT
+				if (MainState.field.clicked == this) { // GEKLICKT
 					filter = new Color(100, 255, 255); // GEKLICKT
 				} else { // GEHOVERED
 					if (this instanceof Wiese
@@ -443,14 +443,6 @@ public abstract class Pattern extends GameObject {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public Map getMap() {
-		return m;
-	}
-
-	public void setMap(Map m) {
-		this.m = m;
 	}
 
 	/**

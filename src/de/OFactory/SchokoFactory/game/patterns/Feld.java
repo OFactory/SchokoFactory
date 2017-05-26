@@ -1,16 +1,19 @@
 package de.OFactory.SchokoFactory.game.patterns;
 
 
-import de.OFactory.SchokoFactory.game.Map;
+import java.io.Serializable;
+
 import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternState;
 
-public class Feld extends Pattern{
+public class Feld extends Pattern implements Serializable{
+
+	private static final long serialVersionUID = 7L;
 	
 	String plants = "Zucker";
 	
-	public Feld(Map map, int x, int y, int id, int xcoor, int ycoor) {
-		super(map, x, y, PatternState.FELD, id, xcoor, ycoor);
+	public Feld(int x, int y, int id, int xcoor, int ycoor) {
+		super(x, y, PatternState.FELD, id, xcoor, ycoor);
 		
 
 		//XXX BILD FEHLT NOCH

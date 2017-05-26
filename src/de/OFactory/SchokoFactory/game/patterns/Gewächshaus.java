@@ -1,15 +1,19 @@
 package de.OFactory.SchokoFactory.game.patterns;
 
-import de.OFactory.SchokoFactory.game.Map;
+import java.io.Serializable;
+
 import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternState;
 
-public class Gewächshaus extends Pattern{
+public class Gewächshaus extends Pattern implements Serializable{
+	
+
+	private static final long serialVersionUID = 8L;
 	
 	String plants = "Kakao";
 	
-	public Gewächshaus(Map map,int x, int y, int id, int xcoor, int ycoor) {
-		super(map, x, y, PatternState.GEWÄCHSHAUS, id, xcoor, ycoor);
+	public Gewächshaus(int x, int y, int id, int xcoor, int ycoor) {
+		super(x, y, PatternState.GEWÄCHSHAUS, id, xcoor, ycoor);
 		
 		//TODO KAKAOPLANTAGE Bild fehlt noch! 
 	}

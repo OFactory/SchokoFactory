@@ -3,27 +3,19 @@ package de.OFactory.SchokoFactory.game.patterns;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 
-
-import de.OFactory.SchokoFactory.game.Map;
 import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternState;
 import de.OFactory.SchokoFactory.inventory.Button;
 
 
-public class Chemiefabrik extends Pattern{
-	/*
-	private boolean working = true;
-	private int produktion = 100;
-	private int einmaligeFabrikkosten = 200;
-	private int laufendeFabrikkosten = 50;
-	
-	private int alter = 0;
-	private int effizienz = 100;*/
-	
-	
-	public Chemiefabrik(Map map, int x, int y, int id, int xcoor, int ycoor) {
-		super(map, x, y, PatternState.CHEMIEFABRIK, id, xcoor, ycoor);
+public class Chemiefabrik extends Pattern implements Serializable{
+
+	private static final long serialVersionUID = 2L;
+
+	public Chemiefabrik(int x, int y, int id, int xcoor, int ycoor) {
+		super(x, y, PatternState.CHEMIEFABRIK, id, xcoor, ycoor);
 		//start,end,total,delay
 
 		setAnimation(0,7,9,3);

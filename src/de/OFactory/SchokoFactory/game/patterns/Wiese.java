@@ -1,19 +1,21 @@
 package de.OFactory.SchokoFactory.game.patterns;
 
+import java.io.Serializable;
+
 import de.OFactory.SchokoFactory.game.GameUtils;
-import de.OFactory.SchokoFactory.game.Map;
 import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternState;
 import de.OFactory.SchokoFactory.main.MainState;
 
 
-public class Wiese extends Pattern{
+public class Wiese extends Pattern implements Serializable{
+	
+	private static final long serialVersionUID = 12L;
 	
 	private int type = 0;
-
-
-	public Wiese(Map map, int x, int y, int id, int xcoor, int ycoor) {
-		super(map, x, y, PatternState.WIESE, id, xcoor, ycoor);
+	
+	public Wiese(int x, int y, int id, int xcoor, int ycoor) {
+		super(x, y, PatternState.WIESE, id, xcoor, ycoor);
 		
 		
 		this.type = GameUtils.randInt(0, 12);

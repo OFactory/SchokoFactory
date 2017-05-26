@@ -102,7 +102,7 @@ public class MainStateListener implements MouseListener, KeyListener{
 	}
 
 	public void keyPressed(int key, char c) {
-		System.out.println(key+";"+c);
+		//System.out.println(key+";"+c);
 
 		switch(c) { 
 		case 't':
@@ -156,6 +156,10 @@ public class MainStateListener implements MouseListener, KeyListener{
 			
 		case ' ':
 			MainState.run = !MainState.run;
+			break;
+			
+		case 's':
+			MainState.gs.save();
 			break;
 			
 		default:

@@ -1,5 +1,6 @@
 package de.OFactory.SchokoFactory.simulation;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +9,10 @@ import de.OFactory.SchokoFactory.main.MainState;
 
 
 
-public class Market implements Daily {
+public class Market implements Daily, Serializable{
 	
+
+	private static final long serialVersionUID = -3165749406689670676L;
 	
 	private int startingYear = 2016;
 	private long time = 0; // 1. Januar 2016
@@ -123,7 +126,7 @@ public class Market implements Daily {
 			
 			double f = getF();
 			trans *= f;
-			System.out.println("shift it _ f: "+f+"\ntrans: "+trans);
+//			System.out.println("shift it _ f: "+f+"\ntrans: "+trans);
 			int divisor = 0;
 			for (Player p: p_ohne_diff)
 				divisor += p.getMoegAbs();

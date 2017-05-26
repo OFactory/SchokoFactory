@@ -57,7 +57,7 @@ public class Main extends StateBasedGame{
 	public static void main(String[] args) throws LWJGLException {
 		try {
 			AppGameContainer app = new AppGameContainer(new Main("SchokoFactory")); // Spiel Title = Basic
-			app.setDisplayMode(BASE_WIDTH, BASE_HEIGTH, false); // Fenstergröße
+			app.setDisplayMode(BASE_WIDTH, BASE_HEIGTH, true); // Fenstergröße //DAS BLEIBT SO WIE ES IST UND ES WIRD SICHTS NICHTS DRAN ÄNDERN
 			app.setTargetFrameRate(60); // Framerate auf 60 beschränkt
 			
 			//Resizable setzen

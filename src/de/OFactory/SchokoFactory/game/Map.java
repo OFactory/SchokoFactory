@@ -1,27 +1,17 @@
 package de.OFactory.SchokoFactory.game;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Input;
 
 import de.OFactory.SchokoFactory.game.patterns.Wiese;
 import de.OFactory.SchokoFactory.main.MainState;
 import de.OFactory.SchokoFactory.main.Updateable;
-import sun.util.calendar.LocalGregorianCalendar.Date;
 
 public class Map extends ArrayList<Pattern> implements Updateable{
 
-	public final static String SAVE_PATH_DIR = "saves";
-	
 	private static final long serialVersionUID = 1L;
-	private String name = "unnamed";
-	private Date lastedit;
+	
 	private int height;
 	private int width;
 	
@@ -33,11 +23,6 @@ public class Map extends ArrayList<Pattern> implements Updateable{
 	
 	public Map(){
 		super();
-	}
-	
-	public Map(String name){
-		super();
-		this.setName(name);
 	}
 	
 	public void update(GameContainer gc) {
@@ -62,7 +47,7 @@ public class Map extends ArrayList<Pattern> implements Updateable{
 					}
 				} else { //Feld hat ein Gebäude
 					if(MainState.curpatternstate == PatternState.WIESE) //Gebäude entfernen (-> Wiese) 
-						set(clicked.getId(), new Wiese(MainState.field, clicked.getX(), clicked.getY(), clicked.getId(), clicked.getXCoordinate(), clicked.getYCoordinate()));
+						set(clicked.getId(), new Wiese(clicked.getX(), clicked.getY(), clicked.getId(), clicked.getXCoordinate(), clicked.getYCoordinate()));
 					else // Keine Wiese: Gebäude Auswählen
 						selected_pattern = clicked;
 						
@@ -76,9 +61,9 @@ public class Map extends ArrayList<Pattern> implements Updateable{
 			if(p != null)
 				p.update(gc);
 		
-		if(gc.getInput().isKeyPressed(Input.KEY_S)){ 
-			saveMap();
-		}
+//		if(gc.getInput().isKeyPressed(Input.KEY_S)){ 
+//			saveMap();
+//		}
 	}
 	
 	/** Erstellt ein Feld (=Liste) von Patterns aus einer Angebebenen Breite und Höhe
@@ -129,8 +114,7 @@ public class Map extends ArrayList<Pattern> implements Updateable{
 				
 
 				
-				Wiese w = new Wiese( ps,
-						(int) (  x*MainState.TEXTURE_WIDTH * MainState.curpatternscale +//Normal Placement
+				Wiese w = new Wiese( (int) (  x*MainState.TEXTURE_WIDTH * MainState.curpatternscale +//Normal Placement
 								( ((pattern_width+1)-grid_width)*MainState.TEXTURE_WIDTH * MainState.curpatternscale ) / 2 - //Verschiebung durch Anzahl Patterns in Reihe
 								(pattern_width+1)*MainState.TEXTURE_WIDTH*MainState.curpatternscale / 3),
 						(int) (  y*MainState.TEXTURE_HEIGHT * MainState.curpatternscale - //Normal Placement
@@ -291,132 +275,116 @@ public class Map extends ArrayList<Pattern> implements Updateable{
 		
 	}
 	
-	/** Gibt den Speicherstring zurück.
-	 *  
-	 * @return Str sb = der Sepicherstring. Format (WIP)
-	 */
-	public String getSaveString(){
-		StringBuilder sb = new StringBuilder("");
-		//TODO ordentlich encrypten	
-		sb.append(name + " " /*+ lastedit + " " + height + " " + width + " "*/);
-		
-		for(Pattern p : this){
-			//sb.append(Long.toBinaryString(p.getPatternState().getId()) + " "); Binary could be an Option #SOVIELEMÖGLICHKEITEN
-			sb.append(p.getPatternState().getId() + " ");
-		}
-		
-		return sb.toString();
-	}
+//	/** Gibt den Speicherstring zurück.
+//	 *  
+//	 * @return Str sb = der Sepicherstring. Format (WIP)
+//	 */
+//	public String getSaveString(){
+//		StringBuilder sb = new StringBuilder("");
+//		//TODO ordentlich encrypten	
+//		sb.append(name + " " /*+ lastedit + " " + height + " " + width + " "*/);
+//		
+//		for(Pattern p : this){
+//			//sb.append(Long.toBinaryString(p.getPatternState().getId()) + " "); Binary could be an Option #SOVIELEMÖGLICHKEITEN
+//			sb.append(p.getPatternState().getId() + " ");
+//		}
+//		
+//		return sb.toString();
+//	}
 	
-	public void saveMap(){
-		saveMap(Map.SAVE_PATH_DIR + "/" + name + ".sf");
-	}
+//	public void saveMap(){
+//		saveMap(Map.SAVE_PATH_DIR + "/" + name + ".sf");
+//	}
 	
-	/** Speichert die Map im angebenem Dateipfad 
-	 *  in Form des mapstring-Formats(siehe getSaveString())
-	 *  
-	 * @param String path | Dateipfad
-	 * @return Map m | Die ausgelesene Karte(Speicherstand)
-	 */
-	public void saveMap(String path){
-		
-		System.out.println("Saving Map \"" + name + "\" to \"" + path + "\"...");
-		
-		File f = new File(path);
-		
-		try {
-			
-			FileWriter fw = new FileWriter(f);
-			fw.write(this.getSaveString());
-			fw.close();
-			System.out.println("Succesfully saved Map \"" + name + "\"!");
-			
-		} catch (IOException e) {
-			System.err.println("ERROR <003>: Datei \"" + path + "\" konnte nicht gefunden werden!");
-			e.printStackTrace();
-		}
-	}
+//	/** Speichert die Map im angebenem Dateipfad 
+//	 *  in Form des mapstring-Formats(siehe getSaveString())
+//	 *  
+//	 * @param String path | Dateipfad
+//	 * @return Map m | Die ausgelesene Karte(Speicherstand)
+//	 */
+//	public void saveMap(String path){
+//		
+//		System.out.println("Saving Map \"" + name + "\" to \"" + path + "\"...");
+//		
+//		File f = new File(path);
+//		
+//		try {
+//			
+//			FileWriter fw = new FileWriter(f);
+//			fw.write(this.getSaveString());
+//			fw.close();
+//			System.out.println("Succesfully saved Map \"" + name + "\"!");
+//			
+//		} catch (IOException e) {
+//			System.err.println("ERROR <003>: Datei \"" + path + "\" konnte nicht gefunden werden!");
+//			e.printStackTrace();
+//		}
+//	}
 	
 	
-	public String toString(){
-		return "Map(name=" + name + "; size= " + this.getWidth() + "*" + this.getHeight() + " ;" + super.toString() + ")"; //Bsp. Map[name=test; ArrayList[Pattern....]]
-	}
+//	public String toString(){s
+//		return "Map(name=" + name + "; size= " + this.getWidth() + "*" + this.getHeight() + " ;" + super.toString() + ")"; //Bsp. Map[name=test; ArrayList[Pattern....]]
+//	}
 	
 	// STATIC
 	
-	/** Liest eine Karte(Speicherstand) aus einem angebebenem String
-	 *  
-	 * @param String mapstring | Der String der Map 
-	 * @return Map m | Die ausgelesene Karte(Speicherstand)
-	 * @return null, wenn der MapString inkorrekt ist!
-	 */
-	public static Map readMap(String mapstring){
-		String name = "";
-		ArrayList<PatternState> ps = new ArrayList<PatternState>();
-		
-		String[] mapstrings = mapstring.split(" ");
-		
-		for(String s : mapstrings){
-			if( GameUtils.isNumeric(s) ){
-				ps.add(PatternState.getById(Long.parseLong(s)));
-				
-			} else {
-				name = s;
-			}
-		}
-		
-		Map m = Map.structureMap(ps); //Strukturieren
-		m.setName(name);
-		
-		
-		return m;
-	}
+//	/** Liest eine Karte(Speicherstand) aus einem angebebenem String
+//	 *  
+//	 * @param String mapstring | Der String der Map 
+//	 * @return Map m | Die ausgelesene Karte(Speicherstand)
+//	 * @return null, wenn der MapString inkorrekt ist!
+//	 */
+//	public static Map readMap(String mapstring){
+//		String name = "";
+//		ArrayList<PatternState> ps = new ArrayList<PatternState>();
+//		
+//		String[] mapstrings = mapstring.split(" ");
+//		
+//		for(String s : mapstrings){
+//			if( GameUtils.isNumeric(s) ){
+//				ps.add(PatternState.getById(Long.parseLong(s)));
+//				
+//			} else {
+//				name = s;
+//			}
+//		}
+//		
+//		Map m = Map.structureMap(ps); //Strukturieren
+//		m.setName(name);
+//		
+//		
+//		return m;
+//	}
 	
-	/** Liest eine Karte(Speicherstand) aus einer angebebenen Datei heraus
-	 *  
-	 * @param path | Der Dateipfad der Datei
-	 * @return Map map | Die ausgelesene Karte(Speicherstand)
-	 * @return null, wenn die Datei inkorrekt ist!
-	 */
-	public static Map readSavedMap(String path){
-		File f = new File(path);
-		System.out.println("Reading " + path + " ...");
-		String mapstring = null;
-		
-		try {
-			
-			BufferedReader br = new BufferedReader(new FileReader(f));
-			mapstring = br.readLine();
-			
-			br.close();
-			
-		} catch (IOException e) {
-			System.err.println("ERROR <003>: Datei \"" + path + "\" konnte nicht gefunden werden!");
-			e.printStackTrace();
-		}
-		
-		
-		
-		return readMap(mapstring);
-	}
+//	/** Liest eine Karte(Speicherstand) aus einer angebebenen Datei heraus
+//	 *  
+//	 * @param path | Der Dateipfad der Datei
+//	 * @return Map map | Die ausgelesene Karte(Speicherstand)
+//	 * @return null, wenn die Datei inkorrekt ist!
+//	 */
+//	public static Map readSavedMap(String path){
+//		File f = new File(path);
+//		System.out.println("Reading " + path + " ...");
+//		String mapstring = null;
+//		
+//		try {
+//			
+//			BufferedReader br = new BufferedReader(new FileReader(f));
+//			mapstring = br.readLine();
+//			
+//			br.close();
+//			
+//		} catch (IOException e) {
+//			System.err.println("ERROR <003>: Datei \"" + path + "\" konnte nicht gefunden werden!");
+//			e.printStackTrace();
+//		}
+//		
+//		
+//		
+//		return readMap(mapstring);
+//	}
 	
 	// Getter und Setter
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Date getLastedit() {
-		return lastedit;
-	}
-
-	public void setLastedit(Date lastedit) {
-		this.lastedit = lastedit;
-	}
 
 	public int getHeight() {
 		return height;

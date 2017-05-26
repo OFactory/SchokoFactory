@@ -15,6 +15,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
+import de.OFactory.SchokoFactory.game.GameSave;
 import de.OFactory.SchokoFactory.game.Map;
 import de.OFactory.SchokoFactory.inventory.Button;
 
@@ -23,12 +24,10 @@ public class SelectMapState extends BasicGameState{
 	ArrayList<Button> buttons = new ArrayList<Button>();
 	
 	public void init(GameContainer gc, final StateBasedGame sbg) throws SlickException {
-		// TODO Auto-generated method stub
 		File folder = new File("saves");
 		File[] listOfFiles = folder.listFiles();
 		int height = gc.getHeight()/(listOfFiles.length + 2);
 		
-		// TODO Auto-generated method stub
 		for (int i = 0; i < listOfFiles.length; i++) {
 		      if (listOfFiles[i].isFile()) {
 		    	  
@@ -42,7 +41,7 @@ public class SelectMapState extends BasicGameState{
 
 						
 						sbg.enterState(1,  new FadeOutTransition(), new FadeInTransition());
-						MainState.field = Map.readSavedMap(f.getPath());
+						MainState.gs = GameSave.readPath(f.getPath());
 						MainState.pausescreen.setShow(false);
 					}
 				  });
@@ -61,7 +60,7 @@ public class SelectMapState extends BasicGameState{
 				sbg.enterState(1,  new FadeOutTransition(), new FadeInTransition());
 				MainState.field = Map.generateMap(20, 20);
 				SimpleDateFormat df = new SimpleDateFormat( "dd-MM-YYYY HH-mm-ss,S" );
-				MainState.field.setName("" + df.format(new Date()));
+				MainState.gs.setName("" + df.format(new Date()));
 				MainState.pausescreen.setShow(false);
 				
 			}
@@ -100,7 +99,6 @@ public class SelectMapState extends BasicGameState{
 
 	@Override
 	public int getID() {
-		// TODO Auto-generated method stub
 		return 2;
 	}
 

@@ -1,12 +1,18 @@
 package de.OFactory.SchokoFactory.game.patterns;
 
-import de.OFactory.SchokoFactory.game.Map;
+import java.io.Serializable;
+
 import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternState;
 
-public class Molkerei extends Pattern {
-	public Molkerei(Map map, int x, int y, int id, int xcoor, int ycoor) {
-		super(map, x, y, PatternState.MOLKEREI, id, xcoor, ycoor);
+public class Molkerei extends Pattern implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5L;
+
+	public Molkerei( int x, int y, int id, int xcoor, int ycoor) {
+		super(x, y, PatternState.MOLKEREI, id, xcoor, ycoor);
 		
 	}
 

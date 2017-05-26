@@ -1,16 +1,19 @@
 package de.OFactory.SchokoFactory.game.patterns;
 
-import de.OFactory.SchokoFactory.game.Map;
+import java.io.Serializable;
+
 import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternState;
 
-public class Lagerhalle extends Pattern{
+public class Lagerhalle extends Pattern implements Serializable{
+
 	
+	private static final long serialVersionUID = 4L;
 	public static final int LAGERKAPAZITÄT_NORMAL = 2000;
 	
 	
-	public Lagerhalle(Map map, int x, int y, int id, int xcoor, int ycoor) {
-		super(map, x, y, PatternState.LAGER, id, xcoor, ycoor);
+	public Lagerhalle(int x, int y, int id, int xcoor, int ycoor) {
+		super(x, y, PatternState.LAGER, id, xcoor, ycoor);
 		
 
 	}

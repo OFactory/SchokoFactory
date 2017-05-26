@@ -2,18 +2,20 @@ package de.OFactory.SchokoFactory.game.patterns;
 
 
 
-import de.OFactory.SchokoFactory.game.Map;
+import java.io.Serializable;
+
 import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternState;
 import de.OFactory.SchokoFactory.main.MainState;
 
-public class Tank extends Pattern{
-	
+public class Tank extends Pattern implements Serializable{
+
+	private static final long serialVersionUID = 0L;
 	private int capacity = 1000; // 1000l Startkapatzität
 	private int stored_amount = 0; // stored anzahl {l}
 
-	public Tank(Map map, int x, int y, int id, int xcoor, int ycoor) {
-		super(map, x, y, PatternState.TANK, id, xcoor, ycoor);
+	public Tank(int x, int y, int id, int xcoor, int ycoor) {
+		super(x, y, PatternState.TANK, id, xcoor, ycoor);
 
 		
 	}

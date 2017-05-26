@@ -19,6 +19,7 @@ import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import de.OFactory.SchokoFactory.game.GameSave;
 import de.OFactory.SchokoFactory.game.GameSettings;
 import de.OFactory.SchokoFactory.game.GameUtils;
 import de.OFactory.SchokoFactory.game.Map;
@@ -59,7 +60,7 @@ public class MainState extends BasicGameState{
 	public static StateBasedGame sbg;
 	
 	//Zeug für Pattern
-	
+	public static GameSave gs;
 	public static Map field;
 	
 	public static double curpatternscale = 0.3D;
@@ -165,8 +166,11 @@ public class MainState extends BasicGameState{
 		
 		
 		// - Initialisierung der Map | Auslesen des Speichers und Generieren der Map
-		if(field == null)
-			field = Map.readSavedMap("saves/Test.sf");
+		if(gs == null){
+			System.out.println("Generiere neue Map!");
+			field = Map.generateMap(20, 20);
+			gs = new GameSave("Test", field, m);
+		}
 		//field = Map.generateMap(20, 20);// GameSettings.STANDARD_MAP_SIZE_HEIGHT); // Feld generieren //GameSettings.STANDARD_MAP_SIZE_WIDTH
 				//field.setName("Test");
 		
@@ -278,12 +282,12 @@ public class MainState extends BasicGameState{
 		if(delta_t >= GameSettings.DAY_MILIS && run){ //Ein Tag(Siehe GameSettings.DAY_MILIS) geht verüber
 			last = 0;
 			
-			long t1 = System.currentTimeMillis();
+//			long t1 = System.currentTimeMillis();
 
 			for(Daily d:dailys)
 				d.day();
 					
-			System.out.println("Berechnungsdauer der Simulation (Tag "+m.getTime()+"): " + (System.currentTimeMillis() - t1) + " ms");
+//			System.out.println("Berechnungsdauer der Simulation (Tag "+m.getTime()+"): " + (System.currentTimeMillis() - t1) + " ms");
 
 		}
 		

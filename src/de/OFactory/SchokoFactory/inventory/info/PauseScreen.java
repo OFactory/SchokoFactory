@@ -32,7 +32,7 @@ public class PauseScreen implements Drawable, Updateable{
 		hauptmenü.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				MainState.field.saveMap();
+				MainState.gs.save(); 
 				MainState.sbg.enterState(2,  new FadeOutTransition(), new FadeInTransition());
 				
 			}

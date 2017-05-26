@@ -1,17 +1,19 @@
 package de.OFactory.SchokoFactory.game.patterns;
 
-import de.OFactory.SchokoFactory.game.Map;
+import java.io.Serializable;
+
 import de.OFactory.SchokoFactory.game.Pattern;
 import de.OFactory.SchokoFactory.game.PatternState;
 
 
-public class Rührer extends Pattern{
+public class Rührer extends Pattern implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private boolean active = false;
 	
 	
-	public Rührer(Map map, int x, int y, int id, int xcoor, int ycoor) {
-		super(map, x, y, PatternState.RÜHRER, id, xcoor, ycoor);
+	public Rührer(int x, int y, int id, int xcoor, int ycoor) {
+		super(x, y, PatternState.RÜHRER, id, xcoor, ycoor);
 		
 
 		//start,end,total,delay

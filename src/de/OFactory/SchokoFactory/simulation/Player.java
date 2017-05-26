@@ -1,8 +1,12 @@
 package de.OFactory.SchokoFactory.simulation;
 
+import java.io.Serializable;
+
 import de.OFactory.SchokoFactory.main.MainState;
 
-public class Player {
+public class Player implements Serializable{
+
+	private static final long serialVersionUID = -2354318203231470496L;
 	
 	Market market;
 	String name;

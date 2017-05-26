@@ -9,7 +9,6 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
 import de.OFactory.SchokoFactory.main.Drawable;
-import de.OFactory.SchokoFactory.main.MainState;
 import de.OFactory.SchokoFactory.main.Updateable;
 
 public class LinesChart extends LineChart implements Updateable, Drawable{

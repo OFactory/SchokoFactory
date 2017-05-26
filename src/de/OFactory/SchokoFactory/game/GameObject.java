@@ -1,15 +1,17 @@
 package de.OFactory.SchokoFactory.game;
 
-import org.newdawn.slick.Color;
+import java.io.Serializable;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Shape;
 
 import de.OFactory.SchokoFactory.main.Drawable;
 import de.OFactory.SchokoFactory.main.Updateable;
 
-public abstract class GameObject implements Updateable, Drawable{
+public abstract class GameObject implements Updateable, Drawable, Serializable{
+
+	private static final long serialVersionUID = -5033850842531426519L;
 	
 	private int x;
 	private int y;
