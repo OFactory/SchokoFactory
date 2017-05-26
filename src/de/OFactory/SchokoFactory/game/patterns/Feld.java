@@ -10,7 +10,7 @@ public class Feld extends Pattern implements Serializable{
 
 	private static final long serialVersionUID = 7L;
 	
-	String plants = "Zucker";
+	private String plants = "Zucker";
 	
 	public Feld(int x, int y, int id, int xcoor, int ycoor) {
 		super(x, y, PatternState.FELD, id, xcoor, ycoor);
@@ -33,5 +33,13 @@ public class Feld extends Pattern implements Serializable{
 	public void updatePatternInfo() {
 		// XXX Mögliche Attribute: Effizienz, Fruchtbarkeit, Qualität
 		
+	}
+
+	public String getPlants() {
+		return plants;
+	}
+
+	public void setPlants(String plants) {
+		this.plants = plants;
 	}
 }

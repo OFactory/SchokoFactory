@@ -19,11 +19,11 @@ public class Stock {
 	
 	// Materialien
 	
-	private int kakao;
-	private int zucker;
-	private int milch;
-	private int zusatzstoffe;
-	private int flüssigeSchokolade;
+	private double kakao;
+	private double zucker;
+	private double milch;
+	private double zusatzstoffe;
+	private double flüssigeSchokolade;
 	private int tafeln;
 
 	
@@ -49,71 +49,71 @@ public class Stock {
 	
 	
 	
-	public void addKakao(int menge){
+	public void addKakao(double menge){
 		setKakao(getKakao() + menge);
 	}
 
-	public int getKakao() {
+	public double getKakao() {
 		return kakao;
 	}
 
-	public void setKakao(int kakao) {
+	public void setKakao(double kakao) {
 		this.kakao = kakao;
 	}
 
 	
 	
-	public void addZucker(int menge){
+	public void addZucker(double menge){
 		setKakao(getZucker() + menge);
 	}
 	
-	public int getZucker() {
+	public double getZucker() {
 		return zucker;
 	}
 
-	public void setZucker(int zucker) {
+	public void setZucker(double zucker) {
 		this.zucker = zucker;
 	}
 
 	
 	
-	public void addMilch(int menge){
-		setKakao(getMilch() + menge);
+	public void addMilch(double d){
+		setMilch(getMilch() + d);
 	}
 	
-	public int getMilch() {
+	public double getMilch() {
 		return milch;
 	}
 
-	public void setMilch(int milch) {
+	public void setMilch(double milch) {
 		this.milch = milch;
 	}
 
 	
 	
-	public void addZusatzstoffe(int menge){
+	public void addZusatzstoffe(double menge){
 		setKakao(getZusatzstoffe() + menge);
 	}
 	
-	public int getZusatzstoffe() {
+	public double getZusatzstoffe() {
 		return zusatzstoffe;
 	}
 
-	public void setZusatzstoffe(int zusatzstoffe) {
+	public void setZusatzstoffe(double zusatzstoffe) {
 		this.zusatzstoffe = zusatzstoffe;
 	}
 
 	
 	
-	public void addFlüssigeSchokolade(int menge){
+	public void addFlüssigeSchokolade(double menge){
 		setKakao(getFlüssigeSchokolade() + menge);
 	}
 	
-	public int getFlüssigeSchokolade() {
+	public double getFlüssigeSchokolade() {
 		return flüssigeSchokolade;
 	}
 
-	public void setFlüssigeSchokolade(int flüssigeSchokolade) {
+	public void setFlüssigeSchokolade(double flüssigeSchokolade) {
 		this.flüssigeSchokolade = flüssigeSchokolade;
 	}
 

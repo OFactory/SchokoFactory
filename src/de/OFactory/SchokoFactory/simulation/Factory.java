@@ -32,8 +32,6 @@ public class Factory implements Daily{
 	public void run() {
 		// t‰glicher Ablauf bei der Fabrik
 		
-		// aktuell vereinfachte Simulation:
-		// 		Gieﬂer produzieren Tafeln aus Geld
 		
 		// durch alle arbeitenden Patterns iterieren und work() aufrufen
 		for(Pattern p : MainState.field){

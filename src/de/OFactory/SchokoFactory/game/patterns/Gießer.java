@@ -17,9 +17,9 @@ public class Gießer extends Pattern implements Workable, Drawable, Serializable{
 	private static final long serialVersionUID = 3L;
 	
 	private boolean working = true;
-	private int produktion = 100;
+	private int produktion = 1000;
 	private int einmaligeFabrikkosten = 200;
-	private int laufendeFabrikkosten = 50;
+	private int laufendeFabrikkosten = 0;
 	
 	private int alter = 0;
 	private int effizienz = 100;
@@ -66,6 +66,7 @@ public class Gießer extends Pattern implements Workable, Drawable, Serializable{
 		
 		if(this.isWorking()){
 			MainState.p.stock.addTafeln(produktion);
+			MainState.p.stock.addFlüssigeSchokolade(-produktion/10); // 1 Liter Schokolade zu 10 Tafeln
 			MainState.p.addMoney(-laufendeFabrikkosten);
 			MainState.p.addAusgaben(laufendeFabrikkosten);
 		}

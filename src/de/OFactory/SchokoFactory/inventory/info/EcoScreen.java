@@ -85,6 +85,13 @@ public class EcoScreen  implements Drawable, Updateable, Daily{
 			GameFonts.SUB.drawString( offx + 10, offy + 290, "Produktmenge: " + MainState.p.stock.getTafeln(),  INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 10, offy + 310, "Qualität: "     + round(MainState.p.getQualitaet(),2),     INFO_FONT_COLOR);
 			
+			GameFonts.MED.drawString( offx + 300, offy + 200, "Kakao: "        + MainState.p.stock.getKakao(),        INFO_FONT_COLOR);
+			GameFonts.SUB.drawString( offx + 300, offy + 230, "Zucker: "       + MainState.p.stock.getZucker(),        INFO_FONT_COLOR);
+			GameFonts.SUB.drawString( offx + 300, offy + 250, "Milch: "  + MainState.p.stock.getMilch(),        INFO_FONT_COLOR);
+			GameFonts.SUB.drawString( offx + 300, offy + 270, "Zusatzstoffe: "  + MainState.p.stock.getZusatzstoffe(),        INFO_FONT_COLOR);
+			GameFonts.SUB.drawString( offx + 300, offy + 290, "flüssige Schokolade: " + MainState.p.stock.getFlüssigeSchokolade(),        INFO_FONT_COLOR);
+			GameFonts.SUB.drawString( offx + 300, offy + 310, "Tafeln: "     + MainState.p.stock.getTafeln(),        INFO_FONT_COLOR);
+			
 			GameFonts.MED.drawString( offx + 10, offy + 350, "AI1",                                  		     Color.yellow);
 			GameFonts.SUB.drawString( offx + 10, offy + 380, "Absatz: "       + MainState.ai1.getAbsatz(),       INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 10, offy + 400, "Bekanntheit: "  + round(MainState.ai1.getBekanntheit(),2), INFO_FONT_COLOR);
