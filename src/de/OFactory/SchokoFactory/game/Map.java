@@ -322,9 +322,9 @@ public class Map extends ArrayList<Pattern> implements Updateable{
 //	}
 	
 	
-//	public String toString(){s
-//		return "Map(name=" + name + "; size= " + this.getWidth() + "*" + this.getHeight() + " ;" + super.toString() + ")"; //Bsp. Map[name=test; ArrayList[Pattern....]]
-//	}
+	public String toString(){
+		return "Map(size= " + this.getWidth() + "*" + this.getHeight() + ")"; //Bsp. Map[name=test; ArrayList[Pattern....]]
+	}
 	
 	// STATIC
 	

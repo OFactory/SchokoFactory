@@ -152,25 +152,10 @@ public class MainState extends BasicGameState{
 		MainState.in  = gc.getInput();
 		System.out.println("\n\n SchokoFactory MainState          -   Game-Log \n");	
 		
+		
 		// - Initialisierung der Objekte für die Marktsimulation
-		MainState.f = new Factory();					// Reihenfolge beachten, damit die day()-Methoden in der richtigen Reihenfolge ausgeführt werden.
-		MainState.p = new Player(m, "P1", 1800);		// Wichtig: fabrik, dann ais, dann markt
-		MainState.ai1 = new SimpleAI(m,"P2",1000);
-		MainState.ai2 = new BetterAI(m,"P3",1000);
-		
-		MainState.m = new Market(); 
-		MainState.m.setPlayer(Arrays.asList(
-				p,
-				ai1,
-				ai2));
 		
 		
-		// - Initialisierung der Map | Auslesen des Speichers und Generieren der Map
-		if(gs == null){
-			System.out.println("Generiere neue Map!");
-			field = Map.generateMap(20, 20);
-			gs = new GameSave("Test", field, m);
-		}
 		//field = Map.generateMap(20, 20);// GameSettings.STANDARD_MAP_SIZE_HEIGHT); // Feld generieren //GameSettings.STANDARD_MAP_SIZE_WIDTH
 				//field.setName("Test");
 		
@@ -250,6 +235,20 @@ public class MainState extends BasicGameState{
 
 	}
 	
+	public void generateNewGameSave(){
+		System.out.println("(1/2) Generiere neue Map...");
+		MainState.f = new Factory();					// Reihenfolge beachten, damit die day()-Methoden in der richtigen Reihenfolge ausgeführt werden.
+		MainState.p = new Player(m, "P1", 1800);		// Wichtig: fabrik, dann ais, dann markt
+		MainState.ai1 = new SimpleAI(m,"P2",1000);
+		MainState.ai2 = new BetterAI(m,"P3",1000);
+		
+		MainState.m = new Market(); 
+		MainState.m.setPlayer(Arrays.asList(
+				p,
+				ai1,
+				ai2));
+		
+	}
 	
 	
 	/** Die Update Methode,
@@ -262,7 +261,8 @@ public class MainState extends BasicGameState{
 	 */
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 
-		
+		field = gs.getMap();
+		m = gs.getMarket();
 		
 		Input in = gc.getInput(); //Inputinstanz holen
 		in.enableKeyRepeat();

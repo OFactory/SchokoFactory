@@ -60,8 +60,8 @@ public class GameSave implements Serializable{
 	 */
 	public void save(String path){ 
 
-		System.out.println("Initializiere die Speicherung des Speicherstandes "
-				+ "\n\t " + this
+		System.out.println("(1/2) Initialisiere die Speicherung des Speicherstandes "
+				+ "\n\t" + this
 				+ "\n in \"" + path + "\"..." );
 		
         try {
@@ -72,7 +72,7 @@ public class GameSave implements Serializable{
         	out.writeObject(this);
         	out.close();
         	fileOut.close();
-        	System.out.println("Serializierter Speicherstand wurden erfolgreich in \"" + path + "\" gespeichert!" );
+        	System.out.println("(2/2)Serialisierter Speicherstand wurden erfolgreich in \"" + path + "\" gespeichert!" );
         } catch (IOException e) {
 			System.err.println("ERROR <101>: Speicherstand konnte nicht in \"" + path + "\" gespeichert werden!");
 			e.printStackTrace();
@@ -94,7 +94,7 @@ public class GameSave implements Serializable{
 	 */
 	public static GameSave readPath(String path){
 		
-		System.out.println("Initializiere das Lesen des Speicherstandes in \"" + path + "\"..." );
+		System.out.println("(1/2) Initialisiere das Lesen des Speicherstandes in \"" + path + "\"..." );
 		GameSave read = null;
 		try {
 			FileInputStream fileIn = new FileInputStream(new File(path));
@@ -102,6 +102,9 @@ public class GameSave implements Serializable{
 			read = (GameSave) in.readObject();
 			in.close();
 			fileIn.close();
+			System.out.println("(2/2) Das Objekt wurden erfolgreich geladen:\n\t" + read );
+			
+			
 		}catch (IOException e) {
 			System.err.println("ERROR <102>: Speicherstand konnte nicht in \"" + path + "\" gelesen werden!");
 			e.printStackTrace();
@@ -111,6 +114,10 @@ public class GameSave implements Serializable{
 		}
 		
 		return read;
+	}
+	
+	public String toString(){
+		return " + " + getName() + "[GameSave]:\n\t + Markt: " + getMarket() + "\n\t + Map: "  + getMap();
 	}
 	
 	public String getStandardSaveString(){

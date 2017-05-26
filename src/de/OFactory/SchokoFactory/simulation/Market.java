@@ -144,7 +144,9 @@ public class Market implements Daily, Serializable{
 	}
 	
 	
-	
+	public String toString(){
+		return "Markt(" + getDateString() + ")";
+	}
 
 	/**
 	 * Produkt der Werbefaktoren aller Spieler
