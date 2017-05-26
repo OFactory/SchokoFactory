@@ -14,7 +14,7 @@ Hier geht es darum,<br>
 
 ## Installation
 
-Um das Spiel testen zu können stellen wir auf <a href="www.ofactory.de/SchokoFactory/download">OFactory.de</a> eine ausführbare .jar Datei bereit. Bitte sprecht uns auf Bugs(nicht, dass wir welche hätten) und Vorschläge an.
+Zur Zeit stellen wir keine spielbare Version zur Verfügung. Aber bald wird es soweit sein und ihr könnt eine ausführbare .jar Datei herunterladen.
 
 ## TODO
 - Speicherung
@@ -46,7 +46,7 @@ SchokoFactory is a super-realistic strategy game. Control the market and sell ch
 
 ## Installation
 
-In order to test the game, pls visit <a href="www.ofactory.de/SchokoFactory/download">OFactory.de</a> and download a runnable .jar file of SchokoFactory. Please report bugs(not that there were any) and suggestions to the creators.
+At the time we're not offering a runnable version of the game. Stay tuned.
 
 ## License
 
