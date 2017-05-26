@@ -177,10 +177,10 @@ public abstract class Pattern extends GameObject implements Serializable {
 		
 		int off_x = img.getScaledCopy((float) MainState.curpatternscale).getWidth();
 		int off_y = img.getScaledCopy((float) MainState.curpatternscale).getHeight();
-		p.addPoint(getX() + off_x * 0.1F, getY() + off_y * 0.82F);
-		p.addPoint(getX() + off_x / 2, getY() + off_y * 0.68F);
-		p.addPoint(getX() + off_x * 0.9F, getY() + off_y * 0.82F);
-		p.addPoint(getX() + off_x / 2, getY() + off_y * 0.95F);
+		p.addPoint(getX() + off_x * 0.05F, getY() + off_y * 0.75F);
+		p.addPoint(getX() + off_x * 0.5F,  getY() + off_y * 0.55F);
+		p.addPoint(getX() + off_x * 0.95F, getY() + off_y * 0.75F);
+		p.addPoint(getX() + off_x * 0.5F,  getY() + off_y * 0.95F);
 
 		this.setClickBox(p);
 		this.selected = MainState.field.selected_pattern == this;
@@ -385,11 +385,11 @@ public abstract class Pattern extends GameObject implements Serializable {
 			 */
 		}
 
-		/*
-		 * DEBUG CLICKBOX g.setColor(Color.pink); g.setLineWidth(2F);
-		 * 
-		 * if(this.getClickBox() != null) g.draw(this.getClickBox());
-		 */
+		g.setColor(Color.pink); 
+		g.setLineWidth(2F);
+		if(this.getClickBox() != null) 
+			g.draw(this.getClickBox());
+
 		if (this instanceof Gieﬂer) {
 			Gieﬂer gi = (Gieﬂer) this;
 			if (!gi.isWorking()) {
