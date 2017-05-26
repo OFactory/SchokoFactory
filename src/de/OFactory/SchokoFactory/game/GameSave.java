@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import de.OFactory.SchokoFactory.main.MainState;
 import de.OFactory.SchokoFactory.simulation.Market;
 
 public class GameSave implements Serializable{
@@ -24,6 +25,11 @@ public class GameSave implements Serializable{
 		setName(name);
 		setMap(map);
 		setMarket(market);
+	}
+	
+	public static void saveMainState(){
+		GameSave gs = new GameSave("Mainstate#1", MainState.field, MainState.m);
+		gs.save();
 	}
 	
 	public GameSave(String readlocation){

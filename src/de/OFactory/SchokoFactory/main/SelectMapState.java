@@ -41,7 +41,7 @@ public class SelectMapState extends BasicGameState{
 
 						
 						sbg.enterState(1,  new FadeOutTransition(), new FadeInTransition());
-						MainState.gs = GameSave.readPath(f.getPath());
+						MainState.overwriteGameSave(GameSave.readPath(f.getPath()));
 						MainState.pausescreen.setShow(false);
 					}
 				  });

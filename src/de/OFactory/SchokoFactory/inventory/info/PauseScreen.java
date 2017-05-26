@@ -10,6 +10,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
+import de.OFactory.SchokoFactory.game.GameSave;
 import de.OFactory.SchokoFactory.inventory.Button;
 import de.OFactory.SchokoFactory.main.Drawable;
 import de.OFactory.SchokoFactory.main.MainState;
@@ -32,7 +33,7 @@ public class PauseScreen implements Drawable, Updateable{
 		hauptmenü.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				MainState.gs.save(); 
+				GameSave.saveMainState();
 				MainState.sbg.enterState(2,  new FadeOutTransition(), new FadeInTransition());
 				
 			}

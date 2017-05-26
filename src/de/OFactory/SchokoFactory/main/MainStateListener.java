@@ -4,6 +4,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.KeyListener;
 import org.newdawn.slick.MouseListener;
 
+import de.OFactory.SchokoFactory.game.GameSave;
 import de.OFactory.SchokoFactory.game.PatternState;
 
 public class MainStateListener implements MouseListener, KeyListener{
@@ -159,7 +160,7 @@ public class MainStateListener implements MouseListener, KeyListener{
 			break;
 			
 		case 's':
-			MainState.gs.save();
+			GameSave.saveMainState();
 			break;
 			
 		default:

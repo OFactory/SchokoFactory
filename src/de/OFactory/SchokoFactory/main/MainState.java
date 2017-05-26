@@ -154,11 +154,16 @@ public class MainState extends BasicGameState{
 		
 		
 		// - Initialisierung der Objekte für die Marktsimulation
-		
+		MainState.f = new Factory();
 		
 		//field = Map.generateMap(20, 20);// GameSettings.STANDARD_MAP_SIZE_HEIGHT); // Feld generieren //GameSettings.STANDARD_MAP_SIZE_WIDTH
 				//field.setName("Test");
-		
+		if(MainState.gs == null){ // keine Map ausgewählt
+			generateNewGameSave();
+		} else {
+			MainState.field = gs.getMap();
+			MainState.m     = gs.getMarket();
+		}
 		
 		// - Initialisierung Stockpile und Unterklassen
 		pile      = new Stockpile(50); // Stockpile generieren
@@ -235,9 +240,17 @@ public class MainState extends BasicGameState{
 
 	}
 	
+	public static void overwriteGameSave(GameSave gs){
+		System.out.println("GameSave \n\t" + MainState.gs + "\n wird überschrieben mit:\n\t" + gs);
+		MainState.gs    = gs;
+		MainState.field = gs.getMap();
+		MainState.m     = gs.getMarket();
+	}
+	
 	public void generateNewGameSave(){
-		System.out.println("(1/2) Generiere neue Map...");
-		MainState.f = new Factory();					// Reihenfolge beachten, damit die day()-Methoden in der richtigen Reihenfolge ausgeführt werden.
+		System.out.println("(1/4) Generiere neuen Spielstand...");
+		System.out.println("(2/4) Marktgeneration...");
+					// Reihenfolge beachten, damit die day()-Methoden in der richtigen Reihenfolge ausgeführt werden.
 		MainState.p = new Player(m, "P1", 1800);		// Wichtig: fabrik, dann ais, dann markt
 		MainState.ai1 = new SimpleAI(m,"P2",1000);
 		MainState.ai2 = new BetterAI(m,"P3",1000);
@@ -248,6 +261,10 @@ public class MainState extends BasicGameState{
 				ai1,
 				ai2));
 		
+		System.out.println("(3/4) Kartengeneration...");
+		MainState.field = Map.generateMap(20, 20);
+		
+		System.out.println("(4/4) Generation vollständig:\n\tMarkt: " + m + "\n\tKarte: " + field);
 	}
 	
 	
@@ -260,9 +277,6 @@ public class MainState extends BasicGameState{
 	 *  @throws SlickException: Falls Etwas beim Berechnen schief läuft
 	 */
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-
-		field = gs.getMap();
-		m = gs.getMarket();
 		
 		Input in = gc.getInput(); //Inputinstanz holen
 		in.enableKeyRepeat();
