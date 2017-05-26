@@ -2,6 +2,7 @@ package de.OFactory.SchokoFactory.simulation;
 
 public class AI extends Player {
 
+	private static final long serialVersionUID = 1788349354608828959L;
 	
 	private int fabriken = 2;
 	private int produktion = 100;

@@ -5,6 +5,9 @@ import de.OFactory.SchokoFactory.main.MainState;
 
 public class SimpleAI extends AI implements Daily{
 	
+
+	private static final long serialVersionUID = 2789964915069056347L;
+	
 	private int fabriken = 2;
 	private int produktion = 100;
 	private int einmaligeFabrikkosten = 200;

@@ -4,6 +4,8 @@ import de.OFactory.SchokoFactory.main.Daily;
 import de.OFactory.SchokoFactory.main.MainState;
 
 public class BetterAI extends AI implements Daily{
+
+	private static final long serialVersionUID = 2573325907491797228L;
 	
 	private int fabriken = 2;
 	private int produktion = 100;
