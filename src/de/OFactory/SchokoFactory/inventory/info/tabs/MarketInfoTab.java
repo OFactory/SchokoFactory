@@ -59,14 +59,14 @@ public class MarketInfoTab extends Tab implements Daily{
 		GameFonts.SUB.drawString( offx + 25, offy + 230, "Absatz: "       + MainState.p.getAbsatz(),        INFO_FONT_COLOR);
 		GameFonts.SUB.drawString( offx + 25, offy + 250, "Bekanntheit: "  + round(MainState.p.getBekanntheit(),2), INFO_FONT_COLOR);
 		GameFonts.SUB.drawString( offx + 25, offy + 270, "Marktanteil: "  + MainState.p.getMarktanteil(),   INFO_FONT_COLOR);
-		GameFonts.SUB.drawString( offx + 25, offy + 290, "Produktmenge: " + MainState.p.getProduktmenge(),  INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 25, offy + 290, "Produktmenge: " + MainState.p.stock.getTafeln(),  INFO_FONT_COLOR);
 		GameFonts.SUB.drawString( offx + 25, offy + 310, "Qualität: "     + round(MainState.p.getQualitaet(),2),     INFO_FONT_COLOR);
 		
 		GameFonts.MED.drawString( offx + 30, offy + 350, "AI2",                                              Color.black);
 		GameFonts.SUB.drawString( offx + 25, offy + 380, "Absatz: "       + MainState.ai2.getAbsatz(),       INFO_FONT_COLOR);
 		GameFonts.SUB.drawString( offx + 25, offy + 400, "Bekanntheit: "  + round(MainState.ai2.getBekanntheit(),2), INFO_FONT_COLOR);
 		GameFonts.SUB.drawString( offx + 25, offy + 420, "Marktanteil: "  + MainState.ai2.getMarktanteil(),  INFO_FONT_COLOR);
-		GameFonts.SUB.drawString( offx + 25, offy + 440, "Produktmenge: " + MainState.ai2.getProduktmenge(), INFO_FONT_COLOR);
+		GameFonts.SUB.drawString( offx + 25, offy + 440, "Produktmenge: " + MainState.ai2.stock.getTafeln(), INFO_FONT_COLOR);
 		GameFonts.SUB.drawString( offx + 25, offy + 460, "Qualität: "     + round(MainState.ai2.getQualitaet(),2), INFO_FONT_COLOR);
 		GameFonts.SUB.drawString( offx + 25, offy + 480, "Geld: "         + MainState.ai2.getMoney(),        INFO_FONT_COLOR);
 		

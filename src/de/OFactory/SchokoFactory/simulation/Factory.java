@@ -15,6 +15,7 @@ import de.OFactory.SchokoFactory.main.MainState;
  */
 public class Factory implements Daily{
 	
+	
 
 	public Factory() {
 		MainState.dailys.add(this);

@@ -68,7 +68,7 @@ public class Market implements Daily, Serializable{
 		System.out.println("<Markt> Tagesbilanz");	// zum leichteren Debuggen der Markt- und Produktionssimlation
 		//System.out.println(" | Bedarf: " + this.bedarf);
 		for (int i = 0; i < players.size(); i++) {
-			System.out.println(" | P"+i+"  produktmenge: " + players.get(i).getProduktmenge());
+			System.out.println(" | P"+i+"  produktmenge: " + players.get(i).stock.getTafeln());
 		}
 	}
 	

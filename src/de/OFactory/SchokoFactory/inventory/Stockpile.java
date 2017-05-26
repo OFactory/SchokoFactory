@@ -44,7 +44,7 @@ public class Stockpile implements Drawable, Updateable{
 		this.piles.add("Bundesregierung erhöht Steuern ... ");//Infolge dessen steigt der Milchpreis um 3.6% ...");
 		this.piles.add(MainState.p.getMoney() + " EUR");
 		this.piles.add(MainState.molten_chokolate+" Liter");
-		this.piles.add(MainState.p.getProduktmenge() + " produktmenge");
+		this.piles.add(MainState.p.stock.getTafeln() + " produktmenge");
 		
 		
 	}

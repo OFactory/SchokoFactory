@@ -82,14 +82,14 @@ public class EcoScreen  implements Drawable, Updateable, Daily{
 			GameFonts.SUB.drawString( offx + 10, offy + 230, "Absatz: "       + MainState.p.getAbsatz(),        INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 10, offy + 250, "Bekanntheit: "  + round(MainState.p.getBekanntheit(),2), INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 10, offy + 270, "Marktanteil: "  + MainState.p.getMarktanteil(),   INFO_FONT_COLOR);
-			GameFonts.SUB.drawString( offx + 10, offy + 290, "Produktmenge: " + MainState.p.getProduktmenge(),  INFO_FONT_COLOR);
+			GameFonts.SUB.drawString( offx + 10, offy + 290, "Produktmenge: " + MainState.p.stock.getTafeln(),  INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 10, offy + 310, "Qualität: "     + round(MainState.p.getQualitaet(),2),     INFO_FONT_COLOR);
 			
 			GameFonts.MED.drawString( offx + 10, offy + 350, "AI1",                                  		     Color.yellow);
 			GameFonts.SUB.drawString( offx + 10, offy + 380, "Absatz: "       + MainState.ai1.getAbsatz(),       INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 10, offy + 400, "Bekanntheit: "  + round(MainState.ai1.getBekanntheit(),2), INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 10, offy + 420, "Marktanteil: "  + MainState.ai1.getMarktanteil(),  INFO_FONT_COLOR);
-			GameFonts.SUB.drawString( offx + 10, offy + 440, "Produktmenge: " + MainState.ai1.getProduktmenge(), INFO_FONT_COLOR);
+			GameFonts.SUB.drawString( offx + 10, offy + 440, "Produktmenge: " + MainState.ai1.stock.getTafeln(), INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 10, offy + 460, "Qualität: "     + round(MainState.ai1.getQualitaet(),2), INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 10, offy + 480, "Geld: "         + round(MainState.ai1.getMoney(),2),        INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 10, offy + 500, "Preis: "        + MainState.ai1.getPreis(),        INFO_FONT_COLOR);
@@ -99,7 +99,7 @@ public class EcoScreen  implements Drawable, Updateable, Daily{
 			GameFonts.SUB.drawString( offx + 300, offy + 380, "Absatz: "       + MainState.ai2.getAbsatz(),       INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 300, offy + 400, "Bekanntheit: "  + round(MainState.ai2.getBekanntheit(),2), INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 300, offy + 420, "Marktanteil: "  + MainState.ai2.getMarktanteil(),  INFO_FONT_COLOR);
-			GameFonts.SUB.drawString( offx + 300, offy + 440, "Produktmenge: " + MainState.ai2.getProduktmenge(), INFO_FONT_COLOR);
+			GameFonts.SUB.drawString( offx + 300, offy + 440, "Produktmenge: " + MainState.ai2.stock.getTafeln(), INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 300, offy + 460, "Qualität: "     + round(MainState.ai2.getQualitaet(),2), INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 300, offy + 480, "Geld: "         + round(MainState.ai2.getMoney(),2),        INFO_FONT_COLOR);
 			GameFonts.SUB.drawString( offx + 300, offy + 500, "Preis: "        + MainState.ai2.getPreis(),        INFO_FONT_COLOR);

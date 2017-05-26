@@ -65,7 +65,7 @@ public class Gieﬂer extends Pattern implements Workable, Drawable, Serializable{
 		alter++;
 		
 		if(this.isWorking()){
-			MainState.p.addProduktmenge(produktion);
+			MainState.p.stock.addTafeln(produktion);
 			MainState.p.addMoney(-laufendeFabrikkosten);
 			MainState.p.addAusgaben(laufendeFabrikkosten);
 		}

@@ -53,12 +53,12 @@ public class LinesChart extends LineChart implements Updateable, Drawable{
 
 		g.draw(shape);
 		
-		
+		g.setLineWidth(1);
 		
 		int max = getMax(lines[0]);
-		/*for (ArrayList<Integer> l:lines)
+		for (ArrayList<Integer> l:lines)
 			if (getMax(l) > max)
-				max = getMax(points);*/
+				max = getMax(points);
 		
 		//int charheight = GameFonts.SUB.getHeight("b");
 		//g.drawString(" "+max, (int)this.x+this.width, (int)(this.y + this.height*0.1 - charheight/2));

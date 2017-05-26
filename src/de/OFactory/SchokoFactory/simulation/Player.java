@@ -9,6 +9,7 @@ public class Player implements Serializable{
 	private static final long serialVersionUID = -2354318203231470496L;
 	
 	Market market;
+	public Stock stock;
 	String name;
 	
 	private boolean liquide = true;
@@ -19,7 +20,6 @@ public class Player implements Serializable{
 	private double umsatz;
 	
 	private double marktanteil = (double)1/3;
-	private int produktmenge = 0;
 	
 	
 	private double werbefaktor = 1;
@@ -47,6 +47,8 @@ public class Player implements Serializable{
 		this.market = market;
 		this.name = name;
 		this.money = money;
+		
+		this.stock = new Stock();
 		
 	}
 	/**First part of the calculation. Gets inputs and works out possible sales(ger.: Absatz). Returns possible sales to Game.**/
@@ -93,14 +95,16 @@ public class Player implements Serializable{
 
     		moegAbs = 0;
     	}
-    		
-    	if (moegAbs > produktmenge) {
-    		absatz = produktmenge;
+    	
+    	int tafeln = this.stock.getTafeln();
+    	
+    	if (moegAbs > tafeln) {
+    		absatz = this.stock.getTafeln();
     		setRest(0);
-    		setDiff_bedarf(moegAbs - produktmenge);	
+    		setDiff_bedarf(moegAbs - tafeln);	
     	} else {
     		absatz = moegAbs;
-    		setRest(produktmenge - moegAbs);
+    		setRest(tafeln - moegAbs);
     		setDiff_bedarf(0);
     	}
     }
@@ -120,8 +124,8 @@ public class Player implements Serializable{
     	umsatz = absatz * preis;
     	money += umsatz;
 
-    	produktmenge -= absatz;
-
+    	this.stock.addTafeln(-absatz);
+    	
         if (MainState.m.getSummeAbs() != 0) {
         	marktanteil = (float)Math.round((float)absatz/MainState.m.getSummeAbs() *100d) /100d;  // runde auf 2 Nachkommastellen
         } else {
@@ -222,17 +226,6 @@ public class Player implements Serializable{
 	}
 	public void setPreis(double preis) {
 		this.preis = preis;
-	}
-	public int getProduktmenge() {
-		return produktmenge;
-	}
-	public void setProduktmenge(int produktmenge) {
-
-		this.produktmenge = produktmenge;
-	}
-	public void addProduktmenge(int delta) {
-		
-		this.produktmenge += delta;
 	}
 	public double getWerbefaktor() {
 		return werbefaktor;

@@ -231,10 +231,6 @@ public class MainState extends BasicGameState{
 			}
 		});
 		
-
-		// - damit die Tanks nicht so traurig aussehen [bleibt hier nicht mehr lange]
-		molten_chokolate = 3600;
-		free_molten_chokolate = molten_chokolate;
 		
 		
 
@@ -264,7 +260,7 @@ public class MainState extends BasicGameState{
 		System.out.println("(3/4) Kartengeneration...");
 		MainState.field = Map.generateMap(20, 20);
 		
-		System.out.println("(4/4) Generation vollständig:\n\tMarkt: " + m + "\n\tKarte: " + field);
+		System.out.println("(4/4) Generierung vollständig:\n\tMarkt: " + m + "\n\tKarte: " + field);
 	}
 	
 	

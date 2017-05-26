@@ -29,15 +29,15 @@ public class SimpleAI extends AI implements Daily{
 
 		// mehr Fabriken benötigt?
 		
-		diff = this.getProduktmenge() - lastProduktmenge;
+		diff = this.stock.getTafeln() - lastProduktmenge;
 		if (this.getMoegAbs() > this.getAbsatz()*(1+0.5/(float)this.getFabriken())) {		// Der Faktor 1+1/(float)this.getFabriken())
 			if ( this.getMoney() >= einmaligeFabrikkosten ) {							// sorgt für eine Berücksichtigung des Produktonsanstiegs.
 				buildFactory();															// (fabriken+1) / fabriken ist 1+1/fabriken
 			}																			// Bei 4 Fabriken: 1.25 (25% Produktionsanstieg nach Kauf)
 		}
-		if (this.getProduktmenge() > 0) {
-			if ( this.getMoney() >= this.getProduktmenge()/10 ) {
-				investQuality(this.getProduktmenge()/10);
+		if (this.stock.getTafeln() > 0) {
+			if ( this.getMoney() >= this.stock.getTafeln()/10 ) {
+				investQuality(this.stock.getTafeln()/10);
 			}	
 
 		}
@@ -56,8 +56,8 @@ public class SimpleAI extends AI implements Daily{
 	}
 	
 	public void produce() {
-		lastProduktmenge = this.getProduktmenge();
-		this.addProduktmenge(fabriken * produktion);
+		lastProduktmenge = this.stock.getTafeln();
+		this.stock.addTafeln(fabriken * produktion);
 		this.addMoney(fabriken * -laufendeFabrikkosten);
 		this.addAusgaben(fabriken * laufendeFabrikkosten);
 	}

@@ -30,17 +30,17 @@ public class BetterAI extends AI implements Daily{
 		// mehr Fabriken benötigt?		
 		
 		// Ausgleichsmechaniken
-		diff = this.getProduktmenge() - lastProduktmenge;
+		diff = this.stock.getTafeln() - lastProduktmenge;
 		if (this.getMoegAbs() > this.getAbsatz()*(1+0.5/(float)this.getFabriken())) {		// Der Faktor 1+1/(float)this.getFabriken())
 			if ( this.getMoney() >= einmaligeFabrikkosten ) {							// sorgt für eine Berücksichtigung des Produktonsanstiegs.
 				buildFactory();															// (fabriken+1) / fabriken ist 1+1/fabriken
 			}
 		}
-		if (this.getProduktmenge() > lastProduktmenge) {
+		if (this.stock.getTafeln() > lastProduktmenge) {
 			//noetige Investition 'invest'
-			int invest = this.getProduktmenge()/10;
+			int invest = this.stock.getTafeln()/10;
 			if ( this.getMoney()-1000 >= invest ) {
-				investQuality(this.getProduktmenge()/10);
+				investQuality(this.stock.getTafeln()/10);
 			}
 			else if (this.getMoney() > 1000)
 				investQuality(this.getMoney()-1000);
@@ -84,8 +84,8 @@ public class BetterAI extends AI implements Daily{
 	}
 	
 	public void produce() {
-		lastProduktmenge = this.getProduktmenge();
-		this.addProduktmenge(fabriken * produktion);
+		lastProduktmenge = this.stock.getTafeln();
+		this.stock.addTafeln(fabriken * produktion);
 		this.addMoney(fabriken * -laufendeFabrikkosten);
 		this.addAusgaben(fabriken * laufendeFabrikkosten);
 	}
