@@ -13,8 +13,6 @@ import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ShadowEffect;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import de.OFactory.SchokoFactory.game.GameFonts;
 import de.OFactory.SchokoFactory.inventory.MainMenuButton;
