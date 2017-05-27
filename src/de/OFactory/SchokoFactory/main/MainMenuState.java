@@ -1,5 +1,6 @@
 package de.OFactory.SchokoFactory.main;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,18 +9,23 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.UnicodeFont;
+import org.newdawn.slick.font.effects.ShadowEffect;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
-import de.OFactory.SchokoFactory.inventory.Button;
+import de.OFactory.SchokoFactory.game.GameFonts;
+import de.OFactory.SchokoFactory.inventory.MainMenuButton;
 
 public class MainMenuState  extends BasicGameState {
 	
 	// Variablen
-	public static Button play;
-	public static Button test;
+	public static MainMenuButton single;
+	public static MainMenuButton multi;
+	public static MainMenuButton options;
+	public static MainMenuButton close;
 	public static Image header;
 	public static Image bg;
 	
@@ -33,16 +39,21 @@ public class MainMenuState  extends BasicGameState {
 	
 	public void init(GameContainer gc, final StateBasedGame sbg) throws SlickException {
 		
-		play = new Button(0, gc.getWidth()/4, (int) (gc.getWidth()/4D), gc.getWidth()/2, gc.getHeight()/7, "Spielen", 0);
-		play.addActionListener(new ActionListener() {
+		GameFonts.loadFont();
+		
+		single = new MainMenuButton(0, 150, 600, 500, 60, "Einzelspieler");
+		single.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				sbg.enterState(2,  new FadeOutTransition(), new FadeInTransition());
+				sbg.enterState(2);
 				
 			}
 		});
-		test = new Button(1, gc.getWidth()/4, (int) (gc.getWidth()/2.8D), gc.getWidth()/2, gc.getHeight()/7, "Beenden", 0);
-		test.addActionListener(new ActionListener() {
+		
+		multi   = new MainMenuButton(1, 150, 660, 500, 60, "Mehrspieler");
+		options = new MainMenuButton(2, 150, 720, 500, 60, "Optionen");
+		close   = new MainMenuButton(3, 150, 780, 500, 60, "Beenden");
+		close.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0); // Programm beenden
@@ -51,20 +62,24 @@ public class MainMenuState  extends BasicGameState {
 		});
 
 	
-		header = new Image("assets/textures/gui/header.png");
-		bg     = new Image("assets/textures/gui/menu_bg.jpg");
+		//header = new Image("assets/textures/gui/header.png");
+		bg     = new Image("assets/textures/gui/Schokolade.jpg");
 	}
 	
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		
 		headersize += 0.02;
 
-		play.update(gc.getInput());
-		test.update(gc.getInput());
+		Input in = gc.getInput();
+		
+		single.update(in);
+		multi.update(in);
+		options.update(in);
+		close.update(in);
 		
 		
 		if(gc.getInput().isKeyPressed(Input.KEY_1))
-			sbg.enterState(1, new FadeOutTransition(), new FadeInTransition());
+			sbg.enterState(1);
 		
 	}
 
@@ -76,12 +91,28 @@ public class MainMenuState  extends BasicGameState {
 		g.fillRect(0, 0, gc.getWidth(), gc.getHeight());*/
 		bg.draw(0, 0, gc.getWidth(), gc.getHeight());
 		
-		play.draw(g);
-		test.draw(g);
-		g.drawString("MainMenu - WARNUNG: DIESER HAUPTSCREEN DIENT NUR ZUR BELUSTIGUNG NOAHS", 50, 50);
+		single.draw(g);
+		multi.draw(g);
+		options.draw(g);
+		close.draw(g);
 		
-		float headerscale = (float) (1.5 + (Math.sin(headersize)/10));
-		header.draw(gc.getWidth()/2 - (header.getWidth()*headerscale)/2, gc.getHeight()/3 - (header.getHeight()*headerscale)/2, headerscale);
+		
+		if(GameFonts.ALTE_HAAS_200 != null){
+			
+			UnicodeFont tmp = GameFonts.ALTE_HAAS_200;
+			tmp.getEffects().add(new ShadowEffect(Color.BLACK, 5, 5, 0.5F));
+			tmp.addAsciiGlyphs();
+			tmp.loadGlyphs();
+			tmp.drawString(100, 150, "SchokoFactory");
+			
+//			tmp = GameFonts.ALTE_HAAS_SMALL;
+//			tmp.drawString(100, 600, "Einzelspieler");
+//			tmp.drawString(100, 660, "Mehrspieler");
+//			tmp.drawString(100, 720, "Optionen");
+//			tmp.drawString(100, 780, "Beenden");
+			
+		}
+	
 	}
 	
 	//-------------------------------------------------------------------------

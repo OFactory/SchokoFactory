@@ -13,6 +13,7 @@ import org.newdawn.slick.geom.Shape;
 
 import de.OFactory.SchokoFactory.game.GameFonts;
 import de.OFactory.SchokoFactory.main.Drawable;
+import de.OFactory.SchokoFactory.main.ResourceManager;
 
 public class Button implements Drawable{
 	
@@ -141,6 +142,7 @@ public class Button implements Drawable{
 				cooldown_counter = 0;
 				clicked = true;
 				al.actionPerformed(new ActionEvent(this, 0, "click"));
+				ResourceManager.snd_click.play();
 			}
 		}
 		
@@ -195,6 +197,10 @@ public class Button implements Drawable{
 	
 	public void setSource(Object o){
 		this.source = o;
+	}
+	
+	public String getContent(){
+		return this.content;
 	}
 	
 	public Object getSource(){

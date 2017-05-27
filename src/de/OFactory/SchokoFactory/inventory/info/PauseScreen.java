@@ -7,8 +7,6 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import de.OFactory.SchokoFactory.game.GameSave;
 import de.OFactory.SchokoFactory.inventory.Button;
@@ -34,8 +32,8 @@ public class PauseScreen implements Drawable, Updateable{
 			
 			public void actionPerformed(ActionEvent e) {
 				GameSave.saveMainState();
-				MainState.sbg.enterState(2,  new FadeOutTransition(), new FadeInTransition());
-				
+				MainState.sbg.enterState(2);
+				active = false;
 			}
 		});
 	}
