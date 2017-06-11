@@ -63,7 +63,7 @@ public class Gießer extends Pattern implements Workable, Drawable, Serializable{
 	public void work() {
 		
 		alter++;
-		
+
 		if(this.isWorking()){
 			MainState.p.stock.addTafeln(produktion);
 			MainState.p.stock.addFlüssigeSchokolade(-produktion/10); // 1 Liter Schokolade zu 10 Tafeln

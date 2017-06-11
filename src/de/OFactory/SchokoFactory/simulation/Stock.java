@@ -64,7 +64,7 @@ public class Stock {
 	
 	
 	public void addZucker(double menge){
-		setKakao(getZucker() + menge);
+		setZucker(getZucker() + menge);
 	}
 	
 	public double getZucker() {
@@ -92,7 +92,7 @@ public class Stock {
 	
 	
 	public void addZusatzstoffe(double menge){
-		setKakao(getZusatzstoffe() + menge);
+		setZusatzstoffe(getZusatzstoffe() + menge);
 	}
 	
 	public double getZusatzstoffe() {
@@ -106,7 +106,8 @@ public class Stock {
 	
 	
 	public void addFlüssigeSchokolade(double menge){
-		setKakao(getFlüssigeSchokolade() + menge);
+		setFlüssigeSchokolade(getFlüssigeSchokolade() + menge);
+		
 	}
 	
 	public double getFlüssigeSchokolade() {
@@ -120,7 +121,8 @@ public class Stock {
 	
 	
 	public void addTafeln(int menge){
-		setKakao(getTafeln() + menge);
+		setTafeln(getTafeln() + menge);
+
 	}
 	
 	public int getTafeln() {

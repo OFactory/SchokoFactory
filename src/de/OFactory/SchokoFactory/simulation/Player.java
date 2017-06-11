@@ -49,6 +49,9 @@ public class Player implements Serializable{
 		this.money = money;
 		
 		this.stock = new Stock();
+		this.stock.addFlüssigeSchokolade(321.0);
+		this.stock.addTafeln(1000);
+
 		
 	}
 	/**First part of the calculation. Gets inputs and works out possible sales(ger.: Absatz). Returns possible sales to Game.**/

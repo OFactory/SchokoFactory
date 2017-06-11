@@ -44,13 +44,14 @@ public class Rührer extends Pattern implements Workable, Serializable{
 		setAlter(getAlter() + 1);
 		
 		if(this.isWorking()){
-			MainState.p.stock.addFlüssigeSchokolade(produktion);
+			MainState.p.stock.addFlüssigeSchokolade((double)produktion);
 			MainState.p.stock.addMilch(-produktion*0.5); // 0.5 Liter Milch zu 1 Liter flüssigen Schokolade
 			MainState.p.stock.addKakao(-produktion*0.25); // 0.25 kg Kakao zu 1 Liter flüssigen Schokolade
 			MainState.p.stock.addZucker(-produktion*0.25); // 0.25 kg Zucker zu 1 Liter flüssigen Schokolade
 			MainState.p.stock.addZucker(-produktion*0.05); // 5 g Zusatzstoffe zu 1 Liter flüssigen Schokolade
 			MainState.p.addMoney(-laufendeFabrikkosten);
 			MainState.p.addAusgaben(laufendeFabrikkosten);
+			//System.out.println("\n get() -> "+MainState.p.stock.getFlüssigeSchokolade());
 		}
 	}
 	
@@ -63,10 +64,11 @@ public class Rührer extends Pattern implements Workable, Serializable{
 		else
 			putPatternInfo("Status", "Deaktiviert");
 		
-		putPatternInfo("Produkt", "Schokolade");
+		putPatternInfo("Produkt", "flüssige Schokolade");
 		putPatternInfo("Laufende Kosten",   laufendeFabrikkosten);
 		putPatternInfo("Gerätealter",       alter + " Tage");
 		putPatternInfo("Effizienz",         effizienz + "%");
+		putPatternInfo("tägl. Produktion",  produktion + "kg");
 		
 	}
 
